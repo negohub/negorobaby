@@ -7,11 +7,11 @@
 <meta name="description" content="妊娠週数に合わせて、食べもの・くらし・からだ・検査・お金・手続き・出産準備まで。妊娠中に必要な情報をまとめた手帳サイト。">
 <meta name="theme-color" content="#FF9EBB">
 
-<!-- 公開URL: https://negohub.github.io/premam/ （リポジトリ名を premam にすれば書き換え不要） -->
-<link rel="canonical" href="https://negohub.github.io/premam/">
-<meta property="og:url" content="https://negohub.github.io/premam/">
-<meta property="og:image" content="https://negohub.github.io/premam/ogp.png">
-<meta name="twitter:image" content="https://negohub.github.io/premam/ogp.png">
+<!-- 公開URL: https://negohub.github.io/negorobaby/ （リポジトリ名: negorobaby） -->
+<link rel="canonical" href="https://negohub.github.io/negorobaby/">
+<meta property="og:url" content="https://negohub.github.io/negorobaby/">
+<meta property="og:image" content="https://negohub.github.io/negorobaby/ogp.png">
+<meta name="twitter:image" content="https://negohub.github.io/negorobaby/ogp.png">
 
 <link rel="icon" href="favicon.png" type="image/png" sizes="48x48">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -235,6 +235,35 @@ footer{margin-top:50px;padding:22px 0 0;border-top:2px dashed var(--line);font-s
 .rectable td{padding:7px 8px;border-bottom:1px dashed var(--line);color:var(--ink-mid);white-space:nowrap}
 .rectable .x{color:var(--ink-soft);cursor:pointer;background:none;border:none;font-size:14px}
 
+/* --- category tiles / folded groups --- */
+.cattiles{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.cattile{background:var(--card);border:2px solid var(--line);border-radius:16px;padding:13px 14px;cursor:pointer;
+  font-family:inherit;text-align:left;box-shadow:var(--sh)}
+.cattile:hover,.cattile:focus-visible{border-color:var(--pink);background:#fff}
+.cattile b{display:block;font-family:"Zen Maru Gothic",sans-serif;font-size:14.5px;color:var(--ink);margin-bottom:5px}
+.cattile .bars{display:flex;gap:3px;align-items:center;font-family:"Quicksand",sans-serif;font-size:11px;font-weight:700}
+.cattile .bars i{font-style:normal;padding:2px 7px;border-radius:100px}
+.cattile .b-best{background:var(--mint-bg);color:var(--mint)}
+.cattile .b-hold{background:var(--amber-bg);color:var(--amber)}
+.cattile .b-stop{background:var(--red-bg);color:var(--red)}
+.cathint{font-size:12.5px;color:var(--ink-soft);text-align:center;padding:14px 8px 2px;line-height:1.7}
+
+details.grpwrap{margin-bottom:8px}
+details.grpwrap > summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;
+  margin:14px 0 8px;font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:13px}
+details.grpwrap > summary::-webkit-details-marker{display:none}
+details.grpwrap > summary:focus-visible{outline:3px solid var(--lav);outline-offset:3px;border-radius:8px}
+details.grpwrap .gl{padding:4px 13px;border-radius:100px;font-size:12.5px}
+details.grpwrap.g-best .gl{background:var(--mint-bg);color:var(--mint)}
+details.grpwrap.g-ok .gl{background:var(--lav-bg);color:var(--lav)}
+details.grpwrap.g-hold .gl{background:var(--amber-bg);color:var(--amber)}
+details.grpwrap.g-stop .gl{background:var(--red-bg);color:var(--red)}
+details.grpwrap .gn{font-family:"Quicksand",sans-serif;font-size:11.5px;color:var(--ink-soft)}
+details.grpwrap .gline{flex:1;height:2px;background:var(--line);border-radius:2px}
+details.grpwrap .gcv{flex:0 0 auto;font-size:11px;color:var(--ink-soft);font-weight:700}
+details.grpwrap[open] > summary .gcv::after{content:"とじる"}
+details.grpwrap:not([open]) > summary .gcv::after{content:"ひらく"}
+
 /* --- finder readability --- */
 .i-sum{display:block;font-size:12px;color:var(--ink-mid);font-weight:500;margin-top:2px;line-height:1.5}
 .v-stop .i-sum{color:var(--red)}
@@ -361,7 +390,7 @@ nav.jump a.off{opacity:.45}
   <section id="food" data-from="4" data-to="41">
     <span class="eyebrow">たべもの</span>
     <h2>これ、食べてええ？</h2>
-    <p class="sub">約120品目。開かなくても答えが1行で見えます。もっと知りたいときだけタップ。ひらがな・カタカナ・漢字どれでも探せます。</p>
+    <p class="sub">約120品目。カテゴリを選ぶか、検索窓に食材名を入れてください。答えは1行で出ます。ひらがな・カタカナ・漢字どれでもOK。</p>
     <div class="finder">
       <div class="search">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
@@ -377,7 +406,7 @@ nav.jump a.off{opacity:.45}
   <section id="life" data-from="4" data-to="41">
     <span class="eyebrow">くらし</span>
     <h2>これ、してええ？</h2>
-    <p class="sub">お薬、レントゲン、温泉、旅行、運動、ヘアカラー、猫。食べもの以外の「していい／やめとく」もここで。</p>
+    <p class="sub">お薬、レントゲン、温泉、旅行、運動、ヘアカラー、猫。カテゴリを選ぶか、検索窓に入れてください。</p>
     <div class="finder">
       <div class="search">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
@@ -1172,17 +1201,34 @@ function makeFinder(data,cats,ids){
     cntEl.textContent=list.length+"件";
     if(!list.length){itemsEl.innerHTML='<div class="empty">見つかりませんでした<br>別の言い方で探すか、産院で聞いてみてね。</div>';return;}
 
+    if(!nq&&cat==="all"){
+      cntEl.textContent=data.length+"件";
+      itemsEl.innerHTML='<div class="cattiles">'+cats.map(function(c){
+        var g=data.filter(function(f){return f.c===c;});
+        var nb=g.filter(function(f){return f.v==="best";}).length;
+        var nh=g.filter(function(f){return f.v==="hold";}).length;
+        var ns=g.filter(function(f){return f.v==="stop";}).length;
+        return '<button class="cattile" data-cat="'+c+'"><b>'+c+'</b><span class="bars">'+
+          (nb?'<i class="b-best">◎'+nb+"</i>":"")+(nh?'<i class="b-hold">△'+nh+"</i>":"")+
+          (ns?'<i class="b-stop">×'+ns+"</i>":"")+"</span></button>";
+      }).join("")+'</div><div class="cathint">カテゴリを選ぶか、上の検索窓に食材名を入れてください</div>';
+      return;
+    }
+
     if(nq&&list.length<=6){
       itemsEl.innerHTML=list.map(row).join("");
       if(list.length===1)itemsEl.querySelector("details").open=true;
       return;
     }
+    var openAllG=list.length<=12;
     var html="";
     ORDER.forEach(function(v){
       var g=list.filter(function(f){return f.v===v;});
       if(!g.length)return;
-      html+='<div class="grp g-'+v+'"><span class="gl">'+GLABEL[v]+'</span><span class="gn">'+g.length+
-        '</span><span class="gline"></span></div>'+g.map(row).join("");
+      var op=(openAllG||v==="stop")?" open":"";
+      html+='<details class="grpwrap g-'+v+'"'+op+'><summary><span class="gl">'+GLABEL[v]+
+        '</span><span class="gn">'+g.length+'</span><span class="gline"></span><span class="gcv"></span></summary>'+
+        g.map(row).join("")+"</details>";
     });
     itemsEl.innerHTML=html;
   }
@@ -1191,6 +1237,15 @@ function makeFinder(data,cats,ids){
     var b=e.target.closest(".chip");if(!b)return;
     cat=b.dataset.c;
     Array.prototype.forEach.call(chipsEl.children,function(x){x.setAttribute("aria-pressed",x===b);});
+    draw();
+  });
+  itemsEl.addEventListener("click",function(e){
+    var t=e.target.closest(".cattile");if(!t)return;
+    cat=t.dataset.cat;
+    Array.prototype.forEach.call(chipsEl.children,function(x){x.setAttribute("aria-pressed",x.dataset.c===cat);});
+    var sel=null;
+    Array.prototype.forEach.call(chipsEl.children,function(x){if(x.dataset.c===cat)sel=x;});
+    if(sel&&sel.scrollIntoView)sel.scrollIntoView({block:"nearest",inline:"center"});
     draw();
   });
   qEl.addEventListener("input",function(e){q=e.target.value;draw();});
