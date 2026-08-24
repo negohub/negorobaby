@@ -809,16 +809,26 @@ nav.jump a.off{opacity:.45}
   <section id="backup" data-from="0" data-to="41">
     <span class="eyebrow">データのひきつぎ</span>
     <h2>もう1台に移す</h2>
-    <p class="sub">記録はこの端末の中だけに保存されています。ふたりの端末で同じ内容を見たいとき、機種変するとき、ブラウザのデータを消す前に。</p>
+    <p class="sub">記録はこの端末の中だけに保存されています。ふたりの端末で同じ内容を見たいとき、機種変するとき、ブラウザのデータを消す前に。サーバーには何も保存されません。</p>
     <div class="card share">
-      <button class="btnp" id="bkOut" style="width:100%">この端末のデータを書き出す</button>
-      <textarea id="bkText" placeholder="ここに出てくる文字列を、LINEなどでもう1台に送ってください。受け取った側は、その文字列をここに貼りつけて「読み込む」を押します。" spellcheck="false"></textarea>
-      <div class="row">
-        <button class="btns" id="bkCopy">コピー</button>
-        <button class="btnp" id="bkIn">貼りつけた内容を読み込む</button>
-      </div>
-      <p style="font-size:12px;color:var(--ink-soft);margin-top:10px;line-height:1.7">対象：予定日／産院の連絡先／質問メモ／体重・血圧／胎動の記録／準備リストのチェック。読み込むと、その端末の内容は上書きされます。</p>
+      <button class="bigbtn" id="bkLink">&#128279; リンクにして送る</button>
+      <p style="font-size:12.5px;color:var(--ink-mid);margin-top:10px;line-height:1.8">押すと共有メニューが開きます。LINEで相手に送ってください。<b>受け取った人がリンクをタップするだけ</b>で、この端末の記録がそのまま入ります。</p>
+      <div id="bkLinkOut" style="margin-top:10px"></div>
     </div>
+
+    <details class="acc" style="margin-top:12px">
+      <summary><span class="ttl">うまくいかないとき（文字列でやりとり）</span><span class="cv">+</span></summary>
+      <div class="acc-b share">
+        <button class="btns" id="bkOut" style="width:100%">この端末のデータを書き出す</button>
+        <textarea id="bkText" placeholder="ここに出てくる文字列を、LINEなどでもう1台に送ってください。受け取った側は、その文字列をここに貼りつけて「読み込む」を押します。" spellcheck="false" style="margin-top:8px"></textarea>
+        <div class="row">
+          <button class="btns" id="bkCopy">コピー</button>
+          <button class="btnp" id="bkIn">貼りつけた内容を読み込む</button>
+        </div>
+      </div>
+    </details>
+
+    <div class="note calm" style="margin-top:10px"><b>送られるもの：</b>予定日／産院の連絡先／質問メモ／体重・血圧／胎動の記録／準備リストのチェック／文字サイズなどの設定。<br><br>読み込むと、受け取った側の記録は<b>上書きされます</b>。両方で別々に記録している場合は注意してください。リンクの中身は暗号化されていないので、送り先を間違えないように。</div>
   </section>
 
   <div class="gdiv" data-g="4"><span class="gd-n">04</span><div><b>たべかたと体重</b><span>迷わないための数字</span></div></div>
@@ -2535,11 +2545,7 @@ var MENU_LAB={"food": "これ食べてええ？", "life": "これしてええ？
 /* ---- backup / handoff ---- */
 (function(){
   var KEYS=["premam-due","premam-contact","premam-q","premam-rec","premam-kick","premam-check","premam-size","premam-theme","premam-caf","premam-ctx"];
-  $("#bkOut").addEventListener("click",function(){
-    var o={};
-    KEYS.forEach(function(k){try{var v=localStorage.getItem(k);if(v!==null)o[k]=v;}catch(e){}});
-    $("#bkText").value="PREMAM1:"+btoa(unescape(encodeURIComponent(JSON.stringify(o))));
-  });
+  $("#bkOut").addEventListener("click",function(){$("#bkText").value=pack();});
   $("#bkCopy").addEventListener("click",function(){
     var t=$("#bkText");if(!t.value){alert("先に書き出してください");return;}
     t.select();
@@ -2548,16 +2554,63 @@ var MENU_LAB={"food": "これ食べてええ？", "life": "これしてええ？
     $("#bkCopy").textContent="コピーしました";
     setTimeout(function(){$("#bkCopy").textContent="コピー";},1500);
   });
+  function pack(){
+    var o={};
+    KEYS.forEach(function(k){try{var v=localStorage.getItem(k);if(v!==null)o[k]=v;}catch(e){}});
+    return "PREMAM1:"+btoa(unescape(encodeURIComponent(JSON.stringify(o))));
+  }
+  function apply(str){
+    if(str.indexOf("PREMAM1:")!==0)return false;
+    try{
+      var o=JSON.parse(decodeURIComponent(escape(atob(str.slice(8)))));
+      Object.keys(o).forEach(function(k){if(KEYS.indexOf(k)>=0)localStorage.setItem(k,o[k]);});
+      return true;
+    }catch(e){return false;}
+  }
+  function makeUrl(){
+    return location.origin+location.pathname+"#d="+encodeURIComponent(pack());
+  }
+  $("#bkLink").addEventListener("click",function(){
+    var url=makeUrl(),out=$("#bkLinkOut");
+    if(navigator.share){
+      navigator.share({title:"ぷれまむ手帳の記録",text:"この手帳の記録です。タップすると入ります。",url:url})
+        .catch(function(){showUrl(url);});
+    }else showUrl(url);
+    function showUrl(u){
+      out.innerHTML='<textarea readonly spellcheck="false">'+u+'</textarea>'+
+        '<button class="btns" id="bkUrlCopy" style="width:100%;margin-top:8px">このリンクをコピー</button>';
+      var t=out.querySelector("textarea");
+      var b=$("#bkUrlCopy");
+      b.addEventListener("click",function(){
+        t.select();
+        if(navigator.clipboard)navigator.clipboard.writeText(u);
+        else document.execCommand("copy");
+        b.textContent="コピーしました";
+        setTimeout(function(){b.textContent="このリンクをコピー";},1600);
+      });
+    }
+  });
+
+  /* リンクから開かれたとき */
+  (function(){
+    var hh=location.hash||"";
+    if(hh.indexOf("#d=")!==0)return;
+    var str=decodeURIComponent(hh.slice(3));
+    history.replaceState(null,"",location.pathname);
+    if(str.indexOf("PREMAM1:")!==0)return;
+    setTimeout(function(){
+      if(!confirm("送られてきた記録をこの端末に読み込みますか？\n\n予定日・産院の連絡先・質問メモ・体重や胎動の記録が、この端末の内容に上書きされます。"))return;
+      if(apply(str)){alert("読み込みました。画面を更新します。");location.reload();}
+      else alert("読み込めませんでした。リンクが途中で切れているかもしれません。");
+    },300);
+  })();
+
   $("#bkIn").addEventListener("click",function(){
     var v=$("#bkText").value.trim();
     if(v.indexOf("PREMAM1:")!==0){alert("書き出した文字列を貼りつけてください");return;}
     if(!confirm("この端末の記録を、貼りつけた内容で上書きします。よろしいですか？"))return;
-    try{
-      var o=JSON.parse(decodeURIComponent(escape(atob(v.slice(8)))));
-      Object.keys(o).forEach(function(k){if(KEYS.indexOf(k)>=0)localStorage.setItem(k,o[k]);});
-      alert("読み込みました。画面を更新します。");
-      location.reload();
-    }catch(e){alert("読み込めませんでした。文字列が途中で切れていないか確認してください。");}
+    if(apply(v)){alert("読み込みました。画面を更新します。");location.reload();}
+    else alert("読み込めませんでした。文字列が途中で切れていないか確認してください。");
   });
 })();
 
