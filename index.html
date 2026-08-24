@@ -245,6 +245,27 @@ footer{margin-top:50px;padding:22px 0 0;border-top:2px dashed var(--line);font-s
 .rectable td{padding:7px 8px;border-bottom:1px dashed var(--line);color:var(--ink-mid);white-space:nowrap}
 .rectable .x{color:var(--ink-soft);cursor:pointer;background:none;border:none;font-size:14px}
 
+/* --- setup inline rows --- */
+.setup details{border-bottom:1px dashed var(--line)}
+.setup details:last-child{border-bottom:none}
+.setup summary{list-style:none;display:flex;align-items:center;gap:11px;padding:13px 15px;cursor:pointer}
+.setup summary::-webkit-details-marker{display:none}
+.setup summary:hover,.setup summary:focus-visible{background:var(--pink-bg)}
+.setup details[open] summary{background:var(--pink-bg)}
+.setup .form{padding:2px 15px 16px;background:var(--pink-bg)}
+.setup .form .fr{display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap}
+.setup .form .fr > *{flex:1 1 120px;min-width:0}
+.setup .form input,.setup .form select{width:100%;padding:11px 12px;font-size:16px;font-family:inherit;
+  border:2px solid var(--line);border-radius:12px;background:#fff;color:var(--ink)}
+html[data-theme="dark"] .setup .form input,html[data-theme="dark"] .setup .form select{background:var(--card)}
+.setup .form input:focus,.setup .form select:focus{outline:none;border-color:var(--pink)}
+.setup .form .btnp{flex:0 0 auto;padding:11px 20px}
+.setup .form .hint{font-size:11.5px;color:var(--ink-soft);line-height:1.6;margin-top:2px}
+.setup .form .hint a{color:var(--pink-d)}
+.setup .go{display:block;text-align:center;font-size:12.5px;font-weight:700;color:var(--pink-d);
+  text-decoration:none;padding:10px;background:#fff;border-radius:12px;margin-top:4px}
+html[data-theme="dark"] .setup .go{background:var(--card)}
+
 /* --- setup list --- */
 .setup{background:var(--card);border-radius:var(--r);box-shadow:var(--sh);overflow:hidden}
 .setup a{display:flex;align-items:center;gap:11px;padding:13px 15px;text-decoration:none;
@@ -688,7 +709,7 @@ nav.jump a.off{opacity:.45}
   <section id="setup" data-from="0" data-to="42">
     <span class="eyebrow">さいしょに</span>
     <h2>入力するところ</h2>
-    <p class="sub">この手帳で入力できる場所は13か所あります。全部やる必要はありません。<b>まず「予定日」だけ入れれば、あとは自動で回ります。</b></p>
+    <p class="sub">入力できる場所の一覧です。<b>タップするとその場で入力できます</b>（ページを移動しなくて大丈夫）。全部やる必要はありません。まず「予定日」だけ入れれば、あとは自動で回ります。</p>
     <div class="setup" id="setupBody"></div>
 
     <div class="card share" style="margin-top:12px">
@@ -2459,46 +2480,137 @@ if("serviceWorker" in navigator&&navigator.serviceWorker.getRegistrations){
 
 /* ---- setup list ---- */
 var SETUP=[
- {id:"dial",t:"予定日",s:"これを入れると週数とカウントダウンが自動になります",k:"premam-due"},
- {id:"weight",t:"身長と妊娠前の体重",s:"増えていい範囲を計算します",k:"__wh"},
- {id:"contact",t:"産院の電話番号",s:"登録するとタップで発信できます",k:"premam-contact"},
- {id:"contact",t:"健診で聞きたいことメモ",s:"思いついたときに足しておく",k:"premam-q"},
- {id:"record",t:"体重と血圧",s:"健診のたびに。グラフになります",k:"premam-rec"},
+ {id:"dial",t:"予定日",s:"これを入れると週数とカウントダウンが自動になります",k:"premam-due",f:"due"},
+ {id:"weight",t:"身長と妊娠前の体重",s:"増えていい範囲を計算します",k:"__wh",f:"wh"},
+ {id:"contact",t:"産院の電話番号",s:"登録するとタップで発信できます",k:"premam-contact",f:"tel"},
+ {id:"contact",t:"健診で聞きたいことメモ",s:"思いついたときに足しておく",k:"premam-q",f:"memo"},
+ {id:"record",t:"体重と血圧",s:"健診のたびに。グラフになります",k:"premam-rec",f:"rec"},
  {id:"kick",t:"胎動カウント",s:"28週ごろから、1日1回",k:"premam-kick",from:27},
  {id:"caffeine",t:"飲んだもの",s:"タップするだけ。今日の合計が出ます",k:"__any"},
  {id:"prep",t:"用意するもののチェック",s:"そろえたものをタップ",k:"premam-check",from:26},
  {id:"timer",t:"陣痛タイマー",s:"本番用。押すだけ",k:"__any",from:32},
  {id:"food",t:"たべもの・くらしの検索",s:"食材名や「温泉」などを入力",k:"__any"},
- {id:"backup",t:"データのひきつぎ",s:"もう1台に送る",k:"__any"},
- {id:"setup",t:"文字サイズ・よるモード",s:"画面いちばん上のボタンから",k:"__any"}
+ {id:"backup",t:"データのひきつぎ",s:"もう1台に送る",k:"__any"}
 ];
-function refreshSetup(){
-  var box=document.getElementById("setupBody");if(!box)return;
+
+var SFORM={
+ due:'<div class="fr"><select id="sDueMode"><option value="due">出産予定日</option><option value="lmp">最後の生理の開始日</option></select><input type="date" id="sDueDate"></div>'+
+     '<div class="fr"><button class="btnp" id="sDueSave">保存する</button></div>'+
+     '<div class="hint">健診で予定日を言われたら「出産予定日」、まだなら「最後の生理の開始日」を選んでください。</div>',
+ wh:'<div class="fr"><input type="number" id="sHt" inputmode="decimal" placeholder="身長 cm"><input type="number" id="sPw" inputmode="decimal" placeholder="妊娠前の体重 kg"></div>'+
+    '<div class="fr"><button class="btnp" id="sWhSave">保存する</button></div>'+
+    '<div class="hint" id="sWhOut">妊娠前のBMIから、増えていい範囲を計算します。</div>',
+ tel:'<div class="fr"><input type="text" id="sCName" placeholder="産院の名前"></div>'+
+     '<div class="fr"><input type="tel" id="sCDay" inputmode="tel" placeholder="昼間の番号"></div>'+
+     '<div class="fr"><input type="tel" id="sCNight" inputmode="tel" placeholder="夜間・休日の番号"></div>'+
+     '<div class="fr"><button class="btnp" id="sCSave">保存する</button></div>'+
+     '<div class="hint">保存すると「電話するところ」からタップで発信できます。</div>',
+ memo:'<div class="fr"><input type="text" id="sQNew" placeholder="例：旅行に行っていいか"><button class="btnp" id="sQAdd">追加</button></div>'+
+      '<div class="hint" id="sQOut"></div>',
+ rec:'<div class="fr"><input type="number" id="sRWk" inputmode="numeric" placeholder="週"><input type="number" id="sRKg" inputmode="decimal" placeholder="体重kg"><input type="text" id="sRBp" placeholder="血圧 112/68"></div>'+
+     '<div class="fr"><button class="btnp" id="sRAdd">記録する</button></div>'+
+     '<div class="hint">グラフは「体重と血圧の記録」のページに出ます。</div>'
+};
+
+function setupState(x){
   var w=+$("#wk").value;
+  if(x.from&&w<x.from)return['any',x.from+"週から"];
+  if(x.k==="__any")return['any','いつでも'];
+  if(x.k==="__wh"){
+    var ok=($("#ht")&&$("#ht").value&&$("#pw")&&$("#pw").value);
+    return ok?['done','すみ']:['todo','まだ'];
+  }
+  var v=null;try{v=localStorage.getItem(x.k);}catch(e){}
+  var has=!!v&&v!=="{}"&&v!=="[]"&&v!=="null";
+  if(has&&x.k==="premam-contact"){try{var o=JSON.parse(v);has=!!(o.day||o.night||o.name);}catch(e){}}
+  return has?['done','すみ']:['todo','まだ'];
+}
+
+function buildSetup(){
+  var box=document.getElementById("setupBody");if(!box)return;
   box.innerHTML=SETUP.map(function(x,i){
-    var st='<span class="st any">いつでも</span>';
-    if(x.k==="__wh"){
-      var ok=($("#ht")&&$("#ht").value&&$("#pw")&&$("#pw").value);
-      st=ok?'<span class="st done">すみ</span>':'<span class="st todo">まだ</span>';
-    }else if(x.k!=="__any"){
-      var v=null;try{v=localStorage.getItem(x.k);}catch(e){}
-      var has=!!v&&v!=="{}"&&v!=="[]"&&v!=="null";
-      if(has&&x.k==="premam-contact"){try{var o=JSON.parse(v);has=!!(o.day||o.night||o.name);}catch(e){}}
-      st=has?'<span class="st done">すみ</span>':'<span class="st todo">まだ</span>';
+    var st=setupState(x);
+    var head='<summary><span class="n">'+(i+1)+'</span><span class="tx"><b>'+x.t+
+      "</b><span>"+x.s+'</span></span><span class="st '+st[0]+'" data-st="'+i+'">'+st[1]+"</span></summary>";
+    if(x.f){
+      return "<details>"+head+'<div class="form">'+SFORM[x.f]+
+        '<a class="go" href="#'+x.id+'">ページを開く &#8250;</a></div></details>';
     }
-    if(x.from&&w<x.from)st='<span class="st any">'+x.from+"週から</span>";
     return '<a href="#'+x.id+'"><span class="n">'+(i+1)+'</span><span class="tx"><b>'+x.t+
-      "</b><span>"+x.s+"</span></span>"+st+"</a>";
+      "</b><span>"+x.s+'</span></span><span class="st '+st[0]+'" data-st="'+i+'">'+st[1]+"</span></a>";
   }).join("");
+  fillSetup();
+  wireSetup();
+}
+
+function fillSetup(){
+  var c={};try{c=JSON.parse(localStorage.getItem("premam-contact")||"{}");}catch(e){}
+  var d=null;try{d=JSON.parse(localStorage.getItem("premam-due")||"null");}catch(e){}
+  if($("#sDueDate")&&d&&d.due&&!$("#sDueDate").value){$("#sDueDate").value=d.due;$("#sDueMode").value="due";}
+  [["sCName","name"],["sCDay","day"],["sCNight","night"]].forEach(function(p){
+    var el=$("#"+p[0]);if(el&&c[p[1]]&&!el.value)el.value=c[p[1]];
+  });
+  if($("#sHt")&&$("#ht")&&$("#ht").value&&!$("#sHt").value)$("#sHt").value=$("#ht").value;
+  if($("#sPw")&&$("#pw")&&$("#pw").value&&!$("#sPw").value)$("#sPw").value=$("#pw").value;
+  if($("#sRWk")&&!$("#sRWk").value)$("#sRWk").placeholder=$("#wk").value;
+  var qs=[];try{qs=JSON.parse(localStorage.getItem("premam-q")||"[]");}catch(e){}
+  if($("#sQOut"))$("#sQOut").textContent=qs.length?("いま "+qs.length+" 件たまっています。中身は「電話するところ」の下で見られます。"):"まだありません。";
+  if($("#sWhOut")&&$("#calcOut"))$("#sWhOut").innerHTML=$("#calcOut").innerHTML;
+}
+
+function flash(b,msg){var o=b.textContent;b.textContent=msg;setTimeout(function(){b.textContent=o;},1600);}
+
+function wireSetup(){
+  function drive(id,val){var el=$("#"+id);if(!el)return;el.value=val;el.dispatchEvent(new Event("input",{bubbles:true}));}
+  var b;
+  if((b=$("#sDueSave")))b.addEventListener("click",function(){
+    if(!$("#sDueDate").value){alert("日付を選んでください");return;}
+    $("#dueMode").value=$("#sDueMode").value;
+    $("#dueDate").value=$("#sDueDate").value;
+    $("#dueSave").click();
+    flash(b,"保存しました");refreshSetup();
+  });
+  if((b=$("#sWhSave")))b.addEventListener("click",function(){
+    drive("ht",$("#sHt").value);drive("pw",$("#sPw").value);
+    flash(b,"保存しました");fillSetup();refreshSetup();
+  });
+  if((b=$("#sCSave")))b.addEventListener("click",function(){
+    drive("cName",$("#sCName").value);drive("cDay",$("#sCDay").value);drive("cNight",$("#sCNight").value);
+    $("#cSave").click();
+    flash(b,"保存しました");refreshSetup();
+  });
+  if((b=$("#sQAdd")))b.addEventListener("click",function(){
+    var v=$("#sQNew").value.trim();if(!v)return;
+    drive("qNew",v);$("#qAdd").click();
+    $("#sQNew").value="";flash(b,"追加");fillSetup();refreshSetup();
+  });
+  if($("#sQNew"))$("#sQNew").addEventListener("keydown",function(e){if(e.key==="Enter")$("#sQAdd").click();});
+  if((b=$("#sRAdd")))b.addEventListener("click",function(){
+    var w=$("#sRWk").value||$("#sRWk").placeholder;
+    if(!$("#sRKg").value&&!$("#sRBp").value){alert("体重か血圧を入れてください");return;}
+    drive("rWk",w);drive("rKg",$("#sRKg").value);drive("rBp",$("#sRBp").value);
+    $("#rAdd").click();
+    $("#sRKg").value="";$("#sRBp").value="";
+    flash(b,"記録しました");refreshSetup();
+  });
+}
+
+function refreshSetup(){
+  var box=document.getElementById("setupBody");if(!box||!box.children.length)return;
+  SETUP.forEach(function(x,i){
+    var el=box.querySelector('[data-st="'+i+'"]');if(!el)return;
+    var st=setupState(x);
+    el.className="st "+st[0];el.textContent=st[1];
+  });
+  fillSetup();
 }
 (function(){
+  buildSetup();
   var t=null;
-  function later(){clearTimeout(t);t=setTimeout(refreshSetup,220);}
-  document.addEventListener("click",later,true);
+  function later(){clearTimeout(t);t=setTimeout(refreshSetup,260);}
   document.addEventListener("change",later,true);
-  document.addEventListener("input",later,true);
   window.addEventListener("focus",later);
-  refreshSetup();
+  $("#wk").addEventListener("input",later);
 })();
 
 /* ---- menu ---- */
