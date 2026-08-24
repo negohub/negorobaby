@@ -235,6 +235,31 @@ footer{margin-top:50px;padding:22px 0 0;border-top:2px dashed var(--line);font-s
 .rectable td{padding:7px 8px;border-bottom:1px dashed var(--line);color:var(--ink-mid);white-space:nowrap}
 .rectable .x{color:var(--ink-soft);cursor:pointer;background:none;border:none;font-size:14px}
 
+/* --- big action button --- */
+.bigbtn{width:100%;padding:22px;font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:19px;
+  color:#fff;background:var(--pink);border:none;border-radius:20px;cursor:pointer;line-height:1.4}
+.bigbtn:active{transform:scale(.985)}
+.bigbtn.stop{background:var(--red)}
+.bigbtn:disabled{background:var(--line);color:var(--ink-soft)}
+.bigread{text-align:center;font-family:"Quicksand",sans-serif;font-weight:700;font-size:40px;color:var(--pink-d);line-height:1.1}
+.biglab{text-align:center;font-size:12px;color:var(--ink-soft);margin-bottom:10px}
+.statrow{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}
+.stat{background:var(--pink-l);border-radius:14px;padding:10px;text-align:center}
+.stat b{display:block;font-family:"Quicksand",sans-serif;font-size:20px;color:var(--pink-d);line-height:1.2}
+.stat span{font-size:10.5px;color:var(--ink-soft)}
+.verdict{border-radius:14px;padding:12px 14px;font-size:13px;line-height:1.7;margin-top:4px}
+.verdict.wait{background:var(--cream);border:2px solid var(--line);color:var(--ink-mid)}
+.verdict.go{background:var(--red-bg);border:2px solid #F6C4CE;color:var(--red);font-weight:700}
+
+/* --- caffeine --- */
+.cafgrid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:12px}
+.cafgrid button{font-family:inherit;font-size:12.5px;font-weight:700;padding:11px 8px;border-radius:14px;
+  border:2px solid var(--line);background:var(--card);color:var(--ink-mid);cursor:pointer;line-height:1.4}
+.cafgrid button:hover,.cafgrid button:focus-visible{border-color:var(--pink);color:var(--pink-d)}
+.cafgrid button i{display:block;font-style:normal;font-family:"Quicksand",sans-serif;font-size:11px;color:var(--ink-soft);margin-top:2px}
+.bar{height:16px;background:var(--pink-l);border-radius:10px;overflow:hidden;margin-top:8px}
+.bar i{display:block;height:100%;background:var(--mint);border-radius:10px;transition:width .25s}
+.bar i.over{background:var(--red)}
 /* --- night mode --- */
 html[data-theme="dark"]{
   --pink:#E88AA9; --pink-d:#FFB3CB; --pink-l:#3B2B33; --pink-bg:#1E1720;
@@ -537,6 +562,20 @@ nav.jump a.off{opacity:.45}
     </div>
   </section>
 
+  <section id="count" data-from="4" data-to="41">
+    <span class="eyebrow">かぞえかた</span>
+    <h2>「5週」ってどこから？</h2>
+    <p class="sub">最初にみんなが混乱するところです。1回読めば、あとはずっとすっきりします。</p>
+    <div id="countBody"></div>
+  </section>
+
+  <section id="tips" data-from="10" data-to="41">
+    <span class="eyebrow">こまごま</span>
+    <h2>服と、細かいこと</h2>
+    <p class="sub">誰も教えてくれないけど、知っておくと地味に助かること。</p>
+    <div id="tipsBody"></div>
+  </section>
+
   <div class="gdiv"><span class="gd-n">02</span><div><b>からだとこころ</b><span>しんどいとき・不安なとき</span></div></div>
 
   <section id="body" data-from="4" data-to="41">
@@ -621,6 +660,28 @@ nav.jump a.off{opacity:.45}
       </tbody>
     </table>
     <div class="note calm" style="margin-top:10px">「厳格に守る根拠は必ずしも十分ではない」と学会自身が注記しています。幅として持っておく程度に。急に増えた・減ったときだけ健診で相談を。</div>
+  </section>
+
+  <section id="caffeine" data-from="4" data-to="41">
+    <span class="eyebrow">カフェイン</span>
+    <h2>今日、どれくらい？</h2>
+    <p class="sub">飲んだものをタップすると合計が出ます。目安は1日200mgまで。日付が変わると自動でリセットされます。</p>
+    <div class="card">
+      <div class="bigread" id="cafNum">0</div>
+      <div class="biglab">mg / 200mg</div>
+      <div class="bar"><i id="cafBar" style="width:0%"></i></div>
+      <div class="verdict wait" id="cafMsg" style="margin-top:10px">まだ何も飲んでいません。</div>
+      <div class="cafgrid" id="cafGrid"></div>
+      <button class="btns" id="cafReset" style="width:100%;margin-top:10px">今日の記録をリセット</button>
+    </div>
+    <div class="note calm">数値は食品成分表をもとにした1杯あたりの目安です。同じコーヒーでも淹れ方で倍近く変わるので、きっちり計算するというより「だいたいこのへん」を掴むために使ってください。カフェインレスなら何杯でも大丈夫です。</div>
+  </section>
+
+  <section id="salt" data-from="16" data-to="41">
+    <span class="eyebrow">えんぶん</span>
+    <h2>6.5gって、どれくらい？</h2>
+    <p class="sub">「1日6.5g未満」と言われてもピンときません。実際の数字で見ると、どこを削ればいいかが一目でわかります。</p>
+    <div id="saltBody"></div>
   </section>
 
   <div class="gdiv"><span class="gd-n">04</span><div><b>びょういんのこと</b><span>健診・記録・お産の選択</span></div></div>
@@ -722,6 +783,14 @@ nav.jump a.off{opacity:.45}
     <div class="note calm" style="margin-top:10px">2026年5月に改正健康保険法が成立し、正常分娩を公的保険でまかなう新制度（自己負担ゼロ）が決まりました。ただし施行は公布から2年以内で、実際の開始は2027〜2028年度の見込み。<b>いまは従来どおり出産育児一時金50万円が使えます。</b></div>
   </section>
 
+  <section id="cost" data-from="12" data-to="41">
+    <span class="eyebrow">じっさいの金額</span>
+    <h2>結局いくら要るのか</h2>
+    <p class="sub">制度の話とは別に、財布から出ていく実額の目安です。金額は全国平均で、地域と施設で大きく変わります。</p>
+    <div id="costBody"></div>
+    <div class="note calm" style="margin-top:10px"><b>出ていく額より、タイミングがつらい。</b>もらえるお金は合計するとかなりの額になりますが、振り込まれるのは数か月後です。<b>現金で50〜80万円を先に用意できる状態</b>にしておくと、精神的にまったく違います。</div>
+  </section>
+
   <section id="todo" data-from="4" data-to="41">
     <span class="eyebrow">てつづき</span>
     <h2>いつ、なにをする</h2>
@@ -760,6 +829,25 @@ nav.jump a.off{opacity:.45}
     <div id="laborBody"></div>
   </section>
 
+  <section id="timer" data-from="32" data-to="41">
+    <span class="eyebrow">じんつうタイマー</span>
+    <h2>間隔をはかる</h2>
+    <p class="sub">痛みが来たらボタン、おさまったらもう一度。間隔と長さが自動で計算されます。実際に始まったら、これを見ながら電話してください。</p>
+    <div class="card">
+      <div class="bigread" id="tmDisp">--</div>
+      <div class="biglab" id="tmLab">まだ計測していません</div>
+      <button class="bigbtn" id="tmBtn">痛みが来た</button>
+      <div class="statrow">
+        <div class="stat"><b id="tmInt">--</b><span>直近5回の平均間隔</span></div>
+        <div class="stat"><b id="tmDur">--</b><span>平均の長さ</span></div>
+      </div>
+      <div class="verdict wait" id="tmMsg">10分間隔（1時間に6回）になったら産院に電話です。</div>
+      <div id="tmLog" style="margin-top:12px"></div>
+      <button class="btns" id="tmReset" style="width:100%;margin-top:10px">記録を消す</button>
+    </div>
+    <div class="note warn"><b>タイマーより優先すること。</b>破水したと思ったら、間隔にかかわらずすぐ電話。出血が多い、いつもと違う強い痛みが続く、胎動が減った、これらも待たずに連絡してください。経産婦は進みが早いので、10分を待たずに向かうよう言われることがあります。</div>
+  </section>
+
   <section id="after" data-from="29" data-to="41">
     <span class="eyebrow">さんご</span>
     <h2>産後にやること</h2>
@@ -769,6 +857,14 @@ nav.jump a.off{opacity:.45}
     <p class="sub">0歳のうちに10回以上。同時接種が標準で、効果も安全性も単独接種と変わりません。</p>
     <div class="tl" id="vaxBody"></div>
     <div class="note warn" style="margin-top:10px"><b>ここだけは期限厳守。</b>ロタウイルスワクチンの1回目は、生後14週6日までに接種する必要があります。過ぎると受けられません。<br><br>そして<b>1か月健診のときに、小児科へ「生後2か月の誕生日」の予約を入れておく</b>のが鉄則です。予約は埋まります。</div>
+  </section>
+
+  <section id="baby1m" data-from="30" data-to="41">
+    <span class="eyebrow">さいしょの1か月</span>
+    <h2>生まれてからのこと</h2>
+    <p class="sub">産まれた瞬間から始まるのに、妊娠中は誰も教えてくれない部分です。読んでおくだけで、最初の1週間がだいぶ違います。</p>
+    <div id="babyBody"></div>
+    <div class="note warn" style="margin-top:10px"><b>迷ったら #8000。</b>子ども医療電話相談。夜間・休日に小児科医や看護師へつながります。<b>生後3か月未満で38℃以上の熱が出たら、時間帯にかかわらず受診</b>してください。この月齢だけは特別です。</div>
   </section>
 
   <section id="name" data-from="26" data-to="41">
@@ -810,7 +906,7 @@ nav.jump a.off{opacity:.45}
 
 <button id="toTop" aria-label="いちばん上へ">&#8593;</button>
 <nav class="jump">
-  <a href="#dial">週数</a><a href="#food">たべもの</a><a href="#life">くらし</a><a href="#recipe">レシピ</a><a href="#limits">使い方</a><a href="#body">からだ</a><a href="#danger" class="urgent">危険サイン</a><a href="#phase">時期別</a><a href="#fuan">不安</a><a href="#oops">やっちゃった</a><a href="#nutri">栄養</a><a href="#fish">魚</a><a href="#weight">体重</a><a href="#contact">連絡先</a><a href="#test">健診</a><a href="#echo">エコー用語</a><a href="#record">記録</a><a href="#kick">胎動</a><a href="#birth">産み方</a><a href="#kinkyu">入院</a><a href="#money">お金</a><a href="#todo">手続き</a><a href="#hokatsu">保活</a><a href="#edu">教育費</a><a href="#prep">準備</a><a href="#labor">お産</a><a href="#after">産後</a><a href="#name">名づけ</a><a href="#around">まわり</a><a href="#papa">パパへ</a><a href="#backup">ひきつぎ</a>
+  <a href="#dial">週数</a><a href="#food">たべもの</a><a href="#life">くらし</a><a href="#recipe">レシピ</a><a href="#count">数え方</a><a href="#limits">使い方</a><a href="#tips">服とコツ</a><a href="#body">からだ</a><a href="#danger" class="urgent">危険サイン</a><a href="#phase">時期別</a><a href="#fuan">不安</a><a href="#oops">やっちゃった</a><a href="#nutri">栄養</a><a href="#fish">魚</a><a href="#weight">体重</a><a href="#caffeine">カフェイン</a><a href="#salt">塩分</a><a href="#contact">連絡先</a><a href="#test">健診</a><a href="#echo">エコー用語</a><a href="#record">記録</a><a href="#kick">胎動</a><a href="#birth">産み方</a><a href="#kinkyu">入院</a><a href="#money">お金</a><a href="#cost">実際の金額</a><a href="#todo">手続き</a><a href="#hokatsu">保活</a><a href="#edu">教育費</a><a href="#prep">準備</a><a href="#labor">お産</a><a href="#timer">陣痛タイマー</a><a href="#after">産後</a><a href="#baby1m">最初の1か月</a><a href="#name">名づけ</a><a href="#around">まわり</a><a href="#papa">パパへ</a><a href="#backup">ひきつぎ</a>
 </nav>
 
 <script>
@@ -1371,6 +1467,84 @@ const LIMITS=[
 {h:"ひとりで抱えている",d:"パートナーがいない、頼れる家族がいない、相手との関係が不安定。どのケースでも支援はあります。<b>自治体のこども家庭センター</b>が入口です。<br><br>暴力や強い支配がある場合は、産院に伝えれば守られる仕組みがあります。ひとりで解決しようとしないでください。"}
 ];
 
+const COUNT=[
+{h:"最終月経の初日が「0週0日」",d:"妊娠週数は、<b>最後の生理が始まった日を0日目として数えます。</b>受精した日でも、着床した日でもありません。<br><br>だから妊娠2週ごろに排卵・受精、3〜4週ごろに着床、というズレが生まれます。<b>5週の時点で、赤ちゃんが存在してからはまだ3週間ほど。</b>「5週も経ったのに何も見えない」と焦らなくて大丈夫です。"},
+{h:"4週で1か月。だから10か月",d:"妊娠の「月数」は4週きっかりで1か月と数えます。カレンダーの月とは違うので、ここも混乱しがち。<br><br>妊娠1か月＝0〜3週／<b>2か月＝4〜7週</b>／3か月＝8〜11週／4か月＝12〜15週。以降も同じで、10か月＝36〜39週。「十月十日（とつきとおか）」はここから来ています。"},
+{h:"予定日は40週0日",d:"最終月経初日から数えて<b>280日目</b>が出産予定日です。<br><br>ただし生理周期は人それぞれなので、初期のエコーで測るCRL（頭からおしりまでの長さ）をもとに<b>予定日が修正されることがあります。</b>8〜11週ごろの計測がいちばん正確で、そこで決まった予定日がその後ずっと使われます。"},
+{h:"正期産・早産の線引き",d:"<b>正期産＝37週0日〜41週6日。</b>この間に生まれれば「予定どおり」です。<br><br>22週0日〜36週6日は早産、22週未満は流産という区分。逆に42週を超えると過期産で、その前に誘発の判断になります。<br><br>ちなみに<b>予定日ぴったりに生まれる子は5%以下</b>。予定日は締切ではなく、真ん中の目安です。"},
+{h:"「◯週◯日」の読み方",d:"週の始まりが「◯週0日」です。5週0日の翌日が5週1日、6日後が5週6日、その次が6週0日。<br><br>健診では「今9週3日ですね」のように言われます。この手帳のダイヤルに予定日を登録しておけば、開くたびに自動で出ます。"}
+];
+
+const SALT=[
+{n:"ラーメン（スープ全部）",g:"6.0g"},{n:"ラーメン（スープを残す）",g:"3.0g"},
+{n:"カップ麺 1個",g:"5.5g"},{n:"うどん・そば（つゆ全部）",g:"5.0g"},
+{n:"カレーライス 1皿",g:"3.3g"},{n:"牛丼 並",g:"2.5g"},
+{n:"明太子 1/2腹",g:"2.2g"},{n:"味噌 大さじ1",g:"2.2g"},
+{n:"梅干し 1粒",g:"2.0g"},{n:"味噌汁 1杯",g:"1.5g"},
+{n:"塩鮭（甘塩）1切れ",g:"1.5g"},{n:"ハンバーガー 1個",g:"1.5g"},
+{n:"ピザ 1切れ",g:"1.5g"},{n:"おにぎり（鮭）1個",g:"1.2g"},
+{n:"漬物 小皿1つ",g:"1.0g"},{n:"醤油 小さじ1",g:"0.9g"},
+{n:"食パン 6枚切1枚",g:"0.8g"},{n:"ウインナー 3本",g:"0.6g"},
+{n:"ポテトチップス 60g",g:"0.6g"},{n:"ハム 2枚",g:"0.5g"}
+];
+
+const SALTTIPS=[
+{h:"いちばん効くのは、汁を残すこと",d:"ラーメンのスープを残すだけで<b>3g減ります。</b>これは他のどんな工夫より大きい。うどん・そばのつゆ、鍋の〆、味噌汁のおかわりも同じです。"},
+{h:"減らすのではなく、置き換える",d:"塩を減らすと味気なくなりますが、<b>だし・酢・レモン・香辛料・ごま・海苔</b>で満足度は戻せます。特に酸味は「塩が足りない」感覚を打ち消します。"},
+{h:"意外な伏兵",d:"パン、練り物、ハム、シリアル、菓子パン。それ自体は薄味でも、量を食べるので積み上がります。パン食の日は他を薄味に。"},
+{h:"むくみと血圧が気になったら",d:"塩を減らすのと同時に、<b>カリウム</b>（バナナ・いも類・トマト・アボカド・ほうれん草）を摂ると排出されます。水分は減らさないでください。減らすとかえってむくみます。"}
+];
+
+const CAF=[
+{n:"ドリップコーヒー",u:"1杯150ml",mg:90},
+{n:"インスタントコーヒー",u:"1杯150ml",mg:85},
+{n:"カフェラテ・カプチーノ",u:"1杯",mg:75},
+{n:"エスプレッソ",u:"1杯30ml",mg:60},
+{n:"紅茶",u:"1杯150ml",mg:45},
+{n:"煎茶・緑茶",u:"1杯150ml",mg:30},
+{n:"ほうじ茶・ウーロン茶",u:"1杯150ml",mg:30},
+{n:"玉露",u:"1杯60ml",mg:95},
+{n:"エナジードリンク",u:"1本",mg:120},
+{n:"コーラ",u:"500ml",mg:50},
+{n:"ココア",u:"1杯",mg:10},
+{n:"板チョコ",u:"半分(25g)",mg:10},
+{n:"カフェインレス",u:"何杯でも",mg:0},
+{n:"麦茶・ルイボス",u:"何杯でも",mg:0}
+];
+
+const COST=[
+{h:"分娩・入院費",d:"全国平均で<b>およそ52万円</b>（正常分娩・室料差額を除く）。地域差が大きく、東京は約65万円、いちばん安い県で約40万円。<br><br>出産育児一時金50万円が直接支払われるので、<b>差額の数万円だけ払う（または戻ってくる）</b>のが基本の形です。"},
+{h:"個室・差額ベッド代",d:"1日あたり<b>5,000〜20,000円</b>。5〜6日の入院で3〜10万円の上乗せになります。<b>ここは一時金の対象外</b>で、自己負担です。<br><br>大部屋でいいと思っていても、産後は他の赤ちゃんの泣き声で眠れないことがあります。予算に入れておくと選択肢が持てます。"},
+{h:"無痛分娩",d:"<b>プラス10〜20万円</b>が相場。24時間対応の施設ほど高くなる傾向があります。これも保険外です。"},
+{h:"妊婦健診の自己負担",d:"受診票でほとんどカバーされますが、補助の上限を超える回や、追加の検査があります。<b>トータルで3〜7万円</b>くらいを見ておくと安心。<br><br>NIPTなど自費の出生前検査を受ける場合は、別に数万〜20万円ほどかかります。"},
+{h:"マタニティ用品",d:"服・下着・腹帯・保湿クリームなどで<b>2〜3万円</b>。全部そろえる必要はなく、手持ちのゆったりした服で足りる部分も多い。"},
+{h:"ベビー用品（初期）",d:"肌着・おむつ・寝具・ベビーバスなどで<b>5〜10万円</b>。チャイルドシートを新規で買うと、さらに2〜5万円。<br><br>ベビーカーと抱っこひもは急がなくていいので、後回しにすると初期費用は抑えられます。"},
+{h:"里帰り・その他",d:"交通費、上の子の預け先、内祝い（いただいた額の1/3〜半分）。内祝いは意外とまとまるので、<b>お祝いをもらったら半分は使わずに取っておく</b>のがおすすめ。"},
+{h:"入ってくるお金（合計すると大きい）",d:"出産育児一時金50万円／妊婦のための支援給付10万円／出産手当金（産休中・給与の2/3）／育児休業給付金（67%〜、出生後休業支援給付を使えば手取り10割相当の期間あり）／児童手当（18年で約234万円）。<br><br><b>出ていく実額より、入ってくる額のほうが大きくなるケースが多い</b>のが実際のところです。"}
+];
+
+const BABY1M=[
+{h:"授乳は、思っているより頻繁",d:"<b>1日8〜12回、2〜3時間おき。</b>夜も同じです。「まとめて寝てくれる」は最初の1か月には来ません。<br><br>足りているかの目安は体重より<b>おしっこの回数</b>。1日6回以上出ていて、機嫌よく寝る時間があれば足りています。ミルクを足すことは失敗ではありません。"},
+{h:"うんちの色を見る",d:"黄色・緑・茶色は正常。<b>白っぽい・赤い・黒いときは受診</b>してください。母子健康手帳に「便色カード」がついているので、それと見比べます。<br><br>回数は1日10回のこともあれば、数日出ないこともあり、どちらもありえます。"},
+{h:"体重が減るのは正常",d:"生まれて数日で<b>5〜10%減ります（生理的体重減少）。</b>その後、生後1〜2週で出生時の体重に戻るのが普通の流れ。<br><br>減ったと言われても、それは異常ではありません。1か月健診で「1日25〜30gずつ増えている」と言われればまったく問題なしです。"},
+{h:"寝かせ方（ここは譲れない）",d:"乳幼児突然死症候群を防ぐために、<b>あお向けで寝かせる</b>こと。うつぶせ寝は絶対に避けてください。<br><br>ほかに、かたい敷布団を使う／顔の周りにぬいぐるみ・タオル・枕を置かない／暖めすぎない／<b>周囲でたばこを吸わない</b>。ソファやクッションの上での添い寝も窒息の原因になります。"},
+{h:"泣き止まないとき",d:"おむつ、空腹、暑い寒い、抱っこ。全部やっても泣く時期があります。<b>生後2週〜2か月ごろがピークで、これは正常な発達</b>（PURPLEクライングと呼ばれます）。<br><br>いちばん大事なこと：<b>絶対に揺さぶらないでください。</b>限界だと感じたら、安全な場所に寝かせて数分その場を離れていい。それは正しい対処です。"},
+{h:"へその緒・沐浴・湿疹",d:"へその緒は1〜2週間で自然にとれます。乾かしておけばOK。<br><br>沐浴は1か月健診まで。生後2〜3週から<b>乳児湿疹</b>が出るのはよくあることで、洗って保湿すれば多くは落ち着きます。ひどければ小児科で薬が出ます。"},
+{h:"熱が出たら",d:"<b>生後3か月未満で38℃以上は、時間帯にかかわらず受診。</b>この月齢だけは「様子を見る」をしません。<br><br>それ以外で迷ったら、<b>#8000</b>（子ども医療電話相談）に電話すれば、小児科医や看護師が判断してくれます。夜間・休日も対応しています。"},
+{h:"ママの体も回復途中",d:"産後1か月は<b>全治1〜2か月のけがと同じ状態</b>です。悪露が続き、傷が痛み、睡眠は細切れ。<br><br>1か月健診で医師のOKが出るまでは、家事も外出も最小限に。ここでパパが引き受けた分が、そのまま回復の速さになります。"}
+];
+
+const TIPS=[
+{h:"マタニティ服は、全部そろえなくていい",d:"おなかが目立ちはじめるのは<b>16〜20週ごろ</b>。専用の服を一式買う必要はなく、ゆったりしたワンピース、レギンス、大きめのトップスで大半は乗り切れます。<br><br>買うなら<b>授乳口つきのもの</b>を。産後も使えるので、実質2倍もちます。"},
+{h:"下着は2回買い替えになる",d:"バストは妊娠中と産後で2段階大きくなります。最初から高いものを買わず、<b>ノンワイヤーの授乳兼用ブラ</b>を必要なぶんだけ。<br><br>ショーツはおなかを締めつけないタイプに。産褥ショーツは入院時に2〜3枚あれば足ります。"},
+{h:"靴は後期に困る",d:"足がむくんでサイズが変わり、しかも<b>かがんで靴紐を結べなくなります。</b>後期はスリッポンかバレエシューズが正解。ヒールは転倒のリスクがあるので早めに卒業を。"},
+{h:"エコー写真は、消えます",d:"多くのエコー写真は<b>感熱紙なので、数年で薄くなって消えます。</b>もらったその日にスマホで撮っておくか、スキャンして保存を。<br><br>アルバムに貼るなら、感熱紙のままではなくコピーしたものを。"},
+{h:"母子手帳ケースは早めに",d:"母子手帳・診察券・保険証・受診票・エコー写真。健診のたびに全部要ります。<b>まとめて1つに入れておくと、忘れ物がなくなる</b>だけで気持ちがかなり楽になります。"},
+{h:"歯みがきができない時期がある",d:"つわりで歯ブラシを口に入れられない人は多いです。<b>うがいだけでも、何もしないよりずっといい。</b>子ども用の小さい歯ブラシに替える、歯磨き粉をやめる、という手もあります。<br><br>歯周病は早産のリスクを上げるので、体調が戻ったら妊婦歯科健診（多くの自治体で無料）へ。"},
+{h:"産後、髪が抜けます",d:"産後2〜3か月ごろから<b>一時的に抜け毛が増えます。</b>ホルモンの変化によるもので、半年〜1年で戻ります。<br><br>知らないと不安になるので、先に言っておきます。ハゲません。"},
+{h:"性別を聞くかどうかも自由",d:"多くは18〜20週ごろにわかりますが、<b>「聞かない」という選択もできます。</b>産院に先に伝えておけば、口をすべらせないよう配慮してくれます。<br><br>わかっても、外れることはあります。名前を1つに絞りきらないのが安全です。"}
+];
+
 /* ============ RENDER ============ */
 const $=s=>document.querySelector(s);
 function norm(s){return s.replace(/[\u30A1-\u30F6]/g,c=>String.fromCharCode(c.charCodeAt(0)-0x60)).toLowerCase();}
@@ -1575,6 +1749,15 @@ function renderStatic(){
 
   $("#limitBody").innerHTML=LIMITS.map(function(x){return acc(x.h,"<p>"+x.d+"</p>");}).join("");
 
+  $("#countBody").innerHTML=COUNT.map(function(x){return acc(x.h,"<p>"+x.d+"</p>");}).join("");
+  $("#tipsBody").innerHTML=TIPS.map(function(x){return acc(x.h,"<p>"+x.d+"</p>");}).join("");
+  $("#costBody").innerHTML=COST.map(function(x){return acc(x.h,"<p>"+x.d+"</p>");}).join("");
+  $("#babyBody").innerHTML=BABY1M.map(function(x){return acc(x.h,"<p>"+x.d+"</p>");}).join("");
+  $("#saltBody").innerHTML='<table class="tbl"><thead><tr><th>食べもの</th><th>塩分の目安</th></tr></thead><tbody>'+
+    SALT.map(function(x){return "<tr><td>"+x.n+'</td><td class="num">'+x.g+"</td></tr>";}).join("")+
+    '</tbody></table><div style="height:12px"></div>'+
+    SALTTIPS.map(function(x){return acc(x.h,"<p>"+x.d+"</p>");}).join("");
+
   let saved={};
   try{saved=JSON.parse(localStorage.getItem("premam-check")||"{}");}catch(e){saved={};}
   $("#prepBody").innerHTML=PREP.map(function(g,gi){
@@ -1617,20 +1800,20 @@ makeFinder(LIFE,CL,{chips:"#chipsL",items:"#itemsL",count:"#countL",q:"#qL",quic
 renderDial();
 
 /* ---- week-aware UI ---- */
-var SECT_LABEL={limits:"使い方と限界",backup:"データのひきつぎ",food:"たべもの",life:"くらし",recipe:"レシピ",body:"からだの手あて",danger:"危険サイン",
+var SECT_LABEL={count:"週数の数え方",tips:"服とコツ",caffeine:"カフェイン",salt:"塩分",cost:"実際の金額",timer:"陣痛タイマー",baby1m:"最初の1か月",limits:"使い方と限界",backup:"データのひきつぎ",food:"たべもの",life:"くらし",recipe:"レシピ",body:"からだの手あて",danger:"危険サイン",
  phase:"時期別ガイド",fuan:"不安のこと",oops:"やっちゃった",nutri:"栄養",fish:"おさかな",weight:"体重",
  contact:"連絡先とメモ",test:"健診と検査",echo:"エコー用語",record:"体重の記録",kick:"胎動カウント",
  birth:"産み方の選択",kinkyu:"入院になったら",money:"お金",todo:"手続き",hokatsu:"保活",edu:"教育費",
  prep:"用意するもの",labor:"お産のサイン",after:"産後にやること",name:"名づけ",around:"まわりのこと",papa:"パパへ"};
 
 var TOPPICKS=[
- {to:7,h:"いちばん大事なのは、葉酸だけ",s:"まだ実感がない時期。やることは驚くほど少なくて、葉酸サプリと、避けるものを知っておくことだけです。つわりが来る前に、食べたいものを食べておいて。",l:["food","fuan","phase","danger"]},
+ {to:7,h:"いちばん大事なのは、葉酸だけ",s:"まだ実感がない時期。やることは驚くほど少なくて、葉酸サプリと、避けるものを知っておくことだけです。つわりが来る前に、食べたいものを食べておいて。",l:["food","count","fuan","phase"]},
  {to:11,h:"母子手帳をもらいに行く時期",s:"心拍が確認できたら、産院で妊娠届出書をもらって自治体へ。ここから健診の補助券が使えます。つわりのピークでもあるので、無理をしない前提で。",l:["todo","food","body","contact"]},
  {to:15,h:"つわりを越えるところ",s:"食べられるものを食べる期間。そろそろ会社への報告と、お金まわりの見通しを立てておくと、後がずっと楽です。",l:["phase","recipe","money","body"]},
  {to:22,h:"いちばん動ける時期",s:"安定期に入りました。歯科健診、旅行、保活の情報収集は今のうち。鉄とカルシウムを意識しはじめる時期でもあります。",l:["life","nutri","hokatsu","echo"]},
- {to:27,h:"鉄と体重を気にかける",s:"貧血と体重増加が出やすいころ。血糖の検査もあります。産み方について考えはじめてもいい時期です。",l:["nutri","record","birth","weight"]},
- {to:32,h:"準備をはじめる",s:"後期に入りました。胎動カウントを習慣に。入院バッグは早産に備えて34週までにそろえておくと安心です。",l:["kick","prep","phase","danger"]},
- {to:41,h:"いつ来てもいいように",s:"正期産が近づきました。陣痛と破水の見分け方、産院の電話番号、産後の手続き。この4つを押さえておけば大丈夫。",l:["labor","contact","after","prep"]}
+ {to:27,h:"鉄と体重を気にかける",s:"貧血と体重増加が出やすいころ。血糖の検査もあります。産み方について考えはじめてもいい時期です。",l:["nutri","record","birth","cost"]},
+ {to:32,h:"準備をはじめる",s:"後期に入りました。胎動カウントを習慣に。入院バッグは早産に備えて34週までにそろえておくと安心です。",l:["kick","prep","tips","danger"]},
+ {to:41,h:"いつ来てもいいように",s:"正期産が近づきました。陣痛と破水の見分け方、産院の電話番号、産後の手続き。この4つを押さえておけば大丈夫。",l:["timer","labor","contact","baby1m"]}
 ];
 
 var unfolded={};
@@ -1852,6 +2035,98 @@ if("serviceWorker" in navigator&&navigator.serviceWorker.getRegistrations){
   }).catch(function(){});
 }
 
+/* ---- caffeine counter ---- */
+(function(){
+  function today(){var d=new Date();return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate();}
+  var st=LS("premam-caf",{d:today(),mg:0});
+  if(st.d!==today()){st={d:today(),mg:0};LSet("premam-caf",st);}
+  $("#cafGrid").innerHTML=CAF.map(function(c,i){
+    return '<button data-i="'+i+'">'+c.n+"<i>"+c.u+(c.mg?" / "+c.mg+"mg":"")+"</i></button>";}).join("");
+  function draw(){
+    var pct=Math.min(100,Math.round(st.mg/200*100));
+    $("#cafNum").textContent=st.mg;
+    var b=$("#cafBar");b.style.width=pct+"%";b.classList.toggle("over",st.mg>200);
+    var m=$("#cafMsg");
+    if(st.mg===0){m.className="verdict wait";m.textContent="まだ何も飲んでいません。";}
+    else if(st.mg<=120){m.className="verdict wait";m.textContent="余裕があります。あと"+(200-st.mg)+"mgまで大丈夫。";}
+    else if(st.mg<=200){m.className="verdict wait";m.innerHTML="目安の範囲内です。あと<b>"+(200-st.mg)+"mg</b>。ここからはカフェインレスに切り替えると安心。";}
+    else{m.className="verdict go";m.innerHTML="今日は目安の200mgを超えました（"+st.mg+"mg）。<br>1日だけなら心配いりません。明日から戻せば大丈夫です。";}
+  }
+  $("#cafGrid").addEventListener("click",function(e){
+    var b=e.target.closest("button[data-i]");if(!b)return;
+    st.mg+=CAF[+b.dataset.i].mg;LSet("premam-caf",st);draw();
+  });
+  $("#cafReset").addEventListener("click",function(){st={d:today(),mg:0};LSet("premam-caf",st);draw();});
+  draw();
+})();
+
+/* ---- contraction timer ---- */
+(function(){
+  var rec=LS("premam-ctx",[]),cur=null,tick=null;
+  function fmt(ms){var s=Math.max(0,Math.floor(ms/1000));return Math.floor(s/60)+":"+("0"+(s%60)).slice(-2);}
+  function avg(a){return a.length?a.reduce(function(x,y){return x+y;},0)/a.length:0;}
+  function stats(){
+    var last=rec.slice(-6);
+    var ints=[];
+    for(var i=1;i<last.length;i++)ints.push(last[i].s-last[i-1].s);
+    var durs=rec.slice(-5).filter(function(r){return r.e;}).map(function(r){return r.e-r.s;});
+    $("#tmInt").textContent=ints.length?fmt(avg(ints)):"--";
+    $("#tmDur").textContent=durs.length?fmt(avg(durs)):"--";
+    var m=$("#tmMsg");
+    if(ints.length>=3&&avg(ints)<=10*60000){
+      m.className="verdict go";
+      m.innerHTML="10分間隔になっています。<b>産院に電話してください。</b>連絡先は「連絡先」のページに登録した番号から発信できます。";
+    }else if(ints.length>=3&&avg(ints)<=20*60000){
+      m.className="verdict wait";
+      m.innerHTML="間隔が縮まってきています。準備をして、10分になったら電話を。";
+    }else{
+      m.className="verdict wait";
+      m.textContent="10分間隔（1時間に6回）になったら産院に電話です。";
+    }
+  }
+  function log(){
+    if(!rec.length){$("#tmLog").innerHTML="";return;}
+    $("#tmLog").innerHTML='<div style="font-size:11px;font-weight:700;color:var(--pink);letter-spacing:.08em;margin-bottom:6px">直近の記録</div>'+
+      rec.slice(-8).reverse().map(function(r,i,arr){
+        var t=new Date(r.s);
+        var d=r.e?fmt(r.e-r.s):"計測中";
+        var idx=rec.length-1-i;
+        var gap=idx>0?fmt(rec[idx].s-rec[idx-1].s):"--";
+        return '<div style="display:flex;justify-content:space-between;font-size:12.5px;color:var(--ink-mid);padding:5px 0;border-bottom:1px dashed var(--line)"><span>'+
+          ("0"+t.getHours()).slice(-2)+":"+("0"+t.getMinutes()).slice(-2)+
+          '</span><span>長さ '+d+'</span><span class="num" style="color:var(--pink-d)">間隔 '+gap+"</span></div>";
+      }).join("");
+  }
+  function draw(){stats();log();}
+  $("#tmBtn").addEventListener("click",function(){
+    var now=Date.now();
+    if(!cur){
+      cur={s:now,e:null};rec.push(cur);
+      $("#tmBtn").textContent="おさまった";
+      $("#tmBtn").classList.add("stop");
+      $("#tmLab").textContent="痛みが続いている時間";
+      tick=setInterval(function(){$("#tmDisp").textContent=fmt(Date.now()-cur.s);},200);
+    }else{
+      cur.e=now;clearInterval(tick);tick=null;
+      $("#tmBtn").textContent="痛みが来た";
+      $("#tmBtn").classList.remove("stop");
+      $("#tmLab").textContent="前回の長さ";
+      $("#tmDisp").textContent=fmt(cur.e-cur.s);
+      cur=null;
+    }
+    LSet("premam-ctx",rec);draw();
+  });
+  $("#tmReset").addEventListener("click",function(){
+    if(!confirm("陣痛の記録を全部消します。よろしいですか？"))return;
+    rec=[];cur=null;if(tick)clearInterval(tick);tick=null;
+    LSet("premam-ctx",rec);
+    $("#tmDisp").textContent="--";$("#tmLab").textContent="まだ計測していません";
+    $("#tmBtn").textContent="痛みが来た";$("#tmBtn").classList.remove("stop");
+    draw();
+  });
+  draw();
+})();
+
 /* ---- night mode ---- */
 (function(){
   var t=null;try{t=localStorage.getItem("premam-theme");}catch(e){}
@@ -1870,7 +2145,7 @@ if("serviceWorker" in navigator&&navigator.serviceWorker.getRegistrations){
 
 /* ---- backup / handoff ---- */
 (function(){
-  var KEYS=["premam-due","premam-contact","premam-q","premam-rec","premam-kick","premam-check","premam-size","premam-theme"];
+  var KEYS=["premam-due","premam-contact","premam-q","premam-rec","premam-kick","premam-check","premam-size","premam-theme","premam-caf","premam-ctx"];
   $("#bkOut").addEventListener("click",function(){
     var o={};
     KEYS.forEach(function(k){try{var v=localStorage.getItem(k);if(v!==null)o[k]=v;}catch(e){}});
