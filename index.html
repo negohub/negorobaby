@@ -72,11 +72,18 @@ header::after{content:"";position:absolute;bottom:-70px;left:-40px;width:160px;h
 
 .dial{background:var(--card);border-radius:24px;box-shadow:var(--sh);margin:-34px 0 0;padding:20px 18px 22px;position:relative;z-index:2}
 .dial-label{font-size:11px;letter-spacing:.16em;color:var(--pink-d);font-weight:700}
-.dial-row{display:flex;align-items:center;gap:12px;margin:4px 0 2px}
+.dial-row{display:flex;align-items:center;gap:10px;margin:4px 0 2px}
+.wkstep{flex:0 0 auto;width:44px;height:44px;border-radius:50%;border:2px solid var(--pink-l);
+  background:var(--card);color:var(--pink-d);font-size:24px;font-weight:700;line-height:1;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;font-family:"Quicksand",sans-serif;padding:0}
+.wkstep:hover,.wkstep:focus-visible{background:var(--pink);border-color:var(--pink);color:#fff}
+.wkstep:active{transform:scale(.93)}
+.wkstep:disabled{opacity:.3;pointer-events:none}
+.wkval{flex:0 0 auto;min-width:86px;text-align:center}
 .dial-num{font-family:"Quicksand",sans-serif;font-size:46px;font-weight:700;line-height:1;color:var(--pink-d)}
 .dial-unit{font-size:15px;color:var(--ink-mid);margin-left:2px}
-.dial-phase{margin-left:auto;text-align:right}
-.dial-phase b{font-family:"Zen Maru Gothic",sans-serif;font-size:17px;color:var(--ink);display:block}
+.dial-phase{margin-left:auto;text-align:right;min-width:0}
+.dial-phase b{font-family:"Zen Maru Gothic",sans-serif;font-size:15.5px;color:var(--ink);display:block;white-space:nowrap}
 .dial-phase span{font-size:11px;color:var(--ink-soft)}
 input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:28px;background:transparent;margin-top:6px}
 input[type=range]::-webkit-slider-runnable-track{height:10px;border-radius:6px;background:linear-gradient(90deg,#FFD3E0 0%,#FFA9C4 50%,#F98BB4 100%)}
@@ -630,7 +637,9 @@ nav.jump a.off{opacity:.45}
   <div class="dial" id="dial">
     <div class="dial-label">いま何週？　<span style="font-weight:500;color:var(--ink-soft);letter-spacing:0">（最終月経の初日＝0週0日）</span></div>
     <div class="dial-row">
-      <div><span class="dial-num" id="wkNum">5</span><span class="dial-unit">週</span></div>
+      <button class="wkstep" id="wkMinus" aria-label="1週もどる">&#8722;</button>
+      <div class="wkval"><span class="dial-num" id="wkNum">5</span><span class="dial-unit">週</span></div>
+      <button class="wkstep" id="wkPlus" aria-label="1週すすむ">&#43;</button>
       <div class="dial-phase"><b id="wkPhase">妊娠初期</b><span id="wkMonth">2か月</span></div>
     </div>
     <input type="range" id="wk" min="0" max="42" value="5" aria-label="妊娠週数">
@@ -1884,6 +1893,8 @@ function babyOf(w){return WEEK[Math.max(0,Math.min(WEEK.length-1,w))];}
 function renderDial(){
   const w=+$("#wk").value,p=phaseOf(w),P=PHASES[p],B=babyOf(w);
   $("#wkNum").textContent=w;
+  $("#wkMinus").disabled=(w<=+$("#wk").min);
+  $("#wkPlus").disabled=(w>=+$("#wk").max);
   $("#wkPhase").textContent=P.name;
   $("#wkMonth").textContent=(Math.floor(w/4)+1)+"か月";
   $("#babyEmoji").textContent=B.e;
@@ -2017,6 +2028,17 @@ function calc(){
 }
 
 $("#wk").addEventListener("input",renderDial);
+(function(){
+  var s=$("#wk");
+  function step(n){
+    var v=Math.max(+s.min,Math.min(+s.max,(+s.value)+n));
+    if(v===+s.value)return;
+    s.value=v;
+    s.dispatchEvent(new Event("input",{bubbles:true}));
+  }
+  $("#wkMinus").addEventListener("click",function(){step(-1);});
+  $("#wkPlus").addEventListener("click",function(){step(1);});
+})();
 $("#ht").addEventListener("input",calc);
 $("#pw").addEventListener("input",calc);
 
