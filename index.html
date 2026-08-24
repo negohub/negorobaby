@@ -320,6 +320,23 @@ html[data-theme="dark"] .cd-next{background:var(--card)}
 .cd-next b{color:var(--pink-d);font-family:"Quicksand",sans-serif;font-size:14px}
 .cd-set{margin-top:12px;background:var(--pink-l);border-radius:14px;padding:12px 14px;font-size:12.5px;color:var(--ink-mid);line-height:1.7}
 
+/* --- topbar inline search --- */
+.tb-field{flex:1;min-width:0;display:flex;align-items:center;gap:8px;background:#fff;border:2px solid var(--pink-l);
+  border-radius:14px;padding:0 10px;height:40px;color:var(--pink)}
+html[data-theme="dark"] .tb-field{background:var(--card)}
+.tb-field[hidden]{display:none}
+.tb-field input{flex:1;min-width:0;border:none;background:transparent;font-family:inherit;font-size:16px;
+  color:var(--ink);outline:none;padding:0}
+.tb-field button{flex:0 0 auto;border:none;background:var(--pink-l);color:var(--pink-d);width:24px;height:24px;
+  border-radius:50%;font-size:15px;line-height:1;cursor:pointer;padding:0}
+.topbar.searching .tb-brand,.topbar.searching #searchBtn{display:none}
+
+#sPanel{position:fixed;top:54px;left:0;right:0;bottom:0;z-index:70;background:rgba(74,58,66,.35)}
+#sPanel[hidden]{display:none}
+body.has-up #sPanel{top:100px}
+.sp-in{max-height:100%;overflow-y:auto;background:var(--pink-bg);padding:12px 14px calc(24px + env(safe-area-inset-bottom));
+  border-radius:0 0 22px 22px;box-shadow:0 10px 30px rgba(74,58,66,.25)}
+
 /* --- update banner --- */
 #upBar{position:fixed;top:0;left:0;right:0;z-index:90;display:flex;align-items:center;gap:8px;
   padding:10px 12px calc(10px);background:var(--pink-d);color:#fff;
@@ -692,9 +709,16 @@ section.later .sub,section.past .sub{opacity:.5}
 
 <div class="topbar">
   <a href="#top" class="tb-brand">ぷれまむ手帳<span>&#9825;</span></a>
+  <div class="tb-field" id="tbField" hidden>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+    <input type="search" id="tbQ" placeholder="サイト内をさがす" autocomplete="off">
+    <button id="tbCancel" aria-label="やめる">&#215;</button>
+  </div>
   <button id="searchBtn" class="tb-ic" aria-label="さがす">&#128269;</button>
-  <button id="menuBtn" class="tb-ic tb-menu" aria-label="メニュー"><span></span><span></span><span></span></button>
+  <button id="menuBtn" class="tb-ic tb-menu" aria-label="もくじ"><span></span><span></span><span></span></button>
 </div>
+
+<div id="sPanel" hidden><div class="sp-in" id="sPanelBody"></div></div>
 
 <header id="top">
   <div class="wrap">
@@ -1192,14 +1216,8 @@ section.later .sub,section.past .sub{opacity:.5}
 <div id="menu" hidden>
   <div class="menu-in">
     <div class="menu-h">
-      <b id="menuTitle">もくじ</b>
+      <b>もくじ</b>
       <button id="menuClose" aria-label="閉じる">&#215;</button>
-    </div>
-    <div class="menu-s">
-      <div class="search">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
-        <input type="search" id="siteQ" placeholder="サイト内をさがす（例：むくみ、鉄、育休）" autocomplete="off">
-      </div>
     </div>
     <div class="menu-quick">
       <a href="#danger" class="mq urg">&#9888;&#65038; 危険サイン</a>
@@ -2789,11 +2807,9 @@ var MENU_LAB={"setup":"入力するところ","food": "これ食べてええ？"
     return out;
   }
 
-  function run(q){
+  function run(q,body){
     var nq=norm(q.trim());
-    var body=$("#menuBody");
-    if(!nq){$("#menuTitle").textContent="もくじ";build();return;}
-    $("#menuTitle").textContent="けんさく";
+    if(!nq){body.innerHTML='<div class="sr-none">食材名でも、症状でも、制度の名前でも。<br>例：むくみ／鉄／育休／温泉／レバー</div>';return;}
     hits=[];
     var html="";
 
@@ -2837,7 +2853,7 @@ var MENU_LAB={"setup":"入力するところ","food": "これ食べてええ？"
 
   function go(i){
     var x=hits[i];if(!x)return;
-    close();
+    close();if(typeof closeSearch==="function")closeSearch();
     if(x.type==="finder"){
       var sec=document.getElementById(x.sec);
       unfoldSection(sec);
@@ -2861,24 +2877,41 @@ var MENU_LAB={"setup":"入力するところ","food": "これ食べてええ？"
   }
 
   var bar=document.querySelector(".topbar");
-  function open(focusSearch){
+  function open(){
     build();m.hidden=false;document.body.style.overflow="hidden";
     if(bar)bar.classList.add("on-menu");
-    if(focusSearch)setTimeout(function(){$("#siteQ").focus();},80);
   }
   function close(){m.hidden=true;document.body.style.overflow="";if(bar)bar.classList.remove("on-menu");}
 
   $("#menuBtn").addEventListener("click",function(){
     if(!m.hidden){close();return;}
-    $("#siteQ").value="";$("#menuTitle").textContent="もくじ";open(false);
+    closeSearch();open();
   });
-  $("#searchBtn").addEventListener("click",function(){open(true);});
   $("#menuClose").addEventListener("click",close);
-  $("#siteQ").addEventListener("input",function(e){run(e.target.value);});
-  $("#menuBody").addEventListener("click",function(e){
-    var b=e.target.closest(".sr");
-    if(b){go(+b.dataset.h);return;}
+
+  /* ---- topbar inline search ---- */
+  var pan=$("#sPanel"),panBody=$("#sPanelBody"),field=$("#tbField"),tbq=$("#tbQ");
+  function openSearch(){
+    close();
+    bar.classList.add("searching");
+    field.hidden=false;pan.hidden=false;
+    run("",panBody);
+    setTimeout(function(){tbq.focus();},60);
+  }
+  function closeSearch(){
+    bar.classList.remove("searching");
+    field.hidden=true;pan.hidden=true;tbq.value="";tbq.blur();
+  }
+  $("#searchBtn").addEventListener("click",openSearch);
+  $("#tbCancel").addEventListener("click",closeSearch);
+  tbq.addEventListener("input",function(e){pan.hidden=false;run(e.target.value,panBody);});
+  panBody.addEventListener("click",function(e){
+    var b=e.target.closest(".sr");if(!b)return;
+    go(+b.dataset.h);closeSearch();
   });
+  pan.addEventListener("click",function(e){if(e.target===pan)closeSearch();});
+  document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!pan.hidden)closeSearch();});
+  window.openSiteSearch=openSearch;
   m.addEventListener("click",function(e){
     if(e.target===m){close();return;}
     if(e.target.closest(".mg-l a")||e.target.closest(".menu-quick a")){close();}
