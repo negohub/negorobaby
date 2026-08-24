@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ぷれまむ手帳｜妊娠のぜんぶ、ここに。</title>
 <meta name="description" content="妊娠週数に合わせて、食べもの・くらし・からだ・検査・お金・手続き・出産準備まで。妊娠中に必要な情報をまとめた手帳サイト。">
+<meta http-equiv="Cache-Control" content="no-cache, max-age=0">
 <meta name="theme-color" content="#FF9EBB">
 
 <!-- 公開URL: https://negohub.github.io/negorobaby/ （リポジトリ名: negorobaby） -->
@@ -318,6 +319,18 @@ html[data-theme="dark"] .cd-track{background:var(--card)}
 html[data-theme="dark"] .cd-next{background:var(--card)}
 .cd-next b{color:var(--pink-d);font-family:"Quicksand",sans-serif;font-size:14px}
 .cd-set{margin-top:12px;background:var(--pink-l);border-radius:14px;padding:12px 14px;font-size:12.5px;color:var(--ink-mid);line-height:1.7}
+
+/* --- update banner --- */
+#upBar{position:fixed;top:0;left:0;right:0;z-index:90;display:flex;align-items:center;gap:8px;
+  padding:10px 12px calc(10px);background:var(--pink-d);color:#fff;
+  font-size:12.5px;font-weight:700;box-shadow:0 3px 14px rgba(214,72,111,.35)}
+#upBar[hidden]{display:none}
+#upBar span{flex:1;min-width:0}
+#upBar button{flex:0 0 auto;border:none;border-radius:100px;cursor:pointer;font-family:inherit;font-weight:700}
+#upBar #upNow{background:#fff;color:var(--pink-d);font-size:12.5px;padding:7px 14px}
+#upBar #upLater{background:rgba(255,255,255,.22);color:#fff;font-size:16px;width:30px;height:30px;line-height:1}
+body.has-up .topbar{top:46px}
+body.has-up{padding-top:100px}
 
 /* --- top bar + menu --- */
 body{padding-top:54px;padding-bottom:40px}
@@ -670,6 +683,12 @@ section.later .sub,section.past .sub{opacity:.5}
 </style>
 </head>
 <body>
+
+<div id="upBar" hidden>
+  <span>あたらしいバージョンがあります</span>
+  <button id="upNow">更新する</button>
+  <button id="upLater" aria-label="あとで">&#215;</button>
+</div>
 
 <div class="topbar">
   <a href="#top" class="tb-brand">ぷれまむ手帳<span>&#9825;</span></a>
@@ -1163,9 +1182,9 @@ section.later .sub,section.past .sub{opacity:.5}
       <li>こども家庭庁「妊婦のための支援給付」／児童手当（2024年10月拡充）</li>
       <li>改正健康保険法（2026年5月29日成立・公布後2年以内施行）</li>
     </ul>
-    <p style="margin-top:12px">このページのバージョン：<b id="verTag">2026-08-24</b></p>
+    <p style="margin-top:12px">いま表示しているファイルの更新日時：<b id="verTag">確認中…</b></p>
     <button class="btns" id="reloadBtn" style="margin-top:8px">&#8635; 最新版にする</button>
-    <p style="margin-top:8px;font-size:11px">ホーム画面から開いていて内容が古いときは、これを押すと最新を取り直します。記録は消えません。</p>
+    <p style="margin-top:8px;font-size:11px">更新は自動で反映されます。うまくいかないときだけ、これを押してください。記録は消えません。</p>
   </footer>
 </div>
 
@@ -2497,6 +2516,74 @@ if("serviceWorker" in navigator&&navigator.serviceWorker.getRegistrations){
     draw();
   });
   draw();
+})();
+
+/* ---- auto update check ---- */
+/* バージョン番号を手で書き換える必要はありません。
+   サーバー上のファイルそのもの（ETag / 更新日時 / 中身）を見て判定します。 */
+(function(){
+  var KEY="premam-build",PEND="premam-build-pending",T0=Date.now();
+
+  function hash(s){
+    var a=5381,b=52711,i=s.length;
+    while(i--){var c=s.charCodeAt(i);a=(a*33^c)>>>0;b=(b*29^c)>>>0;}
+    return (a>>>0).toString(36)+(b>>>0).toString(36)+"-"+s.length.toString(36);
+  }
+  function sigOf(res,text){
+    var e=null;
+    try{e=res.headers.get("etag")||res.headers.get("last-modified");}catch(x){}
+    return e?("h:"+e):("c:"+hash(text));
+  }
+  function get(k){try{return localStorage.getItem(k);}catch(e){return null;}}
+  function set(k,v){try{localStorage.setItem(k,v);}catch(e){}}
+  function del(k){try{localStorage.removeItem(k);}catch(e){}}
+
+  function goto(){
+    location.replace(location.pathname+"?v="+Date.now()+location.hash);
+  }
+  function banner(){
+    var b=document.getElementById("upBar");if(!b||!b.hidden)return;
+    b.hidden=false;document.body.classList.add("has-up");
+    document.getElementById("upNow").onclick=goto;
+    document.getElementById("upLater").onclick=function(){
+      b.hidden=true;document.body.classList.remove("has-up");
+    };
+  }
+  function stamp(sig){
+    var t=document.getElementById("verTag");if(!t)return;
+    var m=sig.indexOf("h:")===0?sig.slice(2):"";
+    var d=m?new Date(m):null;
+    if(d&&!isNaN(d))t.textContent=d.getFullYear()+"-"+("0"+(d.getMonth()+1)).slice(-2)+"-"+("0"+d.getDate()).slice(-2)+
+      " "+("0"+d.getHours()).slice(-2)+":"+("0"+d.getMinutes()).slice(-2);
+    else t.textContent=sig.replace(/^[hc]:/,"").slice(0,18);
+  }
+
+  function check(auto){
+    if(location.protocol==="file:")return;
+    fetch(location.pathname+"?cb="+Date.now(),{cache:"no-store"})
+      .then(function(r){return r.text().then(function(t){return[r,t];});})
+      .then(function(a){
+        var sig=sigOf(a[0],a[1]),prev=get(KEY),pending=get(PEND);
+        stamp(sig);
+        if(pending&&pending===sig){set(KEY,sig);del(PEND);return;}
+        if(!prev){set(KEY,sig);return;}
+        if(prev===sig){del(PEND);return;}
+        if(auto){set(PEND,sig);goto();}
+        else banner();
+      }).catch(function(){});
+  }
+
+  /* 開いた直後は黙って最新に入れ替える */
+  check(true);
+  /* アプリに戻ってきたときは、帯を出して選んでもらう */
+  function later(){if(Date.now()-T0>10000)check(false);}
+  document.addEventListener("visibilitychange",function(){if(!document.hidden)later();});
+  window.addEventListener("focus",later);
+
+  /* ?v= を URL から消す（記録用の #d= は残す） */
+  if(location.search.indexOf("v=")>-1){
+    try{history.replaceState(null,"",location.pathname+location.hash);}catch(e){}
+  }
 })();
 
 /* ---- topbar brand -> top ---- */
