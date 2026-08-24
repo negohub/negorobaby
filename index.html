@@ -6,6 +6,28 @@
 <title>ぷれまむ手帳｜妊娠のぜんぶ、ここに。</title>
 <meta name="description" content="妊娠週数に合わせて、食べもの・くらし・からだ・検査・お金・手続き・出産準備まで。妊娠中に必要な情報をまとめた手帳サイト。">
 <meta name="theme-color" content="#FF9EBB">
+
+<!-- 公開URL: https://negohub.github.io/premam/ （リポジトリ名を premam にすれば書き換え不要） -->
+<link rel="canonical" href="https://negohub.github.io/premam/">
+<meta property="og:url" content="https://negohub.github.io/premam/">
+<meta property="og:image" content="https://negohub.github.io/premam/ogp.png">
+<meta name="twitter:image" content="https://negohub.github.io/premam/ogp.png">
+
+<link rel="icon" href="favicon.png" type="image/png" sizes="48x48">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-title" content="ぷれまむ手帳">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ぷれまむ手帳">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="ぷれまむ手帳｜にんしんのこと、ぜんぶここに。">
+<meta property="og:description" content="妊娠週数に合わせて、食べもの・くらし・からだ・検査・お金・手続き・出産準備まで。食材120品目を◎○△×で判定します。">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="ぷれまむ手帳 — にんしんのこと、ぜんぶここに。">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ぷれまむ手帳｜にんしんのこと、ぜんぶここに。">
+<meta name="twitter:description" content="妊娠週数に合わせて、食べもの・くらし・からだ・検査・お金・手続き・出産準備まで。食材120品目を◎○△×で判定します。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
@@ -178,6 +200,41 @@ nav.jump a:hover,nav.jump a:focus-visible{background:var(--pink);color:#fff}
 footer{margin-top:50px;padding:22px 0 0;border-top:2px dashed var(--line);font-size:11.5px;color:var(--ink-soft);line-height:1.9}
 .src li{list-style:none;margin-bottom:3px}
 
+/* --- due date / records / contact --- */
+.duebox{margin-top:12px;padding-top:12px;border-top:1px dashed var(--line)}
+.duebox summary{list-style:none;cursor:pointer;font-size:12px;font-weight:700;color:var(--pink-d);display:flex;align-items:center;gap:6px}
+.duebox summary::-webkit-details-marker{display:none}
+.duebox .row{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.duebox select,.duebox input[type=date]{flex:1 1 130px;padding:10px;font-size:15px;font-family:inherit;border:2px solid var(--line);border-radius:12px;background:var(--pink-bg);color:var(--ink)}
+.btnp{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:13.5px;color:#fff;background:var(--pink);border:none;border-radius:12px;padding:10px 18px;cursor:pointer}
+.btnp:hover,.btnp:focus-visible{background:var(--pink-d)}
+.btns{font-family:inherit;font-weight:700;font-size:12px;color:var(--ink-mid);background:#fff;border:2px solid var(--line);border-radius:12px;padding:9px 14px;cursor:pointer}
+.today{margin-top:10px;background:var(--pink-l);border-radius:14px;padding:11px 13px;font-size:13px;color:var(--ink-mid);line-height:1.7}
+.today b{color:var(--pink-d);font-family:"Quicksand",sans-serif;font-size:17px}
+
+.telrow{display:flex;gap:8px;align-items:center;margin-bottom:8px}
+.telrow input{flex:1;padding:11px 12px;font-size:15px;font-family:inherit;border:2px solid var(--line);border-radius:12px;background:var(--pink-bg);color:var(--ink)}
+.telrow input:focus{outline:none;border-color:var(--pink);background:#fff}
+.telcall{flex:0 0 auto;text-decoration:none;background:var(--red);color:#fff;font-weight:700;font-size:13px;padding:11px 16px;border-radius:12px;font-family:"Zen Maru Gothic",sans-serif}
+.telcall.off{background:var(--line);color:var(--ink-soft);pointer-events:none}
+.flabel{font-size:11px;font-weight:700;color:var(--pink);letter-spacing:.06em;display:block;margin-bottom:4px}
+
+.qlist label{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--ink-mid);padding:6px 0;line-height:1.7;border-bottom:1px dashed var(--line)}
+.qlist input[type=checkbox]{appearance:none;-webkit-appearance:none;flex:0 0 auto;width:20px;height:20px;border:2px solid var(--line);border-radius:7px;margin-top:3px;cursor:pointer;position:relative;background:#fff}
+.qlist input:checked{background:var(--pink);border-color:var(--pink)}
+.qlist input:checked::after{content:"\2713";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:700}
+.qlist input:checked + span{text-decoration:line-through;color:var(--ink-soft)}
+.qlist .del{margin-left:auto;background:none;border:none;color:var(--ink-soft);font-size:16px;cursor:pointer;padding:0 4px;line-height:1}
+
+.recgrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.recgrid input{width:100%;padding:10px;font-size:16px;font-family:"Quicksand",sans-serif;font-weight:700;border:2px solid var(--line);border-radius:12px;background:var(--pink-bg);color:var(--ink)}
+.recgrid input:focus{outline:none;border-color:var(--pink);background:#fff}
+.chartwrap{margin-top:14px;overflow-x:auto}
+.rectable{width:100%;border-collapse:collapse;font-size:12px;margin-top:12px}
+.rectable th{background:var(--pink-l);color:var(--pink-d);font-size:10.5px;padding:7px 8px;text-align:left;white-space:nowrap}
+.rectable td{padding:7px 8px;border-bottom:1px dashed var(--line);color:var(--ink-mid);white-space:nowrap}
+.rectable .x{color:var(--ink-soft);cursor:pointer;background:none;border:none;font-size:14px}
+
 /* --- finder readability --- */
 .i-sum{display:block;font-size:12px;color:var(--ink-mid);font-weight:500;margin-top:2px;line-height:1.5}
 .v-stop .i-sum{color:var(--red)}
@@ -270,6 +327,21 @@ nav.jump a.off{opacity:.45}
     <div class="baby"><div class="baby-emoji" id="babyEmoji">&#127827;</div><div class="baby-txt" id="babyTxt"></div></div>
     <div class="dial-out" id="wkOut"></div>
     <div class="dial-focus" id="wkTags"></div>
+    <details class="duebox" id="duebox">
+      <summary id="dueSummary">&#128197; 予定日を登録すると、今日の週数が自動で出ます</summary>
+      <div class="row">
+        <select id="dueMode">
+          <option value="due">出産予定日</option>
+          <option value="lmp">最後の生理の開始日</option>
+        </select>
+        <input type="date" id="dueDate">
+      </div>
+      <div class="row">
+        <button class="btnp" id="dueSave">保存する</button>
+        <button class="btns" id="dueClear">消す</button>
+      </div>
+    </details>
+    <div class="today" id="todayBox" style="display:none"></div>
   </div>
 
   <div class="nowcard" id="nowcard"></div>
@@ -340,6 +412,31 @@ nav.jump a.off{opacity:.45}
     <div id="dangerBody"></div>
   </section>
 
+  <section id="contact" data-from="4" data-to="41">
+    <span class="eyebrow">れんらくさき</span>
+    <h2>電話するところ</h2>
+    <p class="sub">入れておくと、いざというときタップで発信できます。この端末にだけ保存されるので、奥さまの端末でも登録してください。</p>
+    <div class="card">
+      <span class="flabel">産院の名前</span>
+      <div class="telrow"><input type="text" id="cName" placeholder="◯◯レディースクリニック"></div>
+      <span class="flabel">昼間の番号</span>
+      <div class="telrow"><input type="tel" id="cDay" placeholder="06-1234-5678" inputmode="tel"><a class="telcall off" id="cDayCall">発信</a></div>
+      <span class="flabel">夜間・休日の番号</span>
+      <div class="telrow"><input type="tel" id="cNight" placeholder="夜間専用があれば" inputmode="tel"><a class="telcall off" id="cNightCall">発信</a></div>
+      <span class="flabel">その他（実家・タクシー会社など）</span>
+      <div class="telrow"><input type="tel" id="cEtc" placeholder="陣痛タクシーなど" inputmode="tel"><a class="telcall off" id="cEtcCall">発信</a></div>
+      <button class="btnp" id="cSave" style="width:100%;margin-top:6px">保存する</button>
+    </div>
+    <div class="note calm">迷ったら電話していいです。産院は24時間、その電話に慣れています。「こんなことで」と思う必要はまったくありません。</div>
+
+    <h3 style="margin:22px 0 8px;font-size:17px;color:var(--ink)">健診で聞きたいことメモ</h3>
+    <p class="sub">思いついたときに入れておくと、健診の3分で全部聞けます。診察室では必ず忘れます。</p>
+    <div class="card">
+      <div class="telrow"><input type="text" id="qNew" placeholder="例：旅行に行っていいか"><button class="btnp" id="qAdd">追加</button></div>
+      <div class="qlist" id="qList"></div>
+    </div>
+  </section>
+
   <section id="test" data-from="4" data-to="41">
     <span class="eyebrow">けんしんと検査</span>
     <h2>いつ、なにを調べるの</h2>
@@ -391,6 +488,23 @@ nav.jump a.off{opacity:.45}
       </tbody>
     </table>
     <div class="note calm" style="margin-top:10px">「厳格に守る根拠は必ずしも十分ではない」と学会自身が注記しています。幅として持っておく程度に。急に増えた・減ったときだけ健診で相談を。</div>
+  </section>
+
+  <section id="record" data-from="8" data-to="41">
+    <span class="eyebrow">きろく</span>
+    <h2>体重と血圧のグラフ</h2>
+    <p class="sub">健診のたびに入れるだけ。増え方の「線」が見えると、1回の数字に振り回されなくなります。血圧は妊娠高血圧症候群の早期発見に効きます。</p>
+    <div class="card">
+      <div class="recgrid">
+        <div><span class="flabel">週数</span><input type="number" id="rWk" inputmode="numeric" placeholder="12"></div>
+        <div><span class="flabel">体重(kg)</span><input type="number" id="rKg" inputmode="decimal" placeholder="52.4"></div>
+        <div><span class="flabel">血圧</span><input type="text" id="rBp" placeholder="112/68"></div>
+      </div>
+      <button class="btnp" id="rAdd" style="width:100%;margin-top:10px">記録する</button>
+      <div class="chartwrap" id="rChart"></div>
+      <div id="rTable"></div>
+    </div>
+    <div class="note warn"><b>血圧の目安。</b>140/90以上が続くときは妊娠高血圧症候群を疑います。頭痛・目のちらつき・みぞおちの痛み・急なむくみを伴うときは、数値を待たずに産院へ連絡してください。</div>
   </section>
 
   <section id="money" data-from="4" data-to="41">
@@ -493,6 +607,34 @@ nav.jump a.off{opacity:.45}
     <div class="note love" style="margin-top:10px">相談先：かかりつけの産院／自治体のこども家庭センター（旧・子育て世代包括支援センター）／産後ケア事業／救急相談 #7119。どこも「こんなことで」と思われる場所ではありません。</div>
   </section>
 
+  <section id="birth" data-from="20" data-to="41">
+    <span class="eyebrow">おさんの選択</span>
+    <h2>どう産むか、を決める</h2>
+    <p class="sub">産み方に優劣はありません。どれを選んでも、選ばされても、それは「ちゃんと産んだ」ことです。決める材料だけ置いておきます。</p>
+    <div id="birthBody"></div>
+  </section>
+
+  <section id="kinkyu" data-from="12" data-to="41">
+    <span class="eyebrow">もしものとき</span>
+    <h2>入院になったら</h2>
+    <p class="sub">切迫流産・切迫早産は珍しくありません。急に決まることが多いので、先に知っておくだけで慌てずに済みます。</p>
+    <div id="kinkyuBody"></div>
+  </section>
+
+  <section id="around" data-from="12" data-to="41">
+    <span class="eyebrow">まわりのこと</span>
+    <h2>人づきあいの段取り</h2>
+    <p class="sub">妊娠でいちばん消耗するのは、実は体ではなく人間関係だったりします。先に決めておけば揉めません。</p>
+    <div id="aroundBody"></div>
+  </section>
+
+  <section id="name" data-from="26" data-to="41">
+    <span class="eyebrow">なまえ</span>
+    <h2>名づけと出生届</h2>
+    <p class="sub">生まれてから14日以内に決めて出す必要があります。制度上のルールだけ先に押さえておけば、あとは自由です。</p>
+    <div id="nameBody"></div>
+  </section>
+
   <section id="oops" data-from="4" data-to="41">
     <span class="eyebrow">やっちゃった</span>
     <h2>だいたい、大丈夫</h2>
@@ -522,6 +664,8 @@ nav.jump a.off{opacity:.45}
   <a href="#nutri">栄養</a><a href="#weight">体重</a><a href="#money">お金</a><a href="#todo">手続き</a>
   <a href="#prep">準備</a><a href="#labor">お産</a><a href="#papa">パパへ</a>
   <a href="#echo">エコー用語</a><a href="#kick">胎動カウント</a><a href="#recipe">レシピ</a>
+  <a href="#contact">連絡先</a><a href="#record">記録</a><a href="#birth">産み方</a><a href="#kinkyu">入院</a>
+  <a href="#around">まわり</a><a href="#name">名づけ</a>
   <a href="#hokatsu">保活</a><a href="#after">産後手続き</a><a href="#edu">教育費</a><a href="#fuan">不安</a>
 </nav>
 
@@ -947,6 +1091,40 @@ const FUAN=[
 {h:"パパへ：解決しようとしないで",d:"「大丈夫だよ」「考えすぎ」は、いちばん効かない返しです。<b>「そっか」「不安なんやな」で止める。</b>否定せずに最後まで聞く。それだけで、ひとりで抱えなくてよくなります。"}
 ];
 
+const BIRTH=[
+{h:"無痛分娩（硬膜外麻酔）",d:"背中から細い管を入れて痛みをやわらげる方法。日本でも年々増えています。<b>費用は10〜20万円ほど上乗せ</b>になるのが一般的で、施設によって「24時間対応」か「計画分娩のみ」かが分かれます。<br><br>「無痛だと母乳が出ない」「愛情が薄れる」は<b>いずれも根拠がありません</b>。一方でリスクがゼロでもなく、麻酔後の頭痛などが起こることがあります。産院を選ぶ段階で、麻酔科医の体制と対応時間を必ず確認してください。"},
+{h:"帝王切開",d:"日本ではおよそ5人に1人。予定帝王切開（逆子・前置胎盤・多胎など）と、お産の途中で決まる緊急帝王切開があります。<b>保険診療なので3割負担＋高額療養費の対象</b>で、民間の医療保険からも給付が出ることがほとんど。<br><br>術後は歩くのも痛く、回復に時間がかかります。<b>「お腹を痛めていない」という言葉は事実として間違い</b>です。もし誰かに言われたら、それは相手が無知なだけです。"},
+{h:"逆子（骨盤位）と言われたら",d:"妊娠30週ごろは4人に1人が逆子ですが、<b>出産時まで残るのは3〜5%程度</b>。まだ動くので、この時点では心配しすぎないで。<br><br>逆子体操を指導されることがあります。36週前後に「外回転術」（おなかの上から回す処置）を行う施設もありますが、対応できるところは限られます。最終的に戻らなければ、多くは予定帝王切開になります。"},
+{h:"計画分娩・陣痛promotion（誘発）",d:"予定日を過ぎた場合（41週〜）や、医学的な理由、無痛分娩の体制の都合で、日を決めて陣痛を起こす方法です。<b>予定日ぴったりに生まれる子は5%以下</b>で、41週を超えると胎盤の機能が落ちてくるため誘発の判断になります。"},
+{h:"立ち会い出産",d:"施設によって可否・人数・時間が違います。<b>「立ち会う／立ち会わない」に正解はありません。</b>血が苦手な人が無理に入って倒れるより、廊下で待って産後すぐ会うほうがいい場合もあります。ふたりで正直に話しておいて。"},
+{h:"バースプランの書き方",d:"産院で「どんなお産にしたいですか」と紙を渡されます。かしこまらなくて大丈夫。<br><br>書くと役に立つのは、<b>①痛みへの希望（無痛にしたい／できるだけ自然に）②立ち会い ③産まれた直後にしたいこと（カンガルーケア・写真）④母乳かミルクか ⑤絶対に嫌なこと</b>。とくに⑤は書いておくと守ってもらえます。そのとおりにならなくても、失敗ではありません。"}
+];
+
+const KINKYU=[
+{h:"切迫流産・切迫早産とは",d:"流産・早産になりかけている状態のこと。<b>おなかの張りや出血、子宮頸管の短さで診断</b>されます。22週未満が切迫流産、22〜36週が切迫早産。<br><br>大事なことをひとつ。<b>働きすぎたから、動きすぎたから、なるわけではありません。</b>原因がはっきりしないことも多く、自分を責める理由はどこにもありません。"},
+{h:"自宅安静と入院",d:"軽ければ自宅安静、進めば入院になります。子宮収縮を抑える薬（リトドリンなど）の点滴で、動悸や手の震えという副作用が出ることも。<br><br><b>入院は数日で終わることも、数週間〜数か月続くこともあります。</b>トイレと洗面以外はベッドの上、という生活になる場合も。"},
+{h:"入院バッグを、早めに用意する理由",d:"切迫の入院は、<b>健診でその場で決まることがあります。</b>「今日から入院ね」と言われて家に帰れないケースが実際にある。だから入院バッグは34週を待たず、玄関近くに置いておくのが安心です。<br><br>長期入院になったら追加で欲しくなるのは、延長コード、タブレット、耳栓、アイマスク、羽織もの、水を運ぶストローボトル。"},
+{h:"お金のこと",d:"入院は<b>保険診療なので高額療養費の対象</b>。「限度額適用認定証」（またはマイナ保険証の登録）があれば窓口で上限までの支払いで済みます。<br><br>働けなくなったら<b>傷病手当金</b>（連続4日以上の休みで、標準報酬日額の2/3）。民間の医療保険に入っていれば入院給付も出ます。会社への連絡は「母性健康管理指導事項連絡カード（母健カード）」を医師に書いてもらうのがいちばん早い。"},
+{h:"パパがやること",d:"洗濯物の往復、支払い、上の子の世話、家の維持。<b>そして毎日連絡すること。</b>入院中は情報から切り離されて、外の世界が進んでいくのを見ているだけになります。今日あったことをだらだら送るだけでいい。"}
+];
+
+const AROUND=[
+{h:"報告の順番",d:"順番でこじれることが多いので、先に決めておく。<b>基本は「上司→自分の親→相手の親→友人」で、双方の親は同じ日に。</b>そして<b>自分の親には自分が言う</b>のが鉄則です。妻に義実家へ報告させると、その後の距離感がずっと歪みます。<br><br>初期に伝えるかは自由。つわりで仕事に影響が出るなら、早めに伝えたほうが守られます。"},
+{h:"里帰り出産",d:"<b>34週前後までに帰るのが一般的</b>で、里帰り先の産院は妊娠がわかってすぐ予約が必要なこともあります。今の産院から紹介状をもらいます。<br><br>注意点は<b>妊婦健診の受診票が自治体をまたぐと使えないこと</b>。多くの自治体で後から償還払いできるので、領収書と受診票は必ず保管を。<br><br>里帰りしない選択も普通です。夫が育児の最初から関われるという大きなメリットがあります。"},
+{h:"義実家との距離",d:"揉めるのはたいてい「名前」「育児方針」「訪問の頻度」の3つ。<b>断る役はパパが引き受けてください。</b>「妻が嫌がってる」ではなく「うちはこうする」と言う。主語を自分たちにするだけで角が立ちません。<br><br>産後の訪問は、退院直後は避けてもらうのが無難。ホルモンと睡眠不足で、普段なら流せることが流せません。"},
+{h:"内祝い（お返し）",d:"<b>いただいた額の1/3〜半分</b>が目安。生後1か月〜2か月ごろ、お宮参りの時期に贈るのが一般的です。<br><br>コツは<b>いただいた瞬間に記録すること</b>。誰から・何を・いくらくらい、をスマホのメモに。産後は本当に記憶が飛びます。カタログだけ妊娠中に見ておくと、あとが楽です。"},
+{h:"マタニティフォト・記念",d:"撮るなら<b>おなかがきれいに出る32〜36週ごろ</b>。義務ではまったくありません。スマホで毎月同じ場所・同じ角度で撮るだけでも、並べるとかなりいい記録になります。"},
+{h:"SNSへの投稿",d:"急がなくていい。<b>エコー写真の投稿は、あとで子ども本人が選べない情報</b>でもあります。夫婦で方針を合わせてから。報告のタイミングを勝手に先取りしないのも大事です（親族が先に投稿してしまう事故がよくあります）。"}
+];
+
+const NAME=[
+{h:"出生届は14日以内",d:"生まれた日を含めて14日以内。<b>提出先は住所地・本籍地・出産地のいずれかの役所</b>で、里帰り先でも出せます。出生証明書は医師・助産師が書いてくれるので、退院時に受け取って。<br><br>持ち物は、出生届（出生証明書と一体）、母子健康手帳、届出人の印鑑（不要な自治体も増えています）、本人確認書類。"},
+{h:"名前に使える文字",d:"<b>常用漢字・人名用漢字・ひらがな・カタカナ</b>、それに長音符（ー）や繰り返し記号（々）が使えます。<br><br>使えないのは<b>アルファベット、数字、記号（♡や☆）</b>。旧字体や異体字は使えるものと使えないものがあるので、決めたら<b>役所に電話して1文字ずつ確認する</b>のがいちばん確実です。"},
+{h:"読み方のルールが変わりました",d:"2025年5月から、戸籍に<b>氏名の「振り仮名」が記載される</b>ようになりました。出生届にも読み仮名を書きます。<br><br>読み方は「一般に認められているもの」に限られ、漢字とかけ離れた読みは受理されないことがあります。凝った読みを考えている場合は、届出前に役所に確認を。"},
+{h:"決まらないときは",d:"14日以内に「名前は未定」で出生届を出すこともできます（後日、追完届で名前を届け出る）。ただし手続きが増えるので、できれば臨月までに<b>2〜3個の候補</b>に絞っておくのがおすすめ。<br><br>顔を見てから決める、はよくある話です。候補を紙に書いて病院に持っていって。"},
+{h:"決めるときの実用的な視点",d:"画数や字義はお好みで。実務的に効くのはこのあたりです。<br><br>・<b>電話で伝わるか</b>（「◯◯の◯です」と説明しやすいか）<br>・変換で出るか<br>・ローマ字にしたときの見え方（パスポート・メールアドレス）<br>・呼びやすい愛称になるか<br>・きょうだいができたときに並べて不自然でないか"}
+];
+
 /* ============ RENDER ============ */
 const $=s=>document.querySelector(s);
 function norm(s){return s.replace(/[\u30A1-\u30F6]/g,c=>String.fromCharCode(c.charCodeAt(0)-0x60)).toLowerCase();}
@@ -1112,6 +1290,11 @@ function renderStatic(){
   $("#eduBody").innerHTML=EDU.map(function(x){return acc(x.h,"<p>"+x.d+"</p>");}).join("");
   $("#fuanBody").innerHTML=FUAN.map(function(x){return acc(x.h,"<p>"+x.d+"</p>");}).join("");
 
+  $("#birthBody").innerHTML=BIRTH.map(function(x){return acc(x.h,"<p>"+x.d+"</p>");}).join("");
+  $("#kinkyuBody").innerHTML=KINKYU.map(function(x){return acc(x.h,"<p>"+x.d+"</p>");}).join("");
+  $("#aroundBody").innerHTML=AROUND.map(function(x){return acc(x.h,"<p>"+x.d+"</p>");}).join("");
+  $("#nameBody").innerHTML=NAME.map(function(x){return acc(x.h,"<p>"+x.d+"</p>");}).join("");
+
   let saved={};
   try{saved=JSON.parse(localStorage.getItem("premam-check")||"{}");}catch(e){saved={};}
   $("#prepBody").innerHTML=PREP.map(function(g,gi){
@@ -1222,6 +1405,165 @@ function applyWeekUI(){
 
 $("#wk").addEventListener("input",applyWeekUI);
 applyWeekUI();
+
+/* ---- storage helper ---- */
+function LS(k,d){try{var v=localStorage.getItem(k);return v?JSON.parse(v):d;}catch(e){return d;}}
+function LSet(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
+
+/* ---- due date -> auto week ---- */
+(function(){
+  var cfg=LS("premam-due",null);
+  function calc(){
+    if(!cfg||!cfg.due)return null;
+    var due=new Date(cfg.due+"T00:00:00");
+    var now=new Date();now.setHours(0,0,0,0);
+    var left=Math.round((due-now)/86400000);
+    var total=280-left;
+    if(total<0)total=0;
+    return {w:Math.floor(total/7),d:total%7,left:left};
+  }
+  function show(){
+    var r=calc(),box=$("#todayBox");
+    if(!r){box.style.display="none";$("#dueSummary").innerHTML="&#128197; 予定日を登録すると、今日の週数が自動で出ます";return;}
+    box.style.display="block";
+    var msg;
+    if(r.left>0)msg="出産予定日まで あと"+r.left+"日";
+    else if(r.left===0)msg="今日が出産予定日です &#9825;";
+    else msg="予定日から "+(-r.left)+"日過ぎています";
+    box.innerHTML="今日は <b>"+r.w+"週"+r.d+"日</b>　／　"+msg;
+    $("#dueSummary").innerHTML="&#128197; 予定日："+cfg.due+"（タップで変更）";
+    var w=Math.max(4,Math.min(41,r.w));
+    $("#wk").value=w;
+    if(typeof renderDial==="function")renderDial();
+    if(typeof applyWeekUI==="function")applyWeekUI();
+    var rw=$("#rWk");if(rw&&!rw.value)rw.placeholder=w;
+  }
+  $("#dueSave").addEventListener("click",function(){
+    var v=$("#dueDate").value;
+    if(!v){alert("日付を選んでください");return;}
+    var d=new Date(v+"T00:00:00");
+    if($("#dueMode").value==="lmp")d=new Date(d.getTime()+280*86400000);
+    cfg={due:d.getFullYear()+"-"+("0"+(d.getMonth()+1)).slice(-2)+"-"+("0"+d.getDate()).slice(-2)};
+    LSet("premam-due",cfg);
+    $("#duebox").open=false;
+    show();
+  });
+  $("#dueClear").addEventListener("click",function(){
+    cfg=null;try{localStorage.removeItem("premam-due");}catch(e){}
+    $("#dueDate").value="";show();
+  });
+  if(cfg&&cfg.due)$("#dueDate").value=cfg.due;
+  show();
+})();
+
+/* ---- contact + question memo ---- */
+(function(){
+  var c=LS("premam-contact",{});
+  var f=[["cName","name"],["cDay","day"],["cNight","night"],["cEtc","etc"]];
+  f.forEach(function(x){if(c[x[1]])$("#"+x[0]).value=c[x[1]];});
+  function links(){
+    [["cDay","cDayCall"],["cNight","cNightCall"],["cEtc","cEtcCall"]].forEach(function(x){
+      var v=$("#"+x[0]).value.replace(/[^0-9+]/g,""),a=$("#"+x[1]);
+      if(v){a.href="tel:"+v;a.classList.remove("off");}else{a.removeAttribute("href");a.classList.add("off");}
+    });
+  }
+  $("#cSave").addEventListener("click",function(){
+    f.forEach(function(x){c[x[1]]=$("#"+x[0]).value;});
+    LSet("premam-contact",c);links();
+    $("#cSave").textContent="保存しました &#9825;";
+    setTimeout(function(){$("#cSave").textContent="保存する";},1500);
+  });
+  f.forEach(function(x){$("#"+x[0]).addEventListener("input",links);});
+  links();
+
+  var qs=LS("premam-q",[]);
+  function drawQ(){
+    if(!qs.length){$("#qList").innerHTML='<div style="font-size:12.5px;color:var(--ink-soft);padding:10px 0">まだありません。思いついたら追加してください。</div>';return;}
+    $("#qList").innerHTML=qs.map(function(q,i){
+      return '<label><input type="checkbox" data-i="'+i+'"'+(q.done?" checked":"")+'><span>'+q.t+
+        '</span><button class="del" data-d="'+i+'" aria-label="削除">&#215;</button></label>';}).join("");
+  }
+  $("#qAdd").addEventListener("click",function(){
+    var v=$("#qNew").value.trim();if(!v)return;
+    qs.push({t:v,done:false});LSet("premam-q",qs);$("#qNew").value="";drawQ();
+  });
+  $("#qNew").addEventListener("keydown",function(e){if(e.key==="Enter")$("#qAdd").click();});
+  $("#qList").addEventListener("click",function(e){
+    var d=e.target.closest("[data-d]");
+    if(d){qs.splice(+d.dataset.d,1);LSet("premam-q",qs);drawQ();return;}
+  });
+  $("#qList").addEventListener("change",function(e){
+    var c2=e.target.closest("[data-i]");if(!c2)return;
+    qs[+c2.dataset.i].done=c2.checked;LSet("premam-q",qs);
+  });
+  drawQ();
+})();
+
+/* ---- weight / BP records ---- */
+(function(){
+  var recs=LS("premam-rec",[]);
+  function sortR(){recs.sort(function(a,b){return a.w-b.w;});}
+  function chart(){
+    var box=$("#rChart");
+    var ws=recs.filter(function(r){return r.kg;});
+    if(ws.length<2){box.innerHTML='<div style="font-size:12.5px;color:var(--ink-soft);text-align:center;padding:16px 0">2回以上記録するとグラフが出ます</div>';return;}
+    var W=520,H=200,pl=42,pr=14,pt=16,pb=26;
+    var minW=4,maxW=41;
+    var kgs=ws.map(function(r){return r.kg;});
+    var lo=Math.floor(Math.min.apply(null,kgs))-2,hi=Math.ceil(Math.max.apply(null,kgs))+2;
+    function X(w){return pl+(w-minW)/(maxW-minW)*(W-pl-pr);}
+    function Y(k){return pt+(hi-k)/(hi-lo)*(H-pt-pb);}
+    var g="";
+    for(var k=lo;k<=hi;k+=Math.max(1,Math.round((hi-lo)/5))){
+      g+='<line x1="'+pl+'" y1="'+Y(k)+'" x2="'+(W-pr)+'" y2="'+Y(k)+'" stroke="#F3DFE7" stroke-width="1"/>'+
+         '<text x="'+(pl-6)+'" y="'+(Y(k)+4)+'" font-size="10" fill="#A6939C" text-anchor="end">'+k+'</text>';
+    }
+    [4,16,28,40].forEach(function(w){
+      g+='<line x1="'+X(w)+'" y1="'+pt+'" x2="'+X(w)+'" y2="'+(H-pb)+'" stroke="#F3DFE7" stroke-width="1"/>'+
+         '<text x="'+X(w)+'" y="'+(H-8)+'" font-size="10" fill="#A6939C" text-anchor="middle">'+w+'w</text>';
+    });
+    var pts=ws.map(function(r){return X(r.w)+","+Y(r.kg);}).join(" ");
+    g+='<polyline points="'+pts+'" fill="none" stroke="#FF9EBB" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>';
+    ws.forEach(function(r){
+      g+='<circle cx="'+X(r.w)+'" cy="'+Y(r.kg)+'" r="4.5" fill="#fff" stroke="#D6486F" stroke-width="2.5"/>';
+    });
+    box.innerHTML='<svg viewBox="0 0 '+W+' '+H+'" style="width:100%;min-width:340px;height:auto" role="img" aria-label="体重の推移"><rect x="0" y="0" width="'+W+'" height="'+H+'" fill="#fff"/>'+g+'</svg>';
+  }
+  function table(){
+    if(!recs.length){$("#rTable").innerHTML="";return;}
+    $("#rTable").innerHTML='<table class="rectable"><thead><tr><th>週</th><th>体重</th><th>血圧</th><th></th></tr></thead><tbody>'+
+      recs.slice().reverse().map(function(r,i){
+        var idx=recs.length-1-i;
+        var bp=r.bp||"—";var warn="";
+        if(r.bp){var m=r.bp.match(/(\d+)\D+(\d+)/);if(m&&(+m[1]>=140||+m[2]>=90))warn=' style="color:var(--red);font-weight:700"';}
+        return "<tr><td>"+r.w+"w</td><td>"+(r.kg?r.kg+"kg":"—")+"</td><td"+warn+">"+bp+
+          '</td><td><button class="x" data-r="'+idx+'" aria-label="削除">&#215;</button></td></tr>';
+      }).join("")+"</tbody></table>";
+  }
+  function draw(){sortR();chart();table();}
+  $("#rAdd").addEventListener("click",function(){
+    var w=parseInt($("#rWk").value||$("#rWk").placeholder,10);
+    var kg=parseFloat($("#rKg").value);
+    var bp=$("#rBp").value.trim();
+    if(!w||(!kg&&!bp)){alert("週数と、体重か血圧を入れてください");return;}
+    recs.push({w:w,kg:kg||null,bp:bp||null});
+    LSet("premam-rec",recs);
+    $("#rKg").value="";$("#rBp").value="";$("#rWk").value="";
+    draw();
+  });
+  $("#rTable").addEventListener("click",function(e){
+    var b=e.target.closest("[data-r]");if(!b)return;
+    recs.splice(+b.dataset.r,1);LSet("premam-rec",recs);draw();
+  });
+  draw();
+})();
+
+/* 以前のバージョンでService Workerを登録していた場合の後始末 */
+if("serviceWorker" in navigator&&navigator.serviceWorker.getRegistrations){
+  navigator.serviceWorker.getRegistrations().then(function(rs){
+    rs.forEach(function(r){r.unregister();});
+  }).catch(function(){});
+}
 
 /* ---- kick counter ---- */
 (function(){
