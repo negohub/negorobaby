@@ -235,6 +235,91 @@ footer{margin-top:50px;padding:22px 0 0;border-top:2px dashed var(--line);font-s
 .rectable td{padding:7px 8px;border-bottom:1px dashed var(--line);color:var(--ink-mid);white-space:nowrap}
 .rectable .x{color:var(--ink-soft);cursor:pointer;background:none;border:none;font-size:14px}
 
+/* --- night mode --- */
+html[data-theme="dark"]{
+  --pink:#E88AA9; --pink-d:#FFB3CB; --pink-l:#3B2B33; --pink-bg:#1E1720;
+  --cream:#241C26; --ink:#F2E6EC; --ink-mid:#C4B2BC; --ink-soft:#8E7C87;
+  --line:#3D2F37; --card:#2A2029;
+  --mint:#7FD3B0; --mint-bg:#22362F;
+  --lav:#B9A6E8; --lav-bg:#2B2439;
+  --amber:#E5B96A; --amber-bg:#382E20;
+  --red:#F2879C; --red-bg:#3A222A;
+  --sh:0 2px 4px rgba(0,0,0,.25),0 12px 28px -18px rgba(0,0,0,.7);
+}
+html[data-theme="dark"] body{background-image:radial-gradient(circle at 1px 1px, rgba(232,138,169,.13) 1px, transparent 0)}
+html[data-theme="dark"] header{background:linear-gradient(160deg,#5A3444 0%,#71404F 50%,#5A3444 100%)}
+html[data-theme="dark"] nav.jump{background:rgba(30,23,32,.97);box-shadow:0 -4px 20px rgba(0,0,0,.5)}
+html[data-theme="dark"] .chip,html[data-theme="dark"] .cattile,html[data-theme="dark"] .unfold,
+html[data-theme="dark"] .btns,html[data-theme="dark"] .openall,html[data-theme="dark"] #toTop{background:var(--card)}
+html[data-theme="dark"] .search input,html[data-theme="dark"] .field input,
+html[data-theme="dark"] .recgrid input,html[data-theme="dark"] .telrow input,
+html[data-theme="dark"] .duebox select,html[data-theme="dark"] .duebox input{background:var(--pink-bg);color:var(--ink)}
+html[data-theme="dark"] .qlist input[type=checkbox],html[data-theme="dark"] .ck input{background:var(--card)}
+html[data-theme="dark"] .note.love{background:linear-gradient(135deg,#3B2B33,#2A2029)}
+html[data-theme="dark"] mark{background:#5C4A1E;color:#FFE9A8}
+
+/* --- share / backup --- */
+.share textarea{width:100%;min-height:96px;padding:11px;font-size:12px;font-family:"Roboto Mono",monospace;
+  border:2px solid var(--line);border-radius:12px;background:var(--pink-bg);color:var(--ink);resize:vertical}
+.share .row{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+.share .row button{flex:1 1 auto}
+
+/* --- ask-from-search --- */
+.askbox{margin-top:10px;background:var(--pink-l);border-radius:14px;padding:12px 14px;font-size:12.5px;color:var(--ink-mid);line-height:1.7}
+.askbox button{margin-top:8px;width:100%}
+
+/* --- print (冷蔵庫に貼る用) --- */
+@media print{
+  body{background:#fff!important;background-image:none!important;padding:0;font-size:11pt;color:#000}
+  header,nav.jump,#toTop,.tools,.dial,.nowcard,.gdiv,.finder,.quick,.chips,.openall,.unfold,footer{display:none!important}
+  section{display:none!important;page-break-inside:avoid;max-height:none!important;overflow:visible!important}
+  section#danger,section#contact,section#labor,section#prep{display:block!important;margin:0 0 14pt}
+  section .sub,.note.calm{font-size:9.5pt}
+  .card,.acc,.ck,.note{box-shadow:none!important;border:1pt solid #ccc!important;border-radius:6pt!important;
+    page-break-inside:avoid;background:#fff!important}
+  details.acc,details.item,details.grpwrap{display:block!important}
+  details:not([open]) .acc-b,details:not([open]) .i-body{display:block!important}
+  .acc .cv,.telcall,.btnp,.btns,.rectable .x,.qlist .del{display:none!important}
+  h2{font-size:15pt;margin-bottom:4pt}
+  .eyebrow,.wkbadge{display:none!important}
+  a[href^="tel:"]::after{content:""}
+}
+
+/* --- group dividers --- */
+.gdiv{display:flex;align-items:center;gap:12px;margin:52px 0 -18px;padding:0 2px}
+.gdiv .gd-n{font-family:"Quicksand",sans-serif;font-weight:700;font-size:26px;color:var(--pink);line-height:1;
+  flex:0 0 auto;opacity:.65}
+.gdiv b{display:block;font-family:"Zen Maru Gothic",sans-serif;font-size:17px;color:var(--ink);line-height:1.3}
+.gdiv span{display:block;font-size:11.5px;color:var(--ink-soft);margin-top:1px}
+.gdiv::after{content:"";flex:1;height:2px;background:linear-gradient(90deg,var(--pink-l),transparent);border-radius:2px}
+
+/* --- compact legend inside food --- */
+.legend-mini{margin-bottom:12px}
+.legend-mini .lg{padding:9px 11px;border-radius:12px}
+.legend-mini .lg b{font-size:12.5px;margin-bottom:0}
+.legend-mini .lg span{display:none}
+@media(min-width:520px){.legend-mini .lg span{display:block;font-size:10.5px}}
+
+/* --- text size --- */
+html[data-size="l"]{font-size:112.5%}
+html[data-size="xl"]{font-size:125%}
+.tools{display:flex;align-items:center;gap:6px;margin-top:14px;position:relative;z-index:1}
+.tools span{font-size:11px;color:rgba(255,255,255,.9);font-weight:700;letter-spacing:.06em}
+.tools button{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;border:2px solid rgba(255,255,255,.55);
+  background:rgba(255,255,255,.18);color:#fff;border-radius:100px;cursor:pointer;padding:4px 12px;line-height:1.5}
+.tools button[aria-pressed=true]{background:#fff;color:var(--pink-d);border-color:#fff}
+.tools .s1{font-size:11px}.tools .s2{font-size:13px}.tools .s3{font-size:15px}
+
+/* --- back to top --- */
+#toTop{position:fixed;right:14px;bottom:70px;z-index:45;width:46px;height:46px;border-radius:50%;
+  background:#fff;border:2px solid var(--pink-l);box-shadow:0 6px 18px rgba(214,72,111,.25);
+  color:var(--pink-d);font-size:19px;cursor:pointer;display:none;align-items:center;justify-content:center;padding:0}
+#toTop.on{display:flex}
+#toTop:hover,#toTop:focus-visible{background:var(--pink);border-color:var(--pink);color:#fff}
+
+nav.jump a.urgent{background:var(--red-bg);color:var(--red)}
+nav.jump a.urgent.on,nav.jump a.urgent:hover{background:var(--red);color:#fff}
+
 /* --- category tiles / folded groups --- */
 .cattiles{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
 .cattile{background:var(--card);border:2px solid var(--line);border-radius:16px;padding:13px 14px;cursor:pointer;
@@ -339,6 +424,13 @@ nav.jump a.off{opacity:.45}
 <header>
   <div class="wrap">
     <div class="brand">ぷれまむ手帳<em>&#9825;</em><small>にんしんのこと、ぜんぶここに</small></div>
+    <div class="tools" role="group" aria-label="文字サイズ">
+      <span>もじの大きさ</span>
+      <button class="s1" data-size="m" aria-pressed="true">小</button>
+      <button class="s2" data-size="l" aria-pressed="false">中</button>
+      <button class="s3" data-size="xl" aria-pressed="false">大</button>
+      <button id="themeBtn" style="margin-left:6px" aria-label="表示の切り替え">&#127769; よる</button>
+    </div>
     <p class="lede">食べもののこと、くらしのこと、からだのこと、お金と手続きのこと。妊娠週数を合わせると、いまのふたりに必要なページが開きます。</p>
   </div>
 </header>
@@ -375,22 +467,18 @@ nav.jump a.off{opacity:.45}
 
   <div class="nowcard" id="nowcard"></div>
 
-  <section id="legend" data-from="4" data-to="41">
-    <span class="eyebrow">はんていの見方</span>
-    <h2>4つのしんごう<span class="dot">&#9825;</span></h2>
-    <p class="sub">「ダメ」は思っているより少ないです。ほとんどは量と火の通し方の話。</p>
-    <div class="legend">
+  <div class="gdiv"><span class="gd-n">01</span><div><b>まいにち使う</b><span>毎日ひらくところ</span></div></div>
+
+  <section id="food" data-from="4" data-to="41">
+    <span class="eyebrow">たべもの</span>
+    <h2>これ、食べてええ？</h2>
+    <p class="sub">200品目。カテゴリを選ぶか、検索窓に食材名を入れてください。答えは1行で出ます。ひらがな・カタカナ・漢字どれでもOK。</p>
+    <div class="legend legend-mini">
       <div class="lg best"><b>◎ すすんで</b><span>いまの体がほしい栄養</span></div>
       <div class="lg ok"><b>○ ふつうに</b><span>心配いらないよ</span></div>
       <div class="lg hold"><b>△ ちょっと注意</b><span>量・回数に条件あり</span></div>
       <div class="lg stop"><b>× やめとこ</b><span>出産までおあずけ</span></div>
     </div>
-  </section>
-
-  <section id="food" data-from="4" data-to="41">
-    <span class="eyebrow">たべもの</span>
-    <h2>これ、食べてええ？</h2>
-    <p class="sub">約120品目。カテゴリを選ぶか、検索窓に食材名を入れてください。答えは1行で出ます。ひらがな・カタカナ・漢字どれでもOK。</p>
     <div class="finder">
       <div class="search">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
@@ -419,13 +507,37 @@ nav.jump a.off{opacity:.45}
     <div id="itemsL" style="margin-top:12px"></div>
   </section>
 
-  <section id="phase" data-from="4" data-to="41">
-    <span class="eyebrow">じきべつガイド</span>
-    <h2>いまは、こういう時期</h2>
-    <p class="sub">上のダイヤルと連動しています。時期で優先順位が変わります。</p>
-    <div class="tabs" id="tabs" role="tablist"></div>
-    <div id="phaseBody"></div>
+  <section id="recipe" data-from="4" data-to="41">
+    <span class="eyebrow">レシピ</span>
+    <h2>じゃあ、何つくる</h2>
+    <p class="sub">「食べていいもの」がわかっても、作るのは別問題。つわり期に通るものと、鉄・カルシウムが自然に入るものを集めました。全部10分前後でできます。</p>
+    <div id="recipeBody"></div>
   </section>
+
+  <section id="limits" data-from="4" data-to="41">
+    <span class="eyebrow">このての使い方</span>
+    <h2>ここに書いていないこと</h2>
+    <p class="sub">この手帳は「よくある妊娠」を前提にまとめています。当てはまらない事情があるときは、ここの記述より主治医が優先です。</p>
+    <div id="limitBody"></div>
+    <div class="note calm" style="margin-top:10px">情報は<b>2026年8月時点</b>のものです。制度と金額はよく変わるので、申請の前に勤務先か自治体の窓口で必ず確認してください。</div>
+  </section>
+
+  <section id="backup" data-from="4" data-to="41">
+    <span class="eyebrow">データのひきつぎ</span>
+    <h2>もう1台に移す</h2>
+    <p class="sub">記録はこの端末の中だけに保存されています。ふたりの端末で同じ内容を見たいとき、機種変するとき、ブラウザのデータを消す前に。</p>
+    <div class="card share">
+      <button class="btnp" id="bkOut" style="width:100%">この端末のデータを書き出す</button>
+      <textarea id="bkText" placeholder="ここに出てくる文字列を、LINEなどでもう1台に送ってください。受け取った側は、その文字列をここに貼りつけて「読み込む」を押します。" spellcheck="false"></textarea>
+      <div class="row">
+        <button class="btns" id="bkCopy">コピー</button>
+        <button class="btnp" id="bkIn">貼りつけた内容を読み込む</button>
+      </div>
+      <p style="font-size:12px;color:var(--ink-soft);margin-top:10px;line-height:1.7">対象：予定日／産院の連絡先／質問メモ／体重・血圧／胎動の記録／準備リストのチェック。読み込むと、その端末の内容は上書きされます。</p>
+    </div>
+  </section>
+
+  <div class="gdiv"><span class="gd-n">02</span><div><b>からだとこころ</b><span>しんどいとき・不安なとき</span></div></div>
 
   <section id="body" data-from="4" data-to="41">
     <span class="eyebrow">からだのこと</span>
@@ -440,6 +552,78 @@ nav.jump a.off{opacity:.45}
     <p class="sub">迷ったら電話していい。夜中でも休日でも。「大したことなかった」で終わるのがいちばんいい結果です。</p>
     <div id="dangerBody"></div>
   </section>
+
+  <section id="phase" data-from="4" data-to="41">
+    <span class="eyebrow">じきべつガイド</span>
+    <h2>いまは、こういう時期</h2>
+    <p class="sub">上のダイヤルと連動しています。時期で優先順位が変わります。</p>
+    <div class="tabs" id="tabs" role="tablist"></div>
+    <div id="phaseBody"></div>
+  </section>
+
+  <section id="fuan" data-from="4" data-to="41">
+    <span class="eyebrow">ふあんのこと</span>
+    <h2>あなたのせいじゃない</h2>
+    <div id="fuanBody"></div>
+    <div class="note love" style="margin-top:10px">相談先：かかりつけの産院／自治体のこども家庭センター（旧・子育て世代包括支援センター）／産後ケア事業／救急相談 #7119。どこも「こんなことで」と思われる場所ではありません。</div>
+  </section>
+
+  <section id="oops" data-from="4" data-to="41">
+    <span class="eyebrow">やっちゃった</span>
+    <h2>だいたい、大丈夫</h2>
+    <div class="note love" style="margin-bottom:10px">生ハムを1切れ。コーヒーを3杯。気づく前にお酒を飲んだ。——あとから来る不安のほうが体にこたえます。1回の出来事でリスクが跳ね上がることは、ほとんどありません。</div>
+    <div id="oopsBody"></div>
+  </section>
+
+  <div class="gdiv"><span class="gd-n">03</span><div><b>たべかたと体重</b><span>知っておくと迷わない</span></div></div>
+
+  <section id="nutri" data-from="4" data-to="41">
+    <span class="eyebrow">えいよう</span>
+    <h2>足りなくなるのは、この6つ</h2>
+    <p class="sub">やみくもに「バランスよく」より、不足しやすいものを狙い撃ちするほうが現実的。数字は食事摂取基準（2025年版）の目安です。</p>
+    <div id="nutBody"></div>
+  </section>
+
+  <section id="fish" data-from="4" data-to="41">
+    <span class="eyebrow">おさかな</span>
+    <h2>種類と量だけ見ればOK</h2>
+    <p class="sub">魚は妊娠中いちばん食べてほしい食材のひとつ。制限があるのは一部の大型魚だけです。切り身1切れ＝刺身1人前＝約80g。</p>
+    <table class="tbl">
+      <thead><tr><th>目安</th><th>魚の種類</th></tr></thead>
+      <tbody>
+        <tr><td class="num">週80gまで</td><td>キンメダイ、メカジキ、クロマグロ（本マグロ）、メバチマグロ、エッチュウバイガイ、ツチクジラ、マッコウクジラ</td></tr>
+        <tr><td class="num">週160gまで</td><td>キダイ、マカジキ、ユメカサゴ、ミナミマグロ、ヨシキリザメ、イシイルカ、クロムツ</td></tr>
+        <tr><td class="num">制限なし</td><td>サケ、アジ、サバ、イワシ、サンマ、タイ、ブリ、カツオ、キハダマグロ、ビンナガ、メジマグロ、ツナ缶、しらす、たら、えび、いか、たこ、貝類（加熱して）</td></tr>
+        <tr><td class="num">ごく少量</td><td>コビレゴンドウ（2週に1回）、バンドウイルカ（2か月に1回）</td></tr>
+      </tbody>
+    </table>
+    <div class="note love" style="margin-top:12px"><b>魚を減らす方向に読まないでね。</b>厚労省もそう明記しています。DHA・EPA・ビタミンD・鉄は赤ちゃんの脳と体をつくる材料そのもの。種類さえ選べば週2〜3回は積極的に。</div>
+  </section>
+
+  <section id="weight" data-from="8" data-to="41">
+    <span class="eyebrow">たいじゅう</span>
+    <h2>増えていいんです</h2>
+    <p class="sub">2021年に日本産科婦人科学会が目安を改定し、以前より2〜3kg引き上げられました。「増やさないで」と厳しく言われる時代は終わっています。</p>
+    <div class="card">
+      <div class="calc-in">
+        <div class="field"><label for="ht">身長（cm）</label><input type="number" id="ht" inputmode="decimal" placeholder="158"></div>
+        <div class="field"><label for="pw">妊娠前の体重（kg）</label><input type="number" id="pw" inputmode="decimal" placeholder="50"></div>
+      </div>
+      <div class="calc-out" id="calcOut">身長と体重を入れると、目安が出ます&#9825;</div>
+    </div>
+    <table class="tbl" style="margin-top:10px">
+      <thead><tr><th>妊娠前の体格</th><th>BMI</th><th>増加の目安</th></tr></thead>
+      <tbody>
+        <tr><td>低体重</td><td class="num">18.5未満</td><td class="num">12〜15kg</td></tr>
+        <tr><td>普通体重</td><td class="num">18.5〜25未満</td><td class="num">10〜13kg</td></tr>
+        <tr><td>肥満（1度）</td><td class="num">25〜30未満</td><td class="num">7〜10kg</td></tr>
+        <tr><td>肥満（2度以上）</td><td class="num">30以上</td><td class="num">個別対応（上限5kg目安）</td></tr>
+      </tbody>
+    </table>
+    <div class="note calm" style="margin-top:10px">「厳格に守る根拠は必ずしも十分ではない」と学会自身が注記しています。幅として持っておく程度に。急に増えた・減ったときだけ健診で相談を。</div>
+  </section>
+
+  <div class="gdiv"><span class="gd-n">04</span><div><b>びょういんのこと</b><span>健診・記録・お産の選択</span></div></div>
 
   <section id="contact" data-from="4" data-to="41">
     <span class="eyebrow">れんらくさき</span>
@@ -473,50 +657,12 @@ nav.jump a.off{opacity:.45}
     <div class="tl" id="testBody"></div>
   </section>
 
-  <section id="fish" data-from="4" data-to="41">
-    <span class="eyebrow">おさかな</span>
-    <h2>種類と量だけ見ればOK</h2>
-    <p class="sub">魚は妊娠中いちばん食べてほしい食材のひとつ。制限があるのは一部の大型魚だけです。切り身1切れ＝刺身1人前＝約80g。</p>
-    <table class="tbl">
-      <thead><tr><th>目安</th><th>魚の種類</th></tr></thead>
-      <tbody>
-        <tr><td class="num">週80gまで</td><td>キンメダイ、メカジキ、クロマグロ（本マグロ）、メバチマグロ、エッチュウバイガイ、ツチクジラ、マッコウクジラ</td></tr>
-        <tr><td class="num">週160gまで</td><td>キダイ、マカジキ、ユメカサゴ、ミナミマグロ、ヨシキリザメ、イシイルカ、クロムツ</td></tr>
-        <tr><td class="num">制限なし</td><td>サケ、アジ、サバ、イワシ、サンマ、タイ、ブリ、カツオ、キハダマグロ、ビンナガ、メジマグロ、ツナ缶、しらす、たら、えび、いか、たこ、貝類（加熱して）</td></tr>
-        <tr><td class="num">ごく少量</td><td>コビレゴンドウ（2週に1回）、バンドウイルカ（2か月に1回）</td></tr>
-      </tbody>
-    </table>
-    <div class="note love" style="margin-top:12px"><b>魚を減らす方向に読まないでね。</b>厚労省もそう明記しています。DHA・EPA・ビタミンD・鉄は赤ちゃんの脳と体をつくる材料そのもの。種類さえ選べば週2〜3回は積極的に。</div>
-  </section>
-
-  <section id="nutri" data-from="4" data-to="41">
-    <span class="eyebrow">えいよう</span>
-    <h2>足りなくなるのは、この6つ</h2>
-    <p class="sub">やみくもに「バランスよく」より、不足しやすいものを狙い撃ちするほうが現実的。数字は食事摂取基準（2025年版）の目安です。</p>
-    <div id="nutBody"></div>
-  </section>
-
-  <section id="weight" data-from="8" data-to="41">
-    <span class="eyebrow">たいじゅう</span>
-    <h2>増えていいんです</h2>
-    <p class="sub">2021年に日本産科婦人科学会が目安を改定し、以前より2〜3kg引き上げられました。「増やさないで」と厳しく言われる時代は終わっています。</p>
-    <div class="card">
-      <div class="calc-in">
-        <div class="field"><label for="ht">身長（cm）</label><input type="number" id="ht" inputmode="decimal" placeholder="158"></div>
-        <div class="field"><label for="pw">妊娠前の体重（kg）</label><input type="number" id="pw" inputmode="decimal" placeholder="50"></div>
-      </div>
-      <div class="calc-out" id="calcOut">身長と体重を入れると、目安が出ます&#9825;</div>
-    </div>
-    <table class="tbl" style="margin-top:10px">
-      <thead><tr><th>妊娠前の体格</th><th>BMI</th><th>増加の目安</th></tr></thead>
-      <tbody>
-        <tr><td>低体重</td><td class="num">18.5未満</td><td class="num">12〜15kg</td></tr>
-        <tr><td>普通体重</td><td class="num">18.5〜25未満</td><td class="num">10〜13kg</td></tr>
-        <tr><td>肥満（1度）</td><td class="num">25〜30未満</td><td class="num">7〜10kg</td></tr>
-        <tr><td>肥満（2度以上）</td><td class="num">30以上</td><td class="num">個別対応（上限5kg目安）</td></tr>
-      </tbody>
-    </table>
-    <div class="note calm" style="margin-top:10px">「厳格に守る根拠は必ずしも十分ではない」と学会自身が注記しています。幅として持っておく程度に。急に増えた・減ったときだけ健診で相談を。</div>
+  <section id="echo" data-from="6" data-to="41">
+    <span class="eyebrow">エコーのみかた</span>
+    <h2>あの英語、なに？</h2>
+    <p class="sub">健診でもらう紙にずらっと並ぶアルファベット。意味がわかると、健診が「見る時間」から「わかる時間」になります。</p>
+    <div id="echoBody"></div>
+    <div class="note calm" style="margin-top:10px"><b>EFW（推定体重）に一喜一憂しないで。</b>計算式で出しているので誤差は±10〜15%あります。大事なのは1点の数字ではなく、前回からの伸び方。医師が何も言わないなら順調です。</div>
   </section>
 
   <section id="record" data-from="8" data-to="41">
@@ -536,49 +682,6 @@ nav.jump a.off{opacity:.45}
     <div class="note warn"><b>血圧の目安。</b>140/90以上が続くときは妊娠高血圧症候群を疑います。頭痛・目のちらつき・みぞおちの痛み・急なむくみを伴うときは、数値を待たずに産院へ連絡してください。</div>
   </section>
 
-  <section id="money" data-from="4" data-to="41">
-    <span class="eyebrow">おかね</span>
-    <h2>もらえるもの、ぜんぶ</h2>
-    <p class="sub">申請しないともらえないものばかりです。会社員（健康保険＋雇用保険）を前提にした一覧。自営業・扶養内の場合は対象外のものがあります。</p>
-    <div id="moneyBody"></div>
-    <div class="note calm" style="margin-top:10px">2026年5月に改正健康保険法が成立し、正常分娩を公的保険でまかなう新制度（自己負担ゼロ）が決まりました。ただし施行は公布から2年以内で、実際の開始は2027〜2028年度の見込み。<b>いまは従来どおり出産育児一時金50万円が使えます。</b></div>
-  </section>
-
-  <section id="todo" data-from="4" data-to="41">
-    <span class="eyebrow">てつづき</span>
-    <h2>いつ、なにをする</h2>
-    <p class="sub">やることが多く見えますが、ほとんどは「その時期になったら案内が来る」もの。忘れると損するものだけ太字にしています。</p>
-    <div class="tl" id="todoBody"></div>
-  </section>
-
-  <section id="prep" data-from="26" data-to="41">
-    <span class="eyebrow">じゅんび</span>
-    <h2>用意するものリスト</h2>
-    <p class="sub">タップでチェックできます（この端末に保存されます）。全部そろえなくて大丈夫。生まれてから買い足すほうが失敗しません。</p>
-    <div id="prepBody"></div>
-  </section>
-
-  <section id="labor" data-from="33" data-to="41">
-    <span class="eyebrow">おさん</span>
-    <h2>そろそろ、のサイン</h2>
-    <div id="laborBody"></div>
-  </section>
-
-  <section id="papa" data-from="4" data-to="41">
-    <span class="eyebrow">パパへ</span>
-    <h2>いちばん効くこと</h2>
-    <p class="sub">「なにか手伝おうか？」より「これやっとくね」。判断のコストを渡さないのが、いちばんの支えになります。</p>
-    <div id="papaBody"></div>
-  </section>
-
-  <section id="echo" data-from="6" data-to="41">
-    <span class="eyebrow">エコーのみかた</span>
-    <h2>あの英語、なに？</h2>
-    <p class="sub">健診でもらう紙にずらっと並ぶアルファベット。意味がわかると、健診が「見る時間」から「わかる時間」になります。</p>
-    <div id="echoBody"></div>
-    <div class="note calm" style="margin-top:10px"><b>EFW（推定体重）に一喜一憂しないで。</b>計算式で出しているので誤差は±10〜15%あります。大事なのは1点の数字ではなく、前回からの伸び方。医師が何も言わないなら順調です。</div>
-  </section>
-
   <section id="kick" data-from="27" data-to="41">
     <span class="eyebrow">たいどうカウント</span>
     <h2>10回動くまで、何分？</h2>
@@ -595,47 +698,6 @@ nav.jump a.off{opacity:.45}
     <div class="note calm" style="margin-top:10px">しゃっくり（規則的なピクピク）は数えません。<b>基準は「何分以内か」ではなく「いつもと比べてどうか」。</b>いつもより明らかに時間がかかる、動きが減った、と感じたら、時間を待たずに産院へ電話してください。カウントは記録より安心のための習慣です。</div>
   </section>
 
-  <section id="recipe" data-from="4" data-to="41">
-    <span class="eyebrow">レシピ</span>
-    <h2>じゃあ、何つくる</h2>
-    <p class="sub">「食べていいもの」がわかっても、作るのは別問題。つわり期に通るものと、鉄・カルシウムが自然に入るものを集めました。全部10分前後でできます。</p>
-    <div id="recipeBody"></div>
-  </section>
-
-  <section id="hokatsu" data-from="14" data-to="41">
-    <span class="eyebrow">ほかつ</span>
-    <h2>保育園は、妊娠中から</h2>
-    <p class="sub">産まれてから考えると間に合わないことがあります。4月入園から逆算するのが基本です。</p>
-    <div class="tl" id="hokatsuBody"></div>
-    <div id="hokatsuNote"></div>
-  </section>
-
-  <section id="after" data-from="29" data-to="41">
-    <span class="eyebrow">さんご</span>
-    <h2>産後にやること</h2>
-    <p class="sub">生まれた直後がいちばん動けないのに、いちばん手続きが多い時期です。パパが全部やる前提で読んでください。</p>
-    <div id="afterBody"></div>
-    <h3 style="margin:22px 0 8px;font-size:17px;color:var(--ink)">予防接種スケジュール</h3>
-    <p class="sub">0歳のうちに10回以上。同時接種が標準で、効果も安全性も単独接種と変わりません。</p>
-    <div class="tl" id="vaxBody"></div>
-    <div class="note warn" style="margin-top:10px"><b>ここだけは期限厳守。</b>ロタウイルスワクチンの1回目は、生後14週6日までに接種する必要があります。過ぎると受けられません。<br><br>そして<b>1か月健診のときに、小児科へ「生後2か月の誕生日」の予約を入れておく</b>のが鉄則です。予約は埋まります。</div>
-  </section>
-
-  <section id="edu" data-from="18" data-to="41">
-    <span class="eyebrow">これからのお金</span>
-    <h2>18年ぶんの設計</h2>
-    <p class="sub">不安を煽る情報が多い分野ですが、順番どおりにやれば怖くありません。慌てて保険や商品を契約しないのがいちばん大事です。</p>
-    <div id="eduBody"></div>
-    <div class="note calm" style="margin-top:10px">金額はすべておおよその目安です。実際の教育費は進路で大きく変わるので、いま決め打ちする必要はありません。<b>いま確実に効くのは「児童手当を使わずに別口座に貯める」だけ。</b>これで18年後に200万円台が残ります。</div>
-  </section>
-
-  <section id="fuan" data-from="4" data-to="41">
-    <span class="eyebrow">ふあんのこと</span>
-    <h2>あなたのせいじゃない</h2>
-    <div id="fuanBody"></div>
-    <div class="note love" style="margin-top:10px">相談先：かかりつけの産院／自治体のこども家庭センター（旧・子育て世代包括支援センター）／産後ケア事業／救急相談 #7119。どこも「こんなことで」と思われる場所ではありません。</div>
-  </section>
-
   <section id="birth" data-from="20" data-to="41">
     <span class="eyebrow">おさんの選択</span>
     <h2>どう産むか、を決める</h2>
@@ -650,11 +712,63 @@ nav.jump a.off{opacity:.45}
     <div id="kinkyuBody"></div>
   </section>
 
-  <section id="around" data-from="12" data-to="41">
-    <span class="eyebrow">まわりのこと</span>
-    <h2>人づきあいの段取り</h2>
-    <p class="sub">妊娠でいちばん消耗するのは、実は体ではなく人間関係だったりします。先に決めておけば揉めません。</p>
-    <div id="aroundBody"></div>
+  <div class="gdiv"><span class="gd-n">05</span><div><b>おかねと手続き</b><span>申請しないともらえない</span></div></div>
+
+  <section id="money" data-from="4" data-to="41">
+    <span class="eyebrow">おかね</span>
+    <h2>もらえるもの、ぜんぶ</h2>
+    <p class="sub">申請しないともらえないものばかりです。会社員（健康保険＋雇用保険）を前提にした一覧。自営業・扶養内の場合は対象外のものがあります。</p>
+    <div id="moneyBody"></div>
+    <div class="note calm" style="margin-top:10px">2026年5月に改正健康保険法が成立し、正常分娩を公的保険でまかなう新制度（自己負担ゼロ）が決まりました。ただし施行は公布から2年以内で、実際の開始は2027〜2028年度の見込み。<b>いまは従来どおり出産育児一時金50万円が使えます。</b></div>
+  </section>
+
+  <section id="todo" data-from="4" data-to="41">
+    <span class="eyebrow">てつづき</span>
+    <h2>いつ、なにをする</h2>
+    <p class="sub">やることが多く見えますが、ほとんどは「その時期になったら案内が来る」もの。忘れると損するものだけ太字にしています。</p>
+    <div class="tl" id="todoBody"></div>
+  </section>
+
+  <section id="hokatsu" data-from="14" data-to="41">
+    <span class="eyebrow">ほかつ</span>
+    <h2>保育園は、妊娠中から</h2>
+    <p class="sub">産まれてから考えると間に合わないことがあります。4月入園から逆算するのが基本です。</p>
+    <div class="tl" id="hokatsuBody"></div>
+    <div id="hokatsuNote"></div>
+  </section>
+
+  <section id="edu" data-from="18" data-to="41">
+    <span class="eyebrow">これからのお金</span>
+    <h2>18年ぶんの設計</h2>
+    <p class="sub">不安を煽る情報が多い分野ですが、順番どおりにやれば怖くありません。慌てて保険や商品を契約しないのがいちばん大事です。</p>
+    <div id="eduBody"></div>
+    <div class="note calm" style="margin-top:10px">金額はすべておおよその目安です。実際の教育費は進路で大きく変わるので、いま決め打ちする必要はありません。<b>いま確実に効くのは「児童手当を使わずに別口座に貯める」だけ。</b>これで18年後に200万円台が残ります。</div>
+  </section>
+
+  <div class="gdiv"><span class="gd-n">06</span><div><b>うまれるとき</b><span>後期になったら読む</span></div></div>
+
+  <section id="prep" data-from="26" data-to="41">
+    <span class="eyebrow">じゅんび</span>
+    <h2>用意するものリスト</h2>
+    <p class="sub">タップでチェックできます（この端末に保存されます）。全部そろえなくて大丈夫。生まれてから買い足すほうが失敗しません。</p>
+    <div id="prepBody"></div>
+  </section>
+
+  <section id="labor" data-from="33" data-to="41">
+    <span class="eyebrow">おさん</span>
+    <h2>そろそろ、のサイン</h2>
+    <div id="laborBody"></div>
+  </section>
+
+  <section id="after" data-from="29" data-to="41">
+    <span class="eyebrow">さんご</span>
+    <h2>産後にやること</h2>
+    <p class="sub">生まれた直後がいちばん動けないのに、いちばん手続きが多い時期です。パパが全部やる前提で読んでください。</p>
+    <div id="afterBody"></div>
+    <h3 style="margin:22px 0 8px;font-size:17px;color:var(--ink)">予防接種スケジュール</h3>
+    <p class="sub">0歳のうちに10回以上。同時接種が標準で、効果も安全性も単独接種と変わりません。</p>
+    <div class="tl" id="vaxBody"></div>
+    <div class="note warn" style="margin-top:10px"><b>ここだけは期限厳守。</b>ロタウイルスワクチンの1回目は、生後14週6日までに接種する必要があります。過ぎると受けられません。<br><br>そして<b>1か月健診のときに、小児科へ「生後2か月の誕生日」の予約を入れておく</b>のが鉄則です。予約は埋まります。</div>
   </section>
 
   <section id="name" data-from="26" data-to="41">
@@ -664,11 +778,18 @@ nav.jump a.off{opacity:.45}
     <div id="nameBody"></div>
   </section>
 
-  <section id="oops" data-from="4" data-to="41">
-    <span class="eyebrow">やっちゃった</span>
-    <h2>だいたい、大丈夫</h2>
-    <div class="note love" style="margin-bottom:10px">生ハムを1切れ。コーヒーを3杯。気づく前にお酒を飲んだ。——あとから来る不安のほうが体にこたえます。1回の出来事でリスクが跳ね上がることは、ほとんどありません。</div>
-    <div id="oopsBody"></div>
+  <section id="around" data-from="12" data-to="41">
+    <span class="eyebrow">まわりのこと</span>
+    <h2>人づきあいの段取り</h2>
+    <p class="sub">妊娠でいちばん消耗するのは、実は体ではなく人間関係だったりします。先に決めておけば揉めません。</p>
+    <div id="aroundBody"></div>
+  </section>
+
+  <section id="papa" data-from="4" data-to="41">
+    <span class="eyebrow">パパへ</span>
+    <h2>いちばん効くこと</h2>
+    <p class="sub">「なにか手伝おうか？」より「これやっとくね」。判断のコストを渡さないのが、いちばんの支えになります。</p>
+    <div id="papaBody"></div>
   </section>
 
   <footer>
@@ -687,15 +808,9 @@ nav.jump a.off{opacity:.45}
   </footer>
 </div>
 
+<button id="toTop" aria-label="いちばん上へ">&#8593;</button>
 <nav class="jump">
-  <a href="#dial">週数</a><a href="#food">たべもの</a><a href="#life">くらし</a><a href="#phase">時期別</a>
-  <a href="#body">からだ</a><a href="#danger">危険サイン</a><a href="#test">健診</a><a href="#fish">魚</a>
-  <a href="#nutri">栄養</a><a href="#weight">体重</a><a href="#money">お金</a><a href="#todo">手続き</a>
-  <a href="#prep">準備</a><a href="#labor">お産</a><a href="#papa">パパへ</a>
-  <a href="#echo">エコー用語</a><a href="#kick">胎動カウント</a><a href="#recipe">レシピ</a>
-  <a href="#contact">連絡先</a><a href="#record">記録</a><a href="#birth">産み方</a><a href="#kinkyu">入院</a>
-  <a href="#around">まわり</a><a href="#name">名づけ</a>
-  <a href="#hokatsu">保活</a><a href="#after">産後手続き</a><a href="#edu">教育費</a><a href="#fuan">不安</a>
+  <a href="#dial">週数</a><a href="#food">たべもの</a><a href="#life">くらし</a><a href="#recipe">レシピ</a><a href="#limits">使い方</a><a href="#body">からだ</a><a href="#danger" class="urgent">危険サイン</a><a href="#phase">時期別</a><a href="#fuan">不安</a><a href="#oops">やっちゃった</a><a href="#nutri">栄養</a><a href="#fish">魚</a><a href="#weight">体重</a><a href="#contact">連絡先</a><a href="#test">健診</a><a href="#echo">エコー用語</a><a href="#record">記録</a><a href="#kick">胎動</a><a href="#birth">産み方</a><a href="#kinkyu">入院</a><a href="#money">お金</a><a href="#todo">手続き</a><a href="#hokatsu">保活</a><a href="#edu">教育費</a><a href="#prep">準備</a><a href="#labor">お産</a><a href="#after">産後</a><a href="#name">名づけ</a><a href="#around">まわり</a><a href="#papa">パパへ</a><a href="#backup">ひきつぎ</a>
 </nav>
 
 <script>
@@ -834,7 +949,99 @@ const FOOD=[
 {n:"居酒屋",k:"いざかや のみかい",c:"外食・コンビニ",v:"hold",t:"△",s:"生ものを外せばOK",w:"刺身・生ハム・半熟卵・レア肉が集まる場所なので、選ぶ目が要ります。",h:"焼き鳥、だし巻き、枝豆、冷奴、焼き魚、揚げ物なら安心。ノンアルは0.00%を。"},
 {n:"ファストフード",k:"ふぁすとふーど はんばーがー まっく",c:"外食・コンビニ",v:"ok",t:"○",s:"たまになら",w:"パティは十分加熱されています。塩分と脂質だけの問題。",h:"サイドをサラダやコーンスープに替えると罪悪感が減ります。"},
 {n:"食べ放題・ビュッフェ",k:"たべほうだい びゅっふぇ ばいきんぐ",c:"外食・コンビニ",v:"hold",t:"△",s:"作り置きの時間が読めない",w:"常温に置かれている時間がわからないのがリスクです。",h:"熱いものが熱い状態で出ているコーナーを中心に。生ものは避ける。"},
-{n:"デリバリー",k:"でりばりー うーばー でまえ",c:"外食・コンビニ",v:"ok",t:"○",s:"届いたらすぐ",w:"配達中に冷める時間があるので、放置しないこと。",h:"届いたらすぐ食べる。冷めていたら温め直す。"}
+{n:"デリバリー",k:"でりばりー うーばー でまえ",c:"外食・コンビニ",v:"ok",t:"○",s:"届いたらすぐ",w:"配達中に冷める時間があるので、放置しないこと。",h:"届いたらすぐ食べる。冷めていたら温め直す。"},
+{n:"牛タン（加熱）",k:"ぎゅうたん たん",c:"肉・卵",v:"ok",t:"○",s:"焼けばOK",w:"タン刺しは生肉なので×ですが、焼いたものは問題ありません。",h:"中まで火を通して。"},
+{n:"馬刺し",k:"ばさし うまさし",c:"肉・卵",v:"stop",t:"×",s:"生肉は避ける",w:"馬肉は寄生虫リスクが低いとされますが、生肉であることに変わりはありません。",h:"加熱した桜鍋なら大丈夫。"},
+{n:"ラム・マトン",k:"らむ まとん ひつじ じんぎすかん",c:"肉・卵",v:"ok",t:"○",s:"鉄が多い",w:"鉄と亜鉛が豊富。ジンギスカンも加熱すれば問題ありません。",h:"中まで焼く。生の羊肉に触れたトングは使い分けを。"},
+{n:"鴨肉（ロゼ）",k:"かも かもにく ろぜ",c:"肉・卵",v:"hold",t:"△",s:"ロゼは中が生",w:"フレンチの鴨は中心をピンクに仕上げることが多く、実質レア肉です。",h:"しっかり焼いてもらうか、コンフィなど加熱調理のものを。"},
+{n:"焼豚・チャーシュー",k:"やきぶた ちゃーしゅー",c:"肉・卵",v:"ok",t:"○",s:"加熱済み",w:"煮豚・焼豚はしっかり加熱されています。",h:"制限なし。塩分だけ。"},
+{n:"コンビーフ・缶詰の肉",k:"こんびーふ かんづめ",c:"肉・卵",v:"ok",t:"○",s:"加熱殺菌済み",w:"缶詰は高温殺菌されているので安全です。",h:"常温保存でき、つわり期の備蓄にも。"},
+{n:"肉まん・餃子・シュウマイ",k:"にくまん ぎょうざ しゅうまい",c:"肉・卵",v:"ok",t:"○",s:"温めれば大丈夫",w:"加熱調理品です。冷めたものは温め直して。",h:"中心まで熱いことを確認。"},
+{n:"卵焼き・だし巻き・茶碗蒸し",k:"たまごやき だしまき ちゃわんむし",c:"肉・卵",v:"ok",t:"○",s:"火が通っていればOK",w:"完全に固まっていればサルモネラの心配はありません。",h:"半熟のとろとろ仕上げだけ避けて。"},
+{n:"スクランブルエッグ・オムレツ",k:"すくらんぶるえっぐ おむれつ おむらいす",c:"肉・卵",v:"hold",t:"△",s:"とろとろは避ける",w:"半熟に仕上げるレシピが多いので注意。",h:"しっかり火を通したものを。ホテルの朝食などは焼き加減を頼めます。"},
+{n:"プリン・カスタード（市販）",k:"ぷりん かすたーど",c:"肉・卵",v:"ok",t:"○",s:"市販なら大丈夫",w:"加熱殺菌された卵が使われています。",h:"手作りの半熟プリンだけ注意。"},
+{n:"カルボナーラ",k:"かるぼなーら",c:"肉・卵",v:"hold",t:"△",s:"生卵ソースと生ハムに注意",w:"仕上げに生卵を使う店があり、パンチェッタが非加熱のこともあります。",h:"しっかり火を通してもらうか、クリームベースのものを選ぶ。"},
+
+{n:"たい・ひらめ・かれい（加熱）",k:"たい ひらめ かれい しろみ",c:"魚介",v:"best",t:"◎",s:"水銀の制限なし",w:"消化がよく、たんぱく質が摂れる白身魚。",h:"煮つけ・ムニエル・蒸しで。"},
+{n:"ぶり・はまち",k:"ぶり はまち",c:"魚介",v:"best",t:"◎",s:"制限なし",w:"DHA・EPAが豊富で、水銀の注意対象ではありません。",h:"照り焼き・ぶり大根に。刺身は生食の注意が別途あります。"},
+{n:"さわら・ほっけ・にしん・たちうお",k:"さわら ほっけ にしん たちうお",c:"魚介",v:"ok",t:"○",s:"制限なし",w:"いずれも水銀の注意対象ではありません。",h:"焼き魚で。ほっけは塩分が高めです。"},
+{n:"ししゃも・きびなご",k:"ししゃも きびなご",c:"魚介",v:"best",t:"◎",s:"骨ごとカルシウム",w:"頭から食べられるのでカルシウムが効率よく摂れ、子持ちなら鉄も。",h:"2〜3尾で十分。焼きすぎない。"},
+{n:"干物・みりん干し",k:"ひもの みりんぼし あじのひらき",c:"魚介",v:"ok",t:"○",s:"塩分だけ注意",w:"焼けば菌の心配はありません。",h:"塩分が高いので、汁物と一緒にしない。"},
+{n:"かにかま",k:"かにかま かにかまぼこ",c:"魚介",v:"ok",t:"○",s:"加熱済み",w:"すり身の加熱品なので安心です。",h:"制限なし。手軽なたんぱく源。"},
+{n:"海鮮丼・ポキ・カルパッチョ",k:"かいせんどん ぽき かるぱっちょ せびーちぇ",c:"魚介",v:"hold",t:"△",s:"生魚と同じ扱い",w:"刺身と同じリスクです。",h:"避けるのが安全。どうしてもなら鮮度の確かな店で少量。"},
+{n:"昆布締め・酢〆の魚",k:"こぶじめ すじめ",c:"魚介",v:"hold",t:"△",s:"締めても生",w:"酢や塩では菌も寄生虫も死にません。",h:"生魚と同じ扱いに。"},
+{n:"いかの塩辛・酒盗・たこわさ",k:"しおから しゅとう たこわさ",c:"魚介",v:"hold",t:"△",s:"非加熱＋高塩分",w:"生の魚介を発酵させたもので、塩分も非常に高い。",h:"避けるのが無難。"},
+{n:"生しらす・白魚",k:"なましらす しらうお おどりぐい",c:"魚介",v:"stop",t:"×",s:"生の魚介",w:"寄生虫と食中毒のリスク。踊り食いは論外です。",h:"釜揚げしらすなら◎です。"},
+{n:"白子",k:"しらこ",c:"魚介",v:"hold",t:"△",s:"加熱すればOK",w:"生の白子は避けたいところ。加熱すれば問題ありません。",h:"焼き白子・白子ポン酢は加熱済みか確認を。"},
+{n:"かに味噌・えびみそ",k:"かにみそ えびみそ",c:"魚介",v:"hold",t:"△",s:"内臓は少量に",w:"甲殻類の内臓にはカドミウムが蓄積することがあります。",h:"身は自由に。味噌は少量にとどめる。"},
+{n:"アンチョビ",k:"あんちょび",c:"魚介",v:"hold",t:"△",s:"非加熱＋塩分",w:"塩蔵の非加熱品です。",h:"加熱する料理に少量なら大丈夫。"},
+{n:"岩牡蠣",k:"いわがき",c:"魚介",v:"stop",t:"×",s:"生食が基本の貝",w:"生食用として流通しますが、妊娠中は避けてください。",h:"産後の楽しみに。"},
+
+{n:"バター",k:"ばたー",c:"乳製品",v:"ok",t:"○",s:"制限なし",w:"殺菌された乳から作られています。",h:"脂質が高いので量だけ。"},
+{n:"モッツァレラ・リコッタ・マスカルポーネ",k:"もっつぁれら りこった ますかるぽーね ふれっしゅちーず",c:"乳製品",v:"hold",t:"△",s:"表示を確認",w:"フレッシュタイプのナチュラルチーズ。国内市販品は加熱殺菌乳が原料のことが多い。",h:"「加熱殺菌された乳を使用」とあればOK。輸入品や量り売りは加熱して。"},
+{n:"パルミジャーノ・ゴーダなどハードチーズ",k:"ぱるみじゃーの ぱるめざん ごーだ はーどちーず",c:"乳製品",v:"ok",t:"○",s:"水分が少なく低リスク",w:"熟成した硬質チーズはリステリアが増えにくい。",h:"粉チーズは加熱品なので安心。心配なら加熱して使う。"},
+{n:"チーズケーキ・ティラミス（市販）",k:"ちーずけーき てぃらみす",c:"乳製品",v:"ok",t:"○",s:"市販なら大丈夫",w:"焼き菓子は加熱済み、レアチーズも市販品は殺菌原料です。",h:"手作り・カフェの自家製は原料を確認。"},
+{n:"練乳・スキムミルク・粉ミルク",k:"れんにゅう すきむみるく こなみるく",c:"乳製品",v:"ok",t:"○",s:"加熱殺菌済み",w:"スキムミルクはカルシウムを足すのに便利です。",h:"練乳は糖分が高いので少量に。"},
+{n:"ラッシー・ミルクセーキ",k:"らっしー みるくせーき",c:"乳製品",v:"ok",t:"○",s:"市販・店なら大丈夫",w:"殺菌乳とヨーグルトが原料です。",h:"生卵入りのミルクセーキだけ注意。"},
+
+{n:"きゅうり・キャベツ・白菜・大根",k:"きゅうり きゃべつ はくさい だいこん",c:"野菜・果物",v:"best",t:"◎",s:"よく洗えば生でも",w:"かさが出て満腹感が得られ、体重管理の味方。",h:"生で食べるときは流水で30秒。"},
+{n:"ごぼう・れんこん",k:"ごぼう れんこん",c:"野菜・果物",v:"best",t:"◎",s:"便秘に効く",w:"食物繊維が多く、妊娠中の便秘対策になります。",h:"土がつく野菜なのでよく洗って。"},
+{n:"たまねぎ・ねぎ・にんにく",k:"たまねぎ ねぎ にんにく",c:"野菜・果物",v:"ok",t:"○",s:"制限なし",w:"にんにくも普通の量なら問題ありません。",h:"におい過敏の時期だけ控えめに。"},
+{n:"しょうが",k:"しょうが じんじゃー",c:"野菜・果物",v:"best",t:"◎",s:"つわりの吐き気に効く",w:"生姜が妊娠中の吐き気を軽くすることは複数の研究で示されています。",h:"すりおろしを白湯や紅茶に。1日1g程度から。サプリでの大量摂取は避ける。"},
+{n:"オクラ・モロヘイヤ・春菊・アスパラ",k:"おくら もろへいや しゅんぎく あすぱら",c:"野菜・果物",v:"best",t:"◎",s:"葉酸が多い",w:"いずれも葉酸が豊富。モロヘイヤはカルシウムも多い。",h:"モロヘイヤの種やさやには毒があるので、市販の葉の部分だけを。"},
+{n:"とうもろこし・かぶ・なす・ズッキーニ",k:"とうもろこし かぶ なす ずっきーに",c:"野菜・果物",v:"ok",t:"○",s:"制限なし",w:"どれも安心して食べられます。",h:"制限なし。"},
+{n:"りんご・ぶどう・桃・梨・柿",k:"りんご ぶどう もも なし かき",c:"野菜・果物",v:"ok",t:"○",s:"1日200gが目安",w:"「柿は体を冷やす」などの言い伝えに医学的根拠はありません。",h:"果物は糖分があるので、1日200g程度に。"},
+{n:"すいか・メロン・マンゴー",k:"すいか めろん まんごー",c:"野菜・果物",v:"ok",t:"○",s:"カットは早めに",w:"カット面から菌が増えるので、時間を置かないこと。",h:"買ったその日に。むくみ対策のカリウムも摂れます。"},
+{n:"ブルーベリー・ラズベリー",k:"ぶるーべりー らずべりー べりー",c:"野菜・果物",v:"best",t:"◎",s:"冷凍が便利",w:"抗酸化成分と食物繊維。冷凍でも栄養は変わりません。",h:"ヨーグルトに入れるだけ。"},
+{n:"梅干し",k:"うめぼし",c:"野菜・果物",v:"hold",t:"△",s:"つわりに効くが塩分",w:"酸味がつわりを和らげますが、1粒で1〜2gの塩分になることも。",h:"1日1粒まで。減塩タイプを選ぶ。"},
+{n:"銀杏（ぎんなん）",k:"ぎんなん",c:"野菜・果物",v:"hold",t:"△",s:"食べすぎると中毒",w:"多量に食べると中毒（けいれん・嘔吐）を起こすことがあります。",h:"数粒程度に。子どもには特に注意が必要な食材です。"},
+{n:"わらび・ぜんまい・山菜",k:"わらび ぜんまい さんさい ふきのとう",c:"野菜・果物",v:"hold",t:"△",s:"アク抜きが必須",w:"わらびには発がん性が指摘される成分があり、アク抜きで大きく減ります。",h:"市販の水煮なら処理済み。頻繁に大量には食べない。"},
+{n:"アロエ",k:"あろえ",c:"野菜・果物",v:"stop",t:"×",s:"下剤成分と子宮収縮",w:"葉の皮に含まれる成分に下剤作用があり、子宮収縮の懸念も指摘されています。",h:"アロエヨーグルトも妊娠中は避けておく。"},
+{n:"スムージー・生ジュース（店）",k:"すむーじー なまじゅーす こーるどぷれす",c:"野菜・果物",v:"hold",t:"△",s:"衛生と糖分",w:"生野菜・生果物を使うため洗浄と器具の衛生が読めず、糖分も高くなりがち。",h:"家で作って、その場で飲むのがいちばん安心。"},
+{n:"たけのこ・ふき",k:"たけのこ ふき",c:"野菜・果物",v:"ok",t:"○",s:"制限なし",w:"アク抜きしてあれば問題ありません。",h:"食物繊維が多く便秘にも。"},
+
+{n:"あんこ・小豆",k:"あんこ あずき ぜんざい",c:"豆・穀物",v:"ok",t:"○",s:"鉄と繊維。糖分は高い",w:"小豆自体は鉄と食物繊維が豊富ですが、あんこは砂糖が多い。",h:"和菓子は洋菓子より脂質が低いので、選ぶならこちら。"},
+{n:"おから・湯葉",k:"おから ゆば",c:"豆・穀物",v:"best",t:"◎",s:"繊維とたんぱく質",w:"おからは食物繊維の量が突出しています。",h:"卯の花や炒り煮で。急に増やすとお腹が張ることがあります。"},
+{n:"そば",k:"そば",c:"豆・穀物",v:"ok",t:"○",s:"食べてOK",w:"妊娠中にそばを避けても、子どものそばアレルギーは予防できません。",h:"つゆの塩分だけ。温かいそばはつわり明けに食べやすい。"},
+{n:"甘栗・栗",k:"あまぐり くり",c:"豆・穀物",v:"ok",t:"○",s:"鉄と葉酸",w:"意外と葉酸と鉄が摂れるおやつです。",h:"糖質は高めなので1袋を一度にはやめて。"},
+{n:"ポップコーン・せんべい",k:"ぽっぷこーん せんべい",c:"豆・穀物",v:"ok",t:"○",s:"かさがあって満足",w:"スナック菓子よりは脂質が低め。",h:"塩分とバターの量だけ気にかけて。"},
+{n:"春雨・ビーフン",k:"はるさめ びーふん",c:"豆・穀物",v:"ok",t:"○",s:"制限なし",w:"つわり期でもつるっと食べられます。",h:"「低カロリー」と思われがちですが糖質は普通にあります。"},
+
+{n:"あおさ・青のり",k:"あおさ あおのり",c:"海藻・きのこ",v:"ok",t:"○",s:"普通量ならOK",w:"ヨウ素を含むので、毎日大量でなければ問題ありません。",h:"味噌汁やお好み焼きに。"},
+{n:"山芋・とろろ",k:"やまいも とろろ ながいも",c:"海藻・きのこ",v:"ok",t:"○",s:"生でも大丈夫",w:"生食する数少ない食材ですが、リスクは低いです。",h:"かゆくなる人は加熱を。とろろ汁は生卵を入れないで。"},
+{n:"寒天・ところてん",k:"かんてん ところてん",c:"海藻・きのこ",v:"ok",t:"○",s:"ほぼゼロカロリー",w:"食物繊維で便秘対策になり、つわり期でも食べやすい。",h:"黒蜜のかけすぎだけ注意。"},
+
+{n:"炭酸水（無糖）",k:"たんさんすい そーだ",c:"飲みもの",v:"best",t:"◎",s:"つわり期の救世主",w:"口の中がさっぱりして、水が飲めない時期でも通ることが多い。",h:"制限なし。レモンを絞るとさらに飲みやすくなります。"},
+{n:"白湯",k:"さゆ",c:"飲みもの",v:"best",t:"◎",s:"冷えとむくみに",w:"胃にやさしく、水分補給としても優秀です。",h:"制限なし。生姜を少し入れると吐き気にも。"},
+{n:"野菜ジュース",k:"やさいじゅーす",c:"飲みもの",v:"ok",t:"○",s:"野菜の代わりにはならない",w:"食物繊維は減っており、糖分が加わっている製品も。",h:"補助として1日1本まで。"},
+{n:"100%果汁ジュース",k:"かじゅう じゅーす おれんじじゅーす",c:"飲みもの",v:"hold",t:"△",s:"血糖が上がりやすい",w:"果物そのものより糖の吸収が速く、血糖が上がりやすい。",h:"コップ1杯まで。果物で食べるほうが優秀です。"},
+{n:"タピオカドリンク",k:"たぴおか みるくてぃー",c:"飲みもの",v:"hold",t:"△",s:"糖分とカフェイン",w:"1杯で相当な糖質になり、紅茶ベースならカフェインも入ります。",h:"たまのご褒美に。"},
+{n:"ジンジャーエール",k:"じんじゃーえーる",c:"飲みもの",v:"ok",t:"○",s:"つわり期に人気",w:"炭酸と生姜の組み合わせで、吐き気がやわらぐことがあります。",h:"糖分が高いので、無糖の炭酸水＋すりおろし生姜のほうがおすすめ。"},
+{n:"コンブチャ（発酵茶）",k:"こんぶちゃ こんぶーちゃ",c:"飲みもの",v:"stop",t:"×",s:"非加熱発酵＋微量アルコール",w:"発酵過程で微量のアルコールが生じ、非加熱のため菌のリスクもあります。",h:"昆布茶（こぶちゃ）とは別物です。昆布茶はヨウ素の注意だけ。"},
+{n:"青汁・スーパーフード飲料",k:"あおじる すーぱーふーど",c:"飲みもの",v:"hold",t:"△",s:"成分表を確認",w:"ケールや明日葉はビタミンKが多く、ハーブ配合の製品もあります。",h:"妊婦向け表示のあるものを。心配なら産院で成分表を見せて。"},
+{n:"プロテイン飲料",k:"ぷろていん",c:"飲みもの",v:"hold",t:"△",s:"成分によっては×",w:"たんぱく質自体は問題ありませんが、ハーブやカフェイン、ビタミンAが配合された製品があります。",h:"シンプルな製品を選び、成分表を確認。基本は食事から。"},
+
+{n:"わさび・からし・唐辛子",k:"わさび からし とうがらし こしょう",c:"調味料・その他",v:"ok",t:"○",s:"制限なし",w:"通常の薬味の量で影響が出ることはありません。",h:"後期は胸やけを悪化させることがあるので、そのときだけ控える。"},
+{n:"酢・レモン・ポン酢",k:"す おす れもん ぽんず",c:"調味料・その他",v:"best",t:"◎",s:"減塩の味方",w:"酸味を使うと、塩を減らしても満足できます。",h:"制限なし。つわり期にも重宝します。"},
+{n:"オリーブオイル・ごま油",k:"おりーぶおいる ごまあぶら あぶら",c:"調味料・その他",v:"ok",t:"○",s:"適量なら問題なし",w:"脂質は必要な栄養素です。極端に避けないで。",h:"1日大さじ1〜2程度を目安に。"},
+{n:"マーガリン・ショートニング",k:"まーがりん しょーとにんぐ とらんすしぼうさん",c:"調味料・その他",v:"hold",t:"△",s:"トランス脂肪酸",w:"日本人の平均摂取量はWHOの目標を下回っており、神経質になる必要はありません。",h:"毎日大量でなければ問題なし。バターやオリーブオイルに替えても。"},
+{n:"食品添加物・保存料",k:"てんかぶつ ほぞんりょう ちゃくしょくりょう",c:"調味料・その他",v:"ok",t:"○",s:"気にしなくていい",w:"使用が認められている量では、妊娠中に問題になるという根拠はありません。",h:"添加物を避けるより、加熱と鮮度を守るほうがずっと大事です。"},
+{n:"残留農薬・輸入野菜",k:"のうやく ざんりゅうのうやく ゆにゅうやさい",c:"調味料・その他",v:"ok",t:"○",s:"洗えば十分",w:"日本の基準値は妊婦も想定して設定されています。",h:"流水でよく洗う。有機である必要はありません。"},
+{n:"グレープフルーツ",k:"ぐれーぷふるーつ",c:"調味料・その他",v:"ok",t:"○",s:"薬を飲むときだけ注意",w:"果物としては問題なし。ただし一部の薬の効き方を変えます。",h:"薬を処方されたら「グレープフルーツは大丈夫ですか」と一言確認を。"},
+{n:"DHA・カルシウム・亜鉛のサプリ",k:"DHA かるしうむ あえん さぷり",c:"調味料・その他",v:"ok",t:"○",s:"妊婦向け表示のものを",w:"不足しがちな栄養素を補う分には問題ありません。",h:"魚由来のDHAサプリは、肝油（ビタミンA）が入っていないか確認を。"},
+{n:"プエラリア・美容系サプリ",k:"ぷえらりあ びようさぷり ぷらせんた こらーげん",c:"調味料・その他",v:"stop",t:"×",s:"妊娠中のデータなし",w:"プエラリアは健康被害の報告があり、ホルモン様作用のあるものは避けるべきです。",h:"産後・授乳が終わってから。"},
+{n:"ダイエット食品・置き換え食",k:"だいえっと おきかえ",c:"調味料・その他",v:"stop",t:"×",s:"妊娠中はしない",w:"栄養が偏り、赤ちゃんの発育に影響します。",h:"体重が心配なら、減らすのではなく内容を変える。産院で栄養指導を受けられます。"},
+{n:"洋酒入りチョコ・ラムレーズン",k:"ようしゅいり らむれーずん ぶらんでー",c:"調味料・その他",v:"hold",t:"△",s:"微量でも避ける",w:"含まれるアルコールはごく微量ですが、避けるに越したことはありません。",h:"表示を見て、洋酒不使用のものを。"},
+{n:"コンビニおにぎり・サンドイッチ",k:"おにぎり さんどいっち こんびに",c:"調味料・その他",v:"ok",t:"○",s:"具だけ選べばOK",w:"加熱された具材なら問題ありません。",h:"避けるのは生ハム、スモークサーモン、ローストビーフ、たまごサンドの半熟タイプ。"},
+
+{n:"カフェ・喫茶店",k:"かふぇ きっさてん すたば こーひーてん",c:"外食・コンビニ",v:"ok",t:"○",s:"デカフェを頼めば自由",w:"ほとんどのチェーンにカフェインレスがあり、ミルク多めにすればさらに減ります。",h:"ハーブティーは種類を確認。ケーキは食べていい。"},
+{n:"中華料理",k:"ちゅうか ちゅうかりょうり らーめん以外",c:"外食・コンビニ",v:"ok",t:"○",s:"塩分と脂だけ",w:"八角や花椒などの香辛料は問題ありません。",h:"スープや餡は塩分が高いので、汁を残す。"},
+{n:"韓国料理",k:"かんこくりょうり ちぢみ ぴびんば さむぎょぷさる",c:"外食・コンビニ",v:"ok",t:"○",s:"ユッケと生卵を外す",w:"辛さは問題ありません。ビビンバの生卵とユッケだけ注意。",h:"サムギョプサルは中まで焼く。キムチは塩分に注意。"},
+{n:"インドカレー・タイ料理",k:"いんどかれー たいりょうり なん がぱお ぱくちー",c:"外食・コンビニ",v:"ok",t:"○",s:"生春巻きだけ注意",w:"スパイスもパクチーも問題ありません。ラッシーも大丈夫。",h:"生春巻き・生野菜のサラダ・魚醤の生ものだけ避ける。"},
+{n:"うどん屋・そば屋",k:"うどんや そばや たちぐい",c:"外食・コンビニ",v:"best",t:"◎",s:"つわり期の外食に最適",w:"温度も量も調整しやすく、消化もいい。",h:"つゆを飲み干さなければ塩分もおさまります。"},
+{n:"BBQ・キャンプ飯",k:"ばーべきゅー BBQ きゃんぷ",c:"外食・コンビニ",v:"hold",t:"△",s:"加熱不足になりやすい",w:"屋外は火加減が読みにくく、生肉用のトングを使い回しがちです。",h:"焼く係はほかの人に。トングを分けてもらう。日陰と水分も忘れずに。"},
+{n:"屋台・お祭りの食べもの",k:"やたい おまつり ろてん",c:"外食・コンビニ",v:"hold",t:"△",s:"熱いものを選ぶ",w:"常温に置かれる時間が長くなりがちです。",h:"焼きそば・たこ焼きなど、その場で熱く仕上がるものを。"},
+{n:"駅弁・空弁・作り置き弁当",k:"えきべん そらべん べんとう",c:"外食・コンビニ",v:"hold",t:"△",s:"時間が経っている",w:"製造から時間が経っており、夏場は特に注意。",h:"購入後は早めに。生ものが入っているものは避ける。"}
 ];
 
 const LIFE=[
@@ -1154,6 +1361,16 @@ const NAME=[
 {h:"決めるときの実用的な視点",d:"画数や字義はお好みで。実務的に効くのはこのあたりです。<br><br>・<b>電話で伝わるか</b>（「◯◯の◯です」と説明しやすいか）<br>・変換で出るか<br>・ローマ字にしたときの見え方（パスポート・メールアドレス）<br>・呼びやすい愛称になるか<br>・きょうだいができたときに並べて不自然でないか"}
 ];
 
+const LIMITS=[
+{h:"持病がある／薬をのんでいる",d:"甲状腺、糖尿病、高血圧、てんかん、うつ、膠原病、喘息など。<b>この手帳の一般論はほとんど当てはまりません。</b>薬も「妊娠中だからやめる」が正解とは限らず、自己判断で中断するほうが危険なことが多い。<br><br>いま通っている科と産科の両方に、それぞれの状況を伝えてください。「お薬手帳を両方で見せる」だけで、かなり守られます。"},
+{h:"ふたご・みつご（多胎）",d:"必要なエネルギーも体重増加の目安も、鉄や葉酸の量も変わります。管理入院になる可能性が高く、早産の頻度も上がるため、<b>準備のスケジュールが全体的に前倒し</b>になります。<br><br>体重増加の目安の表も、この手帳の数字は単胎のものです。多胎の場合は必ず主治医の指示に従ってください。"},
+{h:"不妊治療を経ての妊娠",d:"経過そのものは自然妊娠と大きく変わりませんが、<b>ホルモン補充が続く時期があったり、健診の頻度が多かったり</b>します。治療歴は必ず産科に伝えてください。<br><br>そして、長く待った分だけ不安が強くなるのは自然なことです。それは弱さではありません。"},
+{h:"過去に流産・死産を経験している",d:"<b>次も同じことが起こるとは限りません。</b>一度の流産の多くは偶然によるもので、その後の妊娠に影響しないことがほとんどです。<br><br>ただ、頭でわかっていても不安は消えません。健診と健診のあいだが長く感じるなら、そう産院に伝えていい。回数を増やしてくれることもありますし、その一言で見てもらえる目が変わります。"},
+{h:"年齢が高め・低めの妊娠",d:"35歳以上では妊娠高血圧症候群や妊娠糖尿病、染色体の変化の頻度が少し上がります。ただし<b>「高齢だから危ない」という単純な話ではなく</b>、健診をきちんと受けることでほとんどは早く見つかります。<br><br>10代の妊娠には別の支援制度があります。自治体の窓口で相談できます。"},
+{h:"体調や事情で健診に行けない",d:"お金、仕事、体調、家族の事情。<b>健診を受けられない理由がある人ほど、支援が必要な人です。</b>自治体には未受診の妊婦向けの相談窓口があり、費用の助成や同行の支援が受けられることがあります。<br><br>「怒られるかも」と思って足が遠のくのがいちばん怖い。産院も自治体も、責める場所ではありません。"},
+{h:"ひとりで抱えている",d:"パートナーがいない、頼れる家族がいない、相手との関係が不安定。どのケースでも支援はあります。<b>自治体のこども家庭センター</b>が入口です。<br><br>暴力や強い支配がある場合は、産院に伝えれば守られる仕組みがあります。ひとりで解決しようとしないでください。"}
+];
+
 /* ============ RENDER ============ */
 const $=s=>document.querySelector(s);
 function norm(s){return s.replace(/[\u30A1-\u30F6]/g,c=>String.fromCharCode(c.charCodeAt(0)-0x60)).toLowerCase();}
@@ -1199,7 +1416,13 @@ function makeFinder(data,cats,ids){
       return norm(f.n+f.k+f.c+(f.s||"")).indexOf(nq)>=0;
     });
     cntEl.textContent=list.length+"件";
-    if(!list.length){itemsEl.innerHTML='<div class="empty">見つかりませんでした<br>別の言い方で探すか、産院で聞いてみてね。</div>';return;}
+    if(!list.length){
+      var qq=q.trim().replace(/[<>"&]/g,"");
+      itemsEl.innerHTML='<div class="empty">「'+qq+'」は見つかりませんでした<br>別の言い方でも出てこないときは、健診で聞くのがいちばん確実です。</div>'+
+        '<div class="askbox">思いついたまま、健診の質問メモに入れておけます。<button class="btnp askadd" data-q="'+qq+
+        '">「'+qq+'」を質問メモに追加</button></div>';
+      return;
+    }
 
     if(!nq&&cat==="all"){
       cntEl.textContent=data.length+"件";
@@ -1350,6 +1573,8 @@ function renderStatic(){
   $("#aroundBody").innerHTML=AROUND.map(function(x){return acc(x.h,"<p>"+x.d+"</p>");}).join("");
   $("#nameBody").innerHTML=NAME.map(function(x){return acc(x.h,"<p>"+x.d+"</p>");}).join("");
 
+  $("#limitBody").innerHTML=LIMITS.map(function(x){return acc(x.h,"<p>"+x.d+"</p>");}).join("");
+
   let saved={};
   try{saved=JSON.parse(localStorage.getItem("premam-check")||"{}");}catch(e){saved={};}
   $("#prepBody").innerHTML=PREP.map(function(g,gi){
@@ -1392,19 +1617,20 @@ makeFinder(LIFE,CL,{chips:"#chipsL",items:"#itemsL",count:"#countL",q:"#qL",quic
 renderDial();
 
 /* ---- week-aware UI ---- */
-var SECT_LABEL={legend:"信号の見方",food:"たべもの",life:"くらし",phase:"時期別ガイド",body:"からだ",
- danger:"危険サイン",test:"健診と検査",fish:"おさかな",nutri:"栄養",weight:"体重",money:"お金",
- todo:"手続き",prep:"用意するもの",labor:"お産のサイン",papa:"パパへ",echo:"エコー用語",
- kick:"胎動カウント",recipe:"レシピ",hokatsu:"保活",after:"産後にやること",edu:"教育費",fuan:"不安のこと",oops:"やっちゃった"};
+var SECT_LABEL={limits:"使い方と限界",backup:"データのひきつぎ",food:"たべもの",life:"くらし",recipe:"レシピ",body:"からだの手あて",danger:"危険サイン",
+ phase:"時期別ガイド",fuan:"不安のこと",oops:"やっちゃった",nutri:"栄養",fish:"おさかな",weight:"体重",
+ contact:"連絡先とメモ",test:"健診と検査",echo:"エコー用語",record:"体重の記録",kick:"胎動カウント",
+ birth:"産み方の選択",kinkyu:"入院になったら",money:"お金",todo:"手続き",hokatsu:"保活",edu:"教育費",
+ prep:"用意するもの",labor:"お産のサイン",after:"産後にやること",name:"名づけ",around:"まわりのこと",papa:"パパへ"};
 
 var TOPPICKS=[
- {to:7,h:"いちばん大事なのは、葉酸だけ",s:"まだ何も実感がない時期。やることは驚くほど少なくて、葉酸サプリと、避けるものを知っておくことだけです。つわりが来る前に食べたいものを食べておいて。",l:["food","phase","fuan","danger"]},
- {to:11,h:"母子手帳をもらいに行く時期",s:"心拍が確認できたら、産院で妊娠届出書をもらって自治体へ。ここから健診の補助券が使えるようになります。つわりのピークでもあるので、無理をしない前提で。",l:["todo","phase","food","fuan"]},
- {to:15,h:"つわりを越えるところ",s:"食べられるものを食べる期間。そろそろ会社への報告と、お金まわりの見通しを立てておくと後が楽です。",l:["phase","food","money","body"]},
- {to:22,h:"いちばん動ける時期",s:"安定期に入りました。歯科健診、旅行、保活の情報収集は今のうち。鉄とカルシウムを意識しはじめる時期でもあります。",l:["phase","nutri","hokatsu","recipe"]},
- {to:27,h:"鉄と体重を気にかける",s:"貧血と体重増加が出やすいころ。血糖の検査もあります。エコーの数字の見方がわかると健診が楽しくなります。",l:["nutri","weight","echo","money"]},
+ {to:7,h:"いちばん大事なのは、葉酸だけ",s:"まだ実感がない時期。やることは驚くほど少なくて、葉酸サプリと、避けるものを知っておくことだけです。つわりが来る前に、食べたいものを食べておいて。",l:["food","fuan","phase","danger"]},
+ {to:11,h:"母子手帳をもらいに行く時期",s:"心拍が確認できたら、産院で妊娠届出書をもらって自治体へ。ここから健診の補助券が使えます。つわりのピークでもあるので、無理をしない前提で。",l:["todo","food","body","contact"]},
+ {to:15,h:"つわりを越えるところ",s:"食べられるものを食べる期間。そろそろ会社への報告と、お金まわりの見通しを立てておくと、後がずっと楽です。",l:["phase","recipe","money","body"]},
+ {to:22,h:"いちばん動ける時期",s:"安定期に入りました。歯科健診、旅行、保活の情報収集は今のうち。鉄とカルシウムを意識しはじめる時期でもあります。",l:["life","nutri","hokatsu","echo"]},
+ {to:27,h:"鉄と体重を気にかける",s:"貧血と体重増加が出やすいころ。血糖の検査もあります。産み方について考えはじめてもいい時期です。",l:["nutri","record","birth","weight"]},
  {to:32,h:"準備をはじめる",s:"後期に入りました。胎動カウントを習慣に。入院バッグは早産に備えて34週までにそろえておくと安心です。",l:["kick","prep","phase","danger"]},
- {to:41,h:"いつ来てもいいように",s:"正期産が近づきました。陣痛と破水の見分け方、産院の電話番号、産後の手続き。この4つを押さえておけば大丈夫。",l:["labor","prep","after","danger"]}
+ {to:41,h:"いつ来てもいいように",s:"正期産が近づきました。陣痛と破水の見分け方、産院の電話番号、産後の手続き。この4つを押さえておけば大丈夫。",l:["labor","contact","after","prep"]}
 ];
 
 var unfolded={};
@@ -1543,6 +1769,12 @@ function LSet(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
     qs.push({t:v,done:false});LSet("premam-q",qs);$("#qNew").value="";drawQ();
   });
   $("#qNew").addEventListener("keydown",function(e){if(e.key==="Enter")$("#qAdd").click();});
+  document.addEventListener("click",function(e){
+    var b=e.target.closest(".askadd");if(!b||b.disabled)return;
+    var t=b.dataset.q;if(!t)return;
+    qs.push({t:t+"（食べていい？してもいい？）",done:false});LSet("premam-q",qs);drawQ();
+    b.textContent="質問メモに入れました";b.disabled=true;
+  });
   $("#qList").addEventListener("click",function(e){
     var d=e.target.closest("[data-d]");
     if(d){qs.splice(+d.dataset.d,1);LSet("premam-q",qs);drawQ();return;}
@@ -1619,6 +1851,75 @@ if("serviceWorker" in navigator&&navigator.serviceWorker.getRegistrations){
     rs.forEach(function(r){r.unregister();});
   }).catch(function(){});
 }
+
+/* ---- night mode ---- */
+(function(){
+  var t=null;try{t=localStorage.getItem("premam-theme");}catch(e){}
+  function set(v,save){
+    document.documentElement.setAttribute("data-theme",v);
+    $("#themeBtn").innerHTML=(v==="dark")?"&#9728;&#65039; ひる":"&#127769; よる";
+    var mt=document.querySelector('meta[name="theme-color"]');
+    if(mt)mt.setAttribute("content",v==="dark"?"#5A3444":"#FF9EBB");
+    if(save){try{localStorage.setItem("premam-theme",v);}catch(e){}}
+  }
+  set(t||"light",false);
+  $("#themeBtn").addEventListener("click",function(){
+    set(document.documentElement.getAttribute("data-theme")==="dark"?"light":"dark",true);
+  });
+})();
+
+/* ---- backup / handoff ---- */
+(function(){
+  var KEYS=["premam-due","premam-contact","premam-q","premam-rec","premam-kick","premam-check","premam-size","premam-theme"];
+  $("#bkOut").addEventListener("click",function(){
+    var o={};
+    KEYS.forEach(function(k){try{var v=localStorage.getItem(k);if(v!==null)o[k]=v;}catch(e){}});
+    $("#bkText").value="PREMAM1:"+btoa(unescape(encodeURIComponent(JSON.stringify(o))));
+  });
+  $("#bkCopy").addEventListener("click",function(){
+    var t=$("#bkText");if(!t.value){alert("先に書き出してください");return;}
+    t.select();
+    if(navigator.clipboard)navigator.clipboard.writeText(t.value);
+    else document.execCommand("copy");
+    $("#bkCopy").textContent="コピーしました";
+    setTimeout(function(){$("#bkCopy").textContent="コピー";},1500);
+  });
+  $("#bkIn").addEventListener("click",function(){
+    var v=$("#bkText").value.trim();
+    if(v.indexOf("PREMAM1:")!==0){alert("書き出した文字列を貼りつけてください");return;}
+    if(!confirm("この端末の記録を、貼りつけた内容で上書きします。よろしいですか？"))return;
+    try{
+      var o=JSON.parse(decodeURIComponent(escape(atob(v.slice(8)))));
+      Object.keys(o).forEach(function(k){if(KEYS.indexOf(k)>=0)localStorage.setItem(k,o[k]);});
+      alert("読み込みました。画面を更新します。");
+      location.reload();
+    }catch(e){alert("読み込めませんでした。文字列が途中で切れていないか確認してください。");}
+  });
+})();
+
+/* ---- text size ---- */
+(function(){
+  var s=null;try{s=localStorage.getItem("premam-size");}catch(e){}
+  function set(v,save){
+    document.documentElement.setAttribute("data-size",v);
+    Array.prototype.forEach.call(document.querySelectorAll(".tools button"),function(b){
+      b.setAttribute("aria-pressed",b.dataset.size===v);});
+    if(save){try{localStorage.setItem("premam-size",v);}catch(e){}}
+  }
+  set(s||"m",false);
+  document.querySelector(".tools").addEventListener("click",function(e){
+    var b=e.target.closest("button[data-size]");if(!b)return;set(b.dataset.size,true);
+  });
+})();
+
+/* ---- back to top ---- */
+(function(){
+  var btn=$("#toTop");
+  window.addEventListener("scroll",function(){
+    btn.classList.toggle("on",window.scrollY>700);
+  },{passive:true});
+  btn.addEventListener("click",function(){window.scrollTo({top:0,behavior:"smooth"});});
+})();
 
 /* ---- kick counter ---- */
 (function(){
