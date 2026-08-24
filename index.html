@@ -245,6 +245,22 @@ footer{margin-top:50px;padding:22px 0 0;border-top:2px dashed var(--line);font-s
 .rectable td{padding:7px 8px;border-bottom:1px dashed var(--line);color:var(--ink-mid);white-space:nowrap}
 .rectable .x{color:var(--ink-soft);cursor:pointer;background:none;border:none;font-size:14px}
 
+/* --- setup list --- */
+.setup{background:var(--card);border-radius:var(--r);box-shadow:var(--sh);overflow:hidden}
+.setup a{display:flex;align-items:center;gap:11px;padding:13px 15px;text-decoration:none;
+  border-bottom:1px dashed var(--line);color:inherit}
+.setup a:last-child{border-bottom:none}
+.setup a:hover,.setup a:focus-visible{background:var(--pink-bg)}
+.setup .n{flex:0 0 auto;width:26px;height:26px;border-radius:50%;background:var(--pink-l);color:var(--pink-d);
+  font-family:"Quicksand",sans-serif;font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center}
+.setup .tx{flex:1;min-width:0}
+.setup .tx b{display:block;font-family:"Zen Maru Gothic",sans-serif;font-size:14px;color:var(--ink);line-height:1.4}
+.setup .tx span{display:block;font-size:11.5px;color:var(--ink-soft);line-height:1.55;margin-top:1px}
+.setup .st{flex:0 0 auto;font-size:10.5px;font-weight:700;padding:4px 10px;border-radius:100px;white-space:nowrap}
+.setup .st.done{background:var(--mint-bg);color:var(--mint)}
+.setup .st.todo{background:var(--amber-bg);color:var(--amber)}
+.setup .st.any{background:var(--lav-bg);color:var(--lav)}
+
 /* --- site search --- */
 .menu-s{padding:10px 18px 12px;flex:0 0 auto;border-bottom:2px dashed var(--line)}
 .menu-s .search input{font-size:16px;padding:12px 14px 12px 40px}
@@ -668,6 +684,14 @@ nav.jump a.off{opacity:.45}
   </div>
 
   <div class="nowcard" id="nowcard"></div>
+
+  <section id="setup" data-from="0" data-to="42">
+    <span class="eyebrow">さいしょに</span>
+    <h2>入力するところ</h2>
+    <p class="sub">この手帳で入力できる場所は13か所あります。全部やる必要はありません。<b>まず「予定日」だけ入れれば、あとは自動で回ります。</b></p>
+    <div class="setup" id="setupBody"></div>
+    <div class="note calm" style="margin-top:10px">入力したものは<b>この端末の中だけ</b>に保存されます。サーバーには何も送られません。もう1台と共有したいときは「データのひきつぎ」から。</div>
+  </section>
 
   <div class="gdiv" data-g="1"><span class="gd-n">01</span><div><b>まいにち使う</b><span>毎日ひらくところ</span></div></div>
 
@@ -2070,7 +2094,7 @@ makeFinder(LIFE,CL,{chips:"#chipsL",items:"#itemsL",count:"#countL",q:"#qL",quic
 renderDial();
 
 /* ---- week-aware UI ---- */
-var SECT_LABEL={"food": "これ食べてええ？", "life": "これしてええ？", "recipe": "レシピ", "caffeine": "カフェイン計算", "body": "しんどいときの手あて", "danger": "危険サイン", "contact": "電話するところ", "phase": "時期別ガイド", "fuan": "不安のこと", "oops": "やっちゃったとき", "count": "週数の数え方", "limits": "書いていないこと", "tips": "服と細かいこと", "backup": "データのひきつぎ", "nutri": "栄養", "fish": "おさかな", "salt": "塩分の早見表", "weight": "体重の目安", "test": "健診と検査", "echo": "エコー用語", "record": "体重と血圧の記録", "kick": "胎動カウント", "money": "もらえるお金", "cost": "実際にいくら要る", "todo": "手続きの順番", "hokatsu": "保活", "edu": "教育費", "birth": "産み方の選択", "kinkyu": "入院になったら", "prep": "用意するもの", "timer": "陣痛タイマー", "labor": "お産のサイン", "after": "産後にやること", "baby1m": "最初の1か月", "name": "名づけと出生届", "around": "まわりのこと", "papa": "パパへ"};
+var SECT_LABEL={"setup":"入力するところ","food": "これ食べてええ？", "life": "これしてええ？", "recipe": "レシピ", "caffeine": "カフェイン計算", "body": "しんどいときの手あて", "danger": "危険サイン", "contact": "電話するところ", "phase": "時期別ガイド", "fuan": "不安のこと", "oops": "やっちゃったとき", "count": "週数の数え方", "limits": "書いていないこと", "tips": "服と細かいこと", "backup": "データのひきつぎ", "nutri": "栄養", "fish": "おさかな", "salt": "塩分の早見表", "weight": "体重の目安", "test": "健診と検査", "echo": "エコー用語", "record": "体重と血圧の記録", "kick": "胎動カウント", "money": "もらえるお金", "cost": "実際にいくら要る", "todo": "手続きの順番", "hokatsu": "保活", "edu": "教育費", "birth": "産み方の選択", "kinkyu": "入院になったら", "prep": "用意するもの", "timer": "陣痛タイマー", "labor": "お産のサイン", "after": "産後にやること", "baby1m": "最初の1か月", "name": "名づけと出生届", "around": "まわりのこと", "papa": "パパへ"};
 
 var TOPPICKS=[
  {to:3,h:"まだ、数えはじめの時期",s:"0〜3週は最終月経から数えた期間で、この時点ではまだ妊娠が成立していないか、着床したばかりです。検査薬が反応するのは4週から。いま知っておくといいのは、数え方と葉酸のことだけ。",l:["count","food","fuan","limits"]},
@@ -2425,9 +2449,53 @@ if("serviceWorker" in navigator&&navigator.serviceWorker.getRegistrations){
   draw();
 })();
 
+/* ---- setup list ---- */
+var SETUP=[
+ {id:"dial",t:"予定日",s:"これを入れると週数とカウントダウンが自動になります",k:"premam-due"},
+ {id:"weight",t:"身長と妊娠前の体重",s:"増えていい範囲を計算します",k:"__wh"},
+ {id:"contact",t:"産院の電話番号",s:"登録するとタップで発信できます",k:"premam-contact"},
+ {id:"contact",t:"健診で聞きたいことメモ",s:"思いついたときに足しておく",k:"premam-q"},
+ {id:"record",t:"体重と血圧",s:"健診のたびに。グラフになります",k:"premam-rec"},
+ {id:"kick",t:"胎動カウント",s:"28週ごろから、1日1回",k:"premam-kick",from:27},
+ {id:"caffeine",t:"飲んだもの",s:"タップするだけ。今日の合計が出ます",k:"__any"},
+ {id:"prep",t:"用意するもののチェック",s:"そろえたものをタップ",k:"premam-check",from:26},
+ {id:"timer",t:"陣痛タイマー",s:"本番用。押すだけ",k:"__any",from:32},
+ {id:"food",t:"たべもの・くらしの検索",s:"食材名や「温泉」などを入力",k:"__any"},
+ {id:"backup",t:"データのひきつぎ",s:"もう1台に送る",k:"__any"},
+ {id:"setup",t:"文字サイズ・よるモード",s:"画面いちばん上のボタンから",k:"__any"}
+];
+function refreshSetup(){
+  var box=document.getElementById("setupBody");if(!box)return;
+  var w=+$("#wk").value;
+  box.innerHTML=SETUP.map(function(x,i){
+    var st='<span class="st any">いつでも</span>';
+    if(x.k==="__wh"){
+      var ok=($("#ht")&&$("#ht").value&&$("#pw")&&$("#pw").value);
+      st=ok?'<span class="st done">すみ</span>':'<span class="st todo">まだ</span>';
+    }else if(x.k!=="__any"){
+      var v=null;try{v=localStorage.getItem(x.k);}catch(e){}
+      var has=!!v&&v!=="{}"&&v!=="[]"&&v!=="null";
+      if(has&&x.k==="premam-contact"){try{var o=JSON.parse(v);has=!!(o.day||o.night||o.name);}catch(e){}}
+      st=has?'<span class="st done">すみ</span>':'<span class="st todo">まだ</span>';
+    }
+    if(x.from&&w<x.from)st='<span class="st any">'+x.from+"週から</span>";
+    return '<a href="#'+x.id+'"><span class="n">'+(i+1)+'</span><span class="tx"><b>'+x.t+
+      "</b><span>"+x.s+"</span></span>"+st+"</a>";
+  }).join("");
+}
+(function(){
+  var t=null;
+  function later(){clearTimeout(t);t=setTimeout(refreshSetup,220);}
+  document.addEventListener("click",later,true);
+  document.addEventListener("change",later,true);
+  document.addEventListener("input",later,true);
+  window.addEventListener("focus",later);
+  refreshSetup();
+})();
+
 /* ---- menu ---- */
-var MENU_GROUPS=[["まいにち使う", ["food", "life", "recipe", "caffeine"]], ["からだとこころ", ["body", "danger", "contact", "phase", "fuan", "oops"]], ["知っておくこと", ["count", "limits", "tips", "backup"]], ["たべかたと体重", ["nutri", "fish", "salt", "weight"]], ["けんしんときろく", ["test", "echo", "record", "kick"]], ["おかねと手続き", ["money", "cost", "todo", "hokatsu", "edu"]], ["おさんにむけて", ["birth", "kinkyu", "prep", "timer", "labor"]], ["うまれたあと", ["after", "baby1m", "name", "around", "papa"]]];
-var MENU_LAB={"food": "これ食べてええ？", "life": "これしてええ？", "recipe": "レシピ", "caffeine": "カフェイン計算", "body": "しんどいときの手あて", "danger": "危険サイン", "contact": "電話するところ", "phase": "時期別ガイド", "fuan": "不安のこと", "oops": "やっちゃったとき", "count": "週数の数え方", "limits": "書いていないこと", "tips": "服と細かいこと", "backup": "データのひきつぎ", "nutri": "栄養", "fish": "おさかな", "salt": "塩分の早見表", "weight": "体重の目安", "test": "健診と検査", "echo": "エコー用語", "record": "体重と血圧の記録", "kick": "胎動カウント", "money": "もらえるお金", "cost": "実際にいくら要る", "todo": "手続きの順番", "hokatsu": "保活", "edu": "教育費", "birth": "産み方の選択", "kinkyu": "入院になったら", "prep": "用意するもの", "timer": "陣痛タイマー", "labor": "お産のサイン", "after": "産後にやること", "baby1m": "最初の1か月", "name": "名づけと出生届", "around": "まわりのこと", "papa": "パパへ"};
+var MENU_GROUPS=[["まいにち使う", ["setup", "food", "life", "recipe", "caffeine"]], ["からだとこころ", ["body", "danger", "contact", "phase", "fuan", "oops"]], ["知っておくこと", ["count", "limits", "tips", "backup"]], ["たべかたと体重", ["nutri", "fish", "salt", "weight"]], ["けんしんときろく", ["test", "echo", "record", "kick"]], ["おかねと手続き", ["money", "cost", "todo", "hokatsu", "edu"]], ["おさんにむけて", ["birth", "kinkyu", "prep", "timer", "labor"]], ["うまれたあと", ["after", "baby1m", "name", "around", "papa"]]];
+var MENU_LAB={"setup":"入力するところ","food": "これ食べてええ？", "life": "これしてええ？", "recipe": "レシピ", "caffeine": "カフェイン計算", "body": "しんどいときの手あて", "danger": "危険サイン", "contact": "電話するところ", "phase": "時期別ガイド", "fuan": "不安のこと", "oops": "やっちゃったとき", "count": "週数の数え方", "limits": "書いていないこと", "tips": "服と細かいこと", "backup": "データのひきつぎ", "nutri": "栄養", "fish": "おさかな", "salt": "塩分の早見表", "weight": "体重の目安", "test": "健診と検査", "echo": "エコー用語", "record": "体重と血圧の記録", "kick": "胎動カウント", "money": "もらえるお金", "cost": "実際にいくら要る", "todo": "手続きの順番", "hokatsu": "保活", "edu": "教育費", "birth": "産み方の選択", "kinkyu": "入院になったら", "prep": "用意するもの", "timer": "陣痛タイマー", "labor": "お産のサイン", "after": "産後にやること", "baby1m": "最初の1か月", "name": "名づけと出生届", "around": "まわりのこと", "papa": "パパへ"};
 (function(){
   var m=$("#menu"),hits=[];
 
