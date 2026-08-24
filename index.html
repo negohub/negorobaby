@@ -89,6 +89,9 @@ input[type=range]:focus-visible{outline:3px solid var(--lav);outline-offset:4px;
 .baby-emoji{font-size:30px;line-height:1;flex:0 0 auto}
 .baby-txt{font-size:12.5px;line-height:1.7;color:var(--ink-mid)}
 .baby-txt b{color:var(--pink-d);display:block;font-family:"Zen Maru Gothic",sans-serif;font-size:14px}
+.baby-m{display:block;margin-top:5px;padding-top:5px;border-top:1px dashed rgba(214,72,111,.25);color:var(--ink-soft)}
+html[data-size="l"] .baby-m,html[data-size="xl"] .baby-m{font-size:inherit}
+.baby{align-items:flex-start}
 .dial-out{margin-top:12px;font-size:13px;line-height:1.85;color:var(--ink-mid)}
 .dial-focus{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
 .tag{font-size:11.5px;font-weight:700;padding:5px 12px;border-radius:100px;background:var(--mint-bg);color:var(--mint)}
@@ -235,6 +238,82 @@ footer{margin-top:50px;padding:22px 0 0;border-top:2px dashed var(--line);font-s
 .rectable td{padding:7px 8px;border-bottom:1px dashed var(--line);color:var(--ink-mid);white-space:nowrap}
 .rectable .x{color:var(--ink-soft);cursor:pointer;background:none;border:none;font-size:14px}
 
+/* --- site search --- */
+.menu-s{padding:10px 18px 12px;flex:0 0 auto;border-bottom:2px dashed var(--line)}
+.menu-s .search input{font-size:16px;padding:12px 14px 12px 40px}
+.sr-none{text-align:center;color:var(--ink-soft);font-size:13px;padding:26px 10px;line-height:1.8}
+.sr-h{font-size:11px;font-weight:700;color:var(--pink);letter-spacing:.1em;margin:4px 2px 8px}
+.sr{display:block;background:var(--card);border-radius:14px;padding:12px 14px;margin-bottom:7px;
+  text-decoration:none;box-shadow:var(--sh);cursor:pointer;border:none;width:100%;text-align:left;font-family:inherit}
+.sr:hover,.sr:focus-visible{outline:2px solid var(--pink)}
+.sr .sr-w{display:block;font-size:10.5px;color:var(--pink-d);font-weight:700;letter-spacing:.05em;margin-bottom:2px}
+.sr .sr-t{display:block;font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:14px;color:var(--ink);line-height:1.45}
+.sr .sr-b{display:block;font-size:11.5px;color:var(--ink-soft);line-height:1.6;margin-top:3px;
+  overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.sr .sr-v{display:inline-block;font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:100px;margin-left:6px;vertical-align:middle}
+.sr-v.best{background:var(--mint-bg);color:var(--mint)}
+.sr-v.ok{background:var(--lav-bg);color:var(--lav)}
+.sr-v.hold{background:var(--amber-bg);color:var(--amber)}
+.sr-v.stop{background:var(--red-bg);color:var(--red)}
+.hit{animation:hitfade 2.2s ease}
+@keyframes hitfade{0%,55%{box-shadow:0 0 0 3px var(--pink)}100%{box-shadow:var(--sh)}}
+
+/* --- countdown --- */
+.cd{margin-top:12px;background:linear-gradient(135deg,#FFE9F0,#FFF6F9);border:2px solid var(--pink-l);
+  border-radius:20px;padding:15px 16px}
+html[data-theme="dark"] .cd{background:linear-gradient(135deg,#3B2B33,#2A2029)}
+.cd-top{display:flex;align-items:flex-end;gap:8px}
+.cd-lab{font-size:11.5px;font-weight:700;color:var(--pink-d);letter-spacing:.08em;flex:1}
+.cd-big{font-family:"Quicksand",sans-serif;font-weight:700;font-size:46px;line-height:.95;color:var(--pink-d)}
+.cd-unit{font-size:14px;color:var(--ink-mid);margin-left:2px;font-weight:700}
+.cd-sub{font-size:12px;color:var(--ink-mid);margin-top:6px;line-height:1.7}
+.cd-sub b{color:var(--pink-d)}
+.cd-track{position:relative;height:12px;background:#fff;border-radius:8px;margin:14px 0 5px;overflow:hidden;
+  box-shadow:inset 0 1px 3px rgba(214,72,111,.12)}
+html[data-theme="dark"] .cd-track{background:var(--card)}
+.cd-fill{height:100%;border-radius:8px;background:linear-gradient(90deg,#FFC2D6,#FF9EBB 55%,#F5749C);transition:width .3s}
+.cd-mark{position:absolute;top:0;bottom:0;width:2px;background:rgba(214,72,111,.28)}
+.cd-scale{display:flex;justify-content:space-between;font-family:"Quicksand",sans-serif;font-weight:700;
+  font-size:9.5px;color:var(--ink-soft)}
+.cd-next{margin-top:10px;background:#fff;border-radius:13px;padding:9px 12px;font-size:12px;color:var(--ink-mid);line-height:1.6}
+html[data-theme="dark"] .cd-next{background:var(--card)}
+.cd-next b{color:var(--pink-d);font-family:"Quicksand",sans-serif;font-size:14px}
+.cd-set{margin-top:12px;background:var(--pink-l);border-radius:14px;padding:12px 14px;font-size:12.5px;color:var(--ink-mid);line-height:1.7}
+
+/* --- bottom bar + menu --- */
+nav.jump{padding:8px 8px calc(8px + env(safe-area-inset-bottom));gap:6px;justify-content:space-between;overflow:visible}
+nav.jump a,nav.jump button{flex:1 1 0;min-width:0;text-align:center;font-family:"Zen Maru Gothic",sans-serif;
+  font-weight:700;font-size:11.5px;padding:9px 4px;border-radius:14px;background:var(--pink-bg);color:var(--ink-mid);
+  border:none;cursor:pointer;text-decoration:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+nav.jump button#menuBtn{background:var(--pink);color:#fff;flex:0 0 auto;padding:9px 14px}
+nav.jump button#menuBtn span{margin-right:5px}
+nav.jump a.urgent{background:var(--red-bg);color:var(--red)}
+nav.jump a:hover,nav.jump a:focus-visible{background:var(--pink);color:#fff}
+nav.jump a.urgent:hover{background:var(--red);color:#fff}
+
+#menu{position:fixed;inset:0;z-index:80;background:rgba(74,58,66,.45);display:flex;align-items:flex-end}
+#menu[hidden]{display:none}
+.menu-in{width:100%;max-height:86vh;background:var(--pink-bg);border-radius:26px 26px 0 0;display:flex;flex-direction:column;
+  box-shadow:0 -10px 40px rgba(74,58,66,.3)}
+.menu-h{display:flex;align-items:center;padding:16px 18px 10px;border-bottom:2px dashed var(--line);flex:0 0 auto}
+.menu-h b{font-family:"Zen Maru Gothic",sans-serif;font-size:19px;color:var(--ink);flex:1}
+.menu-h button{width:36px;height:36px;border-radius:50%;border:none;background:var(--pink-l);color:var(--pink-d);
+  font-size:20px;cursor:pointer;line-height:1}
+.menu-body{overflow-y:auto;padding:12px 14px calc(20px + env(safe-area-inset-bottom));-webkit-overflow-scrolling:touch}
+.mg{margin-bottom:14px}
+.mg-h{display:flex;align-items:baseline;gap:8px;margin:0 2px 7px}
+.mg-h i{font-style:normal;font-family:"Quicksand",sans-serif;font-weight:700;font-size:15px;color:var(--pink);opacity:.7}
+.mg-h b{font-family:"Zen Maru Gothic",sans-serif;font-size:13.5px;color:var(--ink)}
+.mg-l{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.mg-l a{display:block;background:var(--card);border-radius:13px;padding:11px 12px;text-decoration:none;
+  font-size:12.5px;font-weight:700;color:var(--ink-mid);box-shadow:var(--sh);line-height:1.4;position:relative}
+.mg-l a.now{background:var(--pink);color:#fff}
+.mg-l a.now::after{content:"いま";position:absolute;top:-5px;right:-2px;background:var(--pink-d);color:#fff;
+  font-size:9px;padding:2px 7px;border-radius:100px}
+.mg-l a.dim{opacity:.42}
+.mg-l a.urg{background:var(--red-bg);color:var(--red)}
+@media(min-width:620px){.mg-l{grid-template-columns:repeat(3,1fr)}}
+
 /* --- big action button --- */
 .bigbtn{width:100%;padding:22px;font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:19px;
   color:#fff;background:var(--pink);border:none;border-radius:20px;cursor:pointer;line-height:1.4}
@@ -326,8 +405,94 @@ html[data-theme="dark"] mark{background:#5C4A1E;color:#FFE9A8}
 @media(min-width:520px){.legend-mini .lg span{display:block;font-size:10.5px}}
 
 /* --- text size --- */
-html[data-size="l"]{font-size:112.5%}
-html[data-size="xl"]{font-size:125%}
+html[data-size="l"] body{font-size:17.1px}
+html[data-size="l"] h2{font-size:25.1px}
+html[data-size="l"] .sub,
+html[data-size="l"] .card p,
+html[data-size="l"] .card li,
+html[data-size="l"] .acc-b p,
+html[data-size="l"] .empty,
+html[data-size="l"] .qlist label,
+html[data-size="l"] .ck label{font-size:14.8px}
+html[data-size="l"] .card h3,
+html[data-size="l"] .ck h3{font-size:17.7px}
+html[data-size="l"] .acc summary,
+html[data-size="l"] .i-name,
+html[data-size="l"] .cattile b{font-size:16.5px}
+html[data-size="l"] .i-body dl,
+html[data-size="l"] .i-body dd,
+html[data-size="l"] .note,
+html[data-size="l"] .tbl th,
+html[data-size="l"] .tbl td,
+html[data-size="l"] .chip,
+html[data-size="l"] .mg-l a,
+html[data-size="l"] .calc-out,
+html[data-size="l"] .verdict,
+html[data-size="l"] .askbox{font-size:14.2px}
+html[data-size="l"] .i-sum,
+html[data-size="l"] .cd-sub,
+html[data-size="l"] .cd-next,
+html[data-size="l"] .rectable td,
+html[data-size="l"] .baby-txt,
+html[data-size="l"] .dial-out{font-size:13.7px}
+html[data-size="l"] .badge,
+html[data-size="l"] .tag,
+html[data-size="l"] .count,
+html[data-size="l"] .gdiv span,
+html[data-size="l"] footer{font-size:13.1px}
+html[data-size="l"] .i-cat,
+html[data-size="l"] .eyebrow,
+html[data-size="l"] .flabel,
+html[data-size="l"] .i-body dt{font-size:12px}
+html[data-size="l"] .gdiv b,
+html[data-size="l"] .mg-h b{font-size:17.1px}
+html[data-size="l"] nav.jump a,
+html[data-size="l"] nav.jump button{font-size:13.1px}
+
+html[data-size="xl"] body{font-size:19.5px}
+html[data-size="xl"] h2{font-size:28.6px}
+html[data-size="xl"] .sub,
+html[data-size="xl"] .card p,
+html[data-size="xl"] .card li,
+html[data-size="xl"] .acc-b p,
+html[data-size="xl"] .empty,
+html[data-size="xl"] .qlist label,
+html[data-size="xl"] .ck label{font-size:16.9px}
+html[data-size="xl"] .card h3,
+html[data-size="xl"] .ck h3{font-size:20.2px}
+html[data-size="xl"] .acc summary,
+html[data-size="xl"] .i-name,
+html[data-size="xl"] .cattile b{font-size:18.9px}
+html[data-size="xl"] .i-body dl,
+html[data-size="xl"] .i-body dd,
+html[data-size="xl"] .note,
+html[data-size="xl"] .tbl th,
+html[data-size="xl"] .tbl td,
+html[data-size="xl"] .chip,
+html[data-size="xl"] .mg-l a,
+html[data-size="xl"] .calc-out,
+html[data-size="xl"] .verdict,
+html[data-size="xl"] .askbox{font-size:16.2px}
+html[data-size="xl"] .i-sum,
+html[data-size="xl"] .cd-sub,
+html[data-size="xl"] .cd-next,
+html[data-size="xl"] .rectable td,
+html[data-size="xl"] .baby-txt,
+html[data-size="xl"] .dial-out{font-size:15.6px}
+html[data-size="xl"] .badge,
+html[data-size="xl"] .tag,
+html[data-size="xl"] .count,
+html[data-size="xl"] .gdiv span,
+html[data-size="xl"] footer{font-size:15px}
+html[data-size="xl"] .i-cat,
+html[data-size="xl"] .eyebrow,
+html[data-size="xl"] .flabel,
+html[data-size="xl"] .i-body dt{font-size:13.7px}
+html[data-size="xl"] .gdiv b,
+html[data-size="xl"] .mg-h b{font-size:19.5px}
+html[data-size="xl"] nav.jump a,
+html[data-size="xl"] nav.jump button{font-size:15px}
+
 .tools{display:flex;align-items:center;gap:6px;margin-top:14px;position:relative;z-index:1}
 .tools span{font-size:11px;color:rgba(255,255,255,.9);font-weight:700;letter-spacing:.06em}
 .tools button{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;border:2px solid rgba(255,255,255,.55);
@@ -336,7 +501,7 @@ html[data-size="xl"]{font-size:125%}
 .tools .s1{font-size:11px}.tools .s2{font-size:13px}.tools .s3{font-size:15px}
 
 /* --- back to top --- */
-#toTop{position:fixed;right:14px;bottom:70px;z-index:45;width:46px;height:46px;border-radius:50%;
+#toTop{position:fixed;right:14px;bottom:calc(74px + env(safe-area-inset-bottom));z-index:45;width:46px;height:46px;border-radius:50%;
   background:#fff;border:2px solid var(--pink-l);box-shadow:0 6px 18px rgba(214,72,111,.25);
   color:var(--pink-d);font-size:19px;cursor:pointer;display:none;align-items:center;justify-content:center;padding:0}
 #toTop.on{display:flex}
@@ -451,25 +616,25 @@ nav.jump a.off{opacity:.45}
     <div class="brand">ぷれまむ手帳<em>&#9825;</em><small>にんしんのこと、ぜんぶここに</small></div>
     <div class="tools" role="group" aria-label="文字サイズ">
       <span>もじの大きさ</span>
-      <button class="s1" data-size="m" aria-pressed="true">小</button>
-      <button class="s2" data-size="l" aria-pressed="false">中</button>
-      <button class="s3" data-size="xl" aria-pressed="false">大</button>
+      <button class="s1" data-size="m" aria-pressed="true">ふつう</button>
+      <button class="s2" data-size="l" aria-pressed="false">大きめ</button>
+      <button class="s3" data-size="xl" aria-pressed="false">もっと大</button>
       <button id="themeBtn" style="margin-left:6px" aria-label="表示の切り替え">&#127769; よる</button>
     </div>
-    <p class="lede">食べもののこと、くらしのこと、からだのこと、お金と手続きのこと。妊娠週数を合わせると、いまのふたりに必要なページが開きます。</p>
+    <p class="lede">食べもののこと、からだのこと、お金と手続きのこと。予定日を登録すると、いまの週数に合わせて必要なページが前に出ます。ぜんぶ見たいときは、下の「もくじ」から。</p>
   </div>
 </header>
 
 <div class="wrap">
 
   <div class="dial" id="dial">
-    <div class="dial-label">いま何週？</div>
+    <div class="dial-label">いま何週？　<span style="font-weight:500;color:var(--ink-soft);letter-spacing:0">（最終月経の初日＝0週0日）</span></div>
     <div class="dial-row">
       <div><span class="dial-num" id="wkNum">5</span><span class="dial-unit">週</span></div>
       <div class="dial-phase"><b id="wkPhase">妊娠初期</b><span id="wkMonth">2か月</span></div>
     </div>
-    <input type="range" id="wk" min="4" max="41" value="5" aria-label="妊娠週数">
-    <div class="dial-scale"><span>4w</span><span>16w</span><span>28w</span><span>41w</span></div>
+    <input type="range" id="wk" min="0" max="42" value="5" aria-label="妊娠週数">
+    <div class="dial-scale"><span>0w</span><span>16w</span><span>28w</span><span>42w</span></div>
     <div class="baby"><div class="baby-emoji" id="babyEmoji">&#127827;</div><div class="baby-txt" id="babyTxt"></div></div>
     <div class="dial-out" id="wkOut"></div>
     <div class="dial-focus" id="wkTags"></div>
@@ -487,14 +652,14 @@ nav.jump a.off{opacity:.45}
         <button class="btns" id="dueClear">消す</button>
       </div>
     </details>
-    <div class="today" id="todayBox" style="display:none"></div>
+    <div id="todayBox"></div>
   </div>
 
   <div class="nowcard" id="nowcard"></div>
 
-  <div class="gdiv"><span class="gd-n">01</span><div><b>まいにち使う</b><span>毎日ひらくところ</span></div></div>
+  <div class="gdiv" data-g="1"><span class="gd-n">01</span><div><b>まいにち使う</b><span>毎日ひらくところ</span></div></div>
 
-  <section id="food" data-from="4" data-to="41">
+  <section id="food" data-from="0" data-to="41">
     <span class="eyebrow">たべもの</span>
     <h2>これ、食べてええ？</h2>
     <p class="sub">200品目。カテゴリを選ぶか、検索窓に食材名を入れてください。答えは1行で出ます。ひらがな・カタカナ・漢字どれでもOK。</p>
@@ -516,7 +681,7 @@ nav.jump a.off{opacity:.45}
     <div id="itemsF" style="margin-top:12px"></div>
   </section>
 
-  <section id="life" data-from="4" data-to="41">
+  <section id="life" data-from="0" data-to="41">
     <span class="eyebrow">くらし</span>
     <h2>これ、してええ？</h2>
     <p class="sub">お薬、レントゲン、温泉、旅行、運動、ヘアカラー、猫。カテゴリを選ぶか、検索窓に入れてください。</p>
@@ -532,14 +697,101 @@ nav.jump a.off{opacity:.45}
     <div id="itemsL" style="margin-top:12px"></div>
   </section>
 
-  <section id="recipe" data-from="4" data-to="41">
+  <section id="recipe" data-from="0" data-to="41">
     <span class="eyebrow">レシピ</span>
     <h2>じゃあ、何つくる</h2>
     <p class="sub">「食べていいもの」がわかっても、作るのは別問題。つわり期に通るものと、鉄・カルシウムが自然に入るものを集めました。全部10分前後でできます。</p>
     <div id="recipeBody"></div>
   </section>
 
-  <section id="limits" data-from="4" data-to="41">
+  <section id="caffeine" data-from="0" data-to="41">
+    <span class="eyebrow">カフェイン</span>
+    <h2>今日、どれくらい？</h2>
+    <p class="sub">飲んだものをタップすると合計が出ます。目安は1日200mgまで。日付が変わると自動でリセットされます。</p>
+    <div class="card">
+      <div class="bigread" id="cafNum">0</div>
+      <div class="biglab">mg / 200mg</div>
+      <div class="bar"><i id="cafBar" style="width:0%"></i></div>
+      <div class="verdict wait" id="cafMsg" style="margin-top:10px">まだ何も飲んでいません。</div>
+      <div class="cafgrid" id="cafGrid"></div>
+      <button class="btns" id="cafReset" style="width:100%;margin-top:10px">今日の記録をリセット</button>
+    </div>
+    <div class="note calm">数値は食品成分表をもとにした1杯あたりの目安です。同じコーヒーでも淹れ方で倍近く変わるので、きっちり計算するというより「だいたいこのへん」を掴むために使ってください。カフェインレスなら何杯でも大丈夫です。</div>
+  </section>
+
+  <div class="gdiv" data-g="2"><span class="gd-n">02</span><div><b>からだとこころ</b><span>しんどいとき・不安なとき</span></div></div>
+
+  <section id="body" data-from="0" data-to="41">
+    <span class="eyebrow">からだのこと</span>
+    <h2>しんどいときの手あて</h2>
+    <p class="sub">妊娠中に出やすい症状と、家でできる対処。がまんが美徳ではないので、つらければ産院に言ってください。薬をもらえるものも多いです。</p>
+    <div id="symBody"></div>
+  </section>
+
+  <section id="danger" data-from="0" data-to="41">
+    <span class="eyebrow">きけんサイン</span>
+    <h2>これが出たら、すぐ電話</h2>
+    <p class="sub">迷ったら電話していい。夜中でも休日でも。「大したことなかった」で終わるのがいちばんいい結果です。</p>
+    <div id="dangerBody"></div>
+  </section>
+
+  <section id="contact" data-from="0" data-to="41">
+    <span class="eyebrow">れんらくさき</span>
+    <h2>電話するところ</h2>
+    <p class="sub">入れておくと、いざというときタップで発信できます。この端末にだけ保存されるので、奥さまの端末でも登録してください。</p>
+    <div class="card">
+      <span class="flabel">産院の名前</span>
+      <div class="telrow"><input type="text" id="cName" placeholder="◯◯レディースクリニック"></div>
+      <span class="flabel">昼間の番号</span>
+      <div class="telrow"><input type="tel" id="cDay" placeholder="06-1234-5678" inputmode="tel"><a class="telcall off" id="cDayCall">発信</a></div>
+      <span class="flabel">夜間・休日の番号</span>
+      <div class="telrow"><input type="tel" id="cNight" placeholder="夜間専用があれば" inputmode="tel"><a class="telcall off" id="cNightCall">発信</a></div>
+      <span class="flabel">その他（実家・タクシー会社など）</span>
+      <div class="telrow"><input type="tel" id="cEtc" placeholder="陣痛タクシーなど" inputmode="tel"><a class="telcall off" id="cEtcCall">発信</a></div>
+      <button class="btnp" id="cSave" style="width:100%;margin-top:6px">保存する</button>
+    </div>
+    <div class="note calm">迷ったら電話していいです。産院は24時間、その電話に慣れています。「こんなことで」と思う必要はまったくありません。</div>
+
+    <h3 style="margin:22px 0 8px;font-size:17px;color:var(--ink)">健診で聞きたいことメモ</h3>
+    <p class="sub">思いついたときに入れておくと、健診の3分で全部聞けます。診察室では必ず忘れます。</p>
+    <div class="card">
+      <div class="telrow"><input type="text" id="qNew" placeholder="例：旅行に行っていいか"><button class="btnp" id="qAdd">追加</button></div>
+      <div class="qlist" id="qList"></div>
+    </div>
+  </section>
+
+  <section id="phase" data-from="0" data-to="41">
+    <span class="eyebrow">じきべつガイド</span>
+    <h2>いまは、こういう時期</h2>
+    <p class="sub">上のダイヤルと連動しています。時期で優先順位が変わります。</p>
+    <div class="tabs" id="tabs" role="tablist"></div>
+    <div id="phaseBody"></div>
+  </section>
+
+  <section id="fuan" data-from="0" data-to="41">
+    <span class="eyebrow">ふあんのこと</span>
+    <h2>あなたのせいじゃない</h2>
+    <div id="fuanBody"></div>
+    <div class="note love" style="margin-top:10px">相談先：かかりつけの産院／自治体のこども家庭センター（旧・子育て世代包括支援センター）／産後ケア事業／救急相談 #7119。どこも「こんなことで」と思われる場所ではありません。</div>
+  </section>
+
+  <section id="oops" data-from="0" data-to="41">
+    <span class="eyebrow">やっちゃった</span>
+    <h2>だいたい、大丈夫</h2>
+    <div class="note love" style="margin-bottom:10px">生ハムを1切れ。コーヒーを3杯。気づく前にお酒を飲んだ。——あとから来る不安のほうが体にこたえます。1回の出来事でリスクが跳ね上がることは、ほとんどありません。</div>
+    <div id="oopsBody"></div>
+  </section>
+
+  <div class="gdiv" data-g="3"><span class="gd-n">03</span><div><b>知っておくこと</b><span>1回読めば、あとは大丈夫</span></div></div>
+
+  <section id="count" data-from="0" data-to="41">
+    <span class="eyebrow">かぞえかた</span>
+    <h2>「5週」ってどこから？</h2>
+    <p class="sub">最初にみんなが混乱するところです。1回読めば、あとはずっとすっきりします。</p>
+    <div id="countBody"></div>
+  </section>
+
+  <section id="limits" data-from="0" data-to="41">
     <span class="eyebrow">このての使い方</span>
     <h2>ここに書いていないこと</h2>
     <p class="sub">この手帳は「よくある妊娠」を前提にまとめています。当てはまらない事情があるときは、ここの記述より主治医が優先です。</p>
@@ -547,7 +799,14 @@ nav.jump a.off{opacity:.45}
     <div class="note calm" style="margin-top:10px">情報は<b>2026年8月時点</b>のものです。制度と金額はよく変わるので、申請の前に勤務先か自治体の窓口で必ず確認してください。</div>
   </section>
 
-  <section id="backup" data-from="4" data-to="41">
+  <section id="tips" data-from="10" data-to="41">
+    <span class="eyebrow">こまごま</span>
+    <h2>服と、細かいこと</h2>
+    <p class="sub">誰も教えてくれないけど、知っておくと地味に助かること。</p>
+    <div id="tipsBody"></div>
+  </section>
+
+  <section id="backup" data-from="0" data-to="41">
     <span class="eyebrow">データのひきつぎ</span>
     <h2>もう1台に移す</h2>
     <p class="sub">記録はこの端末の中だけに保存されています。ふたりの端末で同じ内容を見たいとき、機種変するとき、ブラウザのデータを消す前に。</p>
@@ -562,68 +821,16 @@ nav.jump a.off{opacity:.45}
     </div>
   </section>
 
-  <section id="count" data-from="4" data-to="41">
-    <span class="eyebrow">かぞえかた</span>
-    <h2>「5週」ってどこから？</h2>
-    <p class="sub">最初にみんなが混乱するところです。1回読めば、あとはずっとすっきりします。</p>
-    <div id="countBody"></div>
-  </section>
+  <div class="gdiv" data-g="4"><span class="gd-n">04</span><div><b>たべかたと体重</b><span>迷わないための数字</span></div></div>
 
-  <section id="tips" data-from="10" data-to="41">
-    <span class="eyebrow">こまごま</span>
-    <h2>服と、細かいこと</h2>
-    <p class="sub">誰も教えてくれないけど、知っておくと地味に助かること。</p>
-    <div id="tipsBody"></div>
-  </section>
-
-  <div class="gdiv"><span class="gd-n">02</span><div><b>からだとこころ</b><span>しんどいとき・不安なとき</span></div></div>
-
-  <section id="body" data-from="4" data-to="41">
-    <span class="eyebrow">からだのこと</span>
-    <h2>しんどいときの手あて</h2>
-    <p class="sub">妊娠中に出やすい症状と、家でできる対処。がまんが美徳ではないので、つらければ産院に言ってください。薬をもらえるものも多いです。</p>
-    <div id="symBody"></div>
-  </section>
-
-  <section id="danger" data-from="4" data-to="41">
-    <span class="eyebrow">きけんサイン</span>
-    <h2>これが出たら、すぐ電話</h2>
-    <p class="sub">迷ったら電話していい。夜中でも休日でも。「大したことなかった」で終わるのがいちばんいい結果です。</p>
-    <div id="dangerBody"></div>
-  </section>
-
-  <section id="phase" data-from="4" data-to="41">
-    <span class="eyebrow">じきべつガイド</span>
-    <h2>いまは、こういう時期</h2>
-    <p class="sub">上のダイヤルと連動しています。時期で優先順位が変わります。</p>
-    <div class="tabs" id="tabs" role="tablist"></div>
-    <div id="phaseBody"></div>
-  </section>
-
-  <section id="fuan" data-from="4" data-to="41">
-    <span class="eyebrow">ふあんのこと</span>
-    <h2>あなたのせいじゃない</h2>
-    <div id="fuanBody"></div>
-    <div class="note love" style="margin-top:10px">相談先：かかりつけの産院／自治体のこども家庭センター（旧・子育て世代包括支援センター）／産後ケア事業／救急相談 #7119。どこも「こんなことで」と思われる場所ではありません。</div>
-  </section>
-
-  <section id="oops" data-from="4" data-to="41">
-    <span class="eyebrow">やっちゃった</span>
-    <h2>だいたい、大丈夫</h2>
-    <div class="note love" style="margin-bottom:10px">生ハムを1切れ。コーヒーを3杯。気づく前にお酒を飲んだ。——あとから来る不安のほうが体にこたえます。1回の出来事でリスクが跳ね上がることは、ほとんどありません。</div>
-    <div id="oopsBody"></div>
-  </section>
-
-  <div class="gdiv"><span class="gd-n">03</span><div><b>たべかたと体重</b><span>知っておくと迷わない</span></div></div>
-
-  <section id="nutri" data-from="4" data-to="41">
+  <section id="nutri" data-from="0" data-to="41">
     <span class="eyebrow">えいよう</span>
     <h2>足りなくなるのは、この6つ</h2>
     <p class="sub">やみくもに「バランスよく」より、不足しやすいものを狙い撃ちするほうが現実的。数字は食事摂取基準（2025年版）の目安です。</p>
     <div id="nutBody"></div>
   </section>
 
-  <section id="fish" data-from="4" data-to="41">
+  <section id="fish" data-from="0" data-to="41">
     <span class="eyebrow">おさかな</span>
     <h2>種類と量だけ見ればOK</h2>
     <p class="sub">魚は妊娠中いちばん食べてほしい食材のひとつ。制限があるのは一部の大型魚だけです。切り身1切れ＝刺身1人前＝約80g。</p>
@@ -637,6 +844,13 @@ nav.jump a.off{opacity:.45}
       </tbody>
     </table>
     <div class="note love" style="margin-top:12px"><b>魚を減らす方向に読まないでね。</b>厚労省もそう明記しています。DHA・EPA・ビタミンD・鉄は赤ちゃんの脳と体をつくる材料そのもの。種類さえ選べば週2〜3回は積極的に。</div>
+  </section>
+
+  <section id="salt" data-from="12" data-to="41">
+    <span class="eyebrow">えんぶん</span>
+    <h2>6.5gって、どれくらい？</h2>
+    <p class="sub">「1日6.5g未満」と言われてもピンときません。実際の数字で見ると、どこを削ればいいかが一目でわかります。</p>
+    <div id="saltBody"></div>
   </section>
 
   <section id="weight" data-from="8" data-to="41">
@@ -662,56 +876,9 @@ nav.jump a.off{opacity:.45}
     <div class="note calm" style="margin-top:10px">「厳格に守る根拠は必ずしも十分ではない」と学会自身が注記しています。幅として持っておく程度に。急に増えた・減ったときだけ健診で相談を。</div>
   </section>
 
-  <section id="caffeine" data-from="4" data-to="41">
-    <span class="eyebrow">カフェイン</span>
-    <h2>今日、どれくらい？</h2>
-    <p class="sub">飲んだものをタップすると合計が出ます。目安は1日200mgまで。日付が変わると自動でリセットされます。</p>
-    <div class="card">
-      <div class="bigread" id="cafNum">0</div>
-      <div class="biglab">mg / 200mg</div>
-      <div class="bar"><i id="cafBar" style="width:0%"></i></div>
-      <div class="verdict wait" id="cafMsg" style="margin-top:10px">まだ何も飲んでいません。</div>
-      <div class="cafgrid" id="cafGrid"></div>
-      <button class="btns" id="cafReset" style="width:100%;margin-top:10px">今日の記録をリセット</button>
-    </div>
-    <div class="note calm">数値は食品成分表をもとにした1杯あたりの目安です。同じコーヒーでも淹れ方で倍近く変わるので、きっちり計算するというより「だいたいこのへん」を掴むために使ってください。カフェインレスなら何杯でも大丈夫です。</div>
-  </section>
+  <div class="gdiv" data-g="5"><span class="gd-n">05</span><div><b>けんしんときろく</b><span>病院で使う・家でつける</span></div></div>
 
-  <section id="salt" data-from="16" data-to="41">
-    <span class="eyebrow">えんぶん</span>
-    <h2>6.5gって、どれくらい？</h2>
-    <p class="sub">「1日6.5g未満」と言われてもピンときません。実際の数字で見ると、どこを削ればいいかが一目でわかります。</p>
-    <div id="saltBody"></div>
-  </section>
-
-  <div class="gdiv"><span class="gd-n">04</span><div><b>びょういんのこと</b><span>健診・記録・お産の選択</span></div></div>
-
-  <section id="contact" data-from="4" data-to="41">
-    <span class="eyebrow">れんらくさき</span>
-    <h2>電話するところ</h2>
-    <p class="sub">入れておくと、いざというときタップで発信できます。この端末にだけ保存されるので、奥さまの端末でも登録してください。</p>
-    <div class="card">
-      <span class="flabel">産院の名前</span>
-      <div class="telrow"><input type="text" id="cName" placeholder="◯◯レディースクリニック"></div>
-      <span class="flabel">昼間の番号</span>
-      <div class="telrow"><input type="tel" id="cDay" placeholder="06-1234-5678" inputmode="tel"><a class="telcall off" id="cDayCall">発信</a></div>
-      <span class="flabel">夜間・休日の番号</span>
-      <div class="telrow"><input type="tel" id="cNight" placeholder="夜間専用があれば" inputmode="tel"><a class="telcall off" id="cNightCall">発信</a></div>
-      <span class="flabel">その他（実家・タクシー会社など）</span>
-      <div class="telrow"><input type="tel" id="cEtc" placeholder="陣痛タクシーなど" inputmode="tel"><a class="telcall off" id="cEtcCall">発信</a></div>
-      <button class="btnp" id="cSave" style="width:100%;margin-top:6px">保存する</button>
-    </div>
-    <div class="note calm">迷ったら電話していいです。産院は24時間、その電話に慣れています。「こんなことで」と思う必要はまったくありません。</div>
-
-    <h3 style="margin:22px 0 8px;font-size:17px;color:var(--ink)">健診で聞きたいことメモ</h3>
-    <p class="sub">思いついたときに入れておくと、健診の3分で全部聞けます。診察室では必ず忘れます。</p>
-    <div class="card">
-      <div class="telrow"><input type="text" id="qNew" placeholder="例：旅行に行っていいか"><button class="btnp" id="qAdd">追加</button></div>
-      <div class="qlist" id="qList"></div>
-    </div>
-  </section>
-
-  <section id="test" data-from="4" data-to="41">
+  <section id="test" data-from="0" data-to="41">
     <span class="eyebrow">けんしんと検査</span>
     <h2>いつ、なにを調べるの</h2>
     <p class="sub">妊婦健診は14回前後が公費補助の対象。母子健康手帳と一緒に受診票（補助券）がもらえます。</p>
@@ -759,23 +926,9 @@ nav.jump a.off{opacity:.45}
     <div class="note calm" style="margin-top:10px">しゃっくり（規則的なピクピク）は数えません。<b>基準は「何分以内か」ではなく「いつもと比べてどうか」。</b>いつもより明らかに時間がかかる、動きが減った、と感じたら、時間を待たずに産院へ電話してください。カウントは記録より安心のための習慣です。</div>
   </section>
 
-  <section id="birth" data-from="20" data-to="41">
-    <span class="eyebrow">おさんの選択</span>
-    <h2>どう産むか、を決める</h2>
-    <p class="sub">産み方に優劣はありません。どれを選んでも、選ばされても、それは「ちゃんと産んだ」ことです。決める材料だけ置いておきます。</p>
-    <div id="birthBody"></div>
-  </section>
+  <div class="gdiv" data-g="6"><span class="gd-n">06</span><div><b>おかねと手続き</b><span>申請しないともらえない</span></div></div>
 
-  <section id="kinkyu" data-from="12" data-to="41">
-    <span class="eyebrow">もしものとき</span>
-    <h2>入院になったら</h2>
-    <p class="sub">切迫流産・切迫早産は珍しくありません。急に決まることが多いので、先に知っておくだけで慌てずに済みます。</p>
-    <div id="kinkyuBody"></div>
-  </section>
-
-  <div class="gdiv"><span class="gd-n">05</span><div><b>おかねと手続き</b><span>申請しないともらえない</span></div></div>
-
-  <section id="money" data-from="4" data-to="41">
+  <section id="money" data-from="0" data-to="41">
     <span class="eyebrow">おかね</span>
     <h2>もらえるもの、ぜんぶ</h2>
     <p class="sub">申請しないともらえないものばかりです。会社員（健康保険＋雇用保険）を前提にした一覧。自営業・扶養内の場合は対象外のものがあります。</p>
@@ -791,7 +944,7 @@ nav.jump a.off{opacity:.45}
     <div class="note calm" style="margin-top:10px"><b>出ていく額より、タイミングがつらい。</b>もらえるお金は合計するとかなりの額になりますが、振り込まれるのは数か月後です。<b>現金で50〜80万円を先に用意できる状態</b>にしておくと、精神的にまったく違います。</div>
   </section>
 
-  <section id="todo" data-from="4" data-to="41">
+  <section id="todo" data-from="0" data-to="41">
     <span class="eyebrow">てつづき</span>
     <h2>いつ、なにをする</h2>
     <p class="sub">やることが多く見えますが、ほとんどは「その時期になったら案内が来る」もの。忘れると損するものだけ太字にしています。</p>
@@ -814,19 +967,27 @@ nav.jump a.off{opacity:.45}
     <div class="note calm" style="margin-top:10px">金額はすべておおよその目安です。実際の教育費は進路で大きく変わるので、いま決め打ちする必要はありません。<b>いま確実に効くのは「児童手当を使わずに別口座に貯める」だけ。</b>これで18年後に200万円台が残ります。</div>
   </section>
 
-  <div class="gdiv"><span class="gd-n">06</span><div><b>うまれるとき</b><span>後期になったら読む</span></div></div>
+  <div class="gdiv" data-g="7"><span class="gd-n">07</span><div><b>おさんにむけて</b><span>中期から少しずつ</span></div></div>
+
+  <section id="birth" data-from="20" data-to="41">
+    <span class="eyebrow">おさんの選択</span>
+    <h2>どう産むか、を決める</h2>
+    <p class="sub">産み方に優劣はありません。どれを選んでも、選ばされても、それは「ちゃんと産んだ」ことです。決める材料だけ置いておきます。</p>
+    <div id="birthBody"></div>
+  </section>
+
+  <section id="kinkyu" data-from="12" data-to="41">
+    <span class="eyebrow">もしものとき</span>
+    <h2>入院になったら</h2>
+    <p class="sub">切迫流産・切迫早産は珍しくありません。急に決まることが多いので、先に知っておくだけで慌てずに済みます。</p>
+    <div id="kinkyuBody"></div>
+  </section>
 
   <section id="prep" data-from="26" data-to="41">
     <span class="eyebrow">じゅんび</span>
     <h2>用意するものリスト</h2>
     <p class="sub">タップでチェックできます（この端末に保存されます）。全部そろえなくて大丈夫。生まれてから買い足すほうが失敗しません。</p>
     <div id="prepBody"></div>
-  </section>
-
-  <section id="labor" data-from="33" data-to="41">
-    <span class="eyebrow">おさん</span>
-    <h2>そろそろ、のサイン</h2>
-    <div id="laborBody"></div>
   </section>
 
   <section id="timer" data-from="32" data-to="41">
@@ -847,6 +1008,14 @@ nav.jump a.off{opacity:.45}
     </div>
     <div class="note warn"><b>タイマーより優先すること。</b>破水したと思ったら、間隔にかかわらずすぐ電話。出血が多い、いつもと違う強い痛みが続く、胎動が減った、これらも待たずに連絡してください。経産婦は進みが早いので、10分を待たずに向かうよう言われることがあります。</div>
   </section>
+
+  <section id="labor" data-from="33" data-to="41">
+    <span class="eyebrow">おさん</span>
+    <h2>そろそろ、のサイン</h2>
+    <div id="laborBody"></div>
+  </section>
+
+  <div class="gdiv" data-g="8"><span class="gd-n">08</span><div><b>うまれたあと</b><span>産後すぐ必要になる</span></div></div>
 
   <section id="after" data-from="29" data-to="41">
     <span class="eyebrow">さんご</span>
@@ -881,7 +1050,7 @@ nav.jump a.off{opacity:.45}
     <div id="aroundBody"></div>
   </section>
 
-  <section id="papa" data-from="4" data-to="41">
+  <section id="papa" data-from="0" data-to="41">
     <span class="eyebrow">パパへ</span>
     <h2>いちばん効くこと</h2>
     <p class="sub">「なにか手伝おうか？」より「これやっとくね」。判断のコストを渡さないのが、いちばんの支えになります。</p>
@@ -905,8 +1074,28 @@ nav.jump a.off{opacity:.45}
 </div>
 
 <button id="toTop" aria-label="いちばん上へ">&#8593;</button>
+<div id="menu" hidden>
+  <div class="menu-in">
+    <div class="menu-h">
+      <b id="menuTitle">もくじ</b>
+      <button id="menuClose" aria-label="閉じる">&#215;</button>
+    </div>
+    <div class="menu-s">
+      <div class="search">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+        <input type="search" id="siteQ" placeholder="サイト内をさがす（例：むくみ、鉄、育休）" autocomplete="off">
+      </div>
+    </div>
+    <div class="menu-body" id="menuBody"></div>
+  </div>
+</div>
+
 <nav class="jump">
-  <a href="#dial">週数</a><a href="#food">たべもの</a><a href="#life">くらし</a><a href="#recipe">レシピ</a><a href="#count">数え方</a><a href="#limits">使い方</a><a href="#tips">服とコツ</a><a href="#body">からだ</a><a href="#danger" class="urgent">危険サイン</a><a href="#phase">時期別</a><a href="#fuan">不安</a><a href="#oops">やっちゃった</a><a href="#nutri">栄養</a><a href="#fish">魚</a><a href="#weight">体重</a><a href="#caffeine">カフェイン</a><a href="#salt">塩分</a><a href="#contact">連絡先</a><a href="#test">健診</a><a href="#echo">エコー用語</a><a href="#record">記録</a><a href="#kick">胎動</a><a href="#birth">産み方</a><a href="#kinkyu">入院</a><a href="#money">お金</a><a href="#cost">実際の金額</a><a href="#todo">手続き</a><a href="#hokatsu">保活</a><a href="#edu">教育費</a><a href="#prep">準備</a><a href="#labor">お産</a><a href="#timer">陣痛タイマー</a><a href="#after">産後</a><a href="#baby1m">最初の1か月</a><a href="#name">名づけ</a><a href="#around">まわり</a><a href="#papa">パパへ</a><a href="#backup">ひきつぎ</a>
+  <button id="menuBtn"><span>&#9776;</span>もくじ</button>
+  <button id="searchBtn"><span>&#128269;</span>さがす</button>
+  <a href="#food">たべもの</a>
+  <a href="#danger" class="urgent">危険サイン</a>
+  <a href="#contact" class="urgent">電話</a>
 </nav>
 
 <script>
@@ -1220,20 +1409,50 @@ const PHASES=[
  warn:"産後は気分の落ち込みが起きやすい時期です。眠れない、涙が止まらない、赤ちゃんをかわいいと思えない——産後うつは10人に1人に起こる、治療できる状態です。産院・自治体の産後ケア・こども家庭センターへ。ひとりで抱える種類の問題ではありません。"}
 ];
 
-const BABY=[
-{w:4,e:"\uD83C\uDF31",s:"けしつぶくらい（約2mm）",t:"心臓のもとができはじめます。生理が遅れて気づくころ。"},
-{w:6,e:"\uD83E\uDED0",s:"ブルーベリーくらい（約5mm）",t:"心拍が確認できることも。つわりが始まる人が多い時期。"},
-{w:8,e:"\uD83C\uDF52",s:"さくらんぼくらい（約2cm）",t:"手足の形がはっきり。頭とからだの区別がつきます。"},
-{w:10,e:"\uD83C\uDF53",s:"いちごくらい（約4cm）",t:"「胎児」と呼ばれる時期に。エコーで動くのが見えます。"},
-{w:12,e:"\uD83E\uDD5D",s:"キウイくらい（約6cm・15g）",t:"内臓のかたちがほぼ完成。つわりが落ち着きはじめる人も。"},
-{w:16,e:"\uD83C\uDF4B",s:"レモンくらい（約12cm・100g）",t:"胎盤が完成して安定期に。性別がわかることもあります。"},
-{w:20,e:"\uD83C\uDF4C",s:"バナナくらい（約16cm・300g）",t:"胎動を感じはじめるころ。髪や爪が生えてきます。"},
-{w:24,e:"\uD83C\uDF3D",s:"とうもろこしくらい（約30cm・650g）",t:"音が聞こえるように。声をかけてあげてください。"},
-{w:28,e:"\uD83C\uDF46",s:"なすくらい（約35cm・1,100g）",t:"まぶたが開き、目が見えるように。後期に入ります。"},
-{w:32,e:"\uD83E\uDD65",s:"ココナッツくらい（約40cm・1,700g）",t:"皮下脂肪がついて、ふっくらしてきます。"},
-{w:36,e:"\uD83C\uDF48",s:"メロンくらい（約45cm・2,500g）",t:"いつ生まれても大丈夫な状態に。正期産まであと少し。"},
-{w:38,e:"\uD83C\uDF83",s:"かぼちゃくらい（約48cm・3,000g）",t:"正期産の時期。いつ陣痛が来てもおかしくありません。"},
-{w:40,e:"\uD83D\uDC76",s:"約50cm・3,100g",t:"出産予定日。予定日ぴったりに生まれる子は5%以下です。"}
+const WEEK=[
+{e:"\uD83D\uDCC5",s:"0週｜数えはじめの週",b:"最後の生理が始まった週です。まだ妊娠していません。ここを0日目として、すべての週数を数えます。",m:"いつもの生理。ここが基準日になるので、開始日を覚えておくと後で役立ちます。"},
+{e:"\uD83C\uDF31",s:"1週｜卵子が育つ",b:"卵巣の中で卵子が育っている時期。受精はまだです。",m:"体調に変化はありません。妊娠を考えているなら、この時期から葉酸を始めるのが理想です。"},
+{e:"\u2728",s:"2週｜受精のころ",b:"排卵が起こり、受精する週。<b>赤ちゃんのはじまりは、実はこの週</b>です。",m:"排卵日のあたり。まだ何も自覚はありません。"},
+{e:"\uD83D\uDD2C",s:"3週｜着床",b:"受精卵が分裂しながら子宮へ移動し、内膜に着床します。ここで妊娠が成立。",b2:"",m:"ごく少量の出血（着床出血）がある人もいます。検査薬はまだ反応しません。"},
+{e:"\uD83E\uDDEB",s:"4週｜ケシ粒くらい（約2mm）",b:"心臓や脳のもとになる部分ができはじめます。器官形成期のはじまり。",m:"生理予定日のころ。<b>検査薬が使えるようになります。</b>ここから葉酸サプリと、お酒・たばこの中止を。"},
+{e:"\uD83E\uDED8",s:"5週｜ごま粒くらい（約4mm）",b:"エコーで<b>胎嚢（黒い袋）</b>が見えはじめます。心臓の原型が動き出すころ。",m:"つわりが始まる人も。眠気、だるさ、胸の張り。まだ見た目は変わりません。"},
+{e:"\uD83E\uDED0",s:"6週｜ブルーベリーくらい（約6mm）",b:"<b>心拍が確認できることが多い</b>週。手足の芽が出てきます。",m:"つわりが本格化しはじめるころ。においに敏感になります。"},
+{e:"\uD83C\uDF3F",s:"7週｜約1.2cm",b:"頭と体が分かれ、目や耳のもとができます。",m:"つわりがつらくなる時期。食べられるものを、少量ずつ何回にも分けて。"},
+{e:"\uD83C\uDF52",s:"8週｜さくらんぼくらい（約2cm）",b:"「胎芽」から<b>「胎児」</b>へ。指の区別がつきはじめます。",m:"心拍が確認できたら、産院で妊娠届出書をもらって<b>母子手帳</b>を受け取りに。"},
+{e:"\uD83E\uDED2",s:"9週｜約2.5cm",b:"しっぽが消えて、人らしい形に。エコーでよく動くのが見えます。",m:"つわりのピークの人が多い時期。水も飲めないときは早めに産院へ。"},
+{e:"\uD83C\uDF53",s:"10週｜いちごくらい（約3.5cm）",b:"主要な臓器の形が完成に近づき、<b>器官形成期の山を越えます</b>。",m:"薬やレントゲンの影響が最も気になる時期を抜けます。初期の血液検査があるころ。"},
+{e:"\uD83C\uDF4A",s:"11週｜約4.5cm",b:"爪や髪が作られはじめます。NT（首の後ろのむくみ）を測るのはこの時期。",m:"出生前検査を考えるなら、この前後に説明を受けます。受けない選択も正当です。"},
+{e:"\uD83E\uDD5D",s:"12週｜キウイくらい（約6cm・15g）",b:"内臓のかたちがほぼ完成。<b>流産の確率がぐっと下がります</b>。",m:"つわりが軽くなる人が出てきます。葉酸サプリはこの週あたりまでが目安。"},
+{e:"\uD83C\uDF4B",s:"13週｜約7.5cm・25g",b:"胎盤が働きはじめ、声帯ができます。",m:"体調が上向く人が増えます。まだの人も、焦らなくて大丈夫。"},
+{e:"\uD83E\uDD51",s:"14週｜約9cm・45g",b:"表情を作る筋肉が動きはじめ、顔をしかめたりします。",m:"つわりが明ける人が多い時期。食欲が戻るので、増えすぎに注意しはじめます。"},
+{e:"\uD83C\uDF51",s:"15週｜約10cm・70g",b:"全身が産毛（うぶ毛）に覆われ、羊水を飲む練習を始めます。",m:"おなかがふっくらしてくるころ。締めつけない服に切り替えを。"},
+{e:"\uD83C\uDF4E",s:"16週｜レモンくらい（約12cm・100g）",b:"<b>胎盤が完成＝安定期</b>に入ります。性別がわかることも。",m:"体調が落ち着く時期。歯科健診、旅行、保活の情報収集はここから27週の間に。"},
+{e:"\uD83E\uDD5C",s:"17週｜約13cm・140g",b:"骨が硬くなりはじめ、動きがしっかりしてきます。",m:"おなかが目立ちはじめます。腰に負担が来る人も。"},
+{e:"\uD83C\uDF3D",s:"18週｜約14cm・190g",b:"<b>音が聞こえはじめます</b>。話しかけると届いています。",m:"経産婦は胎動を感じはじめるころ。初産だともう少し先。"},
+{e:"\uD83E\uDD52",s:"19週｜約15cm・240g",b:"皮膚を守る胎脂におおわれます。",m:"中期の超音波（体の構造を詳しく見る検査）が近づきます。"},
+{e:"\uD83C\uDF4C",s:"20週｜バナナくらい（約16cm・300g）",b:"<b>ちょうど折り返し。</b>体の構造を詳しく確認する健診があります。",m:"胎動をはっきり感じる人が増えます。内祝いの下調べを始めると後が楽。"},
+{e:"\uD83E\uDD55",s:"21週｜約18cm・360g",b:"眉毛やまつげが生えてきます。",m:"胎動がはっきり。夜に動くのが分かるようになります。"},
+{e:"\uD83C\uDF3E",s:"22週｜約19cm・430g",b:"<b>ここから「早産」の区分</b>になります。生まれた場合に生存の可能性が出てくる線です。",m:"おなかの張りに気をつけて。張ったら休む習慣を。"},
+{e:"\uD83E\uDDC5",s:"23週｜約20cm・500g",b:"肺の中で呼吸の準備が始まります。",m:"体重の増え方をチェック。1週に0.3〜0.5kgのペースが目安。"},
+{e:"\uD83C\uDF3D",s:"24週｜とうもろこしくらい（約21cm・600g）",b:"音に反応して動きます。声をかけると返ってくることも。",m:"<b>妊娠糖尿病のスクリーニング</b>がこのあたり。引っかかっても本人のせいではありません。"},
+{e:"\uD83E\uDD6C",s:"25週｜約22cm・700g",b:"まぶたが開き、目を開けるようになります。",m:"貧血が出やすい時期。鉄をしっかり。"},
+{e:"\uD83E\uDD65",s:"26週｜約23cm・800g",b:"脳が急速に発達し、記憶の仕組みが働きはじめます。",m:"こむら返りや腰痛が出やすいころ。水分とカルシウムを。"},
+{e:"\uD83C\uDF48",s:"27週｜約24cm・950g",b:"中期の最後の週。体がふっくらしてきます。",m:"胎動カウントを始める準備を。次の週から後期です。"},
+{e:"\uD83C\uDF46",s:"28週｜なすくらい（約25cm・1,100g）",b:"<b>妊娠後期に入ります。</b>目が見えるようになり、明暗が分かります。",m:"健診が2週に1回に。胎動カウントを毎日の習慣に。産休の相談もこのころ。"},
+{e:"\uD83E\uDD54",s:"29週｜約26cm・1,250g",b:"体温を自分で調節する準備が始まります。",m:"胃が圧迫されて一度に食べられなくなります。1日4〜6回に分けて。"},
+{e:"\uD83E\uDD6D",s:"30週｜約27cm・1,400g",b:"逆子でも<b>まだ回ります</b>。心配しすぎないで。",m:"貧血の再チェックがあるころ。鉄剤が出ることも。"},
+{e:"\uD83C\uDF4D",s:"31週｜約28cm・1,600g",b:"皮下脂肪がついて、しわが減ってきます。",m:"むくみが出やすい時期。減塩とカリウム、足を上げて休む。"},
+{e:"\uD83E\uDD65",s:"32週｜約29cm・1,800g",b:"爪が伸び、髪が増えます。",m:"<b>入院バッグの準備を。</b>早産に備えて、34週までに玄関近くへ。"},
+{e:"\uD83C\uDF83",s:"33週｜約30cm・2,000g",b:"ママの免疫（抗体）が赤ちゃんに渡りはじめます。",m:"RSウイルスの母子免疫ワクチンは28〜36週が定期接種の対象です。"},
+{e:"\uD83C\uDF88",s:"34週｜約31cm・2,200g",b:"爪が指先まで伸び、外の世界の準備がほぼ整います。",m:"<b>里帰りするならこの週までに移動</b>を。産院の受け入れ期限のことが多い。"},
+{e:"\uD83C\uDF10",s:"35週｜約32cm・2,400g",b:"肺がほぼ完成します。",m:"GBS（B群溶連菌）の検査。陽性でも出産時に点滴するだけです。"},
+{e:"\uD83C\uDF89",s:"36週｜約33cm・2,600g",b:"いつ生まれてもおかしくない状態に近づきます。",m:"健診が<b>毎週</b>になります。十月十日の「10か月目」に入りました。"},
+{e:"\uD83C\uDF80",s:"37週｜約34cm・2,800g",b:"<b>正期産。いつ生まれても大丈夫</b>な時期になりました。",m:"NST（胎児の心拍を記録する検査）が始まります。陣痛タイマーの使い方を確認しておいて。"},
+{e:"\uD83D\uDC63",s:"38週｜約35cm・2,950g",b:"赤ちゃんが骨盤の中に下がってきます。",m:"胃の圧迫が楽になる代わりに、頻尿と足のつけ根の痛みが出ます。"},
+{e:"\uD83C\uDF7C",s:"39週｜約36cm・3,050g",b:"産まれる準備が完全に整いました。",m:"おしるし・破水・陣痛。3つのサインを確認しておきましょう。"},
+{e:"\uD83D\uDC76",s:"40週｜約37cm・3,100g",b:"出産予定日です。<b>予定日ぴったりに生まれる子は5%以下</b>。",m:"焦らなくて大丈夫。予定日は締切ではなく、真ん中の目安です。"},
+{e:"\u23F3",s:"41週｜約3,200g",b:"過ぎることは珍しくありません。",m:"41週を超えると、胎盤の働きを見ながら<b>誘発分娩の相談</b>が始まります。"},
+{e:"\uD83C\uDFC1",s:"42週｜過期産",b:"42週を超えると過期産と呼ばれます。",m:"多くはその前に誘発か帝王切開の判断になります。医師の方針に従ってください。"}
 ];
 
 const SYM=[
@@ -1650,7 +1869,7 @@ function makeFinder(data,cats,ids){
 }
 
 function phaseOf(w){return w<16?0:(w<28?1:2);}
-function babyOf(w){let b=BABY[0];for(let i=0;i<BABY.length;i++){if(w>=BABY[i].w)b=BABY[i];}return b;}
+function babyOf(w){return WEEK[Math.max(0,Math.min(WEEK.length-1,w))];}
 
 function renderDial(){
   const w=+$("#wk").value,p=phaseOf(w),P=PHASES[p],B=babyOf(w);
@@ -1658,7 +1877,7 @@ function renderDial(){
   $("#wkPhase").textContent=P.name;
   $("#wkMonth").textContent=(Math.floor(w/4)+1)+"か月";
   $("#babyEmoji").textContent=B.e;
-  $("#babyTxt").innerHTML="<b>"+B.s+"</b>"+B.t;
+  $("#babyTxt").innerHTML="<b>"+B.s+"</b>"+B.b+'<span class="baby-m">ママ：'+B.m+"</span>";
   $("#wkOut").innerHTML='1日のエネルギーは <b style="color:var(--pink-d)">'+P.kcal+"</b>。"+P.body;
   $("#wkTags").innerHTML=P.focus.map(function(f){return '<span class="tag">'+f+"</span>";}).join("");
   selectTab(p);
@@ -1800,13 +2019,10 @@ makeFinder(LIFE,CL,{chips:"#chipsL",items:"#itemsL",count:"#countL",q:"#qL",quic
 renderDial();
 
 /* ---- week-aware UI ---- */
-var SECT_LABEL={count:"週数の数え方",tips:"服とコツ",caffeine:"カフェイン",salt:"塩分",cost:"実際の金額",timer:"陣痛タイマー",baby1m:"最初の1か月",limits:"使い方と限界",backup:"データのひきつぎ",food:"たべもの",life:"くらし",recipe:"レシピ",body:"からだの手あて",danger:"危険サイン",
- phase:"時期別ガイド",fuan:"不安のこと",oops:"やっちゃった",nutri:"栄養",fish:"おさかな",weight:"体重",
- contact:"連絡先とメモ",test:"健診と検査",echo:"エコー用語",record:"体重の記録",kick:"胎動カウント",
- birth:"産み方の選択",kinkyu:"入院になったら",money:"お金",todo:"手続き",hokatsu:"保活",edu:"教育費",
- prep:"用意するもの",labor:"お産のサイン",after:"産後にやること",name:"名づけ",around:"まわりのこと",papa:"パパへ"};
+var SECT_LABEL={"food": "これ食べてええ？", "life": "これしてええ？", "recipe": "レシピ", "caffeine": "カフェイン計算", "body": "しんどいときの手あて", "danger": "危険サイン", "contact": "電話するところ", "phase": "時期別ガイド", "fuan": "不安のこと", "oops": "やっちゃったとき", "count": "週数の数え方", "limits": "書いていないこと", "tips": "服と細かいこと", "backup": "データのひきつぎ", "nutri": "栄養", "fish": "おさかな", "salt": "塩分の早見表", "weight": "体重の目安", "test": "健診と検査", "echo": "エコー用語", "record": "体重と血圧の記録", "kick": "胎動カウント", "money": "もらえるお金", "cost": "実際にいくら要る", "todo": "手続きの順番", "hokatsu": "保活", "edu": "教育費", "birth": "産み方の選択", "kinkyu": "入院になったら", "prep": "用意するもの", "timer": "陣痛タイマー", "labor": "お産のサイン", "after": "産後にやること", "baby1m": "最初の1か月", "name": "名づけと出生届", "around": "まわりのこと", "papa": "パパへ"};
 
 var TOPPICKS=[
+ {to:3,h:"まだ、数えはじめの時期",s:"0〜3週は最終月経から数えた期間で、この時点ではまだ妊娠が成立していないか、着床したばかりです。検査薬が反応するのは4週から。いま知っておくといいのは、数え方と葉酸のことだけ。",l:["count","food","fuan","limits"]},
  {to:7,h:"いちばん大事なのは、葉酸だけ",s:"まだ実感がない時期。やることは驚くほど少なくて、葉酸サプリと、避けるものを知っておくことだけです。つわりが来る前に、食べたいものを食べておいて。",l:["food","count","fuan","phase"]},
  {to:11,h:"母子手帳をもらいに行く時期",s:"心拍が確認できたら、産院で妊娠届出書をもらって自治体へ。ここから健診の補助券が使えます。つわりのピークでもあるので、無理をしない前提で。",l:["todo","food","body","contact"]},
  {to:15,h:"つわりを越えるところ",s:"食べられるものを食べる期間。そろそろ会社への報告と、お金まわりの見通しを立てておくと、後がずっと楽です。",l:["phase","recipe","money","body"]},
@@ -1856,15 +2072,6 @@ function applyWeekUI(){
     s.appendChild(btn);
   });
 
-  var links=document.querySelectorAll("nav.jump a");
-  Array.prototype.forEach.call(links,function(a){
-    var id=a.getAttribute("href").replace("#","");
-    a.classList.remove("on","off");
-    if(id==="dial")return;
-    if(pick.l.indexOf(id)>=0){a.classList.add("on");return;}
-    var s=document.getElementById(id);
-    if(s&&s.dataset.from&&(w<+s.dataset.from||w>+s.dataset.to))a.classList.add("off");
-  });
 }
 
 $("#wk").addEventListener("input",applyWeekUI);
@@ -1886,17 +2093,57 @@ function LSet(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
     if(total<0)total=0;
     return {w:Math.floor(total/7),d:total%7,left:left};
   }
+  var MILE=[
+    {w:12,n:"つわりが落ち着きはじめる"},
+    {w:16,n:"安定期に入る"},
+    {w:20,n:"胎動を感じるころ"},
+    {w:24,n:"折り返し"},
+    {w:28,n:"妊娠後期に入る"},
+    {w:34,n:"入院バッグの期限"},
+    {w:37,n:"正期産・いつ生まれてもOK"},
+    {w:40,n:"出産予定日"}
+  ];
   function show(){
     var r=calc(),box=$("#todayBox");
-    if(!r){box.style.display="none";$("#dueSummary").innerHTML="&#128197; 予定日を登録すると、今日の週数が自動で出ます";return;}
     box.style.display="block";
-    var msg;
-    if(r.left>0)msg="出産予定日まで あと"+r.left+"日";
-    else if(r.left===0)msg="今日が出産予定日です &#9825;";
-    else msg="予定日から "+(-r.left)+"日過ぎています";
-    box.innerHTML="今日は <b>"+r.w+"週"+r.d+"日</b>　／　"+msg;
+    if(!r){
+      box.className="cd-set";
+      box.innerHTML="予定日を登録すると、<b>今日が何週何日か</b>と<b>予定日までのカウントダウン</b>が毎日ここに出ます。上の「予定日を登録」から、予定日か最後の生理の開始日を入れてください。";
+      $("#dueSummary").innerHTML="&#128197; 予定日を登録すると、今日の週数が自動で出ます";
+      return;
+    }
+    box.className="cd";
+    var total=280-r.left;
+    var pct=Math.max(0,Math.min(100,total/280*100));
+    var big,unit,lab;
+    if(r.left>0){lab="しゅっさんよていびまで";big=r.left;unit="日";}
+    else if(r.left===0){lab="きょうが よていび";big=0;unit="日";}
+    else{lab="よていびから";big=-r.left;unit="日め";}
+
+    var nx=null;
+    for(var i=0;i<MILE.length;i++){if(r.w<MILE[i].w){nx=MILE[i];break;}}
+    var nxHtml="";
+    if(nx){
+      var d=nx.w*7-total;
+      nxHtml='<div class="cd-next">つぎは <b>'+nx.w+"週</b>・"+nx.n+"　／　あと <b>"+d+"</b>日</div>";
+    }else if(r.left<0){
+      nxHtml='<div class="cd-next">予定日ぴったりに生まれる子は5%以下です。41週を過ぎると誘発の相談になります。</div>';
+    }
+
+    var marks="";
+    [16,28,37].forEach(function(w){marks+='<span class="cd-mark" style="left:'+(w*7/280*100)+'%"></span>';});
+
+    box.innerHTML=
+      '<div class="cd-top"><span class="cd-lab">'+lab+'</span></div>'+
+      '<div><span class="cd-big">'+big+'</span><span class="cd-unit">'+unit+'</span></div>'+
+      '<div class="cd-sub">今日は <b>'+r.w+"週"+r.d+"日</b>（妊娠"+(Math.floor(r.w/4)+1)+"か月）　／　"+
+        "ここまで <b>"+total+"</b>日きました</div>"+
+      '<div class="cd-track"><div class="cd-fill" style="width:'+pct+'%"></div>'+marks+"</div>"+
+      '<div class="cd-scale"><span>0w</span><span>16w</span><span>28w</span><span>37w</span><span>40w</span></div>'+
+      nxHtml;
+
     $("#dueSummary").innerHTML="&#128197; 予定日："+cfg.due+"（タップで変更）";
-    var w=Math.max(4,Math.min(41,r.w));
+    var w=Math.max(0,Math.min(42,r.w));
     $("#wk").value=w;
     if(typeof renderDial==="function")renderDial();
     if(typeof applyWeekUI==="function")applyWeekUI();
@@ -2126,6 +2373,148 @@ if("serviceWorker" in navigator&&navigator.serviceWorker.getRegistrations){
   });
   draw();
 })();
+
+/* ---- menu ---- */
+var MENU_GROUPS=[["まいにち使う", ["food", "life", "recipe", "caffeine"]], ["からだとこころ", ["body", "danger", "contact", "phase", "fuan", "oops"]], ["知っておくこと", ["count", "limits", "tips", "backup"]], ["たべかたと体重", ["nutri", "fish", "salt", "weight"]], ["けんしんときろく", ["test", "echo", "record", "kick"]], ["おかねと手続き", ["money", "cost", "todo", "hokatsu", "edu"]], ["おさんにむけて", ["birth", "kinkyu", "prep", "timer", "labor"]], ["うまれたあと", ["after", "baby1m", "name", "around", "papa"]]];
+var MENU_LAB={"food": "これ食べてええ？", "life": "これしてええ？", "recipe": "レシピ", "caffeine": "カフェイン計算", "body": "しんどいときの手あて", "danger": "危険サイン", "contact": "電話するところ", "phase": "時期別ガイド", "fuan": "不安のこと", "oops": "やっちゃったとき", "count": "週数の数え方", "limits": "書いていないこと", "tips": "服と細かいこと", "backup": "データのひきつぎ", "nutri": "栄養", "fish": "おさかな", "salt": "塩分の早見表", "weight": "体重の目安", "test": "健診と検査", "echo": "エコー用語", "record": "体重と血圧の記録", "kick": "胎動カウント", "money": "もらえるお金", "cost": "実際にいくら要る", "todo": "手続きの順番", "hokatsu": "保活", "edu": "教育費", "birth": "産み方の選択", "kinkyu": "入院になったら", "prep": "用意するもの", "timer": "陣痛タイマー", "labor": "お産のサイン", "after": "産後にやること", "baby1m": "最初の1か月", "name": "名づけと出生届", "around": "まわりのこと", "papa": "パパへ"};
+(function(){
+  var m=$("#menu"),hits=[];
+
+  function build(){
+    var w=+$("#wk").value;
+    var now=[];
+    try{
+      for(var i=0;i<TOPPICKS.length;i++){if(w<=TOPPICKS[i].to){now=TOPPICKS[i].l;break;}}
+      if(!now.length)now=TOPPICKS[TOPPICKS.length-1].l;
+    }catch(e){}
+    $("#menuBody").innerHTML=MENU_GROUPS.map(function(g,gi){
+      return '<div class="mg"><div class="mg-h"><i>'+("0"+(gi+1)).slice(-2)+"</i><b>"+g[0]+'</b></div><div class="mg-l">'+
+        g[1].map(function(id){
+          var s=document.getElementById(id),cls=[];
+          if(now.indexOf(id)>=0)cls.push("now");
+          else if(id==="danger"||id==="contact")cls.push("urg");
+          else if(s&&s.dataset.from&&(w<+s.dataset.from||w>+s.dataset.to))cls.push("dim");
+          return '<a href="#'+id+'" class="'+cls.join(" ")+'">'+(MENU_LAB[id]||id)+"</a>";
+        }).join("")+"</div></div>";
+    }).join("");
+  }
+
+  /* ---- site search ---- */
+  var VLAB={best:"◎",ok:"○",hold:"△",stop:"×"};
+  function secLabel(id){return MENU_LAB[id]||id;}
+
+  function domIndex(){
+    var out=[];
+    Array.prototype.forEach.call(document.querySelectorAll("section[data-from]"),function(sec){
+      if(sec.id==="food"||sec.id==="life")return;
+      var h2=sec.querySelector("h2"),sub=sec.querySelector(".sub");
+      out.push({sec:sec.id,t:h2?h2.textContent.trim():secLabel(sec.id),
+        b:sub?sub.textContent.trim():"",el:sec,kind:"sec"});
+      Array.prototype.forEach.call(sec.querySelectorAll("details.acc"),function(d){
+        var s=d.querySelector("summary"),bd=d.querySelector(".acc-b");
+        out.push({sec:sec.id,t:s?s.textContent.replace(/\+$/,"").trim():"",
+          b:bd?bd.textContent.trim():"",el:d,kind:"acc"});
+      });
+      Array.prototype.forEach.call(sec.querySelectorAll(".tbl tbody tr"),function(tr){
+        var td=tr.querySelectorAll("td");if(td.length<2)return;
+        out.push({sec:sec.id,t:td[0].textContent.trim(),b:td[1].textContent.trim(),el:tr.closest("table"),kind:"row"});
+      });
+    });
+    return out;
+  }
+
+  function run(q){
+    var nq=norm(q.trim());
+    var body=$("#menuBody");
+    if(!nq){$("#menuTitle").textContent="もくじ";build();return;}
+    $("#menuTitle").textContent="けんさく";
+    hits=[];
+    var html="";
+
+    var fl=[];
+    [["food",FOOD],["life",LIFE]].forEach(function(pair){
+      pair[1].forEach(function(f){
+        if(norm(f.n+f.k+f.c+(f.s||"")+f.w+f.h).indexOf(nq)>=0)fl.push({sec:pair[0],f:f});
+      });
+    });
+    if(fl.length){
+      html+='<div class="sr-h">たべもの・くらしの判定（'+fl.length+'件）</div>';
+      fl.slice(0,12).forEach(function(x){
+        var i=hits.push({type:"finder",sec:x.sec,q:x.f.n})-1;
+        html+='<button class="sr" data-h="'+i+'"><span class="sr-w">'+x.f.c+'</span><span class="sr-t">'+x.f.n+
+          '<span class="sr-v '+x.f.v+'">'+VLAB[x.f.v]+'</span></span><span class="sr-b">'+(x.f.s||x.f.w)+"</span></button>";
+      });
+      if(fl.length>12)html+='<div style="font-size:11.5px;color:var(--ink-soft);margin:-2px 2px 10px">ほか'+(fl.length-12)+'件。「これ食べてええ？」の検索窓で見られます。</div>';
+    }
+
+    var dm=domIndex().filter(function(x){return norm(x.t+" "+x.b).indexOf(nq)>=0;});
+    if(dm.length){
+      html+='<div class="sr-h">よみもの（'+dm.length+'件）</div>';
+      dm.slice(0,25).forEach(function(x){
+        var i=hits.push({type:"dom",el:x.el,sec:x.sec,kind:x.kind})-1;
+        html+='<button class="sr" data-h="'+i+'"><span class="sr-w">'+secLabel(x.sec)+'</span><span class="sr-t">'+
+          x.t+'</span>'+(x.b?'<span class="sr-b">'+x.b+"</span>":"")+"</button>";
+      });
+    }
+
+    if(!html)html='<div class="sr-none">「'+q.trim()+'」は見つかりませんでした。<br>別の言い方でも出てこないときは、健診で聞くのがいちばん確実です。</div>';
+    body.innerHTML=html;
+  }
+
+  function unfoldSection(sec){
+    if(!sec)return;
+    sec.classList.remove("later","past");
+    var u=sec.querySelector(".unfold");if(u)u.remove();
+    var b=sec.querySelector(".wkbadge");if(b)b.remove();
+    try{unfolded[sec.id]=true;}catch(e){}
+  }
+
+  function go(i){
+    var x=hits[i];if(!x)return;
+    close();
+    if(x.type==="finder"){
+      var sec=document.getElementById(x.sec);
+      unfoldSection(sec);
+      var input=document.getElementById(x.sec==="food"?"qF":"qL");
+      input.value=x.q;
+      input.dispatchEvent(new Event("input",{bubbles:true}));
+      setTimeout(function(){sec.scrollIntoView({behavior:"smooth",block:"start"});},60);
+      return;
+    }
+    var el=x.el,sec2=document.getElementById(x.sec);
+    unfoldSection(sec2);
+    setTimeout(function(){
+      if(el.tagName==="DETAILS")el.open=true;
+      var target=(x.kind==="sec")?sec2:el;
+      target.scrollIntoView({behavior:"smooth",block:"center"});
+      if(x.kind!=="sec"){
+        target.classList.remove("hit");void target.offsetWidth;target.classList.add("hit");
+        setTimeout(function(){target.classList.remove("hit");},2400);
+      }
+    },60);
+  }
+
+  function open(focusSearch){
+    build();m.hidden=false;document.body.style.overflow="hidden";
+    if(focusSearch)setTimeout(function(){$("#siteQ").focus();},80);
+  }
+  function close(){m.hidden=true;document.body.style.overflow="";}
+
+  $("#menuBtn").addEventListener("click",function(){$("#siteQ").value="";$("#menuTitle").textContent="もくじ";open(false);});
+  $("#searchBtn").addEventListener("click",function(){open(true);});
+  $("#menuClose").addEventListener("click",close);
+  $("#siteQ").addEventListener("input",function(e){run(e.target.value);});
+  $("#menuBody").addEventListener("click",function(e){
+    var b=e.target.closest(".sr");
+    if(b){go(+b.dataset.h);return;}
+  });
+  m.addEventListener("click",function(e){
+    if(e.target===m){close();return;}
+    if(e.target.closest(".mg-l a")){close();}
+  });
+  document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!m.hidden)close();});
+})();
+
 
 /* ---- night mode ---- */
 (function(){
