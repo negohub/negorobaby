@@ -690,7 +690,15 @@ nav.jump a.off{opacity:.45}
     <h2>入力するところ</h2>
     <p class="sub">この手帳で入力できる場所は13か所あります。全部やる必要はありません。<b>まず「予定日」だけ入れれば、あとは自動で回ります。</b></p>
     <div class="setup" id="setupBody"></div>
-    <div class="note calm" style="margin-top:10px">入力したものは<b>この端末の中だけ</b>に保存されます。サーバーには何も送られません。もう1台と共有したいときは「データのひきつぎ」から。</div>
+
+    <div class="card share" style="margin-top:12px">
+      <h3 style="margin-bottom:8px">入れ終わったら、もう1台へ</h3>
+      <p style="font-size:12.5px;color:var(--ink-mid);line-height:1.8;margin-bottom:12px">予定日も連絡先も、ふたりの端末で同じにしておくと安心です。押すと共有メニューが開くので、LINEで送ってください。<b>相手はリンクをタップするだけ</b>です。</p>
+      <button class="bigbtn" id="bkLink2">&#128279; リンクにして送る</button>
+      <div id="bkLinkOut2" style="margin-top:10px"></div>
+    </div>
+
+    <div class="note calm" style="margin-top:10px">入力したものは<b>この端末の中だけ</b>に保存されます。サーバーには何も送られません。<b>受け取った側の記録は上書きされる</b>ので、両方で別々に記録している場合だけ注意してください。</div>
   </section>
 
   <div class="gdiv" data-g="1"><span class="gd-n">01</span><div><b>まいにち使う</b><span>毎日ひらくところ</span></div></div>
@@ -2679,26 +2687,31 @@ var MENU_LAB={"setup":"入力するところ","food": "これ食べてええ？"
   function makeUrl(){
     return location.origin+location.pathname+"#d="+encodeURIComponent(pack());
   }
-  $("#bkLink").addEventListener("click",function(){
-    var url=makeUrl(),out=$("#bkLinkOut");
-    if(navigator.share){
-      navigator.share({title:"ぷれまむ手帳の記録",text:"この手帳の記録です。タップすると入ります。",url:url})
-        .catch(function(){showUrl(url);});
-    }else showUrl(url);
-    function showUrl(u){
-      out.innerHTML='<textarea readonly spellcheck="false">'+u+'</textarea>'+
-        '<button class="btns" id="bkUrlCopy" style="width:100%;margin-top:8px">このリンクをコピー</button>';
-      var t=out.querySelector("textarea");
-      var b=$("#bkUrlCopy");
-      b.addEventListener("click",function(){
-        t.select();
-        if(navigator.clipboard)navigator.clipboard.writeText(u);
-        else document.execCommand("copy");
-        b.textContent="コピーしました";
-        setTimeout(function(){b.textContent="このリンクをコピー";},1600);
-      });
-    }
-  });
+  function bindShare(btnId,outId){
+    var btn=document.getElementById(btnId);if(!btn)return;
+    btn.addEventListener("click",function(){
+      var url=makeUrl(),out=document.getElementById(outId);
+      function showUrl(u){
+        out.innerHTML='<textarea readonly spellcheck="false"></textarea>'+
+          '<button class="btns" style="width:100%;margin-top:8px">このリンクをコピー</button>';
+        var t=out.querySelector("textarea"),b=out.querySelector("button");
+        t.value=u;
+        b.addEventListener("click",function(){
+          t.select();
+          if(navigator.clipboard)navigator.clipboard.writeText(u);
+          else document.execCommand("copy");
+          b.textContent="コピーしました";
+          setTimeout(function(){b.textContent="このリンクをコピー";},1600);
+        });
+      }
+      if(navigator.share){
+        navigator.share({title:"ぷれまむ手帳の記録",text:"この手帳の記録です。タップすると入ります。",url:url})
+          .catch(function(){showUrl(url);});
+      }else showUrl(url);
+    });
+  }
+  bindShare("bkLink","bkLinkOut");
+  bindShare("bkLink2","bkLinkOut2");
 
   /* リンクから開かれたとき */
   (function(){
