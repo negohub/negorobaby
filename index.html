@@ -955,19 +955,28 @@ section.later .sub,section.past .sub{opacity:.5}
       <div id="bkLinkOut" style="margin-top:10px"></div>
     </div>
 
+    <div class="card share" style="margin-top:12px">
+      <h3 style="margin-bottom:8px">受け取る（ホーム画面のアプリはこちら）</h3>
+      <p style="font-size:13.5px;color:var(--ink-mid);line-height:1.9;margin-bottom:12px">iPhoneは<b>Safariとホーム画面のアプリで保存場所が別</b>です。ホーム画面のアイコンから開いている場合、リンクをタップしても記録は入りません。<b>送られてきた文字列かURLをここから読み込んでください。</b></p>
+      <button class="bigbtn" id="bkPaste">&#128203; コピーした内容を読み込む</button>
+      <textarea id="bkText" placeholder="うまく読み取れないときは、ここに貼り付けてから下のボタンを押してください。文字列でもURLでもかまいません。" spellcheck="false" style="margin-top:10px"></textarea>
+      <button class="btnp" id="bkIn" style="width:100%;margin-top:8px">貼り付けた内容を読み込む</button>
+    </div>
+
     <details class="acc" style="margin-top:12px">
-      <summary><span class="ttl">うまくいかないとき（文字列でやり取り）</span><span class="cv">+</span></summary>
+      <summary><span class="ttl">送る側：文字列で渡す</span><span class="cv">+</span></summary>
       <div class="acc-b share">
         <button class="btns" id="bkOut" style="width:100%">この端末のデータを書き出す</button>
-        <textarea id="bkText" placeholder="ここに出てくる文字列を、LINEなどでもう1台に送ってください。受け取った側は、その文字列をここに貼りつけて「読み込む」を押します。" spellcheck="false" style="margin-top:8px"></textarea>
-        <div class="row">
-          <button class="btns" id="bkCopy">コピー</button>
-          <button class="btnp" id="bkIn">貼り付けた内容を読み込む</button>
-        </div>
+        <textarea id="bkTextOut" placeholder="ここに出てくる文字列を、LINEなどで送ってください。" spellcheck="false" style="margin-top:8px"></textarea>
+        <button class="btns" id="bkCopy" style="width:100%;margin-top:8px">コピー</button>
       </div>
     </details>
 
-    <div class="note warn" style="margin-top:10px"><b>ホーム画面に追加するときの注意。</b>送られてきたリンクをそのままホーム画面に追加すると、アイコンにその時点の記録が焼き付いてしまいます。<b>受け取って読み込んだあとは、一度アドレスバーの「#」より前だけのURLで開き直してから追加</b>してください。すでに追加してしまった場合も、同じ内容を二度読み込むことはないので記録が巻き戻る心配はありません。</div>
+    <div class="note warn" style="margin-top:10px"><b>ホーム画面のアプリに入れる手順。</b><br>
+    ①送る人は「送る側：文字列で渡す」を開いて<b>書き出す→コピー</b>し、LINEで送る<br>
+    ②受け取る人はその文字列を<b>長押しでコピー</b><br>
+    ③ホーム画面のアイコンからアプリを開き、<b>「コピーした内容を読み込む」</b>を押す<br><br>
+    リンクをタップする方法だとSafariが開いてしまい、ホーム画面のアプリには入りません（iPhoneでは保存場所が別々のため）。上の「リンクにして送る」は、相手がSafariで使っている場合や、パソコンに渡すときに便利です。</div>
 
     <div class="note calm" style="margin-top:10px"><b>送られるもの：</b>予定日／産院の連絡先／質問メモ／体重・血圧／胎動の記録／準備リストのチェック／文字サイズなどの設定。<br><br>読み込むと、受け取った側の記録は<b>上書きされます</b>。両方で別々に記録している場合は注意してください。リンクの中身は暗号化されていないので、送り先を間違えないように。</div>
   </section>
@@ -2965,9 +2974,9 @@ var MENU_LAB={"setup":"入力するところ","food": "これ食べてええ？"
 /* ---- backup / handoff ---- */
 (function(){
   var KEYS=["premam-due","premam-contact","premam-q","premam-rec","premam-kick","premam-check","premam-size","premam-theme","premam-caf","premam-ctx"];
-  $("#bkOut").addEventListener("click",function(){$("#bkText").value=pack();});
+  $("#bkOut").addEventListener("click",function(){$("#bkTextOut").value=pack();});
   $("#bkCopy").addEventListener("click",function(){
-    var t=$("#bkText");if(!t.value){alert("先に書き出してください");return;}
+    var t=$("#bkTextOut");if(!t.value){alert("先に書き出してください");return;}
     t.select();
     if(navigator.clipboard)navigator.clipboard.writeText(t.value);
     else document.execCommand("copy");
@@ -3056,12 +3065,41 @@ var MENU_LAB={"setup":"入力するところ","food": "これ食べてええ？"
     },300);
   })();
 
-  $("#bkIn").addEventListener("click",function(){
-    var v=$("#bkText").value.trim();
-    if(v.indexOf("PREMAM1:")!==0){alert("書き出した文字列を貼りつけてください");return;}
-    if(!confirm("この端末の記録を、貼り付けた内容で上書きします。よろしいですか？"))return;
-    if(apply(v)){alert("読み込みました。画面を更新します。");location.reload();}
-    else alert("読み込めませんでした。文字列が途中で切れていないか確認してください。");
+  /* 文字列でもURLでも受け取れる */
+  function extract(raw){
+    var v=(raw||"").trim(),i=v.indexOf("#d=");
+    if(i>-1){try{v=decodeURIComponent(v.slice(i+3));}catch(e){v=v.slice(i+3);}}
+    i=v.indexOf("PREMAM1:");
+    if(i>-1)v=v.slice(i);
+    return v.replace(/\s+/g,"");
+  }
+  function importFrom(raw,quiet){
+    var v=extract(raw);
+    if(v.indexOf("PREMAM1:")!==0){
+      if(!quiet)alert("読み込める内容が見つかりませんでした。\n送られてきた文字列かURLを、まるごと貼り付けてください。");
+      return false;
+    }
+    if(!confirm("この端末の記録を、受け取った内容で上書きします。よろしいですか？"))return false;
+    if(apply(v)){alert("読み込みました。画面を更新します。");location.reload();return true;}
+    alert("読み込めませんでした。途中で切れていないか確認してください。");
+    return false;
+  }
+  $("#bkIn").addEventListener("click",function(){importFrom($("#bkText").value);});
+  $("#bkPaste").addEventListener("click",function(){
+    if(navigator.clipboard&&navigator.clipboard.readText){
+      navigator.clipboard.readText().then(function(t){
+        if(!importFrom(t,true)){
+          $("#bkText").value=t||"";
+          alert(t?"コピーされていた内容からは読み込めませんでした。下の枠を確認してください。":"クリップボードが空でした。LINEで受け取った文字列をコピーしてから、もう一度押してください。");
+        }
+      }).catch(function(){
+        alert("クリップボードを読み取れませんでした。下の枠に貼り付けてから「貼り付けた内容を読み込む」を押してください。");
+        $("#bkText").focus();
+      });
+    }else{
+      alert("この端末では自動で読み取れません。下の枠に貼り付けてから「貼り付けた内容を読み込む」を押してください。");
+      $("#bkText").focus();
+    }
   });
 })();
 
