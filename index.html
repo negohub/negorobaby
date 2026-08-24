@@ -967,6 +967,8 @@ section.later .sub,section.past .sub{opacity:.5}
       </div>
     </details>
 
+    <div class="note warn" style="margin-top:10px"><b>ホーム画面に追加するときの注意。</b>送られてきたリンクをそのままホーム画面に追加すると、アイコンにその時点の記録が焼き付いてしまいます。<b>受け取って読み込んだあとは、一度アドレスバーの「#」より前だけのURLで開き直してから追加</b>してください。すでに追加してしまった場合も、同じ内容を二度読み込むことはないので記録が巻き戻る心配はありません。</div>
+
     <div class="note calm" style="margin-top:10px"><b>送られるもの：</b>予定日／産院の連絡先／質問メモ／体重・血圧／胎動の記録／準備リストのチェック／文字サイズなどの設定。<br><br>読み込むと、受け取った側の記録は<b>上書きされます</b>。両方で別々に記録している場合は注意してください。リンクの中身は暗号化されていないので、送り先を間違えないように。</div>
   </section>
 
@@ -3021,8 +3023,34 @@ var MENU_LAB={"setup":"入力するところ","food": "これ食べてええ？"
     var str=decodeURIComponent(hh.slice(3));
     history.replaceState(null,"",location.pathname);
     if(str.indexOf("PREMAM1:")!==0)return;
+
+    /* 同じ内容を二度読み込まない（共有リンクをホーム画面に追加した場合の事故防止） */
+    var tag="";
+    try{
+      var a=5381,i=str.length;while(i--){a=(a*33^str.charCodeAt(i))>>>0;}
+      tag=a.toString(36)+"-"+str.length.toString(36);
+    }catch(e){}
+    var seen=null;try{seen=localStorage.getItem("premam-imported");}catch(e){}
+    if(tag&&seen===tag){
+      /* 2回目以降：静かに無視して、追加し直しを案内する */
+      setTimeout(function(){
+        var n=document.getElementById("upBar");if(!n||!n.hidden)return;
+        n.hidden=false;document.body.classList.add("has-up");
+        n.querySelector("span").textContent="このアイコンは共有リンクから作られています。追加し直すと安心です";
+        var ok=document.getElementById("upNow");
+        ok.textContent="開き直す";
+        ok.onclick=function(){location.replace(location.pathname);};
+        document.getElementById("upLater").onclick=function(){
+          n.hidden=true;document.body.classList.remove("has-up");
+        };
+      },500);
+      return;
+    }
+
     setTimeout(function(){
-      if(!confirm("送られてきた記録をこの端末に読み込みますか？\n\n予定日・産院の連絡先・質問メモ・体重や胎動の記録が、この端末の内容に上書きされます。"))return;
+      var yes=confirm("送られてきた記録をこの端末に読み込みますか？\n\n予定日・産院の連絡先・質問メモ・体重や胎動の記録が、この端末の内容に上書きされます。");
+      if(tag){try{localStorage.setItem("premam-imported",tag);}catch(e){}}
+      if(!yes)return;
       if(apply(str)){alert("読み込みました。画面を更新します。");location.reload();}
       else alert("読み込めませんでした。リンクが途中で切れているかもしれません。");
     },300);
