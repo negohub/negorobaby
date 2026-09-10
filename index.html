@@ -244,6 +244,30 @@ footer{margin-top:50px;padding:22px 0 0;border-top:2px dashed var(--line);font-s
 .rectable td{padding:7px 8px;border-bottom:1px dashed var(--line);color:var(--ink-mid);white-space:nowrap}
 .rectable .x{color:var(--ink-soft);cursor:pointer;background:none;border:none;font-size:14px}
 
+/* --- application checklist --- */
+.ap{background:var(--card);border:1px solid var(--line);border-radius:20px;box-shadow:var(--sh);overflow:hidden;margin-bottom:12px}
+.ap-h{display:flex;align-items:center;gap:10px;padding:12px 16px;background:var(--pink-l)}
+.ap-h b{font-family:"Zen Maru Gothic",sans-serif;font-size:15px;color:var(--pink-d);flex:1}
+.ap-h span{font-size:11.5px;color:var(--ink-mid);font-weight:700}
+.ap-i{display:flex;gap:12px;padding:14px 16px;border-top:1px dashed var(--line);align-items:flex-start}
+.ap-i input{appearance:none;-webkit-appearance:none;flex:0 0 auto;width:24px;height:24px;border:2px solid var(--line);
+  border-radius:8px;margin-top:2px;cursor:pointer;position:relative;background:#fff}
+html[data-theme="dark"] .ap-i input{background:var(--pink-bg)}
+.ap-i input:checked{background:var(--pink);border-color:var(--pink)}
+.ap-i input:checked::after{content:"\2713";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:15px;font-weight:700}
+.ap-i input:focus-visible{outline:3px solid var(--lav);outline-offset:2px}
+.ap-b{flex:1;min-width:0}
+.ap-t{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:15.5px;color:var(--ink);line-height:1.5}
+.ap-i input:checked ~ .ap-b .ap-t{text-decoration:line-through;color:var(--ink-soft)}
+.ap-m{display:flex;flex-wrap:wrap;gap:5px;margin:5px 0 4px}
+.ap-m i{font-style:normal;font-size:11px;font-weight:700;padding:3px 9px;border-radius:100px}
+.ap-m .w{background:var(--lav-bg);color:var(--lav)}
+.ap-m .p{background:var(--mint-bg);color:var(--mint)}
+.ap-m .l{background:var(--red-bg);color:var(--red)}
+.ap-d{font-size:13.5px;color:var(--ink-mid);line-height:1.85}
+.ap-done{padding:12px 16px;font-size:12.5px;color:var(--ink-soft);border-top:1px dashed var(--line);text-align:center}
+
 /* --- setup inline rows --- */
 .setup details{border-bottom:1px dashed var(--line)}
 .setup details:last-child{border-bottom:none}
@@ -1096,12 +1120,36 @@ section.later .sub,section.past .sub{opacity:.5}
     <div class="note calm" style="margin-top:10px">2026年5月に改正健康保険法が成立し、正常分娩を公的保険でまかなう新制度（自己負担ゼロ）が決まりました。ただし施行は公布から2年以内で、実際の開始は2027〜2028年度の見込み。<b>今は従来どおり出産育児一時金50万円が使えます。</b></div>
   </section>
 
+  <section id="matsudo" data-from="0" data-to="42">
+    <span class="eyebrow">松戸市</span>
+    <h2>松戸市で受けられるもの</h2>
+    <p class="sub">国の制度とは別に、松戸市が独自にやっているものです。窓口は<b>市民健康相談室（市役所・各支所内）</b>と<b>こども家庭センター母子保健担当室（047-366-5180）</b>。母子手帳の交付時にまとめて案内されますが、案内漏れもあるので確認用に。</p>
+    <div id="matsudoBody"></div>
+    <div class="note calm" style="margin-top:10px">金額や条件は変わることがあります。申請前に<b>「まつどDE子育て」（松戸市公式）</b>で最新をご確認ください。里帰り出産や転入・転出があると受診票の扱いが変わるので、そのときは必ず窓口へ。</div>
+  </section>
+
+  <section id="tokuten" data-from="0" data-to="42">
+    <span class="eyebrow">特典</span>
+    <h2>母子手帳でもらえるもの</h2>
+    <p class="sub">母子手帳を見せるだけで、無料でもらえるものがかなりあります。<b>タップでチェックできます。</b>全部やる必要はありません。上から3つだけでも十分元は取れます。</p>
+    <div id="tokutenBody"></div>
+    <div class="note calm" style="margin-top:10px">内容と実施状況は時期・店舗で変わります。来店前に公式サイトで確認を。<b>登録すると案内メールやDMが届くもの</b>もあるので、気になる場合は専用のメールアドレスを使うと楽です。</div>
+  </section>
+
   <section id="cost" data-from="12" data-to="41">
     <span class="eyebrow">実際の金額</span>
     <h2>結局いくら要るのか</h2>
     <p class="sub">制度の話とは別に、財布から出ていく実額の目安です。金額は全国平均で、地域と施設で大きく変わります。</p>
     <div id="costBody"></div>
     <div class="note calm" style="margin-top:10px"><b>出ていく額より、タイミングがつらい。</b>もらえるお金は合計するとかなりの額になりますが、振り込まれるのは数か月後です。<b>現金で50〜80万円を先に用意できる状態</b>にしておくと、精神的にまったく違います。</div>
+  </section>
+
+  <section id="apply" data-from="0" data-to="41">
+    <span class="eyebrow">申請の順番</span>
+    <h2>お金のためにやること</h2>
+    <p class="sub">母子手帳をもらってから、産後1年までに申請するものを順番に並べました。<b>タップでチェックできます</b>（この端末に保存されます）。赤いバッジは期限があるもの、緑は<b>パパが代われるもの</b>です。</p>
+    <div id="applyBody"></div>
+    <div class="note calm" style="margin-top:10px">会社員（健康保険＋雇用保険）を前提にしています。自営業・扶養内の場合、出産手当金と育児休業給付は対象外です。金額と条件は「もらえるお金」のページに。</div>
   </section>
 
   <section id="todo" data-from="0" data-to="41">
@@ -1228,6 +1276,9 @@ section.later .sub,section.past .sub{opacity:.5}
       <li>厚生労働省「育児休業等給付の内容と支給申請手続」／出生後休業支援給付金・育児時短就業給付金（2025年4月創設）</li>
       <li>こども家庭庁「妊婦のための支援給付」／児童手当（2024年10月拡充）</li>
       <li>改正健康保険法（2026年5月29日成立・公布後2年以内施行）</li>
+      <li>松戸市「まつどDE子育て」（母子健康手帳の交付／妊婦健康診査／妊婦のための支援給付／産後ケア事業／妊産婦向けタクシー利用料助成 ほか）</li>
+      <li>千葉県「子育て応援！チーパス事業」</li>
+      <li>各社の妊婦向け特典は2026年8〜9月時点の各公式情報</li>
     </ul>
     <p style="margin-top:12px">今表示しているファイルの更新日時：<b id="verTag">確認中…</b></p>
     <button class="btns" id="reloadBtn" style="margin-top:8px">&#8635; 最新版にする</button>
@@ -1914,6 +1965,87 @@ const TIPS=[
 {h:"性別を聞くかどうかも自由",d:"多くは18〜20週ごろにわかりますが、<b>「聞かない」という選択もできます。</b>産院に先に伝えておけば、口をすべらせないよう配慮してくれます。<br><br>わかっても、外れることはあります。名前を1つに絞りきらないのが安全です。"}
 ];
 
+const APPLY=[
+{g:"妊娠がわかったら",n:"母子手帳をもらう前後",l:[
+ {t:"妊娠届を出す",w:"8〜11週ごろ",p:0,lim:"",d:"産院で妊娠届出書をもらい、住んでいる自治体の窓口へ。<b>母子健康手帳と、妊婦健診の受診票（14回分）</b>がここで交付されます。すべての入口。"},
+ {t:"妊婦のための支援給付（前期 5万円）",w:"妊娠届のあと",p:0,lim:"",d:"自治体の面談とセットで案内されます。多くは妊娠届と同じ日か、その後の面談時に申請。<b>案内が来なければ自分から窓口で聞く</b>。"},
+ {t:"会社へ報告する",w:"体調しだい",p:0,lim:"",d:"産休・育休・給付の起点になります。直属の上司→人事の順。つわりがひどければ早めのほうが守られます。"}
+]},
+{g:"妊娠中",n:"必要になったときだけ",l:[
+ {t:"母健カードを出す",w:"つらいとき",p:0,lim:"",d:"「母性健康管理指導事項連絡カード」を医師に書いてもらえば、会社は時差通勤・時短・休業に応じる義務があります。無料。"},
+ {t:"傷病手当金",w:"4日以上休んだら",p:0,lim:"",d:"重いつわりや切迫早産で連続4日以上休んだ場合、健康保険から<b>給与の2/3</b>。産休に入る前でも使えます。会社経由で申請。"},
+ {t:"限度額適用認定証（またはマイナ保険証の登録）",w:"入院しそうなとき",p:1,lim:"",d:"帝王切開や切迫入院に備えて。事前にあれば<b>窓口の支払いが上限まで</b>で済みます。健保に申請。"},
+ {t:"医療保険の給付条件を確認",w:"いつでも",p:1,lim:"",d:"帝王切開・切迫早産の入院は給付対象のことが多い。証券を出して条件を見ておく。"}
+]},
+{g:"産前（28週〜）",n:"出産前に済ませる",l:[
+ {t:"産前産後休業の届出",w:"28〜32週",p:0,lim:"",d:"会社へ。あわせて<b>産休中の社会保険料が免除</b>されます（手続きは会社が行う）。"},
+ {t:"出産育児一時金・直接支払制度の合意書",w:"入院前",p:0,lim:"",d:"産院で書類にサインするだけ。これで<b>50万円が病院に直接支払われ</b>、差額だけの精算になります。"},
+ {t:"育児休業の申出",w:"育休開始の1か月前まで",p:1,lim:"期限あり",d:"会社へ。<b>パパの「出生時育児休業」は2週間前まで</b>。取得日数で給付が変わるので、早めに社内調整を。"}
+]},
+{g:"出産後すぐ",n:"パパが動くところ",l:[
+ {t:"出生届",w:"14日以内",p:1,lim:"14日",d:"生まれた日を含めて14日以内に役所へ。住所地・本籍地・出産地のどこでも可。<b>名前を決める期限</b>でもあります。"},
+ {t:"児童手当の認定請求",w:"出生の翌日から15日以内",p:1,lim:"15日",d:"<b>申請した月の翌月分から支給。遅れた分は戻りません。</b>出生届と同じ日に出すのが確実。0〜3歳未満は月15,000円。"},
+ {t:"健康保険への加入",w:"できるだけ早く",p:1,lim:"",d:"赤ちゃんを扶養に入れる手続き。勤務先（国保なら役所）へ。次の乳幼児医療に保険証が必要です。"},
+ {t:"乳幼児医療費助成",w:"保険証ができたら",p:1,lim:"",d:"子どもの医療費が無料または少額に。役所へ。"},
+ {t:"出生連絡票",w:"退院後すぐ",p:1,lim:"",d:"母子手帳についているハガキ。出すと保健師の訪問につながります。"},
+ {t:"妊婦のための支援給付（後期 5万円×人数）",w:"出生届のあと",p:1,lim:"",d:"赤ちゃん1人あたり5万円。自治体の案内に従って申請。"},
+ {t:"出産育児一時金の差額申請",w:"退院後",p:1,lim:"",d:"直接支払制度で50万円に満たなかった場合、差額を健保に請求すると戻ってきます。<b>請求しないと出ません。</b>"}
+]},
+{g:"産後2か月〜",n:"まとまったお金が動く",l:[
+ {t:"出産手当金",w:"産後56日を過ぎてから",p:0,lim:"",d:"健康保険から<b>給与の2/3</b>を、産前42日＋産後56日ぶん。会社経由でまとめて申請するのが一般的。振込まで2〜3か月かかります。"},
+ {t:"育児休業給付金",w:"育休開始から4か月以内",p:0,lim:"期限あり",d:"雇用保険から。最初の180日は<b>67%</b>、以降50%。非課税で社会保険料も免除なので、手取りでは8割前後の感覚。会社が2か月ごとに申請します。"},
+ {t:"出生後休業支援給付金",w:"育休給付と同時",p:1,lim:"",d:"夫婦ともに条件を満たすと<b>+13%（最大28日）</b>で手取り10割相当に。<b>パパが子の出生後8週以内に14日以上</b>、ママが産後休業後8週以内に14日以上の育休を取ることが条件。取らないと純粋に損。"},
+ {t:"高額療養費",w:"帝王切開などのあと",p:1,lim:"",d:"限度額認定証を出していなかった場合は、あとから健保に請求して払い戻し。"}
+]},
+{g:"あとから",n:"忘れがちなもの",l:[
+ {t:"医療費控除（確定申告）",w:"翌年2〜3月",p:1,lim:"",d:"妊婦健診・分娩費・入院費・陣痛時のタクシー代まで対象。家族分を合算して年10万円超で申告できます。<b>領収書は今日から全部保管。</b>"},
+ {t:"育児時短就業給付",w:"復帰して時短を始めたら",p:0,lim:"",d:"2歳未満の子を育てるための時短で賃金が下がった場合、<b>賃金の最大10%</b>。会社経由で申請。"}
+]}
+];
+
+const MATSUDO=[
+{h:"母子健康手帳の交付",d:"産院で妊娠の診断を受けたら、<b>市民健康相談室（市役所・各支所内）</b>へ。母子手帳と一緒に、<b>受診票の別冊</b>（妊婦健診・妊婦歯科健診・産婦健診・乳児健診など）と<b>親子すこやかプラン</b>、マタニティマークがもらえます。<br><br>妊娠届出書は市のサイトからダウンロードして先に書いておけます。窓口でも書けます。ここが全部の入口です。"},
+{h:"妊婦健康診査（14回）",d:"受診票により、妊娠中に<b>14回</b>、原則として<b>千葉県内の医療機関</b>で受けられます。県外で受けたい場合は事前に市へ連絡を。<br><br>市外へ転出すると松戸市の受診票は使えなくなります。転入したときは、母子手帳と前の市町村の受診票を持って市民健康相談室で取り替えてもらえます。"},
+{h:"妊婦歯科健康診査（無料）",d:"出産までの間に<b>1回、市内の委託医療機関で無料</b>。受診票は母子手帳と一緒にもらえます。<br><br>歯周病は早産のリスクを上げるので、<b>安定期（16〜27週）に必ず行ってください。</b>無料なのに受けない人が多い、いちばんもったいない制度です。"},
+{h:"産婦健康診査",d:"産後の母体と気持ちの状態をみる健診。<b>「母子健康手帳」と「松戸市産婦健康診査受診票」</b>を医療機関に出すと助成が受けられます。<br><br>市と契約していない医療機関で受けた場合は、あとから<b>償還払い（払い戻し）</b>の手続きができます。領収書は必ず保管を。"},
+{h:"妊婦のための支援給付（5万円＋5万円）",d:"1回目が<b>5万円</b>、2回目が<b>胎児の人数×5万円</b>。妊娠届のあとと、出産後の申請です。<br><br>里帰り出産で長期間離れていても、<b>住民登録のある松戸市が支給</b>します。専用のコールセンターがあります。ATMでの操作を求められることは絶対にないので、そういう連絡は詐欺です。"},
+{h:"妊産婦向けタクシー利用料の助成",d:"松戸市に住民登録があり母子手帳の交付を受けている人が対象。<b>妊娠36週以降の妊婦健診</b>などで、自宅（または里帰り先）と医療機関の往復・片道に使ったタクシー代の一部が助成されます。<br><br><b>申請期限は「最後に利用した日から6か月以内」。</b>領収書を捨てないでください。過ぎると対象外です。"},
+{h:"産後ケア事業",d:"宿泊型・日帰り型は<b>産後4か月未満</b>、訪問型は<b>産後1年未満</b>。お母さんの心身のケアと、赤ちゃんの健康状態の相談ができます。<br><br><b>事前の申請が必要で、妊娠中から申し込めます。</b>「つらくなってから」ではなく、先に手続きだけ済ませておくのが正解。事業者に空きがないこともあるので早めに。"},
+{h:"ママパパ学級",d:"初めてママ・パパになる人向け。妊娠中の過ごし方と、生まれた後の生活のイメージがつかめます。<b>二人での参加が想定されていて、一人でも参加できます。</b>産院の母親学級と両方出てもかまいません。<br><br>詳しい日程は母子手帳の交付時に説明されます。"},
+{h:"妊婦訪問・赤ちゃん訪問",d:"保健師や助産師が家に来てくれます。産後は<b>乳児家庭全戸訪問（こんにちは赤ちゃん）</b>として全家庭が対象。<br><br>体重の増え方や気持ちの相談ができ、支援制度の案内もここでもらえます。母子手帳のハガキ（出生連絡票）を出すとつながります。"},
+{h:"まつどファミリー・サポート・センター",d:"出産直後の援助活動として、<b>産後4か月まで</b>育児・家事の支援が受けられます。地域の会員さんが手伝ってくれる仕組み。<br><br>利用には事前の会員登録が必要なので、妊娠中に登録だけ済ませておくと安心です。"},
+{h:"まつドリbabyヘルパー（子育て世帯訪問支援）",d:"家事や育児のヘルパーが訪問してくれる事業。産後の消耗しきった時期に効きます。対象と回数の条件があるので、こども家庭センターへ確認を。"},
+{h:"チャイルドシートのリース料金助成",d:"松戸市では<b>チャイルドシートのリース料金を助成</b>しています。退院時に車で帰るなら必須の装備なので、買う前に一度確認する価値があります。"},
+{h:"未熟児養育医療",d:"身体の発育が未熟なまま生まれて入院が必要になった場合に、<b>治療に必要な医療費を公費で一部負担</b>してもらえる制度です。該当したら病院か市から案内があります。"},
+{h:"まつどDE子育てLINE",d:"妊娠期から子育て期までの相談・情報をLINEで受け取れます。イベントや制度の案内も届くので、登録しておくと案内漏れが減ります。"},
+{h:"松戸市立総合医療センター（地域周産期母子医療センター）",d:"ハイリスク分娩や早産に対応する<b>地域周産期母子医療センター</b>に認定されています。小児医療センターは24時間体制。近くにこの体制があるのは大きな安心材料です。"},
+{h:"チーパス（千葉県の子育て応援カード）",d:"<b>妊娠中から使えます。</b>千葉県内在住で妊娠中、または18歳未満の子がいる家庭が対象。<b>「チーパスの店」で提示すると割引や特典</b>が受けられます。<br><br>電子版は「チーパス・スマイル」で登録すればスマホで使えます。<b>2017年から全国47都道府県で相互利用</b>ができるので、旅行先や里帰り先でも使えます。マクドナルドのハッピーセット割引など、身近な店も協賛しています。"}
+];
+
+const TOKUTEN=[
+{g:"お店でもらう",n:"母子手帳を持って行くだけ",l:[
+ {t:"アカチャンホンポ",w:"店舗",d:"アプリ（赤ちゃん本舗の会員）に登録して、<b>店舗で母子手帳を提示</b>するとプレママ特典がもらえます。オリジナルのマタニティマーク、商品サンプル、クーポンなど。<br><br>アプリ登録だけでは完結せず<b>店舗での受け取りが必要</b>です。買い物では200円（税抜）ごとに1ポイント。おむつやミルクは事前にクーポンを確認するのがコツ。"},
+ {t:"西松屋",w:"店舗",d:"西松屋アプリをダウンロード → 会員情報に出産予定日を登録 → 会員証の下に<b>プレママ特典のクーポン</b>が出ます。店舗でクーポンと母子手帳を提示するともらえます。<br><br>プライベートブランド「スマートエンジェル」の商品。<b>購入条件なし・完全無料</b>です。"},
+ {t:"ベビーザらス",w:"店舗",d:"以前のような無料サンプルバッグより、現在は<b>会員特典とクーポン</b>が中心です。スターカード会員、誕生月クーポンなど、買い物と組み合わせて使うもの。<br><br>無料サンプルの有無は店舗と時期で変わるので、来店前に確認を。"}
+]},
+{g:"ネットで申し込む",n:"登録するだけで届く",l:[
+ {t:"Amazon らくらくベビー（旧ベビーレジストリ）",w:"オンライン",d:"<b>いちばん中身が良いのはこれ。</b>出産準備リストを作って条件を満たすと、<b>「出産準備お試しBox」</b>が無料でもらえます。おむつやミルクのサンプル・フルサイズが箱で届く（中身は時期で変動）。<br><br>プライム会員だとさらに有利。<b>夫婦それぞれ登録できます。</b>在庫切れのことがあるので早めに。"},
+ {t:"楽天ママ割",w:"オンライン",d:"楽天会員なら無料登録するだけ。<b>毎月抽選でサンプルボックス</b>が当たります（マタニティ＆ベビーボックスなど）。<br><br>抽選なので必ずもらえるわけではありませんが、毎月応募できます。楽天での買い物のクーポンとポイント特典もつきます。"},
+ {t:"ベビーカレンダー",w:"オンライン",d:"アンケートに答えると、<b>母子手帳ケース</b>か<b>エコー写真アルバム</b>がもらえます。抽選でAmazonギフト券が当たることも。<br><br>母子手帳ケースは実際に毎回使うものなので、実用性は高いです。"},
+ {t:"カラダノート",w:"オンライン",d:"4種類ほどから<b>選べるプレゼント</b>。オリジナル出生届はダウンロードなので、応募後すぐ手に入ります。<br><br>登録後に保険相談などの案内が来ることがあります。"},
+ {t:"こどもちゃれんじ",w:"オンライン",d:"資料請求で<b>ファミリアとのコラボのフード付きバスタオル</b>か<b>読み聞かせ絵本2冊</b>。ロゴが入っていないので普段使いできます。<br><br>妊娠中と育児中で対象が分かれるので、応募前に条件を確認してください。"},
+ {t:"ピジョン",w:"オンライン",d:"LINEの友だち登録＋アンケートで、<b>オリジナルのマタニティマーク</b>が無料でもらえます。自治体でもらえるものとデザインが違うので、予備として。"},
+ {t:"コープデリ・パルシステム（千葉県対象）",w:"オンライン",d:"資料請求で<b>無料サンプル</b>がもらえます。加入すると<b>母子手帳交付から子どもが一定年齢になるまで配達料が無料または割引</b>になる制度があります（名称と条件は生協により異なる）。<br><br>重いもの（米・水・牛乳・飲料）を運ばなくて済むのが最大の価値。妊娠後期と産後は、これが本当に効きます。"},
+ {t:"ミルポッシェ",w:"オンライン",d:"<b>生後2か月以内の申込</b>で、赤ちゃんの等身大ポスターとA3カレンダーが無料。2か月を過ぎると有料になるので、産後すぐに手配を。"}
+]},
+{g:"公共・その他",n:"知らないと損",l:[
+ {t:"チーパス（千葉県）",w:"県",d:"<b>妊娠中から使える県の優待カード。</b>協賛店で提示すると割引や特典。電子版「チーパス・スマイル」で登録すればスマホで完結します。<b>全国どこでも相互利用可。</b>詳しくは「松戸市で受けられるもの」に。"},
+ {t:"マタニティマーク",w:"自治体・鉄道",d:"母子手帳の交付時にもらえます。<b>駅でも配布</b>しているところがあり、ピジョンなどでも無料でもらえます。<br><br>見た目でわからない初期こそ、いちばん体調が悪い時期です。予備を複数持っておくと、かばんを替えても困りません。"},
+ {t:"陣痛タクシー（無料登録）",w:"タクシー会社",d:"事前に住所と産院を登録しておくと、<b>陣痛時に優先的に配車</b>してくれるサービス。登録は無料で、防水シートも用意してくれます。<br><br>松戸市は<b>妊産婦向けのタクシー料金助成</b>もあるので、あわせて登録を。市が子育て世代向けのタクシー会社を案内しています。"},
+ {t:"（終了）ゼクシィBaby",w:"—",d:"「妊婦のための本」で有名でしたが、<b>2025年12月17日ですべてのサービスが終了</b>しています。今も紹介している記事がありますが、申し込めません。"}
+]}
+];
+
 /* ============ RENDER ============ */
 const $=s=>document.querySelector(s);
 function norm(s){return s.replace(/[\u30A1-\u30F6]/g,c=>String.fromCharCode(c.charCodeAt(0)-0x60)).toLowerCase();}
@@ -2144,6 +2276,47 @@ function renderStatic(){
     SALT.map(function(x){return "<tr><td>"+x.n+'</td><td class="num">'+x.g+"</td></tr>";}).join("")+
     '</tbody></table><div style="height:12px"></div>'+
     SALTTIPS.map(function(x){return acc(x.h,"<p>"+x.d+"</p>");}).join("");
+
+  (function(){
+    var ck={};try{ck=JSON.parse(localStorage.getItem("premam-apply")||"{}");}catch(e){ck={};}
+    var gi=0;
+    document.getElementById("applyBody").innerHTML=APPLY.map(function(g){
+      var rows=g.l.map(function(x){
+        var id="a"+(gi++);
+        return '<label class="ap-i"><input type="checkbox" data-a="'+id+'"'+(ck[id]?" checked":"")+
+          '><span class="ap-b"><span class="ap-t">'+x.t+'</span><span class="ap-m">'+
+          '<i class="w">'+x.w+"</i>"+(x.lim?'<i class="l">'+x.lim+"</i>":"")+
+          (x.p?'<i class="p">パパが代われる</i>':"")+'</span><span class="ap-d">'+x.d+"</span></span></label>";
+      }).join("");
+      return '<div class="ap"><div class="ap-h"><b>'+g.g+"</b><span>"+g.n+"</span></div>"+rows+"</div>";
+    }).join("");
+    document.getElementById("applyBody").addEventListener("change",function(e){
+      var c=e.target.closest("[data-a]");if(!c)return;
+      ck[c.dataset.a]=c.checked;
+      try{localStorage.setItem("premam-apply",JSON.stringify(ck));}catch(err){}
+    });
+  })();
+
+  $("#matsudoBody").innerHTML=MATSUDO.map(function(x){return acc(x.h,"<p>"+x.d+"</p>");}).join("");
+
+  (function(){
+    var ck={};try{ck=JSON.parse(localStorage.getItem("premam-tokuten")||"{}");}catch(e){ck={};}
+    var i=0;
+    document.getElementById("tokutenBody").innerHTML=TOKUTEN.map(function(g){
+      var rows=g.l.map(function(x){
+        var id="t"+(i++);
+        return '<label class="ap-i"><input type="checkbox" data-t="'+id+'"'+(ck[id]?" checked":"")+
+          '><span class="ap-b"><span class="ap-t">'+x.t+'</span><span class="ap-m"><i class="w">'+x.w+
+          '</i></span><span class="ap-d">'+x.d+"</span></span></label>";
+      }).join("");
+      return '<div class="ap"><div class="ap-h"><b>'+g.g+"</b><span>"+g.n+"</span></div>"+rows+"</div>";
+    }).join("");
+    document.getElementById("tokutenBody").addEventListener("change",function(e){
+      var c=e.target.closest("[data-t]");if(!c)return;
+      ck[c.dataset.t]=c.checked;
+      try{localStorage.setItem("premam-tokuten",JSON.stringify(ck));}catch(err){}
+    });
+  })();
 
   let saved={};
   try{saved=JSON.parse(localStorage.getItem("premam-check")||"{}");}catch(e){saved={};}
@@ -2646,7 +2819,7 @@ var SECT_ICON={setup:"\u270D\uFE0F",food:"\uD83C\uDF7D\uFE0F",life:"\uD83C\uDFE0
  count:"\uD83D\uDD22",limits:"\uD83D\uDCCC",tips:"\uD83D\uDC55",backup:"\uD83D\uDD17",
  nutri:"\uD83E\uDD57",fish:"\uD83D\uDC1F",salt:"\uD83E\uDDC2",weight:"\u2696\uFE0F",
  test:"\uD83E\uDE7A",echo:"\uD83D\uDDBC\uFE0F",record:"\uD83D\uDCC8",kick:"\uD83D\uDC63",
- money:"\uD83D\uDCB0",cost:"\uD83E\uDDFE",todo:"\uD83D\uDDC2\uFE0F",hokatsu:"\uD83C\uDFEB",edu:"\uD83C\uDF93",
+ money:"\uD83D\uDCB0",apply:"\uD83D\uDCDD",matsudo:"\uD83C\uDFE2",tokuten:"\uD83C\uDF81",cost:"\uD83E\uDDFE",todo:"\uD83D\uDDC2\uFE0F",hokatsu:"\uD83C\uDFEB",edu:"\uD83C\uDF93",
  birth:"\uD83C\uDF38",kinkyu:"\uD83C\uDFE5",prep:"\uD83C\uDF92",timer:"\u23F1\uFE0F",labor:"\uD83D\uDEA8",
  after:"\uD83D\uDCCB",baby1m:"\uD83D\uDC76",name:"\u270F\uFE0F",around:"\uD83D\uDC6A",papa:"\uD83D\uDCAA"};
 (function(){
@@ -2794,7 +2967,7 @@ function refreshSetup(){
 })();
 
 /* ---- menu ---- */
-var MENU_GROUPS=[["毎日使う", ["setup", "food", "life", "recipe", "caffeine"]], ["体と心", ["body", "danger", "contact", "phase", "fuan", "oops"]], ["知っておくこと", ["count", "limits", "tips", "backup"]], ["食べ方と体重", ["nutri", "fish", "salt", "weight"]], ["けんしんと記録", ["test", "echo", "record", "kick"]], ["お金と手続き", ["money", "cost", "todo", "hokatsu", "edu"]], ["お産に向けて", ["birth", "kinkyu", "prep", "timer", "labor"]], ["生まれた後", ["after", "baby1m", "name", "around", "papa"]]];
+var MENU_GROUPS=[["毎日使う", ["setup", "food", "life", "recipe", "caffeine"]], ["体と心", ["body", "danger", "contact", "phase", "fuan", "oops"]], ["知っておくこと", ["count", "limits", "tips", "backup"]], ["食べ方と体重", ["nutri", "fish", "salt", "weight"]], ["けんしんと記録", ["test", "echo", "record", "kick"]], ["お金と手続き", ["money", "apply", "matsudo", "tokuten", "cost", "todo", "hokatsu", "edu"]], ["お産に向けて", ["birth", "kinkyu", "prep", "timer", "labor"]], ["生まれた後", ["after", "baby1m", "name", "around", "papa"]]];
 var MENU_LAB={"setup":"入力するところ","food": "これ食べてええ？", "life": "これしてええ？", "recipe": "レシピ", "caffeine": "カフェイン計算", "body": "しんどい時の手当て", "danger": "危険サイン", "contact": "電話するところ", "phase": "時期別ガイド", "fuan": "不安のこと", "oops": "やっちゃったとき", "count": "週数の数え方", "limits": "書いていないこと", "tips": "服と細かいこと", "backup": "データの引き継ぎ", "nutri": "栄養", "fish": "お魚", "salt": "塩分の早見表", "weight": "体重の目安", "test": "健診と検査", "echo": "エコー用語", "record": "体重と血圧の記録", "kick": "胎動カウント", "money": "もらえるお金", "cost": "実際にいくら要る", "todo": "手続きの順番", "hokatsu": "保活", "edu": "教育費", "birth": "産み方の選択", "kinkyu": "入院になったら", "prep": "用意するもの", "timer": "陣痛タイマー", "labor": "お産のサイン", "after": "産後にやること", "baby1m": "最初の1か月", "name": "名づけと出生届", "around": "周りのこと", "papa": "パパへ"};
 (function(){
   var m=$("#menu"),hits=[];
@@ -2973,7 +3146,7 @@ var MENU_LAB={"setup":"入力するところ","food": "これ食べてええ？"
 
 /* ---- backup / handoff ---- */
 (function(){
-  var KEYS=["premam-due","premam-contact","premam-q","premam-rec","premam-kick","premam-check","premam-size","premam-theme","premam-caf","premam-ctx"];
+  var KEYS=["premam-due","premam-contact","premam-q","premam-rec","premam-kick","premam-check","premam-size","premam-theme","premam-caf","premam-ctx","premam-apply","premam-tokuten"];
   $("#bkOut").addEventListener("click",function(){$("#bkTextOut").value=pack();});
   $("#bkCopy").addEventListener("click",function(){
     var t=$("#bkTextOut");if(!t.value){alert("先に書き出してください");return;}
