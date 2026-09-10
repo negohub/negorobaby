@@ -247,26 +247,35 @@ footer{margin-top:50px;padding:22px 0 0;border-top:2px dashed var(--line);font-s
 /* --- application checklist --- */
 .ap{background:var(--card);border:1px solid var(--line);border-radius:20px;box-shadow:var(--sh);overflow:hidden;margin-bottom:12px}
 .ap-h{display:flex;align-items:center;gap:10px;padding:12px 16px;background:var(--pink-l)}
-.ap-h b{font-family:"Zen Maru Gothic",sans-serif;font-size:15px;color:var(--pink-d);flex:1}
-.ap-h span{font-size:11.5px;color:var(--ink-mid);font-weight:700}
-.ap-i{display:flex;gap:12px;padding:14px 16px;border-top:1px dashed var(--line);align-items:flex-start}
-.ap-i input{appearance:none;-webkit-appearance:none;flex:0 0 auto;width:24px;height:24px;border:2px solid var(--line);
-  border-radius:8px;margin-top:2px;cursor:pointer;position:relative;background:#fff}
-html[data-theme="dark"] .ap-i input{background:var(--pink-bg)}
-.ap-i input:checked{background:var(--pink);border-color:var(--pink)}
-.ap-i input:checked::after{content:"\2713";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-  color:#fff;font-size:15px;font-weight:700}
-.ap-i input:focus-visible{outline:3px solid var(--lav);outline-offset:2px}
+.ap-h b{font-family:"Zen Maru Gothic",sans-serif;font-size:16px;color:var(--pink-d)}
+.ap-h span{font-size:12px;color:var(--ink-mid);font-weight:700;flex:1}
+.ap-all{flex:0 0 auto;font-family:inherit;font-size:11.5px;font-weight:700;color:var(--pink-d);background:#fff;
+  border:2px solid var(--line);border-radius:100px;padding:5px 12px;cursor:pointer}
+.ap-all:hover,.ap-all:focus-visible{background:var(--pink);border-color:var(--pink);color:#fff}
+.ap-i{display:flex;gap:10px;border-top:1px dashed var(--line);align-items:flex-start;padding:0 14px 0 16px}
+.ap-i > input{appearance:none;-webkit-appearance:none;flex:0 0 auto;width:26px;height:26px;border:2px solid var(--line);
+  border-radius:9px;margin-top:15px;cursor:pointer;position:relative;background:#fff}
+html[data-theme="dark"] .ap-i > input{background:var(--pink-bg)}
+.ap-i > input:checked{background:var(--pink);border-color:var(--pink)}
+.ap-i > input:checked::after{content:"\2713";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:16px;font-weight:700}
+.ap-i > input:focus-visible{outline:3px solid var(--lav);outline-offset:2px}
+.ap-x{flex:1;min-width:0}
+.ap-x > summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px;padding:14px 0;min-height:58px}
+.ap-x > summary::-webkit-details-marker{display:none}
+.ap-x > summary:focus-visible{outline:3px solid var(--lav);outline-offset:-3px;border-radius:10px}
 .ap-b{flex:1;min-width:0}
-.ap-t{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:15.5px;color:var(--ink);line-height:1.5}
-.ap-i input:checked ~ .ap-b .ap-t{text-decoration:line-through;color:var(--ink-soft)}
-.ap-m{display:flex;flex-wrap:wrap;gap:5px;margin:5px 0 4px}
-.ap-m i{font-style:normal;font-size:11px;font-weight:700;padding:3px 9px;border-radius:100px}
+.ap-t{display:block;font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:15.5px;color:var(--ink);line-height:1.5}
+.ap-i > input:checked ~ .ap-x .ap-t{text-decoration:line-through;color:var(--ink-soft)}
+.ap-m{display:flex;flex-wrap:wrap;gap:5px;margin-top:5px}
+.ap-m i{font-style:normal;font-size:11.5px;font-weight:700;padding:3px 10px;border-radius:100px}
 .ap-m .w{background:var(--lav-bg);color:var(--lav)}
 .ap-m .p{background:var(--mint-bg);color:var(--mint)}
 .ap-m .l{background:var(--red-bg);color:var(--red)}
-.ap-d{font-size:13.5px;color:var(--ink-mid);line-height:1.85}
-.ap-done{padding:12px 16px;font-size:12.5px;color:var(--ink-soft);border-top:1px dashed var(--line);text-align:center}
+.ap-cv{flex:0 0 auto;width:26px;height:26px;border-radius:50%;background:var(--pink-l);color:var(--pink-d);
+  font-size:16px;line-height:1;display:flex;align-items:center;justify-content:center}
+.ap-x[open] .ap-cv{background:var(--pink);color:#fff}
+.ap-d{font-size:14px;color:var(--ink-mid);line-height:1.9;padding:0 0 16px}
 
 /* --- setup inline rows --- */
 .setup details{border-bottom:1px dashed var(--line)}
@@ -556,6 +565,9 @@ html[data-size="l"] .cd-sub,
 html[data-size="l"] .cd-next,
 html[data-size="l"] .baby-txt,
 html[data-size="l"] .dial-out{font-size:16px}
+html[data-size="l"] .ap-t{font-size:17.7px}
+html[data-size="l"] .ap-d{font-size:16px}
+html[data-size="l"] .ap-m i{font-size:13.1px}
 html[data-size="l"] .mg-l a,
 html[data-size="l"] .sr .sr-t{font-size:15.4px}
 html[data-size="l"] .badge,
@@ -602,6 +614,9 @@ html[data-size="xl"] .cd-sub,
 html[data-size="xl"] .cd-next,
 html[data-size="xl"] .baby-txt,
 html[data-size="xl"] .dial-out{font-size:18.2px}
+html[data-size="xl"] .ap-t{font-size:20.2px}
+html[data-size="xl"] .ap-d{font-size:18.2px}
+html[data-size="xl"] .ap-m i{font-size:15px}
 html[data-size="xl"] .mg-l a,
 html[data-size="xl"] .sr .sr-t{font-size:17.6px}
 html[data-size="xl"] .badge,
@@ -806,22 +821,6 @@ section.later .sub,section.past .sub{opacity:.5}
 
   <div class="gdiv" data-g="1"><span class="gd-n">01</span><div><b>最初に押さえる</b><span>お金と制度。ここが差になる</span></div></div>
 
-  <section id="setup" data-from="0" data-to="42">
-    <span class="eyebrow">最初に</span>
-    <h2>入力するところ</h2>
-    <p class="sub">入力できる場所の一覧です。<b>タップするとその場で入力できます</b>（ページを移動しなくて大丈夫）。全部やる必要はありません。まず「予定日」だけ入れれば、後は自動で回ります。</p>
-    <div class="setup" id="setupBody"></div>
-
-    <div class="card share" style="margin-top:12px">
-      <h3 style="margin-bottom:8px">入れ終わったら、もう1台へ</h3>
-      <p style="font-size:12.5px;color:var(--ink-mid);line-height:1.8;margin-bottom:12px">予定日も連絡先も、二人の端末で同じにしておくと安心です。押すと共有メニューが開くので、LINEで送ってください。<b>相手はリンクをタップするだけ</b>です。</p>
-      <button class="bigbtn" id="bkLink2">&#128279; リンクにして送る</button>
-      <div id="bkLinkOut2" style="margin-top:10px"></div>
-    </div>
-
-    <div class="note calm" style="margin-top:10px">入力したものは<b>この端末の中だけ</b>に保存されます。サーバーには何も送られません。<b>受け取った側の記録は上書きされる</b>ので、両方で別々に記録している場合だけ注意してください。</div>
-  </section>
-
   <section id="apply" data-from="0" data-to="41">
     <span class="eyebrow">申請の順番</span>
     <h2>お金のためにやること</h2>
@@ -844,6 +843,22 @@ section.later .sub,section.past .sub{opacity:.5}
     <p class="sub">母子手帳を見せるだけで無料でもらえるものを、<b>申し込む順に並べました。タップでチェックできます。</b>全部やる必要はありません。上の3つだけでも十分元は取れます。</p>
     <div id="tokutenBody"></div>
     <div class="note calm" style="margin-top:10px">内容と実施状況は時期・店舗で変わります。来店前に公式サイトで確認を。<b>登録すると案内メールやDMが届くもの</b>もあるので、気になる場合は専用のメールアドレスを使うと楽です。</div>
+  </section>
+
+  <section id="setup" data-from="0" data-to="42">
+    <span class="eyebrow">最初に</span>
+    <h2>入力するところ</h2>
+    <p class="sub">入力できる場所の一覧です。<b>タップするとその場で入力できます</b>（ページを移動しなくて大丈夫）。全部やる必要はありません。まず「予定日」だけ入れれば、後は自動で回ります。</p>
+    <div class="setup" id="setupBody"></div>
+
+    <div class="card share" style="margin-top:12px">
+      <h3 style="margin-bottom:8px">入れ終わったら、もう1台へ</h3>
+      <p style="font-size:12.5px;color:var(--ink-mid);line-height:1.8;margin-bottom:12px">予定日も連絡先も、二人の端末で同じにしておくと安心です。押すと共有メニューが開くので、LINEで送ってください。<b>相手はリンクをタップするだけ</b>です。</p>
+      <button class="bigbtn" id="bkLink2">&#128279; リンクにして送る</button>
+      <div id="bkLinkOut2" style="margin-top:10px"></div>
+    </div>
+
+    <div class="note calm" style="margin-top:10px">入力したものは<b>この端末の中だけ</b>に保存されます。サーバーには何も送られません。<b>受け取った側の記録は上書きされる</b>ので、両方で別々に記録している場合だけ注意してください。</div>
   </section>
 
   <div class="gdiv" data-g="2"><span class="gd-n">02</span><div><b>毎日使う</b><span>毎日開くところ</span></div></div>
@@ -2227,17 +2242,27 @@ function checklist(boxId,data,key){
   box.innerHTML=data.map(function(g){
     var rows=g.l.map(function(x){
       var id="k"+(i++);
-      return '<label class="ap-i"><input type="checkbox" data-k="'+id+'"'+(ck[id]?" checked":"")+
-        '><span class="ap-b"><span class="ap-t">'+x.t+'</span><span class="ap-m"><i class="w">'+x.w+"</i>"+
+      return '<div class="ap-i"><input type="checkbox" data-k="'+id+'"'+(ck[id]?" checked":"")+
+        ' aria-label="'+x.t+'"><details class="ap-x"><summary><span class="ap-b"><span class="ap-t">'+x.t+
+        '</span><span class="ap-m"><i class="w">'+x.w+"</i>"+
         (x.lim?'<i class="l">'+x.lim+"</i>":"")+(x.p?'<i class="p">パパが代われる</i>':"")+
-        '</span><span class="ap-d">'+x.d+"</span></span></label>";
+        '</span></span><span class="ap-cv">+</span></summary><div class="ap-d">'+x.d+"</div></details></div>";
     }).join("");
-    return '<div class="ap"><div class="ap-h"><b>'+g.g+"</b><span>"+g.n+"</span></div>"+rows+"</div>";
+    return '<div class="ap"><div class="ap-h"><b>'+g.g+"</b><span>"+g.n+
+      '</span><button class="ap-all" type="button">全部開く</button></div>'+rows+"</div>";
   }).join("");
   box.addEventListener("change",function(e){
     var c=e.target.closest("[data-k]");if(!c)return;
     ck[c.dataset.k]=c.checked;
     try{localStorage.setItem(key,JSON.stringify(ck));}catch(err){}
+  });
+  box.addEventListener("click",function(e){
+    var b=e.target.closest(".ap-all");if(!b)return;
+    var ds=b.closest(".ap").querySelectorAll("details.ap-x");
+    var anyClosed=false;
+    Array.prototype.forEach.call(ds,function(d){if(!d.open)anyClosed=true;});
+    Array.prototype.forEach.call(ds,function(d){d.open=anyClosed;});
+    b.textContent=anyClosed?"全部閉じる":"全部開く";
   });
 }
 function openAll(target){
@@ -2976,7 +3001,7 @@ function refreshSetup(){
 })();
 
 /* ---- menu ---- */
-var MENU_GROUPS=[["最初に押さえる", ["setup", "apply", "matsudo", "tokuten"]], ["毎日使う", ["food", "life", "recipe", "caffeine"]], ["体と心", ["body", "danger", "contact", "phase", "fuan", "oops"]], ["知っておくこと", ["count", "limits", "tips", "backup"]], ["食べ方と体重", ["nutri", "fish", "salt", "weight"]], ["健診と記録", ["test", "echo", "record", "kick"]], ["お金と手続き", ["money", "cost", "todo", "hokatsu", "edu"]], ["お産に向けて", ["birth", "kinkyu", "prep", "timer", "labor"]], ["生まれた後", ["after", "baby1m", "name", "around", "papa"]]];
+var MENU_GROUPS=[["最初に押さえる", ["apply", "matsudo", "tokuten", "setup"]], ["毎日使う", ["food", "life", "recipe", "caffeine"]], ["体と心", ["body", "danger", "contact", "phase", "fuan", "oops"]], ["知っておくこと", ["count", "limits", "tips", "backup"]], ["食べ方と体重", ["nutri", "fish", "salt", "weight"]], ["健診と記録", ["test", "echo", "record", "kick"]], ["お金と手続き", ["money", "cost", "todo", "hokatsu", "edu"]], ["お産に向けて", ["birth", "kinkyu", "prep", "timer", "labor"]], ["生まれた後", ["after", "baby1m", "name", "around", "papa"]]];
 var MENU_LAB={"setup":"入力するところ","food": "これ食べてええ？", "life": "これしてええ？", "recipe": "レシピ", "caffeine": "カフェイン計算", "body": "しんどい時の手当て", "danger": "危険サイン", "contact": "電話するところ", "phase": "時期別ガイド", "fuan": "不安のこと", "oops": "やっちゃったとき", "count": "週数の数え方", "limits": "書いていないこと", "tips": "服と細かいこと", "backup": "データの引き継ぎ", "nutri": "栄養", "fish": "お魚", "salt": "塩分の早見表", "weight": "体重の目安", "test": "健診と検査", "echo": "エコー用語", "record": "体重と血圧の記録", "kick": "胎動カウント", "apply": "申請の順番", "matsudo": "松戸市の制度", "tokuten": "母子手帳の特典", "money": "もらえるお金", "cost": "実際にいくら要る", "todo": "手続きの順番", "hokatsu": "保活", "edu": "教育費", "birth": "産み方の選択", "kinkyu": "入院になったら", "prep": "用意するもの", "timer": "陣痛タイマー", "labor": "お産のサイン", "after": "産後にやること", "baby1m": "最初の1か月", "name": "名づけと出生届", "around": "周りのこと", "papa": "パパへ"};
 (function(){
   var m=$("#menu"),hits=[];
