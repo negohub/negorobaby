@@ -520,6 +520,39 @@ html[data-theme="dark"] mark{background:#5C4A1E;color:#FFE9A8}
   a[href^="tel:"]::after{content:""}
 }
 
+/* --- group tabs --- */
+.gtabs{position:sticky;top:54px;z-index:40;margin:20px -18px 0;padding:10px 18px;
+  background:rgba(255,244,248,.94);backdrop-filter:saturate(1.4) blur(10px);
+  display:flex;gap:7px;overflow-x:auto;scrollbar-width:none}
+html[data-theme="dark"] .gtabs{background:rgba(30,23,32,.94)}
+.gtabs::-webkit-scrollbar{display:none}
+body.has-up .gtabs{top:100px}
+.gtab{flex:0 0 auto;font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:13.5px;
+  padding:10px 16px;border-radius:100px;border:2px solid var(--line);background:var(--card);
+  color:var(--ink-mid);cursor:pointer;white-space:nowrap;line-height:1.3;min-height:44px}
+.gtab i{font-style:normal;font-family:"Quicksand",sans-serif;font-size:11px;opacity:.6;margin-right:5px}
+.gtab[aria-selected=true]{background:var(--pink);border-color:var(--pink);color:#fff}
+.gtab[aria-selected=true] i{opacity:.85}
+.gtab.rec::after{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;
+  background:var(--mint);margin-left:6px;vertical-align:middle}
+.gtab[aria-selected=true].rec::after{background:#fff}
+
+.ghead{display:flex;align-items:center;gap:14px;margin:26px 0 4px;padding:0 2px}
+.ghead .gd-n{font-family:"Quicksand",sans-serif;font-weight:700;font-size:32px;color:var(--pink-d);opacity:.45;line-height:1}
+.ghead b{display:block;font-family:"Zen Maru Gothic",sans-serif;font-size:21px;color:var(--ink);line-height:1.3}
+.ghead span{display:block;font-size:12.5px;color:var(--ink-mid);margin-top:2px}
+.gjump{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 -14px}
+.gjump a{font-size:12.5px;font-weight:700;color:var(--ink-mid);background:var(--card);border:1px solid var(--line);
+  border-radius:100px;padding:7px 13px;text-decoration:none}
+.gjump a i{font-style:normal;margin-right:4px}
+.gjump a:hover,.gjump a:focus-visible{background:var(--pink);border-color:var(--pink);color:#fff}
+.gend{margin:46px 0 0;padding:20px;background:var(--card);border:1px solid var(--line);border-radius:20px;text-align:center}
+.gend p{font-size:13.5px;color:var(--ink-mid);margin-bottom:12px}
+.gend button{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:15px;color:#fff;background:var(--pink);
+  border:none;border-radius:14px;padding:13px 24px;cursor:pointer;min-height:48px}
+.gend button:hover{background:var(--pink-d)}
+.gdiv{display:none}
+
 /* --- group dividers --- */
 .gdiv{display:flex;align-items:center;gap:14px;margin:64px -18px -22px;padding:18px 20px;scroll-margin-top:66px;
   background:linear-gradient(90deg,var(--pink-l),transparent 78%);border-left:5px solid var(--pink)}
@@ -820,6 +853,10 @@ section.later .sub,section.past .sub{opacity:.5}
   <div class="nowcard" id="nowcard"></div>
 
   <div class="gdiv" data-g="1"><span class="gd-n">01</span><div><b>最初に押さえる</b><span>お金と制度。ここが差になる</span></div></div>
+
+  <div class="gtabs" id="gtabs" role="tablist"></div>
+  <div class="ghead" id="ghead"></div>
+  <div class="gjump" id="gjump"></div>
 
   <section id="apply" data-from="0" data-to="41">
     <span class="eyebrow">申請の順番</span>
@@ -1281,6 +1318,8 @@ section.later .sub,section.past .sub{opacity:.5}
     <p class="sub">「何か手伝おうか？」より「これやっとくね」。判断のコストを渡さないのが、一番の支えになります。</p>
     <div id="papaBody"></div>
   </section>
+
+  <div class="gend" id="gend"></div>
 
   <footer>
     <p>このサイトは家庭用のまとめです。医師・助産師・管理栄養士の指示があるときは、そちらが優先です。持病がある場合、妊娠糖尿病・妊娠高血圧症候群と診断された場合、貧血の治療中の場合は、必ず主治医の指導に従ってください。制度・金額は変わることがあるので、申請前に勤務先の担当部署や自治体の窓口でご確認を。</p>
@@ -2430,6 +2469,7 @@ function applyWeekUI(){
       return '<a href="#'+id+'">'+(SECT_LABEL[id]||id)+'</a>';}).join("")+'</div>';
 
   var secs=document.querySelectorAll("section[data-from]");
+  /* 表示されていないグループは触らない */
   Array.prototype.forEach.call(secs,function(s){
     var from=+s.dataset.from,to=+s.dataset.to,id=s.id;
     var old=s.querySelector(".unfold");if(old)old.remove();
@@ -3098,6 +3138,7 @@ var MENU_LAB={"setup":"入力するところ","food": "これ食べてええ？"
     close();if(typeof closeSearch==="function")closeSearch();
     if(x.type==="finder"){
       var sec=document.getElementById(x.sec);
+      if(typeof goSection==="function"&&typeof groupOf==="function"&&groupOf(x.sec)!==curG)showGroup(groupOf(x.sec),false);
       unfoldSection(sec);
       var input=document.getElementById(x.sec==="food"?"qF":"qL");
       input.value=x.q;
@@ -3106,6 +3147,7 @@ var MENU_LAB={"setup":"入力するところ","food": "これ食べてええ？"
       return;
     }
     var el=x.el,sec2=document.getElementById(x.sec);
+    if(typeof showGroup==="function"&&groupOf(x.sec)!==curG)showGroup(groupOf(x.sec),false);
     unfoldSection(sec2);
     setTimeout(function(){
       if(el.tagName==="DETAILS")el.open=true;
@@ -3156,11 +3198,91 @@ var MENU_LAB={"setup":"入力するところ","food": "これ食べてええ？"
   window.openSiteSearch=openSearch;
   m.addEventListener("click",function(e){
     if(e.target===m){close();return;}
-    if(e.target.closest(".mg-l a")||e.target.closest(".menu-quick a")){close();}
+    var ml=e.target.closest(".mg-l a")||e.target.closest(".menu-quick a");
+    if(ml){close();}
   });
   document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!m.hidden)close();});
 })();
 
+
+/* ---- group tabs (1画面に1グループだけ表示) ---- */
+var GSUB=["お金と制度。ここが差になる","毎日開くところ","しんどい時・不安な時","1回読めば、後は大丈夫",
+ "迷わないための数字","病院で使う・家でつける","制度の中身をくわしく","中期から少しずつ","産後すぐ必要になる"];
+var curG=0;
+
+function groupOf(id){
+  for(var i=0;i<MENU_GROUPS.length;i++){if(MENU_GROUPS[i][1].indexOf(id)>=0)return i;}
+  return 0;
+}
+function recGroup(){
+  var w=+$("#wk").value;
+  if(w<=11)return 0;
+  if(w<=15)return 2;
+  if(w<=27)return 4;
+  if(w<=31)return 5;
+  return 7;
+}
+function buildTabs(){
+  var rec=recGroup();
+  $("#gtabs").innerHTML=MENU_GROUPS.map(function(g,i){
+    return '<button class="gtab'+(i===rec?" rec":"")+'" role="tab" data-g="'+i+
+      '" aria-selected="'+(i===curG)+'"><i>'+("0"+(i+1)).slice(-2)+"</i>"+g[0]+"</button>";
+  }).join("");
+}
+function showGroup(i,scroll){
+  curG=i;
+  var ids=MENU_GROUPS[i][1];
+  Array.prototype.forEach.call(document.querySelectorAll("section[data-from]"),function(s){
+    s.style.display=(ids.indexOf(s.id)>=0)?"":"none";
+  });
+  Array.prototype.forEach.call($("#gtabs").children,function(b,bi){
+    b.setAttribute("aria-selected",bi===i);
+  });
+  $("#ghead").innerHTML='<span class="gd-n">'+("0"+(i+1)).slice(-2)+"</span><div><b>"+
+    MENU_GROUPS[i][0]+"</b><span>"+(GSUB[i]||"")+"</span></div>";
+  $("#gjump").innerHTML=ids.map(function(id){
+    return '<a href="#'+id+'"><i>'+(SECT_ICON[id]||"")+"</i>"+(MENU_LAB[id]||id)+"</a>";
+  }).join("");
+  var nx=(i+1)%MENU_GROUPS.length;
+  $("#gend").innerHTML='<p>「'+MENU_GROUPS[i][0]+'」はここまでです。</p><button type="button" data-next="'+nx+
+    '">つぎは '+("0"+(nx+1)).slice(-2)+" "+MENU_GROUPS[nx][0]+" &#8250;</button>";
+  if(typeof applyWeekUI==="function")applyWeekUI();
+  if(scroll)window.scrollTo({top:0,behavior:"auto"});
+}
+function goSection(id){
+  var g=groupOf(id);
+  if(g!==curG)showGroup(g,false);
+  var el=document.getElementById(id);
+  if(!el)return;
+  el.style.display="";
+  setTimeout(function(){el.scrollIntoView({behavior:"smooth",block:"start"});},40);
+}
+(function(){
+  buildTabs();
+  showGroup(recGroup(),false);
+  $("#gtabs").addEventListener("click",function(e){
+    var b=e.target.closest(".gtab");if(!b)return;
+    showGroup(+b.dataset.g,true);
+  });
+  $("#gend").addEventListener("click",function(e){
+    var b=e.target.closest("[data-next]");if(!b)return;
+    showGroup(+b.dataset.next,true);
+  });
+  /* ページ内リンクはグループを切り替えてから飛ぶ */
+  document.addEventListener("click",function(e){
+    var a=e.target.closest('a[href^="#"]');if(!a)return;
+    var id=a.getAttribute("href").slice(1);
+    if(!id||id==="top")return;
+    if(id==="dial"){e.preventDefault();window.scrollTo({top:0,behavior:"smooth"});return;}
+    var el=document.getElementById(id);
+    if(!el||!el.matches("section[data-from]"))return;
+    e.preventDefault();
+    goSection(id);
+  });
+  $("#wk").addEventListener("input",function(){buildTabs();
+    Array.prototype.forEach.call($("#gtabs").children,function(b,bi){b.setAttribute("aria-selected",bi===curG);});
+  });
+})();
 
 /* ---- night mode ---- */
 (function(){
