@@ -520,44 +520,47 @@ html[data-theme="dark"] mark{background:#5C4A1E;color:#FFE9A8}
   a[href^="tel:"]::after{content:""}
 }
 
-/* --- group tabs --- */
-.gtabs{position:sticky;top:54px;z-index:40;margin:20px -18px 0;padding:10px 18px;
-  background:rgba(255,244,248,.94);backdrop-filter:saturate(1.4) blur(10px);
-  display:flex;gap:7px;overflow-x:auto;scrollbar-width:none}
-html[data-theme="dark"] .gtabs{background:rgba(30,23,32,.94)}
-.gtabs::-webkit-scrollbar{display:none}
-body.has-up .gtabs{top:100px}
-.gtab{flex:0 0 auto;font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:13.5px;
-  padding:10px 16px;border-radius:100px;border:2px solid var(--line);background:var(--card);
-  color:var(--ink-mid);cursor:pointer;white-space:nowrap;line-height:1.3;min-height:44px}
-.gtab i{font-style:normal;font-family:"Quicksand",sans-serif;font-size:11px;opacity:.6;margin-right:5px}
-.gtab[aria-selected=true]{background:var(--pink);border-color:var(--pink);color:#fff}
-.gtab[aria-selected=true] i{opacity:.85}
-.gtab.rec::after{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;
-  background:var(--mint);margin-left:6px;vertical-align:middle}
-.gtab[aria-selected=true].rec::after{background:#fff}
+/* --- section accordion --- */
+.listbar{display:flex;align-items:center;gap:10px;margin:22px 0 10px;padding:0 2px}
+.listbar span{flex:1;font-size:12.5px;color:var(--ink-soft);font-weight:700}
+.listbar button{font-family:inherit;font-size:12.5px;font-weight:700;color:var(--ink-mid);background:var(--card);
+  border:2px solid var(--line);border-radius:100px;padding:8px 15px;cursor:pointer;min-height:40px}
+.listbar button:hover,.listbar button:focus-visible{background:var(--pink);border-color:var(--pink);color:#fff}
 
-.ghead{display:flex;align-items:center;gap:14px;margin:26px 0 4px;padding:0 2px}
-.ghead .gd-n{font-family:"Quicksand",sans-serif;font-weight:700;font-size:32px;color:var(--pink-d);opacity:.45;line-height:1}
-.ghead b{display:block;font-family:"Zen Maru Gothic",sans-serif;font-size:21px;color:var(--ink);line-height:1.3}
-.ghead span{display:block;font-size:12.5px;color:var(--ink-mid);margin-top:2px}
-.gjump{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 -14px}
-.gjump a{font-size:12.5px;font-weight:700;color:var(--ink-mid);background:var(--card);border:1px solid var(--line);
-  border-radius:100px;padding:7px 13px;text-decoration:none}
-.gjump a i{font-style:normal;margin-right:4px}
-.gjump a:hover,.gjump a:focus-visible{background:var(--pink);border-color:var(--pink);color:#fff}
-.gend{margin:46px 0 0;padding:20px;background:var(--card);border:1px solid var(--line);border-radius:20px;text-align:center}
-.gend p{font-size:13.5px;color:var(--ink-mid);margin-bottom:12px}
-.gend button{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:15px;color:#fff;background:var(--pink);
-  border:none;border-radius:14px;padding:13px 24px;cursor:pointer;min-height:48px}
-.gend button:hover{background:var(--pink-d)}
-.gdiv{display:none}
+section{margin:0 0 9px;scroll-margin-top:64px}
+.secx{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--sh);overflow:hidden}
+.secx > summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:13px;padding:15px 16px;min-height:70px}
+.secx > summary::-webkit-details-marker{display:none}
+.secx > summary:focus-visible{outline:3px solid var(--lav);outline-offset:-3px}
+.secx > summary:hover{background:var(--pink-bg)}
+.secx[open] > summary{background:var(--pink-l);border-bottom:1px solid var(--line)}
+.sx-ic{flex:0 0 auto;width:42px;height:42px;border-radius:14px;background:var(--pink-l);
+  display:flex;align-items:center;justify-content:center;font-size:21px;line-height:1}
+.secx[open] .sx-ic{background:#fff}
+.sx-t{flex:1;min-width:0}
+.sx-t b{display:block;font-family:"Zen Maru Gothic",sans-serif;font-size:17px;color:var(--ink);line-height:1.4}
+.sx-t > span{display:block;font-size:12.5px;color:var(--ink-soft);line-height:1.55;margin-top:2px;
+  overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.sx-w{display:inline-block;font-size:10.5px;font-weight:700;padding:2px 9px;border-radius:100px;
+  background:var(--lav-bg);color:var(--lav);margin-top:5px}
+.sx-w.now{background:var(--mint-bg);color:var(--mint)}
+.sx-w.past{background:var(--line);color:var(--ink-soft)}
+.sx-w:empty{display:none}
+.sx-cv{flex:0 0 auto;width:28px;height:28px;border-radius:50%;background:var(--pink-l);color:var(--pink-d);
+  font-size:17px;line-height:1;display:flex;align-items:center;justify-content:center}
+.secx[open] .sx-cv{background:var(--pink);color:#fff}
+.sx-b{padding:16px 16px 20px}
+.sx-b > .eyebrow,.sx-b > h2{display:none}
+.sx-b > .sub{margin-bottom:16px}
+section[data-state="later"] .sx-ic,section[data-state="later"] .sx-t b{opacity:.55}
+section[data-state="past"] .sx-ic,section[data-state="past"] .sx-t b{opacity:.5}
 
 /* --- group dividers --- */
-.gdiv{display:flex;align-items:center;gap:14px;margin:64px -18px -22px;padding:18px 20px;scroll-margin-top:66px;
+.gdiv{display:flex;align-items:center;gap:14px;margin:34px -18px 12px;padding:16px 20px;scroll-margin-top:66px;
   background:linear-gradient(90deg,var(--pink-l),transparent 78%);border-left:5px solid var(--pink)}
-.gdiv .gd-n{font-family:"Quicksand",sans-serif;font-weight:700;font-size:30px;color:var(--pink-d);line-height:1;
-  flex:0 0 auto;opacity:.5}
+.gdiv b{display:block;font-family:"Zen Maru Gothic",sans-serif;font-size:19px;color:var(--ink);line-height:1.35}
+.gdiv span{display:block;font-size:12.5px;color:var(--ink-mid);margin-top:2px}
+
 .gdiv b{display:block;font-family:"Zen Maru Gothic",sans-serif;font-size:19px;color:var(--ink);line-height:1.35}
 .gdiv span{display:block;font-size:12.5px;color:var(--ink-mid);margin-top:2px}
 
@@ -762,16 +765,6 @@ details.grpwrap:not([open]) > summary .gcv::after{content:"ひらく"}
 .nowcard .nc-links a{background:#fff;border:2px solid var(--pink-l);color:var(--pink-d);text-decoration:none;font-size:12.5px;font-weight:700;padding:7px 14px;border-radius:100px}
 .nowcard .nc-links a:hover,.nowcard .nc-links a:focus-visible{background:var(--pink);border-color:var(--pink);color:#fff}
 
-section.later,section.past{position:relative;max-height:132px;overflow:hidden}
-section.later::after,section.past::after{content:"";position:absolute;left:0;right:0;bottom:0;height:90px;background:linear-gradient(to bottom,rgba(255,244,248,0),rgba(255,244,248,.96) 70%);pointer-events:none}
-section.later h2,section.past h2{opacity:.5}
-section.later .sub,section.past .sub{opacity:.5}
-.unfold{position:absolute;left:0;right:0;bottom:6px;z-index:3;margin:0 auto;display:block;width:calc(100% - 4px);
-  font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:12.5px;color:var(--pink-d);
-  background:#fff;border:2px solid var(--pink-l);border-radius:100px;padding:9px;cursor:pointer}
-.unfold:hover,.unfold:focus-visible{background:var(--pink);border-color:var(--pink);color:#fff}
-.wkbadge{display:inline-block;font-size:10.5px;font-weight:700;padding:3px 10px;border-radius:100px;background:var(--lav-bg);color:var(--lav);margin-bottom:4px}
-.wkbadge.past{background:var(--mint-bg);color:var(--mint)}
 
 @media(min-width:620px){
   body{font-size:15.5px}
@@ -854,9 +847,10 @@ section.later .sub,section.past .sub{opacity:.5}
 
   <div class="gdiv" data-g="1"><span class="gd-n">01</span><div><b>最初に押さえる</b><span>お金と制度。ここが差になる</span></div></div>
 
-  <div class="gtabs" id="gtabs" role="tablist"></div>
-  <div class="ghead" id="ghead"></div>
-  <div class="gjump" id="gjump"></div>
+  <div class="listbar">
+    <span id="lbInfo"></span>
+    <button id="lbToggle" type="button">全部閉じる</button>
+  </div>
 
   <section id="apply" data-from="0" data-to="41">
     <span class="eyebrow">申請の順番</span>
@@ -1318,8 +1312,6 @@ section.later .sub,section.past .sub{opacity:.5}
     <p class="sub">「何か手伝おうか？」より「これやっとくね」。判断のコストを渡さないのが、一番の支えになります。</p>
     <div id="papaBody"></div>
   </section>
-
-  <div class="gend" id="gend"></div>
 
   <footer>
     <p>このサイトは家庭用のまとめです。医師・助産師・管理栄養士の指示があるときは、そちらが優先です。持病がある場合、妊娠糖尿病・妊娠高血圧症候群と診断された場合、貧血の治療中の場合は、必ず主治医の指導に従ってください。制度・金額は変わることがあるので、申請前に勤務先の担当部署や自治体の窓口でご確認を。</p>
@@ -2457,49 +2449,24 @@ var TOPPICKS=[
  {to:41,h:"いつ来てもいいように",s:"正期産が近づきました。陣痛と破水の見分け方、産院の電話番号、産後の手続き。この4つを押さえておけば大丈夫。",l:["timer","labor","contact","baby1m"]}
 ];
 
-var unfolded={};
 
 function applyWeekUI(){
   var w=+$("#wk").value;
-
   var pick=TOPPICKS[TOPPICKS.length-1];
   for(var i=0;i<TOPPICKS.length;i++){if(w<=TOPPICKS[i].to){pick=TOPPICKS[i];break;}}
-  $("#nowcard").innerHTML='<div class="nc-h">'+w+'週のいま &#9825; '+pick.h+'</div><div class="nc-s">'+pick.s+
+  $("#nowcard").innerHTML='<div class="nc-h">'+w+'週の今 &#9825; '+pick.h+'</div><div class="nc-s">'+pick.s+
     '</div><div class="nc-links">'+pick.l.map(function(id){
-      return '<a href="#'+id+'">'+(SECT_LABEL[id]||id)+'</a>';}).join("")+'</div>';
+      return '<a href="#'+id+'">'+(SECT_ICON[id]||"")+" "+(SECT_LABEL[id]||id)+'</a>';}).join("")+'</div>';
 
-  var secs=document.querySelectorAll("section[data-from]");
-  /* 表示されていないグループは触らない */
-  Array.prototype.forEach.call(secs,function(s){
+  Array.prototype.forEach.call(document.querySelectorAll("section[data-from]"),function(s){
     var from=+s.dataset.from,to=+s.dataset.to,id=s.id;
-    var old=s.querySelector(".unfold");if(old)old.remove();
-    var oldb=s.querySelector(".wkbadge");if(oldb)oldb.remove();
-    s.classList.remove("later","past");
-    if(unfolded[id])return;
-    var state=null;
-    if(w<from)state="later";
-    else if(w>to)state="past";
-    if(!state)return;
-    s.classList.add(state);
-    var badge=document.createElement("span");
-    badge.className="wkbadge"+(state==="past"?" past":"");
-    badge.innerHTML=state==="later"?(from+"週ごろから見るページ"):"この時期は通過しました";
-    var eb=s.querySelector(".eyebrow");
-    if(eb)eb.parentNode.insertBefore(badge,eb.nextSibling);else s.insertBefore(badge,s.firstChild);
-    var btn=document.createElement("button");
-    btn.className="unfold";
-    btn.innerHTML=state==="later"?"先に読んでおく":"もう一度開く";
-    btn.addEventListener("click",function(){
-      unfolded[id]=true;
-      s.classList.remove("later","past");
-      btn.remove();
-      var b=s.querySelector(".wkbadge");if(b)b.remove();
-    });
-    s.appendChild(btn);
+    var badge=s.querySelector(".sx-w");if(!badge)return;
+    if(pick.l.indexOf(id)>=0){s.dataset.state="now";badge.className="sx-w now";badge.textContent="今これ";}
+    else if(w<from){s.dataset.state="later";badge.className="sx-w";badge.textContent=from+"週から";}
+    else if(w>to){s.dataset.state="past";badge.className="sx-w past";badge.textContent="この時期は通過";}
+    else{s.dataset.state="";badge.className="sx-w";badge.textContent="";}
   });
-
 }
-
 $("#wk").addEventListener("input",applyWeekUI);
 applyWeekUI();
 
@@ -3127,10 +3094,7 @@ var MENU_LAB={"setup":"入力するところ","food": "これ食べてええ？"
 
   function unfoldSection(sec){
     if(!sec)return;
-    sec.classList.remove("later","past");
-    var u=sec.querySelector(".unfold");if(u)u.remove();
-    var b=sec.querySelector(".wkbadge");if(b)b.remove();
-    try{unfolded[sec.id]=true;}catch(e){}
+    var d=sec.querySelector(".secx");if(d)d.open=true;
   }
 
   function go(i){
@@ -3138,7 +3102,6 @@ var MENU_LAB={"setup":"入力するところ","food": "これ食べてええ？"
     close();if(typeof closeSearch==="function")closeSearch();
     if(x.type==="finder"){
       var sec=document.getElementById(x.sec);
-      if(typeof goSection==="function"&&typeof groupOf==="function"&&groupOf(x.sec)!==curG)showGroup(groupOf(x.sec),false);
       unfoldSection(sec);
       var input=document.getElementById(x.sec==="food"?"qF":"qL");
       input.value=x.q;
@@ -3147,7 +3110,6 @@ var MENU_LAB={"setup":"入力するところ","food": "これ食べてええ？"
       return;
     }
     var el=x.el,sec2=document.getElementById(x.sec);
-    if(typeof showGroup==="function"&&groupOf(x.sec)!==curG)showGroup(groupOf(x.sec),false);
     unfoldSection(sec2);
     setTimeout(function(){
       if(el.tagName==="DETAILS")el.open=true;
@@ -3205,82 +3167,82 @@ var MENU_LAB={"setup":"入力するところ","food": "これ食べてええ？"
 })();
 
 
-/* ---- group tabs (1画面に1グループだけ表示) ---- */
-var GSUB=["お金と制度。ここが差になる","毎日開くところ","しんどい時・不安な時","1回読めば、後は大丈夫",
- "迷わないための数字","病院で使う・家でつける","制度の中身をくわしく","中期から少しずつ","産後すぐ必要になる"];
-var curG=0;
-
-function groupOf(id){
-  for(var i=0;i<MENU_GROUPS.length;i++){if(MENU_GROUPS[i][1].indexOf(id)>=0)return i;}
-  return 0;
-}
-function recGroup(){
-  var w=+$("#wk").value;
-  if(w<=11)return 0;
-  if(w<=15)return 2;
-  if(w<=27)return 4;
-  if(w<=31)return 5;
-  return 7;
-}
-function buildTabs(){
-  var rec=recGroup();
-  $("#gtabs").innerHTML=MENU_GROUPS.map(function(g,i){
-    return '<button class="gtab'+(i===rec?" rec":"")+'" role="tab" data-g="'+i+
-      '" aria-selected="'+(i===curG)+'"><i>'+("0"+(i+1)).slice(-2)+"</i>"+g[0]+"</button>";
-  }).join("");
-}
-function showGroup(i,scroll){
-  curG=i;
-  var ids=MENU_GROUPS[i][1];
-  Array.prototype.forEach.call(document.querySelectorAll("section[data-from]"),function(s){
-    s.style.display=(ids.indexOf(s.id)>=0)?"":"none";
-  });
-  Array.prototype.forEach.call($("#gtabs").children,function(b,bi){
-    b.setAttribute("aria-selected",bi===i);
-  });
-  $("#ghead").innerHTML='<span class="gd-n">'+("0"+(i+1)).slice(-2)+"</span><div><b>"+
-    MENU_GROUPS[i][0]+"</b><span>"+(GSUB[i]||"")+"</span></div>";
-  $("#gjump").innerHTML=ids.map(function(id){
-    return '<a href="#'+id+'"><i>'+(SECT_ICON[id]||"")+"</i>"+(MENU_LAB[id]||id)+"</a>";
-  }).join("");
-  var nx=(i+1)%MENU_GROUPS.length;
-  $("#gend").innerHTML='<p>「'+MENU_GROUPS[i][0]+'」はここまでです。</p><button type="button" data-next="'+nx+
-    '">つぎは '+("0"+(nx+1)).slice(-2)+" "+MENU_GROUPS[nx][0]+" &#8250;</button>";
-  if(typeof applyWeekUI==="function")applyWeekUI();
-  if(scroll)window.scrollTo({top:0,behavior:"auto"});
-}
-function goSection(id){
-  var g=groupOf(id);
-  if(g!==curG)showGroup(g,false);
-  var el=document.getElementById(id);
-  if(!el)return;
-  el.style.display="";
-  setTimeout(function(){el.scrollIntoView({behavior:"smooth",block:"start"});},40);
+/* ---- 各セクションを折りたたみに変換 ---- */
+function firstSentence(t){
+  t=(t||"").replace(/\s+/g," ").trim();
+  var i=t.indexOf("。");
+  var s=(i>0&&i<44)?t.slice(0,i+1):t;
+  return s.length>52?s.slice(0,52)+"…":s;
 }
 (function(){
-  buildTabs();
-  showGroup(recGroup(),false);
-  $("#gtabs").addEventListener("click",function(e){
-    var b=e.target.closest(".gtab");if(!b)return;
-    showGroup(+b.dataset.g,true);
+  Array.prototype.forEach.call(document.querySelectorAll("section[data-from]"),function(sec){
+    if(sec.querySelector(".secx"))return;
+    var h2=sec.querySelector("h2"),sub=sec.querySelector(".sub");
+    var title=MENU_LAB[sec.id]||(h2?h2.textContent.trim():sec.id);
+    var desc=firstSentence(sub?sub.textContent:"");
+    var det=document.createElement("details");det.className="secx";
+    var sum=document.createElement("summary");
+    sum.innerHTML='<span class="sx-ic">'+(SECT_ICON[sec.id]||"")+'</span>'+
+      '<span class="sx-t"><b>'+title+'</b><span>'+desc+'</span><span class="sx-w"></span></span>'+
+      '<span class="sx-cv">+</span>';
+    det.appendChild(sum);
+    var body=document.createElement("div");body.className="sx-b";
+    while(sec.firstChild)body.appendChild(sec.firstChild);
+    det.appendChild(body);
+    sec.appendChild(det);
   });
-  $("#gend").addEventListener("click",function(e){
-    var b=e.target.closest("[data-next]");if(!b)return;
-    showGroup(+b.dataset.next,true);
+
+  function openIds(ids){
+    Array.prototype.forEach.call(document.querySelectorAll("section[data-from]"),function(s){
+      var d=s.querySelector(".secx");if(d)d.open=(ids.indexOf(s.id)>=0);
+    });
+  }
+  function count(){
+    var n=document.querySelectorAll("section[data-from] .secx[open]").length;
+    $("#lbInfo").textContent=n?(n+"つ開いています"):"タップして開いてください";
+    $("#lbToggle").textContent=n?"全部閉じる":"今週のおすすめを開く";
+  }
+  /* 今週おすすめだけ開いた状態で始める */
+  (function(){
+    var w=+$("#wk").value,pick=TOPPICKS[TOPPICKS.length-1];
+    for(var i=0;i<TOPPICKS.length;i++){if(w<=TOPPICKS[i].to){pick=TOPPICKS[i];break;}}
+    openIds(pick.l.slice(0,2));
+  })();
+  applyWeekUI();
+  count();
+
+  document.addEventListener("toggle",function(e){
+    if(e.target.classList&&e.target.classList.contains("secx"))count();
+  },true);
+
+  $("#lbToggle").addEventListener("click",function(){
+    var open=document.querySelectorAll("section[data-from] .secx[open]").length;
+    if(open){openIds([]);}
+    else{
+      var w=+$("#wk").value,pick=TOPPICKS[TOPPICKS.length-1];
+      for(var i=0;i<TOPPICKS.length;i++){if(w<=TOPPICKS[i].to){pick=TOPPICKS[i];break;}}
+      openIds(pick.l);
+    }
+    count();
+    window.scrollTo({top:$("#lbInfo").getBoundingClientRect().top+window.scrollY-70,behavior:"smooth"});
   });
-  /* ページ内リンクはグループを切り替えてから飛ぶ */
+
+  /* ページ内リンク：該当セクションを開いてから移動 */
+  window.goSection=function(id){
+    var sec=document.getElementById(id);if(!sec)return;
+    var d=sec.querySelector(".secx");if(d)d.open=true;
+    count();
+    setTimeout(function(){sec.scrollIntoView({behavior:"smooth",block:"start"});},40);
+  };
   document.addEventListener("click",function(e){
     var a=e.target.closest('a[href^="#"]');if(!a)return;
     var id=a.getAttribute("href").slice(1);
-    if(!id||id==="top")return;
+    if(!id||id==="top"){return;}
     if(id==="dial"){e.preventDefault();window.scrollTo({top:0,behavior:"smooth"});return;}
-    var el=document.getElementById(id);
-    if(!el||!el.matches("section[data-from]"))return;
+    var sec=document.getElementById(id);
+    if(!sec||!sec.matches("section[data-from]"))return;
     e.preventDefault();
     goSection(id);
-  });
-  $("#wk").addEventListener("input",function(){buildTabs();
-    Array.prototype.forEach.call($("#gtabs").children,function(b,bi){b.setAttribute("aria-selected",bi===curG);});
   });
 })();
 
