@@ -531,6 +531,18 @@ html[data-theme="dark"] mark{background:#5C4A1E;color:#FFE9A8}
   a[href^="tel:"]::after{content:""}
 }
 
+/* --- dial compact --- */
+.dial{padding:16px 16px 14px}
+.dialx{margin-top:12px;border-top:1px dashed var(--line);padding-top:10px}
+.dialx > summary{list-style:none;cursor:pointer;font-size:12.5px;font-weight:700;color:var(--pink-d);
+  display:flex;align-items:center;gap:6px;padding:6px 0}
+.dialx > summary::-webkit-details-marker{display:none}
+.dialx > summary::before{content:"+";display:inline-flex;align-items:center;justify-content:center;
+  width:20px;height:20px;border-radius:50%;background:var(--pink-l);font-size:14px}
+.dialx[open] > summary::before{content:"\2212"}
+.dial-focus{margin-top:8px}
+.nc-s{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+
 /* --- group accordion --- */
 .grpx{background:var(--card);border:1px solid var(--line);border-radius:20px;box-shadow:var(--sh);
   margin-bottom:10px;overflow:hidden}
@@ -887,8 +899,11 @@ details.grpwrap:not([open]) > summary .gcv::after{content:"ひらく"}
     </div>
     <input type="range" id="wk" min="0" max="42" value="7" aria-label="妊娠週数">
     <div class="dial-scale"><span>0w</span><span>16w</span><span>28w</span><span>42w</span></div>
-    <div class="baby"><div class="baby-emoji" id="babyEmoji">&#127827;</div><div class="baby-txt" id="babyTxt"></div></div>
-    <div class="dial-out" id="wkOut"></div>
+    <div id="todayBox"></div>
+    <details class="dialx">
+      <summary>赤ちゃんの様子・予定日の登録</summary>
+      <div class="baby"><div class="baby-emoji" id="babyEmoji">&#127827;</div><div class="baby-txt" id="babyTxt"></div></div>
+      <div class="dial-out" id="wkOut"></div>
     <div class="dial-focus" id="wkTags"></div>
     <details class="duebox" id="duebox">
       <summary id="dueSummary">&#128197; 予定日を登録すると、今日の週数が自動で出ます</summary>
@@ -904,19 +919,15 @@ details.grpwrap:not([open]) > summary .gcv::after{content:"ひらく"}
         <button class="btns" id="dueClear">消す</button>
       </div>
     </details>
+    </details>
     <div id="todayBox"></div>
   </div>
 
   <div class="nowcard" id="nowcard"></div>
 
-  <div class="gdiv" data-g="1"><span class="gd-n">01</span><div><b>最初に押さえる</b><span>お金と制度。ここが差になる</span></div></div>
-
   <div id="cityCard"></div>
 
-  <div class="listbar">
-    <span id="lbInfo"></span>
-    <button id="lbToggle" type="button">全部閉じる</button>
-  </div>
+  <div class="gdiv" data-g="1"><span class="gd-n">01</span><div><b>最初に押さえる</b><span>お金と制度。ここが差になる</span></div></div>
 
   <section id="apply" data-from="0" data-to="41">
     <span class="eyebrow">申請の順番</span>
@@ -3317,35 +3328,13 @@ function firstSentence(t){
       var d=s.querySelector(".secx");if(d)d.open=(ids.indexOf(s.id)>=0);
     });
   }
-  function count(){
-    var n=document.querySelectorAll("section[data-from] .secx[open]").length;
-    $("#lbInfo").textContent=n?(n+"つ開いています"):"グループをタップして開いてください";
-    $("#lbToggle").textContent=n?"全部閉じる":"今週のおすすめを開く";
-  }
-  /* 今週おすすめだけ開いた状態で始める */
-  (function(){
-    var w=+$("#wk").value,pick=TOPPICKS[TOPPICKS.length-1];
-    for(var i=0;i<TOPPICKS.length;i++){if(w<=TOPPICKS[i].to){pick=TOPPICKS[i];break;}}
-    openIds(pick.l.slice(0,2));
-  })();
+  function count(){}
   applyWeekUI();
   count();
 
   document.addEventListener("toggle",function(e){
     if(e.target.classList&&e.target.classList.contains("secx"))count();
   },true);
-
-  $("#lbToggle").addEventListener("click",function(){
-    var open=document.querySelectorAll("section[data-from] .secx[open]").length;
-    if(open){openIds([]);}
-    else{
-      var w=+$("#wk").value,pick=TOPPICKS[TOPPICKS.length-1];
-      for(var i=0;i<TOPPICKS.length;i++){if(w<=TOPPICKS[i].to){pick=TOPPICKS[i];break;}}
-      openIds(pick.l);
-    }
-    count();
-    window.scrollTo({top:$("#lbInfo").getBoundingClientRect().top+window.scrollY-70,behavior:"smooth"});
-  });
 
   /* ページ内リンク：該当セクションを開いてから移動 */
   window.goSection=function(id){
@@ -3406,8 +3395,8 @@ var CITY=[
     }
     var i=0;
     box.innerHTML='<div class="city"><div class="city-h"><span class="ic">&#127963;&#65039;</span>'+
-      '<b>市役所でやること</b></div>'+
-      '<div class="city-s">窓口は<b>市民健康相談室</b>（市役所・各支所内）。市民課とは別です。忘れ物があると出直しになるので、出る前に持ちものだけ確認を。</div>'+
+      '<b>今日、市役所でやること</b></div>'+
+      '<div class="city-s">窓口は<b>市民健康相談室</b>（市役所・各支所内）。市民課とは別です。<b>忘れ物があると出直しになる</b>ので、出る前に持ちものだけ確認を。</div>'+
       CITY.map(function(g){
         return '<div class="city-g"><b>'+g.g+"</b>"+g.l.map(function(t){
           var id="c"+(i++);
@@ -3479,7 +3468,7 @@ var CITY=[
       g.open=has;
     });
   }
-  markRec();openRec();
+  markRec();
   $("#wk").addEventListener("input",markRec);
 
   /* 目次・検索から飛ぶときは親グループも開く */
@@ -3496,17 +3485,6 @@ var CITY=[
     if(sec&&sec.matches("section[data-from]")){var g=sec.closest(".grpx");if(g)g.open=true;}
   },true);
 
-  /* listbar：全部閉じる＝グループごと閉じる */
-  var lb=$("#lbToggle");
-  if(lb){
-    lb.addEventListener("click",function(){
-      setTimeout(function(){
-        var anyOpen=document.querySelectorAll("section[data-from] .secx[open]").length;
-        if(!anyOpen)Array.prototype.forEach.call(document.querySelectorAll(".grpx"),function(g){g.open=false;});
-        else openRec();
-      },0);
-    });
-  }
 })();
 
 /* ---- night mode ---- */
