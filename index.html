@@ -531,6 +531,37 @@ html[data-theme="dark"] mark{background:#5C4A1E;color:#FFE9A8}
   a[href^="tel:"]::after{content:""}
 }
 
+/* --- 市役所カード --- */
+.city{background:linear-gradient(135deg,#FFE4EE,#FFF4F8);border:2px solid var(--pink);border-radius:22px;
+  padding:18px;margin-top:14px;box-shadow:0 6px 22px -12px rgba(214,72,111,.5)}
+html[data-theme="dark"] .city{background:linear-gradient(135deg,#42303A,#2A2029)}
+.city-h{display:flex;align-items:center;gap:10px;margin-bottom:4px}
+.city-h b{flex:1;font-family:"Zen Maru Gothic",sans-serif;font-size:19px;color:var(--pink-d);line-height:1.35}
+.city-h .ic{width:40px;height:40px;border-radius:14px;background:#fff;display:flex;align-items:center;
+  justify-content:center;font-size:21px;flex:0 0 auto}
+.city-s{font-size:13px;color:var(--ink-mid);line-height:1.8;margin-bottom:12px}
+.city-g{background:var(--card);border-radius:16px;padding:13px 14px;margin-bottom:9px}
+.city-g > b{display:block;font-family:"Zen Maru Gothic",sans-serif;font-size:14.5px;color:var(--ink);margin-bottom:6px}
+.city-g label{display:flex;gap:10px;align-items:flex-start;padding:7px 0;font-size:14px;color:var(--ink-mid);
+  line-height:1.75;cursor:pointer;border-bottom:1px dashed var(--line)}
+.city-g label:last-child{border-bottom:none}
+.city-g input{appearance:none;-webkit-appearance:none;flex:0 0 auto;width:24px;height:24px;border:2px solid var(--line);
+  border-radius:8px;margin-top:2px;cursor:pointer;position:relative;background:var(--pink-bg)}
+.city-g input:checked{background:var(--pink);border-color:var(--pink)}
+.city-g input:checked::after{content:"\2713";position:absolute;inset:0;display:flex;align-items:center;
+  justify-content:center;color:#fff;font-size:15px;font-weight:700}
+.city-g input:checked + span{text-decoration:line-through;color:var(--ink-soft)}
+.city-g input:focus-visible{outline:3px solid var(--lav);outline-offset:2px}
+.city-g em{font-style:normal;color:var(--red);font-weight:700}
+.city-f{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.city-f a,.city-f button{flex:1 1 140px;text-align:center;font-family:"Zen Maru Gothic",sans-serif;font-weight:700;
+  font-size:14px;padding:13px;border-radius:14px;cursor:pointer;text-decoration:none;min-height:48px;
+  display:flex;align-items:center;justify-content:center;border:none}
+.city-f a{background:var(--red);color:#fff}
+.city-f button{background:var(--card);color:var(--ink-mid);border:2px solid var(--line)}
+.city-back{width:100%;margin:10px 0 0;font-family:inherit;font-size:12.5px;font-weight:700;color:var(--ink-soft);
+  background:transparent;border:2px dashed var(--line);border-radius:100px;padding:9px;cursor:pointer}
+
 /* --- section accordion --- */
 .listbar{display:flex;align-items:center;gap:10px;margin:22px 0 10px;padding:0 2px}
 .listbar span{flex:1;font-size:12.5px;color:var(--ink-soft);font-weight:700}
@@ -857,6 +888,8 @@ details.grpwrap:not([open]) > summary .gcv::after{content:"ひらく"}
   <div class="nowcard" id="nowcard"></div>
 
   <div class="gdiv" data-g="1"><span class="gd-n">01</span><div><b>最初に押さえる</b><span>お金と制度。ここが差になる</span></div></div>
+
+  <div id="cityCard"></div>
 
   <div class="listbar">
     <span id="lbInfo"></span>
@@ -3297,6 +3330,66 @@ function firstSentence(t){
   });
 })();
 
+/* ---- 市役所でやることカード ---- */
+var CITY=[
+ {g:"持ちもの（これがすべて）",l:[
+  "妊娠届出書（産院でもらったもの。なければ窓口で書けます）",
+  "マイナンバーカード（または通知カード＋本人確認書類）",
+  "<em>振込先の口座がわかるもの</em>（通帳・キャッシュカード）— 5万円の申請に必要",
+  "<em>初回受診の領収書</em>（自費で払った分の補助に使います）",
+  "印鑑（念のため）",
+  "母子手帳ケース or 大きめのかばん（別冊が入ります）"
+ ]},
+ {g:"窓口ですること",l:[
+  "母子健康手帳と<em>受診票の別冊</em>を受け取る",
+  "面談（親子すこやかプランの作成）— 30〜60分みておく",
+  "<em>妊婦のための支援給付 5万円</em>を申請する",
+  "チーパス（千葉県の子育て応援カード）をもらう",
+  "マタニティマークをもらう（予備がほしいと言えば複数もらえることも）",
+  "まつどDE子育てLINEをその場で登録する"
+ ]},
+ {g:"忘れずに聞くこと",l:[
+  "初回産科受診料の補助 — 申請方法と、領収書の提出先",
+  "産後ケア事業 — <em>妊娠中から申し込めます</em>。今日聞いておくと後が楽",
+  "妊婦歯科健診 — 受診票の使い方と、市内の対応医療機関",
+  "ママパパ学級 — 日程と申込方法",
+  "妊産婦向けタクシー助成 — 申請方法（36週から／領収書は6か月以内）",
+  "こども誰でも通園制度（すまいる×すまいる）の登録方法",
+  "ファミリーサポートの登録窓口（別の場所かもしれません）",
+  "里帰り出産の予定があれば、その時点で伝えておく"
+ ]}
+];
+(function(){
+  var box=document.getElementById("cityCard");if(!box)return;
+  var st={};try{st=JSON.parse(localStorage.getItem("premam-city")||"{}");}catch(e){}
+  function render(){
+    if(st.done){
+      box.innerHTML='<button class="city-back" id="cityBack">&#127463; 市役所でやることリストをもう一度見る</button>';
+      document.getElementById("cityBack").addEventListener("click",function(){st.done=false;save();render();});
+      return;
+    }
+    var i=0;
+    box.innerHTML='<div class="city"><div class="city-h"><span class="ic">&#127963;&#65039;</span>'+
+      '<b>市役所でやること</b></div>'+
+      '<div class="city-s">窓口は<b>市民健康相談室</b>（市役所・各支所内）。市民課とは別です。忘れ物があると出直しになるので、出る前に持ちものだけ確認を。</div>'+
+      CITY.map(function(g){
+        return '<div class="city-g"><b>'+g.g+"</b>"+g.l.map(function(t){
+          var id="c"+(i++);
+          return '<label><input type="checkbox" data-c="'+id+'"'+(st[id]?" checked":"")+"><span>"+t+"</span></label>";
+        }).join("")+"</div>";
+      }).join("")+
+      '<div class="city-f"><a href="tel:0473665180">&#128222; 047-366-5180</a>'+
+      '<button type="button" id="cityDone">終わった（閉じる）</button></div></div>';
+    box.querySelectorAll("[data-c]").forEach(function(el){
+      el.addEventListener("change",function(){st[el.dataset.c]=el.checked;save();});
+    });
+    document.getElementById("cityDone").addEventListener("click",function(){st.done=true;save();render();
+      window.scrollTo({top:0,behavior:"smooth"});});
+  }
+  function save(){try{localStorage.setItem("premam-city",JSON.stringify(st));}catch(e){}}
+  render();
+})();
+
 /* ---- night mode ---- */
 (function(){
   var t=null;try{t=localStorage.getItem("premam-theme");}catch(e){}
@@ -3315,7 +3408,7 @@ function firstSentence(t){
 
 /* ---- backup / handoff ---- */
 (function(){
-  var KEYS=["premam-due","premam-contact","premam-q","premam-rec","premam-kick","premam-check","premam-size","premam-theme","premam-caf","premam-ctx","premam-apply","premam-tokuten","premam-matsudo"];
+  var KEYS=["premam-due","premam-contact","premam-q","premam-rec","premam-kick","premam-check","premam-size","premam-theme","premam-caf","premam-ctx","premam-apply","premam-tokuten","premam-matsudo","premam-city"];
   $("#bkOut").addEventListener("click",function(){$("#bkTextOut").value=pack();});
   $("#bkCopy").addEventListener("click",function(){
     var t=$("#bkTextOut");if(!t.value){alert("先に書き出してください");return;}
