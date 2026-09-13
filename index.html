@@ -531,6 +531,35 @@ html[data-theme="dark"] mark{background:#5C4A1E;color:#FFE9A8}
   a[href^="tel:"]::after{content:""}
 }
 
+/* --- group accordion --- */
+.grpx{background:var(--card);border:1px solid var(--line);border-radius:20px;box-shadow:var(--sh);
+  margin-bottom:10px;overflow:hidden}
+.grpx > summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:13px;padding:16px 17px;min-height:76px}
+.grpx > summary::-webkit-details-marker{display:none}
+.grpx > summary:hover{background:var(--pink-bg)}
+.grpx > summary:focus-visible{outline:3px solid var(--lav);outline-offset:-3px}
+.grpx[open] > summary{background:var(--pink-l);border-bottom:1px solid var(--line)}
+.gx-n{flex:0 0 auto;font-family:"Quicksand",sans-serif;font-weight:700;font-size:26px;color:var(--pink-d);opacity:.45;line-height:1}
+.gx-t{flex:1;min-width:0}
+.gx-t b{display:block;font-family:"Zen Maru Gothic",sans-serif;font-size:18px;color:var(--ink);line-height:1.35}
+.gx-t > span{display:block;font-size:12.5px;color:var(--ink-soft);margin-top:3px}
+.gx-ics{display:flex;gap:4px;margin-top:6px;font-size:15px;line-height:1}
+.gx-rec{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--mint);margin-left:6px;vertical-align:middle}
+.gx-cv{flex:0 0 auto;width:28px;height:28px;border-radius:50%;background:var(--pink-l);color:var(--pink-d);
+  font-size:17px;line-height:1;display:flex;align-items:center;justify-content:center}
+.grpx[open] .gx-cv{background:var(--pink);color:#fff}
+.gx-b{padding:12px 12px 16px;background:var(--pink-bg)}
+html[data-theme="dark"] .gx-b{background:var(--pink-bg)}
+.gx-b section{margin-bottom:8px}
+.gx-b section:last-child{margin-bottom:0}
+.gdiv{display:none}
+.menu-set{padding:2px 14px 12px}
+.menu-set .tools{margin:0;background:var(--card);border-radius:14px;padding:9px 11px}
+.menu-set .tools span{color:var(--ink-soft)}
+.menu-set .tools button{border-color:var(--line);background:var(--pink-bg);color:var(--ink-mid)}
+.menu-set .tools button[aria-pressed=true]{background:var(--pink);border-color:var(--pink);color:#fff}
+.menu-set #themeBtn{border-color:var(--line)}
+
 /* --- 市役所カード --- */
 .city{background:linear-gradient(135deg,#FFE4EE,#FFF4F8);border:2px solid var(--pink);border-radius:22px;
   padding:18px;margin-top:14px;box-shadow:0 6px 22px -12px rgba(214,72,111,.5)}
@@ -842,14 +871,7 @@ details.grpwrap:not([open]) > summary .gcv::after{content:"ひらく"}
 <header id="top">
   <div class="wrap">
     <div class="brand">ぷれまむ手帳<em>&#9825;</em><small>妊娠のこと、全部ここに</small></div>
-    <div class="tools" role="group" aria-label="文字サイズ">
-      <span>文字の大きさ</span>
-      <button class="s1" data-size="m" aria-pressed="true">普通</button>
-      <button class="s2" data-size="l" aria-pressed="false">大きめ</button>
-      <button class="s3" data-size="xl" aria-pressed="false">特大</button>
-      <button id="themeBtn" style="margin-left:6px" aria-label="表示の切り替え">&#127769; 夜</button>
-    </div>
-    <p class="lede">食べもののこと、体のこと、お金と手続きのこと。予定日を登録すると、今の週数に合わせて必要なページが前に出ます。全部見たいときは、下の「目次」から。</p>
+    <p class="lede">妊娠のこと、全部ここに。</p>
   </div>
 </header>
 
@@ -859,11 +881,11 @@ details.grpwrap:not([open]) > summary .gcv::after{content:"ひらく"}
     <div class="dial-label">今何週？　<span style="font-weight:500;color:var(--ink-soft);letter-spacing:0">（最終月経の初日＝0週0日）</span></div>
     <div class="dial-row">
       <button class="wkstep" id="wkMinus" aria-label="1週もどる">&#8722;</button>
-      <div class="wkval"><span class="dial-num" id="wkNum">5</span><span class="dial-unit">週</span></div>
+      <div class="wkval"><span class="dial-num" id="wkNum">7</span><span class="dial-unit">週</span></div>
       <button class="wkstep" id="wkPlus" aria-label="1週すすむ">&#43;</button>
       <div class="dial-phase"><b id="wkPhase">妊娠初期</b><span id="wkMonth">2か月</span></div>
     </div>
-    <input type="range" id="wk" min="0" max="42" value="5" aria-label="妊娠週数">
+    <input type="range" id="wk" min="0" max="42" value="7" aria-label="妊娠週数">
     <div class="dial-scale"><span>0w</span><span>16w</span><span>28w</span><span>42w</span></div>
     <div class="baby"><div class="baby-emoji" id="babyEmoji">&#127827;</div><div class="baby-txt" id="babyTxt"></div></div>
     <div class="dial-out" id="wkOut"></div>
@@ -1385,6 +1407,16 @@ details.grpwrap:not([open]) > summary .gcv::after{content:"ひらく"}
       <b>目次</b>
       <button id="menuClose" aria-label="閉じる">&#215;</button>
     </div>
+    <div class="menu-set">
+      <div class="tools" role="group" aria-label="表示設定">
+        <span>文字の大きさ</span>
+        <button class="s1" data-size="m" aria-pressed="true">普通</button>
+        <button class="s2" data-size="l" aria-pressed="false">大きめ</button>
+        <button class="s3" data-size="xl" aria-pressed="false">特大</button>
+        <button id="themeBtn" style="margin-left:auto" aria-label="表示の切り替え">&#127769; 夜</button>
+      </div>
+    </div>
+
     <div class="menu-quick">
       <a href="#danger" class="mq urg">&#9888;&#65038; 危険サイン</a>
       <a href="#contact" class="mq urg">&#128222; 電話するところ</a>
@@ -2289,6 +2321,16 @@ function makeFinder(data,cats,ids){
   draw();
 }
 
+/* ---- section icons ---- */
+var SECT_ICON={setup:"\u270D\uFE0F",food:"\uD83C\uDF7D\uFE0F",life:"\uD83C\uDFE0",recipe:"\uD83C\uDF72",caffeine:"\u2615",
+ body:"\uD83E\uDE79",danger:"\u26A0\uFE0F",contact:"\uD83D\uDCDE",phase:"\uD83D\uDCC6",fuan:"\uD83C\uDF3F",oops:"\uD83E\uDEE7",
+ count:"\uD83D\uDD22",limits:"\uD83D\uDCCC",tips:"\uD83D\uDC55",backup:"\uD83D\uDD17",
+ nutri:"\uD83E\uDD57",fish:"\uD83D\uDC1F",salt:"\uD83E\uDDC2",weight:"\u2696\uFE0F",
+ test:"\uD83E\uDE7A",echo:"\uD83D\uDDBC\uFE0F",record:"\uD83D\uDCC8",kick:"\uD83D\uDC63",
+ money:"\uD83D\uDCB0",apply:"\uD83D\uDCDD",matsudo:"\uD83C\uDFE2",tokuten:"\uD83C\uDF81",cost:"\uD83E\uDDFE",todo:"\uD83D\uDDC2\uFE0F",hokatsu:"\uD83C\uDFEB",edu:"\uD83C\uDF93",
+ birth:"\uD83C\uDF38",kinkyu:"\uD83C\uDFE5",prep:"\uD83C\uDF92",timer:"\u23F1\uFE0F",labor:"\uD83D\uDEA8",
+ after:"\uD83D\uDCCB",baby1m:"\uD83D\uDC76",name:"\u270F\uFE0F",around:"\uD83D\uDC6A",papa:"\uD83D\uDCAA"};
+
 function phaseOf(w){return w<16?0:(w<28?1:2);}
 function babyOf(w){return WEEK[Math.max(0,Math.min(WEEK.length-1,w))];}
 
@@ -2893,6 +2935,7 @@ if("serviceWorker" in navigator&&navigator.serviceWorker.getRegistrations){
 
   function check(auto){
     if(location.protocol==="file:")return;
+    if(typeof fetch!=="function")return;
     fetch(location.pathname+"?cb="+Date.now(),{cache:"no-store"})
       .then(function(r){return r.text().then(function(t){return[r,t];});})
       .then(function(a){
@@ -2938,23 +2981,6 @@ if("serviceWorker" in navigator&&navigator.serviceWorker.getRegistrations){
   });
 })();
 
-/* ---- section icons ---- */
-var SECT_ICON={setup:"\u270D\uFE0F",food:"\uD83C\uDF7D\uFE0F",life:"\uD83C\uDFE0",recipe:"\uD83C\uDF72",caffeine:"\u2615",
- body:"\uD83E\uDE79",danger:"\u26A0\uFE0F",contact:"\uD83D\uDCDE",phase:"\uD83D\uDCC6",fuan:"\uD83C\uDF3F",oops:"\uD83E\uDEE7",
- count:"\uD83D\uDD22",limits:"\uD83D\uDCCC",tips:"\uD83D\uDC55",backup:"\uD83D\uDD17",
- nutri:"\uD83E\uDD57",fish:"\uD83D\uDC1F",salt:"\uD83E\uDDC2",weight:"\u2696\uFE0F",
- test:"\uD83E\uDE7A",echo:"\uD83D\uDDBC\uFE0F",record:"\uD83D\uDCC8",kick:"\uD83D\uDC63",
- money:"\uD83D\uDCB0",apply:"\uD83D\uDCDD",matsudo:"\uD83C\uDFE2",tokuten:"\uD83C\uDF81",cost:"\uD83E\uDDFE",todo:"\uD83D\uDDC2\uFE0F",hokatsu:"\uD83C\uDFEB",edu:"\uD83C\uDF93",
- birth:"\uD83C\uDF38",kinkyu:"\uD83C\uDFE5",prep:"\uD83C\uDF92",timer:"\u23F1\uFE0F",labor:"\uD83D\uDEA8",
- after:"\uD83D\uDCCB",baby1m:"\uD83D\uDC76",name:"\u270F\uFE0F",around:"\uD83D\uDC6A",papa:"\uD83D\uDCAA"};
-(function(){
-  Array.prototype.forEach.call(document.querySelectorAll("section[data-from]"),function(sec){
-    var ic=SECT_ICON[sec.id];if(!ic)return;
-    var h2=sec.querySelector("h2");if(!h2||h2.querySelector(".h2-ic"))return;
-    var s=document.createElement("span");s.className="h2-ic";s.textContent=ic;
-    h2.insertBefore(s,h2.firstChild);
-  });
-})();
 
 /* ---- setup list ---- */
 var SETUP=[
@@ -3251,6 +3277,16 @@ var MENU_LAB={"setup":"入力するところ","food": "これ食べてええ？"
 })();
 
 
+/* ---- 見出しにアイコンを差し込む ---- */
+(function(){
+  Array.prototype.forEach.call(document.querySelectorAll("section[data-from]"),function(sec){
+    var ic=SECT_ICON[sec.id];if(!ic)return;
+    var h2=sec.querySelector("h2");if(!h2||h2.querySelector(".h2-ic"))return;
+    var s=document.createElement("span");s.className="h2-ic";s.textContent=ic;
+    h2.insertBefore(s,h2.firstChild);
+  });
+})();
+
 /* ---- 各セクションを折りたたみに変換 ---- */
 function firstSentence(t){
   t=(t||"").replace(/\s+/g," ").trim();
@@ -3283,7 +3319,7 @@ function firstSentence(t){
   }
   function count(){
     var n=document.querySelectorAll("section[data-from] .secx[open]").length;
-    $("#lbInfo").textContent=n?(n+"つ開いています"):"タップして開いてください";
+    $("#lbInfo").textContent=n?(n+"つ開いています"):"グループをタップして開いてください";
     $("#lbToggle").textContent=n?"全部閉じる":"今週のおすすめを開く";
   }
   /* 今週おすすめだけ開いた状態で始める */
@@ -3388,6 +3424,89 @@ var CITY=[
   }
   function save(){try{localStorage.setItem("premam-city",JSON.stringify(st));}catch(e){}}
   render();
+})();
+
+/* ---- グループも折りたたみにする（開いた直後の情報量を減らす） ---- */
+(function(){
+  var divs=Array.prototype.slice.call(document.querySelectorAll(".gdiv"));
+  divs.forEach(function(gd,gi){
+    var det=document.createElement("details");det.className="grpx";
+    var body=document.createElement("div");body.className="gx-b";
+    var n=gd.nextSibling,secs=[];
+    while(n){
+      var next=n.nextSibling;
+      if(n.nodeType===1&&n.classList&&n.classList.contains("gdiv"))break;
+      if(n.nodeType===1&&n.tagName==="SECTION"){secs.push(n);body.appendChild(n);}
+      else if(n.nodeType===1&&(n.id==="gend"))break;
+      n=next;
+    }
+    if(!secs.length)return;
+    var ttl=gd.querySelector("b")?gd.querySelector("b").textContent:"";
+    var sub=gd.querySelector("span:not(.gd-n)")?gd.querySelector("div span").textContent:"";
+    var ics=secs.slice(0,6).map(function(s){return SECT_ICON[s.id]||"";}).join("");
+    var sum=document.createElement("summary");
+    sum.innerHTML='<span class="gx-n">'+("0"+(gi+1)).slice(-2)+'</span>'+
+      '<span class="gx-t"><b>'+ttl+'<span class="gx-rec" hidden></span></b><span>'+sub+"・"+secs.length+
+      'ページ</span><span class="gx-ics">'+ics+'</span></span><span class="gx-cv">+</span>';
+    det.appendChild(sum);det.appendChild(body);
+    gd.parentNode.insertBefore(det,gd);
+    gd.remove();
+  });
+
+  /* 今週のおすすめが入っているグループだけ最初から開く */
+  function recIds(){
+    var w=+$("#wk").value,pick=TOPPICKS[TOPPICKS.length-1];
+    for(var i=0;i<TOPPICKS.length;i++){if(w<=TOPPICKS[i].to){pick=TOPPICKS[i];break;}}
+    return pick.l;
+  }
+  function markRec(){
+    var ids=recIds();
+    Array.prototype.forEach.call(document.querySelectorAll(".grpx"),function(g){
+      var has=false;
+      Array.prototype.forEach.call(g.querySelectorAll("section[data-from]"),function(s){
+        if(ids.indexOf(s.id)>=0)has=true;
+      });
+      var dot=g.querySelector(".gx-rec");if(dot)dot.hidden=!has;
+    });
+  }
+  function openRec(){
+    var ids=recIds();
+    Array.prototype.forEach.call(document.querySelectorAll(".grpx"),function(g){
+      var has=false;
+      Array.prototype.forEach.call(g.querySelectorAll("section[data-from]"),function(s){
+        if(ids.indexOf(s.id)>=0)has=true;
+      });
+      g.open=has;
+    });
+  }
+  markRec();openRec();
+  $("#wk").addEventListener("input",markRec);
+
+  /* 目次・検索から飛ぶときは親グループも開く */
+  var _go=window.goSection;
+  window.goSection=function(id){
+    var sec=document.getElementById(id);
+    if(sec){var g=sec.closest(".grpx");if(g)g.open=true;}
+    if(_go)_go(id);
+  };
+  document.addEventListener("click",function(e){
+    var a=e.target.closest('a[href^="#"]');if(!a)return;
+    var id=a.getAttribute("href").slice(1);
+    var sec=document.getElementById(id);
+    if(sec&&sec.matches("section[data-from]")){var g=sec.closest(".grpx");if(g)g.open=true;}
+  },true);
+
+  /* listbar：全部閉じる＝グループごと閉じる */
+  var lb=$("#lbToggle");
+  if(lb){
+    lb.addEventListener("click",function(){
+      setTimeout(function(){
+        var anyOpen=document.querySelectorAll("section[data-from] .secx[open]").length;
+        if(!anyOpen)Array.prototype.forEach.call(document.querySelectorAll(".grpx"),function(g){g.open=false;});
+        else openRec();
+      },0);
+    });
+  }
 })();
 
 /* ---- night mode ---- */
