@@ -2104,7 +2104,7 @@ const TIPS=[
 const APPLY=[
 {g:"妊娠がわかったら",n:"母子手帳をもらう前後",l:[
  {m:1,t:"妊娠届を出す",w:"8〜11週ごろ",p:0,lim:"",d:"産院で妊娠届出書をもらい、住んでいる自治体の窓口へ。<b>母子健康手帳と、妊婦健診の受診票（14回分）</b>がここで交付されます。すべての入口。"},
- {m:1,t:"妊婦のための支援給付（前期 5万円）",w:"妊娠届のあと",p:0,lim:"",d:"自治体の面談とセットで案内されます。多くは妊娠届と同じ日か、その後の面談時に申請。<b>案内が来なければ自分から窓口で聞く</b>。"},
+ {m:1,t:"妊婦のための支援給付（前期 5万円）",w:"妊娠届のあと",p:1,lim:"提出が必要",d:"自治体の面談とセットの給付ですが、<b>面談を受けただけでは振り込まれません。渡された申請書を自分で提出する必要があります。</b><br><br>提出方法（窓口・郵送・オンライン）と期限を必ず確認してください。振込先の口座情報が要ります。<b>出しそびれると5万円がまるごと消えます。</b>"},
  {m:1,t:"会社へ報告する",w:"体調しだい",p:0,lim:"",d:"産休・育休・給付の起点になります。直属の上司→人事の順。つわりがひどければ早めのほうが守られます。"}
 ]},
 {g:"妊娠中",n:"必要になったときだけ",l:[
@@ -2149,7 +2149,6 @@ const APPLY=[
 
 const MATSUDO=[
 {g:"妊娠がわかったら",n:"まずここから",l:[
- {m:1,t:"初回産科受診料の補助を確認する",w:"最初の受診のあと",lim:"領収書必須",d:"妊娠がわかる<b>最初の受診は自費</b>で1万円前後かかります。松戸市には初回産科受診料の補助と、受診票の公費負担額を超えた分の補助があります。<br><br><b>最初の受診の領収書は必ず取っておいてください。</b>捨ててしまう人がとても多いところです。"},
  {m:1,t:"母子健康手帳をもらう",w:"8〜11週ごろ",lim:"",d:"<b>市民健康相談室（市役所・各支所内）</b>へ。母子手帳、<b>受診票の別冊</b>（妊婦健診・妊婦歯科健診・産婦健診・乳児健診など）、親子すこやかプラン、マタニティマークが一度にもらえます。<br><br>妊娠届出書は市のサイトから先にダウンロードして書いておけます。窓口でも書けます。"},
  {m:1,t:"チーパスをもらう",w:"母子手帳と同時",lim:"",d:"千葉県の子育て応援カード。<b>妊娠中から使えます。</b>母子手帳の交付時にもらえるほか、市役所の市民課・子ども未来応援課・各支所・行政サービスセンターでも配布。<br><br>電子版は「チーパス・スマイル」（千葉県公式LINEでも表示可）。<b>全国47都道府県で相互利用できる</b>ので、里帰り先や旅行先でも使えます。"}
 ]},
@@ -3355,48 +3354,53 @@ function firstSentence(t){
   });
 })();
 
-/* ---- 市役所でやることカード ---- */
+/* ---- つぎにやることカード ---- */
 var CITY=[
- {g:"持ちもの（これがすべて）",l:[
-  "妊娠届出書（産院でもらったもの。なければ窓口で書けます）",
-  "マイナンバーカード（または通知カード＋本人確認書類）",
-  "<em>振込先の口座がわかるもの</em>（通帳・キャッシュカード）— 5万円の申請に必要",
-  "<em>初回受診の領収書</em>（自費で払った分の補助に使います）",
-  "印鑑（念のため）",
-  "母子手帳ケース or 大きめのかばん（別冊が入ります）"
+ {g:"今週のうちに",l:[
+  "<em>妊婦のための支援給付 5万円を申請する</em>（面談で渡された申請書を提出。口座情報が必要）",
+  "申請の<em>期限と提出方法</em>（窓口・郵送・オンライン）を確認する",
+  "<em>葉酸サプリを毎日400μg</em>飲みはじめる（12週ごろまで）",
+  "産院を決めて<em>分娩予約</em>をする（まだなら。人気の産院は早く埋まります）",
+  "受診票の別冊を開いて、次の健診で使う分を確認する",
+  "産院の電話番号を、このサイトの「電話するところ」に登録する",
+  "会社にいつ報告するか、二人で決める"
  ]},
- {g:"窓口ですること",l:[
-  "母子健康手帳と<em>受診票の別冊</em>を受け取る",
-  "面談（親子すこやかプランの作成）— 30〜60分みておく",
-  "<em>妊婦のための支援給付 5万円</em>を申請する",
-  "チーパス（千葉県の子育て応援カード）をもらう",
-  "マタニティマークをもらう（予備がほしいと言えば複数もらえることも）",
-  "まつどDE子育てLINEをその場で登録する"
+ {g:"12週までに",l:[
+  "妊婦健診を受診票で受ける（初期の血液検査があります）",
+  "<em>出生前検査を受けるかどうか</em>、二人で話しておく（10〜16週）",
+  "ママパパ学級に申し込む",
+  "<em>産後ケア事業を先に申請しておく</em>（妊娠中から申し込めます）",
+  "勤務先の独自制度を調べる（<em>二人ぶん</em>。健保の付加給付・祝い金・育休の上乗せ）",
+  "Amazonらくらくベビーとコープデリに申し込む"
  ]},
- {g:"忘れずに聞くこと",l:[
-  "初回産科受診料の補助 — 申請方法と、領収書の提出先",
-  "産後ケア事業 — <em>妊娠中から申し込めます</em>。今日聞いておくと後が楽",
-  "妊婦歯科健診 — 受診票の使い方と、市内の対応医療機関",
-  "ママパパ学級 — 日程と申込方法",
-  "妊産婦向けタクシー助成 — 申請方法（36週から／領収書は6か月以内）",
-  "こども誰でも通園制度（すまいる×すまいる）の登録方法",
-  "ファミリーサポートの登録窓口（別の場所かもしれません）",
-  "里帰り出産の予定があれば、その時点で伝えておく"
+ {g:"安定期（16週〜）に入ったら",l:[
+  "<em>妊婦歯科健診（無料）</em>を受ける ← 忘れる人がいちばん多い",
+  "旅行や遠出をするならこの時期に",
+  "保活の情報収集（松戸市の保育のしおりを見る）",
+  "チーパスを使いはじめる",
+  "マタニティ用の下着・服を買い替える"
+ ]},
+ {g:"もう少し先（忘れないように）",l:[
+  "28〜32週：産休・育休の申請（<em>パパの育休は早めの社内調整を</em>）",
+  "32〜34週：入院バッグとベビー用品をそろえる",
+  "36週〜：妊産婦向けタクシー助成が使える（領収書を保管）",
+  "出産後14日以内：出生届／<em>児童手当は15日以内</em>",
+  "出産後：支援給付の2回目 5万円を申請する"
  ]}
 ];
 (function(){
   var box=document.getElementById("cityCard");if(!box)return;
-  var st={};try{st=JSON.parse(localStorage.getItem("premam-city")||"{}");}catch(e){}
+  var st={};try{st=JSON.parse(localStorage.getItem("premam-next")||"{}");}catch(e){}
   function render(){
     if(st.done){
-      box.innerHTML='<button class="city-back" id="cityBack">&#127463; 市役所でやることリストをもう一度見る</button>';
+      box.innerHTML='<button class="city-back" id="cityBack">&#128203; つぎにやることリストを見る</button>';
       document.getElementById("cityBack").addEventListener("click",function(){st.done=false;save();render();});
       return;
     }
     var i=0;
-    box.innerHTML='<div class="city"><div class="city-h"><span class="ic">&#127963;&#65039;</span>'+
-      '<b>今日、市役所でやること</b></div>'+
-      '<div class="city-s">窓口は<b>市民健康相談室</b>（市役所・各支所内）。市民課とは別です。<b>忘れ物があると出直しになる</b>ので、出る前に持ちものだけ確認を。</div>'+
+    box.innerHTML='<div class="city"><div class="city-h"><span class="ic">&#128203;</span>'+
+      '<b>つぎにやること</b></div>'+
+      '<div class="city-s">母子手帳をもらったあと、7週のいまから順番にやることです。<b>できたらタップでチェック。</b>くわしくは下の「申請の順番」「松戸市の制度」に。</div>'+
       CITY.map(function(g){
         return '<div class="city-g"><b>'+g.g+"</b>"+g.l.map(function(t){
           var id="c"+(i++);
@@ -3404,14 +3408,14 @@ var CITY=[
         }).join("")+"</div>";
       }).join("")+
       '<div class="city-f"><a href="tel:0473665180">&#128222; 047-366-5180</a>'+
-      '<button type="button" id="cityDone">終わった（閉じる）</button></div></div>';
+      '<button type="button" id="cityDone">閉じる</button></div></div>';
     box.querySelectorAll("[data-c]").forEach(function(el){
       el.addEventListener("change",function(){st[el.dataset.c]=el.checked;save();});
     });
     document.getElementById("cityDone").addEventListener("click",function(){st.done=true;save();render();
       window.scrollTo({top:0,behavior:"smooth"});});
   }
-  function save(){try{localStorage.setItem("premam-city",JSON.stringify(st));}catch(e){}}
+  function save(){try{localStorage.setItem("premam-next",JSON.stringify(st));}catch(e){}}
   render();
 })();
 
@@ -3505,7 +3509,7 @@ var CITY=[
 
 /* ---- backup / handoff ---- */
 (function(){
-  var KEYS=["premam-due","premam-contact","premam-q","premam-rec","premam-kick","premam-check","premam-size","premam-theme","premam-caf","premam-ctx","premam-apply","premam-tokuten","premam-matsudo","premam-city"];
+  var KEYS=["premam-due","premam-contact","premam-q","premam-rec","premam-kick","premam-check","premam-size","premam-theme","premam-caf","premam-ctx","premam-apply","premam-tokuten","premam-matsudo","premam-next"];
   $("#bkOut").addEventListener("click",function(){$("#bkTextOut").value=pack();});
   $("#bkCopy").addEventListener("click",function(){
     var t=$("#bkTextOut");if(!t.value){alert("先に書き出してください");return;}
