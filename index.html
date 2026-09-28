@@ -1021,6 +1021,253 @@ details.grpwrap:not([open]) > summary .gcv::after{content:"ひらく"}
   .calc-in{grid-template-columns:1fr 1fr 1fr}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* ============================================================
+   Liquid Glass — 半透明のガラス層に置き換える上書きレイヤー
+   ============================================================ */
+:root{
+  --g-bg:rgba(255,255,255,.52);
+  --g-bg2:rgba(255,255,255,.66);
+  --g-line:rgba(255,255,255,.72);
+  --g-sh:0 10px 34px rgba(150,70,110,.14), 0 2px 8px rgba(150,70,110,.08);
+  --g-in:inset 0 1px 0 rgba(255,255,255,.9), inset 0 -1px 0 rgba(255,255,255,.28);
+  --g-blur:saturate(180%) blur(22px);
+  --edge:transparent;
+}
+html[data-theme="dark"]{
+  --g-bg:rgba(44,36,54,.55);
+  --g-bg2:rgba(52,42,64,.7);
+  --g-line:rgba(255,255,255,.14);
+  --g-sh:0 12px 38px rgba(0,0,0,.45);
+  --g-in:inset 0 1px 0 rgba(255,255,255,.14), inset 0 -1px 0 rgba(255,255,255,.05);
+}
+
+/* 背景：ガラスが屈折する対象をつくる */
+body{
+  background:#FFF0F7!important;
+  background-image:
+    radial-gradient(60vw 60vw at 12% 4%, rgba(255,95,162,.42), transparent 62%),
+    radial-gradient(52vw 52vw at 92% 14%, rgba(120,190,255,.38), transparent 60%),
+    radial-gradient(55vw 55vw at 50% 92%, rgba(150,235,170,.32), transparent 62%),
+    radial-gradient(48vw 48vw at 84% 62%, rgba(255,215,90,.30), transparent 60%)!important;
+  background-attachment:fixed!important;
+}
+html[data-theme="dark"] body{
+  background:#171320!important;
+  background-image:
+    radial-gradient(60vw 60vw at 12% 4%, rgba(255,95,162,.26), transparent 62%),
+    radial-gradient(52vw 52vw at 92% 14%, rgba(80,150,255,.24), transparent 60%),
+    radial-gradient(55vw 55vw at 50% 92%, rgba(90,210,140,.18), transparent 62%)!important;
+}
+
+/* ガラス面 */
+.card,.acc,.item,.ap,.secx,.grpx,.city,.nowcard,.dial,.tbl,.setup,.ck,.note,
+.cattile,.menu-in,.sp-in,.tabbar,.topbar,.ap-filter button,.chip,.btns,.openall,
+.ap-all,.mg-l a,.mq,.sr,.listbar button,.tb-ic,.city-f button,#toTop,.wkstep{
+  background:var(--g-bg)!important;
+  -webkit-backdrop-filter:var(--g-blur);backdrop-filter:var(--g-blur);
+  border:1px solid var(--g-line)!important;
+  box-shadow:var(--g-sh),var(--g-in)!important;
+}
+.card,.acc,.item,.ap,.secx,.grpx,.city,.nowcard,.dial,.setup,.ck,.menu-in{border-radius:26px!important}
+.note,.cattile,.mg-l a,.sr{border-radius:22px!important}
+.chip,.btns,.openall,.ap-all,.ap-filter button,.mq,.tb-ic,.city-f button,#toTop,.wkstep{border-radius:100px!important}
+
+/* 塗りのアクセントもガラスに */
+.nowcard{background:linear-gradient(135deg,rgba(255,232,140,.62),rgba(255,255,255,.5))!important}
+.city{background:linear-gradient(135deg,rgba(170,240,150,.55),rgba(255,255,255,.5))!important}
+.grpx:nth-child(3n+1) > summary{background:linear-gradient(135deg,rgba(255,120,180,.20),transparent 70%)!important}
+.grpx:nth-child(3n+2) > summary{background:linear-gradient(135deg,rgba(90,190,255,.20),transparent 70%)!important}
+.grpx:nth-child(3n+3) > summary{background:linear-gradient(135deg,rgba(120,220,120,.20),transparent 70%)!important}
+.grpx:nth-child(3n+1)[open] > summary{background:linear-gradient(135deg,rgba(255,95,162,.42),rgba(255,255,255,.25))!important}
+.grpx:nth-child(3n+2)[open] > summary{background:linear-gradient(135deg,rgba(60,170,245,.40),rgba(255,255,255,.25))!important}
+.grpx:nth-child(3n+3)[open] > summary{background:linear-gradient(135deg,rgba(90,205,105,.40),rgba(255,255,255,.25))!important}
+.grpx > summary,.secx > summary{border-bottom:none!important}
+.secx[open] > summary{background:rgba(255,255,255,.34)!important;
+  border-bottom:1px solid var(--g-line)!important}
+
+/* 主要ボタンは色つきガラス */
+.btnp,.bigbtn,.city-f a{
+  background:linear-gradient(135deg,rgba(255,95,162,.92),rgba(226,60,140,.92))!important;
+  border:1px solid rgba(255,255,255,.55)!important;color:#fff!important;
+  box-shadow:0 8px 22px rgba(214,21,110,.32),inset 0 1px 0 rgba(255,255,255,.5)!important;
+  border-radius:100px!important}
+.city-f a{background:linear-gradient(135deg,rgba(235,70,70,.92),rgba(200,40,40,.92))!important;
+  box-shadow:0 8px 22px rgba(200,40,40,.32),inset 0 1px 0 rgba(255,255,255,.45)!important}
+.btnp:active,.bigbtn:active,.city-f a:active,.btns:active{transform:scale(.97);box-shadow:var(--g-sh)!important}
+.chip[aria-pressed=true],.ap-filter button[aria-pressed=true],.cattile:hover{
+  background:linear-gradient(135deg,rgba(255,95,162,.85),rgba(226,60,140,.85))!important;color:#fff!important;
+  border-color:rgba(255,255,255,.5)!important}
+
+/* ヘッダー：ガラスの下に置く発色レイヤー */
+header{
+  background:linear-gradient(150deg,#FF5FA2 0%,#C86BE8 48%,#5AA8FF 100%)!important;
+  padding:26px 0 34px!important;border-radius:0 0 34px 34px!important;overflow:hidden}
+header::before{opacity:.22!important}
+header::after{display:none!important}
+.brand{text-shadow:0 2px 14px rgba(80,20,60,.35)!important;font-size:34px!important;letter-spacing:.04em}
+.lede{text-shadow:0 1px 8px rgba(80,20,60,.3)!important;font-weight:500}
+.ppg-dots i{border:1px solid rgba(255,255,255,.7)!important;box-shadow:0 3px 10px rgba(0,0,0,.18)!important;
+  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+
+/* 上部バー・下タブ */
+.topbar{border-bottom:1px solid var(--g-line)!important;box-shadow:0 6px 24px rgba(150,70,110,.10)!important}
+.tabbar{border-radius:30px!important;box-shadow:0 14px 40px rgba(150,70,110,.22),var(--g-in)!important}
+.tabbar button.on svg{border:1px solid rgba(255,255,255,.6)!important;
+  box-shadow:0 6px 16px rgba(214,21,110,.3),inset 0 1px 0 rgba(255,255,255,.5)!important}
+.tabbar button:nth-child(1).on svg{background:linear-gradient(135deg,#FF5FA2,#E23C8C)!important}
+.tabbar button:nth-child(2).on svg{background:linear-gradient(135deg,#5ABEF5,#2C8FD8)!important}
+.tabbar button:nth-child(3).on svg{background:linear-gradient(135deg,#79D45E,#3FA94B)!important}
+.tabbar button:nth-child(4).on svg{background:linear-gradient(135deg,#FFD84D,#E8A81E)!important;color:#3B2F00!important}
+.tabbar button:nth-child(5).on svg{background:linear-gradient(135deg,#B98BE8,#8A5FD0)!important}
+
+/* 小物 */
+.sx-ic,.h2-ic,.city-h .ic,.gx-cv,.sx-cv,.ap-cv,.acc .cv,.eyebrow,.badge,.tag,.ap-m i,.sx-w,.lg,.st{
+  border:1px solid var(--g-line)!important;box-shadow:0 3px 10px rgba(150,70,110,.12)!important}
+.gx-n{transform:none!important;background:rgba(255,255,255,.6)!important;border:1px solid var(--g-line)!important;
+  box-shadow:0 4px 12px rgba(150,70,110,.14)!important;color:var(--pink-d)!important}
+.eyebrow{background:rgba(255,255,255,.6)!important;color:var(--pink-d)!important}
+h2{text-shadow:none!important}
+.dial-num,.cd-big{text-shadow:0 2px 10px rgba(214,21,110,.18)!important}
+.card li::before{content:"\25CF";color:var(--pink);font-size:9px;top:.45em}
+
+/* 入力欄もガラス */
+.field input,.search input,.recgrid input,.telrow input,.duebox select,.duebox input,
+.setup .form input,.setup .form select,.share textarea,.tb-field{
+  background:rgba(255,255,255,.55)!important;border:1px solid var(--g-line)!important;
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:var(--g-in)!important}
+.field input:focus,.search input:focus,.telrow input:focus,.recgrid input:focus{
+  border-color:rgba(255,95,162,.7)!important;box-shadow:0 0 0 4px rgba(255,95,162,.18)!important}
+
+/* 文字色：ガラス上でも読めるように */
+.card p,.acc-b p,.ap-d,.card li,.sub{color:#3A3040!important}
+html[data-theme="dark"] .card p,html[data-theme="dark"] .acc-b p,
+html[data-theme="dark"] .ap-d,html[data-theme="dark"] .card li,
+html[data-theme="dark"] .sub{color:#CFC3D4!important}
+
+@media(prefers-reduced-transparency:reduce){
+  .card,.acc,.item,.ap,.secx,.grpx,.city,.nowcard,.dial,.tabbar,.topbar,.menu-in{
+    background:#fff!important;-webkit-backdrop-filter:none;backdrop-filter:none}
+  html[data-theme="dark"] .card,html[data-theme="dark"] .acc,html[data-theme="dark"] .item,
+  html[data-theme="dark"] .ap,html[data-theme="dark"] .secx,html[data-theme="dark"] .grpx,
+  html[data-theme="dark"] .tabbar,html[data-theme="dark"] .topbar,html[data-theme="dark"] .menu-in{
+    background:#2B2335!important}
+}
+
+/* ============================================================
+   Soft & Refined — やわらかさ・操作性・精度のチューニング
+   ============================================================ */
+:root{
+  --r1:14px;   /* 小：チップ・バッジ */
+  --r2:22px;   /* 中：ボタン・入力 */
+  --r3:30px;   /* 大：カード */
+  --r4:36px;   /* 特大：グループ・オーバーレイ */
+  --g-sh:0 18px 44px rgba(158,96,132,.12), 0 4px 12px rgba(158,96,132,.06);
+  --g-line:rgba(255,255,255,.78);
+  --g-blur:saturate(150%) blur(26px);
+}
+html[data-theme="dark"]{--g-sh:0 18px 46px rgba(0,0,0,.42);--g-line:rgba(255,255,255,.12)}
+
+/* 背景：彩度を落として、もっと大きくにじませる */
+body{
+  background-image:
+    radial-gradient(75vw 75vw at 8% 0%,  rgba(255,150,195,.34), transparent 66%),
+    radial-gradient(70vw 70vw at 98% 12%, rgba(150,205,255,.30), transparent 64%),
+    radial-gradient(72vw 72vw at 46% 98%, rgba(175,240,195,.26), transparent 66%),
+    radial-gradient(60vw 60vw at 88% 66%, rgba(255,226,150,.24), transparent 62%)!important;
+  line-height:2.0!important;
+}
+
+/* 角丸をそろえる */
+.card,.acc,.item,.ap,.secx,.city,.nowcard,.dial,.setup,.ck,.tbl{border-radius:var(--r3)!important}
+.grpx,.menu-in,.sp-in{border-radius:var(--r4)!important}
+.note,.cattile,.mg-l a,.sr,.ap-filter button{border-radius:var(--r2)!important}
+.badge,.tag,.ap-m i,.sx-w,.st,.eyebrow{border-radius:100px!important}
+
+/* ヘッダー：回転をやめて、ふわっとした光に */
+header::before{
+  background:radial-gradient(38vw 38vw at 20% 18%, rgba(255,255,255,.55), transparent 62%),
+             radial-gradient(34vw 34vw at 82% 8%,  rgba(255,255,255,.35), transparent 60%)!important;
+  animation:none!important;opacity:1!important;inset:0!important}
+header{
+  background:linear-gradient(155deg,#FFA8CE 0%,#D8A6F0 46%,#9CC9FF 100%)!important;
+  border-radius:0 0 var(--r4) var(--r4)!important;padding:28px 0 36px!important}
+html[data-theme="dark"] header{background:linear-gradient(155deg,#7A3A62,#4A3A7A 50%,#2E4E7A)!important}
+.brand{font-size:32px!important;font-weight:700;letter-spacing:.05em;
+  text-shadow:0 2px 18px rgba(110,50,90,.28)!important}
+.lede{font-size:13.5px!important;opacity:.95}
+
+/* タップ領域を大きく：指で押しやすく */
+.grpx > summary{padding:20px 18px!important;min-height:92px!important;gap:15px!important}
+.secx > summary{padding:17px 16px!important;min-height:80px!important;gap:14px!important}
+.ap-x > summary{padding:16px 0!important;min-height:66px!important}
+.item summary{padding:17px 16px!important;min-height:70px!important}
+.acc summary{padding:17px 17px!important;min-height:64px!important}
+.btnp,.bigbtn,.btns,.city-f a,.city-f button,.chip,.ap-filter button,.openall,.ap-all{min-height:52px!important}
+.chip{padding:12px 18px!important}
+.mg-l a,.mq{min-height:64px!important;padding:15px!important}
+.ap-i > input,.city-g input,.ck input,.qlist input[type=checkbox]{width:28px!important;height:28px!important;border-radius:10px!important}
+.wkstep{width:52px!important;height:52px!important}
+#toTop{width:54px!important;height:54px!important;font-size:21px!important}
+
+/* 余白をそろえる（押し間違いを減らす） */
+section{margin-bottom:12px!important}
+.grpx{margin-bottom:14px!important}
+.gx-b{padding:14px 13px 16px!important}
+.card,.acc,.ap{margin-bottom:12px!important}
+.wrap{padding:0 16px!important}
+
+/* 文字：やわらかく、読みやすく */
+.gx-t b{font-size:19px!important;letter-spacing:.02em}
+.gx-t > span{font-size:12.5px!important;opacity:.85}
+.sx-t b{font-size:17.5px!important;letter-spacing:.02em}
+.sx-t > span{font-size:12.5px!important;line-height:1.7!important;opacity:.85}
+.card p,.acc-b p,.ap-d{line-height:2.0!important;color:#463C4E!important}
+html[data-theme="dark"] .card p,html[data-theme="dark"] .acc-b p,html[data-theme="dark"] .ap-d{color:#CEC2D6!important}
+h2{font-size:23px!important;letter-spacing:.02em}
+
+/* 押した感触 */
+.grpx > summary:active,.secx > summary:active,.item summary:active,.acc summary:active{
+  transform:scale(.993);transition:transform .08s}
+.btnp,.bigbtn,.btns,.chip,.mq,.mg-l a,.tabbar button{transition:transform .12s, background .16s}
+
+/* 3色は淡く、開いたときだけ少し強く */
+.grpx:nth-child(3n+1) > summary{background:linear-gradient(135deg,rgba(255,150,195,.16),transparent 72%)!important}
+.grpx:nth-child(3n+2) > summary{background:linear-gradient(135deg,rgba(150,205,255,.16),transparent 72%)!important}
+.grpx:nth-child(3n+3) > summary{background:linear-gradient(135deg,rgba(160,230,165,.16),transparent 72%)!important}
+.grpx:nth-child(3n+1)[open] > summary{background:linear-gradient(135deg,rgba(255,150,195,.44),rgba(255,255,255,.3))!important}
+.grpx:nth-child(3n+2)[open] > summary{background:linear-gradient(135deg,rgba(150,205,255,.44),rgba(255,255,255,.3))!important}
+.grpx:nth-child(3n+3)[open] > summary{background:linear-gradient(135deg,rgba(160,230,165,.44),rgba(255,255,255,.3))!important}
+.gx-b > section:nth-child(3n+1) .sx-ic{background:rgba(255,150,195,.28)!important}
+.gx-b > section:nth-child(3n+2) .sx-ic{background:rgba(150,205,255,.28)!important}
+.gx-b > section:nth-child(3n+3) .sx-ic{background:rgba(160,230,165,.28)!important}
+.sx-ic{width:50px!important;height:50px!important;font-size:24px!important}
+.gx-n{width:50px!important;height:50px!important;font-size:19px!important}
+
+/* 下タブ：大きく、ラベルを常時表示 */
+.tabbar{left:14px;right:14px;bottom:calc(14px + env(safe-area-inset-bottom));padding:9px 8px!important;
+  border-radius:32px!important;gap:2px}
+.tabbar button{padding:8px 2px!important;gap:5px!important;font-size:11.5px!important;border-radius:24px!important}
+.tabbar button svg{width:25px!important;height:25px!important;padding:7px!important}
+.tabbar button.on{transform:translateY(-1px)}
+body{padding-bottom:116px!important}
+#toTop{bottom:calc(120px + env(safe-area-inset-bottom))!important}
+
+/* 強調カードもやわらかく */
+.nowcard{background:linear-gradient(135deg,rgba(255,238,170,.58),rgba(255,255,255,.55))!important;
+  border-radius:var(--r3)!important}
+.city{background:linear-gradient(135deg,rgba(185,242,170,.50),rgba(255,255,255,.55))!important}
+.btnp,.bigbtn{background:linear-gradient(135deg,rgba(255,138,190,.95),rgba(236,92,160,.95))!important;
+  box-shadow:0 10px 26px rgba(226,92,160,.26),inset 0 1px 0 rgba(255,255,255,.55)!important}
+.city-f a{background:linear-gradient(135deg,rgba(245,120,120,.95),rgba(220,70,70,.95))!important;
+  box-shadow:0 10px 26px rgba(220,70,70,.26),inset 0 1px 0 rgba(255,255,255,.5)!important}
+
+/* 細部 */
+.card li::before{content:"\25CF";color:rgba(255,120,175,.85);font-size:8px;top:.55em}
+.eyebrow{background:rgba(255,255,255,.7)!important;font-size:11px!important;padding:5px 13px!important}
+.ppg-dots i{width:14px;height:14px}
+.dial{padding:18px!important}
+.dial-num{font-size:54px!important}
 </style>
 </head>
 <body>
