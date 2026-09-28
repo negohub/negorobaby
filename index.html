@@ -31,7 +31,7 @@
 <meta name="twitter:description" content="妊娠週数に合わせて、食べもの・暮らし・体・検査・お金・手続き・出産準備まで。食材120品目を◎○△×で判定します。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Titan+One&family=Dela+Gothic+One&family=Zen+Maru+Gothic:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --pink:#FF5FA2; --pink-d:#D2156E; --pink-l:#FFDCEC; --pink-bg:#FFF3F9;
@@ -1450,6 +1450,31 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
   background-size:16px 16px}
 html[data-theme="dark"] body::before{background-image:radial-gradient(rgba(255,255,255,.06) 1.6px, transparent 1.6px)}
 html[data-theme="dark"]{--ink-edge:#0F0A16}
+
+/* ============================================================
+   POWERPUFF FONT — 見出しをカートゥーン書体に
+   ============================================================ */
+:root{--ppg-face:"Titan One","Dela Gothic One","Zen Maru Gothic",sans-serif}
+
+.brand{font-family:var(--ppg-face)!important;font-weight:400!important;letter-spacing:.02em!important;
+  font-size:34px!important;line-height:1.3}
+.tb-brand{font-family:var(--ppg-face)!important;font-weight:400!important;font-size:16px!important;letter-spacing:.01em}
+.vhead b{font-family:var(--ppg-face)!important;font-weight:400!important;letter-spacing:.02em}
+h2{font-family:var(--ppg-face)!important;font-weight:400!important;letter-spacing:.02em;line-height:1.5}
+.nowcard .nc-h,.city-h b{font-family:var(--ppg-face)!important;font-weight:400!important;letter-spacing:.02em;line-height:1.5}
+.dial-num,.cd-big,.gx-n,.bigread{font-family:"Titan One","Quicksand",sans-serif!important;font-weight:400!important}
+.tabbar button{font-family:var(--ppg-face)!important;font-weight:400!important;font-size:11px!important;letter-spacing:.01em}
+.ap-h b,.vhead b,.city-g > b{font-family:var(--ppg-face)!important;font-weight:400!important}
+.homenav b{font-family:var(--ppg-face)!important;font-weight:400!important;font-size:16px!important;letter-spacing:.01em}
+.btnp,.bigbtn,.city-f a{font-family:var(--ppg-face)!important;font-weight:400!important;letter-spacing:.02em}
+
+/* 太い書体は行間を少し広めに */
+.brand,h2,.vhead b,.nowcard .nc-h,.city-h b{word-break:auto-phrase}
+.dial-num{font-size:52px!important}
+
+/* 本文・ページ名は読みやすい丸ゴシックのまま */
+.sx-t b,.gx-t b,.card h3,.acc summary,.i-name,.ap-t{
+  font-family:"Zen Maru Gothic",sans-serif!important;font-weight:700!important}
 </style>
 </head>
 <body>
