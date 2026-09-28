@@ -6,7 +6,7 @@
 <title>ぷれまむ手帳｜妊娠の全部、ここに。</title>
 <meta name="description" content="妊娠週数に合わせて、食べもの・暮らし・体・検査・お金・手続き・出産準備まで。妊娠中に必要な情報をまとめた手帳サイト。">
 <meta http-equiv="Cache-Control" content="no-cache, max-age=0">
-<meta name="theme-color" content="#FF9EBB">
+<meta name="theme-color" content="#FF5FA2">
 
 <!-- 公開URL: https://negohub.github.io/negorobaby/ （リポジトリ名: negorobaby） -->
 <link rel="canonical" href="https://negohub.github.io/negorobaby/">
@@ -34,16 +34,27 @@
 <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --pink:#FF9EBB; --pink-d:#D6486F; --pink-l:#FFE3EC; --pink-bg:#FFF4F8;
-  --cream:#FFFBF6;
-  --mint:#3E9E7C; --mint-bg:#E3F4EC;
-  --lav:#7B62B8; --lav-bg:#EFEAFA;
-  --amber:#C0851F; --amber-bg:#FDF3DE;
-  --red:#D13C56; --red-bg:#FDE7EC;
-  --ink:#3D2F36; --ink-mid:#6B5A64; --ink-soft:#8B7681;
-  --line:#F3DFE7; --card:#FFFFFF;
-  --sh:0 2px 4px rgba(214,72,111,.05),0 12px 28px -18px rgba(214,72,111,.35);
+  --pink:#FF5FA2; --pink-d:#D2156E; --pink-l:#FFDCEC; --pink-bg:#FFF3F9;
+  --cream:#FFFBEF;
+  --mint:#2E9E52; --mint-bg:#DFF6E2;
+  --lav:#1E81C4; --lav-bg:#DCF0FB;
+  --amber:#B57900; --amber-bg:#FFF1CC;
+  --red:#E03131; --red-bg:#FFE0E0;
+  --ink:#1F1A24; --ink-mid:#57505E; --ink-soft:#8A8092;
+  --line:#F0D9E6; --card:#FFFFFF;
+  --edge:#241E2B;
+  --sh:3px 3px 0 var(--edge);
   --r:18px;
+}
+html[data-theme="dark"]{
+  --pink:#FF7FB4; --pink-d:#FFB8D6; --pink-l:#42283A; --pink-bg:#1E1823;
+  --cream:#2A2233; --ink:#F6EEF6; --ink-mid:#CDBFD0; --ink-soft:#9A8EA0;
+  --line:#463A52; --card:#2B2335; --edge:#0E0A12;
+  --mint:#6FD68C; --mint-bg:#253A2B;
+  --lav:#77C4F0; --lav-bg:#1F3244;
+  --amber:#E8BE5E; --amber-bg:#3A3020;
+  --red:#FF8080; --red-bg:#3E2126;
+  --sh:3px 3px 0 var(--edge);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
@@ -60,13 +71,7 @@ h1,h2,h3{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;line-height:1.
 .num{font-family:"Quicksand",sans-serif;font-weight:700}
 a{color:var(--pink-d)}
 
-header{
-  background:linear-gradient(160deg,#FFB3C9 0%,#FF9EBB 45%,#F98BB4 100%);
-  color:#fff;padding:26px 0 54px;position:relative;overflow:hidden;border-radius:0 0 34px 34px;
-  scroll-margin-top:60px;
-}
-header::before{content:"";position:absolute;top:-60px;right:-50px;width:200px;height:200px;background:rgba(255,255,255,.16);border-radius:50%}
-header::after{content:"";position:absolute;bottom:-70px;left:-40px;width:160px;height:160px;background:rgba(255,255,255,.12);border-radius:50%}
+header{color:#fff;position:relative;overflow:hidden}
 .brand{font-family:"Zen Maru Gothic",sans-serif;font-size:32px;font-weight:700;letter-spacing:.05em;position:relative;z-index:1}
 .brand em{font-style:normal;font-size:19px;display:inline-block;margin-left:6px}
 .brand small{display:block;font-family:"Zen Kaku Gothic New",sans-serif;font-size:12px;font-weight:500;letter-spacing:.15em;opacity:.92;margin-top:8px}
@@ -482,16 +487,6 @@ html[data-theme="dark"] .topbar{background:rgba(30,23,32,.93);box-shadow:0 2px 1
 .bar i{display:block;height:100%;background:var(--mint);border-radius:10px;transition:width .25s}
 .bar i.over{background:var(--red)}
 /* --- night mode --- */
-html[data-theme="dark"]{
-  --pink:#E88AA9; --pink-d:#FFB3CB; --pink-l:#3B2B33; --pink-bg:#1E1720;
-  --cream:#241C26; --ink:#F2E6EC; --ink-mid:#C4B2BC; --ink-soft:#8E7C87;
-  --line:#3D2F37; --card:#2A2029;
-  --mint:#7FD3B0; --mint-bg:#22362F;
-  --lav:#B9A6E8; --lav-bg:#2B2439;
-  --amber:#E5B96A; --amber-bg:#382E20;
-  --red:#F2879C; --red-bg:#3A222A;
-  --sh:0 2px 4px rgba(0,0,0,.25),0 12px 28px -18px rgba(0,0,0,.7);
-}
 html[data-theme="dark"] body{background-image:radial-gradient(circle at 1px 1px, rgba(232,138,169,.09) 1px, transparent 0)}
 html[data-theme="dark"] header{background:linear-gradient(160deg,#5A3444 0%,#71404F 50%,#5A3444 100%)}
 html[data-theme="dark"] .chip,html[data-theme="dark"] .cattile,
@@ -602,6 +597,175 @@ html[data-theme="dark"] .city{background:linear-gradient(135deg,#42303A,#2A2029)
 .city-f button{background:var(--card);color:var(--ink-mid);border:2px solid var(--line)}
 .city-back{width:100%;margin:10px 0 0;font-family:inherit;font-size:12.5px;font-weight:700;color:var(--ink-soft);
   background:transparent;border:2px dashed var(--line);border-radius:100px;padding:9px;cursor:pointer}
+
+/* --- POP: sunburst header --- */
+:root{--ppg-pink:#FF4FA0;--ppg-blue:#57C8F5;--ppg-green:#79D45E;--ppg-sun:#FFD84D}
+header{
+  background:var(--ppg-pink);
+  padding:22px 0 40px;border-radius:0;overflow:hidden;position:relative;
+}
+header::before{
+  content:"";position:absolute;inset:-60% -30%;z-index:0;
+  background:repeating-conic-gradient(from 0deg at 50% 45%,
+    rgba(255,255,255,.22) 0deg 9deg, rgba(255,255,255,0) 9deg 18deg);
+  animation:spin 60s linear infinite;
+}
+header::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:12px;z-index:2;
+  background:repeating-linear-gradient(135deg,var(--edge) 0 10px,var(--ppg-sun) 10px 20px);
+  border-top:3px solid var(--edge);
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){header::before{animation:none}}
+html[data-theme="dark"] header{background:#8A2457}
+.ppg-dots{display:flex;gap:7px;position:relative;z-index:1;margin-bottom:10px}
+.ppg-dots i{width:16px;height:16px;border-radius:50%;border:2.5px solid var(--edge);display:block}
+.ppg-dots i:nth-child(1){background:var(--ppg-pink);box-shadow:2px 2px 0 var(--edge)}
+.ppg-dots i:nth-child(2){background:var(--ppg-blue);box-shadow:2px 2px 0 var(--edge)}
+.ppg-dots i:nth-child(3){background:var(--ppg-green);box-shadow:2px 2px 0 var(--edge)}
+.brand{position:relative;z-index:1;color:#fff;font-size:40px;letter-spacing:.03em;
+  text-shadow:3px 3px 0 var(--edge),-2px -2px 0 var(--edge),2px -2px 0 var(--edge),-2px 2px 0 var(--edge)}
+.brand em{font-size:24px}
+.lede{position:relative;z-index:1;color:#fff;font-weight:700;font-size:14px;opacity:1;
+  text-shadow:2px 2px 0 var(--edge)}
+
+/* --- POP: 3色ローテーション --- */
+.gx-b > section:nth-child(3n+1) .sx-ic{background:#FFD9EA}
+.gx-b > section:nth-child(3n+2) .sx-ic{background:#D3EEFC}
+.gx-b > section:nth-child(3n+3) .sx-ic{background:#DFF6D5}
+.grpx:nth-child(3n+1) > summary{background:#FFEAF3}
+.grpx:nth-child(3n+2) > summary{background:#E4F4FD}
+.grpx:nth-child(3n+3) > summary{background:#EAF8E3}
+.grpx:nth-child(3n+1)[open] > summary{background:var(--ppg-pink);color:#fff}
+.grpx:nth-child(3n+2)[open] > summary{background:var(--ppg-blue)}
+.grpx:nth-child(3n+3)[open] > summary{background:var(--ppg-green)}
+.grpx[open] > summary .gx-t b,.grpx[open] > summary .gx-t > span,.grpx[open] > summary .gx-n{color:var(--edge)}
+html[data-theme="dark"] .grpx:nth-child(3n+1) > summary{background:#4A2438}
+html[data-theme="dark"] .grpx:nth-child(3n+2) > summary{background:#1F3244}
+html[data-theme="dark"] .grpx:nth-child(3n+3) > summary{background:#263A24}
+
+/* --- POP: ステッカー風の番号 --- */
+.gx-n{background:#fff;border:2.5px solid var(--edge);border-radius:50%;width:46px;height:46px;
+  display:flex;align-items:center;justify-content:center;font-size:19px;opacity:1;color:var(--edge);
+  box-shadow:2px 2px 0 var(--edge);transform:rotate(-6deg)}
+.gx-cv,.sx-cv,.ap-cv,.acc .cv{box-shadow:2px 2px 0 var(--edge)}
+
+/* --- POP: 星の箇条書き --- */
+.card li::before{content:"\2605";color:var(--ppg-pink);font-size:12px;top:.15em}
+.city-g em,.ap-m .l{color:var(--red)}
+
+/* --- POP: 見出し --- */
+h2{text-shadow:2px 2px 0 rgba(36,30,43,.12)}
+.sx-t b,.gx-t b{letter-spacing:.01em}
+.eyebrow{background:var(--ppg-sun);color:var(--edge);box-shadow:2px 2px 0 var(--edge)}
+.tag{background:var(--ppg-blue);color:var(--edge)}
+.badge{box-shadow:1.5px 1.5px 0 var(--edge)}
+.nowcard{background:var(--ppg-sun)}
+html[data-theme="dark"] .nowcard{background:#4A3A12}
+.nowcard .nc-h{color:var(--edge)}
+.nowcard .nc-s{color:var(--edge)}
+.nowcard .nc-links a{background:#fff;border:2.5px solid var(--edge);color:var(--edge);box-shadow:2px 2px 0 var(--edge)}
+.city{background:var(--ppg-green)}
+html[data-theme="dark"] .city{background:#274626}
+.city-h b,.city-s{color:var(--edge)}
+.dial-num,.cd-big{text-shadow:2px 2px 0 rgba(36,30,43,.15)}
+.wkstep{box-shadow:2px 2px 0 var(--edge)}
+.wkstep:active{transform:translate(2px,2px);box-shadow:none}
+.h2-ic{box-shadow:2px 2px 0 var(--edge)}
+.topbar{background:var(--ppg-sun)}
+html[data-theme="dark"] .topbar{background:#3A3012}
+.tb-brand{color:var(--edge)}
+.tb-ic{color:var(--edge);background:#fff;box-shadow:2px 2px 0 var(--edge)}
+.tabbar button.on svg{background:var(--ppg-pink)}
+.tabbar button:nth-child(2).on svg{background:var(--ppg-blue)}
+.tabbar button:nth-child(3).on svg{background:var(--ppg-green)}
+.tabbar button:nth-child(4).on svg{background:var(--ppg-sun);color:var(--edge)}
+
+/* --- POP: 可読性チューニング --- */
+/* 上部バーは白＋黒枠に（色は下のコンテンツに譲る） */
+.topbar{background:#fff!important;border-bottom:3px solid var(--edge)}
+html[data-theme="dark"] .topbar{background:var(--card)!important}
+.tb-brand{color:var(--edge);font-size:17px;letter-spacing:.02em}
+html[data-theme="dark"] .tb-brand{color:var(--ink)}
+
+/* 放射は控えめに（文字の邪魔をしない） */
+header::before{opacity:.55}
+header{padding:20px 0 38px}
+.brand{font-size:36px}
+
+/* グループ：開いたときはベタ塗り＋黒文字（PPGは黒文字が基本） */
+.grpx:nth-child(3n+1)[open] > summary{background:#FF8FC2}
+.grpx:nth-child(3n+2)[open] > summary{background:#8FD8F7}
+.grpx:nth-child(3n+3)[open] > summary{background:#A8E893}
+.grpx[open] > summary .gx-t b,
+.grpx[open] > summary .gx-t > span,
+.grpx[open] > summary .gx-n{color:var(--edge)!important}
+.grpx > summary{padding:18px 17px;min-height:84px}
+.gx-t b{font-size:20px}
+.gx-t > span{font-size:13px;color:var(--ink-mid)}
+
+/* セクション：白地＋黒枠。色はアイコンだけ */
+.secx > summary{padding:16px;min-height:74px}
+.secx[open] > summary{background:var(--cream)}
+html[data-theme="dark"] .secx[open] > summary{background:var(--pink-l)}
+.sx-t b{font-size:18px}
+.sx-t > span{font-size:13px;color:var(--ink-mid)}
+.sx-ic{width:46px;height:46px;font-size:23px;border-radius:50%}
+
+/* 強調カードの色を少し淡く（黒文字が読めるように） */
+.nowcard{background:#FFE98A}
+.city{background:#B6EDA6}
+html[data-theme="dark"] .nowcard{background:#4A3E14}
+html[data-theme="dark"] .city{background:#2A4A26}
+.nowcard .nc-h{font-size:17px}
+.nowcard .nc-s{font-size:13.5px;color:var(--edge)}
+html[data-theme="dark"] .nowcard .nc-h,html[data-theme="dark"] .nowcard .nc-s{color:var(--ink)}
+html[data-theme="dark"] .city-h b,html[data-theme="dark"] .city-s{color:var(--ink)}
+
+/* 本文まわりのコントラストを上げる */
+.card p,.acc-b p,.ap-d,.card li{color:#3B3442}
+html[data-theme="dark"] .card p,html[data-theme="dark"] .acc-b p,
+html[data-theme="dark"] .ap-d,html[data-theme="dark"] .card li{color:var(--ink-mid)}
+.sub{color:#4A4252}
+html[data-theme="dark"] .sub{color:var(--ink-mid)}
+
+/* ダイヤル */
+.dial{background:#fff}
+.dial-num{font-size:52px}
+
+/* --- bottom tab bar --- */
+body{padding-bottom:104px}
+.tabbar{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:55;
+  display:flex;gap:4px;padding:8px;border-radius:26px;background:var(--card);
+  border:3px solid var(--edge);box-shadow:4px 4px 0 var(--edge)}
+.tabbar button{flex:1 1 0;min-width:0;border:none;background:transparent;cursor:pointer;padding:5px 2px;
+  display:flex;flex-direction:column;align-items:center;gap:4px;border-radius:20px;
+  font-family:"Zen Maru Gothic",sans-serif;font-weight:700;font-size:11px;color:var(--ink-mid);line-height:1}
+.tabbar button svg{width:24px;height:24px;padding:5px;border-radius:50%;box-sizing:content-box}
+.tabbar button.on{color:var(--pink-d)}
+.tabbar button.on svg{background:var(--pink);color:#fff;border:2.5px solid var(--edge);box-shadow:2px 2px 0 var(--edge);padding:5px}
+.tabbar button:active{transform:translateY(1px)}
+#toTop{bottom:calc(104px + env(safe-area-inset-bottom))}
+@media print{.tabbar{display:none!important}}
+
+/* --- outline pop style --- */
+.card,.acc,.item,.ap,.secx,.grpx,.city,.nowcard,.dial,.tbl,.setup,.ck,.note,.cattile,.menu-in,.sp-in{
+  border:2.5px solid var(--edge)!important;box-shadow:var(--sh)!important}
+.note{box-shadow:2px 2px 0 var(--edge)!important}
+.btnp,.bigbtn,.btns,.chip,.openall,.ap-all,.ap-filter button,.tb-ic,.city-f a,.city-f button,
+.mg-l a,.mq,.sr,.gtab,#toTop,.field input,.search input,.recgrid input,.telrow input,.duebox select,
+.duebox input,.setup .form input,.setup .form select,.share textarea{
+  border:2.5px solid var(--edge)!important}
+.btnp,.bigbtn,.btns,.city-f a,.city-f button,#toTop,.mq,.sr,.mg-l a{box-shadow:3px 3px 0 var(--edge)}
+.btnp:active,.bigbtn:active,.btns:active,.city-f a:active,.city-f button:active{
+  transform:translate(2px,2px);box-shadow:1px 1px 0 var(--edge)}
+.chip[aria-pressed=true],.ap-filter button[aria-pressed=true]{box-shadow:2px 2px 0 var(--edge)}
+.badge,.tag,.ap-m i,.sx-w,.lg,.st{border:2px solid var(--edge)}
+h2{letter-spacing:.01em;-webkit-text-stroke:0}
+.sx-ic,.h2-ic,.city-h .ic,.gx-cv,.sx-cv,.acc .cv,.ap-cv{border:2.5px solid var(--edge)}
+.eyebrow{border:2px solid var(--edge)}
+.topbar{border-bottom:2.5px solid var(--edge)}
+body{background-image:radial-gradient(circle at 1px 1px, rgba(255,95,162,.16) 1.5px, transparent 0)}
 
 /* --- section accordion --- */
 .listbar{display:flex;align-items:center;gap:10px;margin:22px 0 10px;padding:0 2px}
@@ -868,21 +1032,22 @@ details.grpwrap:not([open]) > summary .gcv::after{content:"ひらく"}
 </div>
 
 <div class="topbar">
-  <a href="#top" class="tb-brand">ぷれまむ手帳<span>&#9825;</span></a>
+  <a href="#top" class="tb-brand">ぷれまむ手帳</a>
   <div class="tb-field" id="tbField" hidden>
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
     <input type="search" id="tbQ" placeholder="サイト内を探す" autocomplete="off">
     <button id="tbCancel" aria-label="やめる">&#215;</button>
   </div>
   <button id="searchBtn" class="tb-ic" aria-label="探す">&#128269;</button>
-  <button id="menuBtn" class="tb-ic tb-menu" aria-label="目次"><span></span><span></span><span></span></button>
+  <button id="menuBtn" class="tb-ic tb-menu" aria-label="目次" hidden><span></span><span></span><span></span></button>
 </div>
 
 <div id="sPanel" hidden><div class="sp-in" id="sPanelBody"></div></div>
 
 <header id="top">
   <div class="wrap">
-    <div class="brand">ぷれまむ手帳<em>&#9825;</em><small>妊娠のこと、全部ここに</small></div>
+    <div class="ppg-dots"><i></i><i></i><i></i></div>
+    <div class="brand">ぷれまむ手帳</div>
     <p class="lede">妊娠のこと、全部ここに。</p>
   </div>
 </header>
@@ -1410,6 +1575,14 @@ details.grpwrap:not([open]) > summary .gcv::after{content:"ひらく"}
     <p style="margin-top:8px;font-size:11px">更新は自動で反映されます。うまくいかないときだけ、これを押してください。記録は消えません。</p>
   </footer>
 </div>
+
+<nav class="tabbar" id="tabbar">
+  <button data-t="top" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11.5 13 4l9 7.5"/><path d="M6.5 10v10h13V10"/></svg><span>ホーム</span></button>
+  <button data-t="food"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3v8a2.5 2.5 0 0 0 5 0V3"/><path d="M9.5 11v10"/><path d="M18 3c-1.5 2-2 4-2 6.5 0 1.5.7 2.5 2 2.5v9"/></svg><span>食べもの</span></button>
+  <button data-t="body"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.5-7-9.2A4 4 0 0 1 12 8a4 4 0 0 1 7-1.2C19 15.5 12 20 12 20z"/></svg><span>からだ</span></button>
+  <button data-t="apply"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2.5"/><circle cx="12" cy="12" r="2.6"/></svg><span>手続き</span></button>
+  <button data-t="menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h16"/></svg><span>目次</span></button>
+</nav>
 
 <button id="toTop" aria-label="一番上へ">&#8593;</button>
 <div id="menu" hidden>
@@ -2590,7 +2763,7 @@ function applyWeekUI(){
   var w=+$("#wk").value;
   var pick=TOPPICKS[TOPPICKS.length-1];
   for(var i=0;i<TOPPICKS.length;i++){if(w<=TOPPICKS[i].to){pick=TOPPICKS[i];break;}}
-  $("#nowcard").innerHTML='<div class="nc-h">'+w+'週の今 &#9825; '+pick.h+'</div><div class="nc-s">'+pick.s+
+  $("#nowcard").innerHTML='<div class="nc-h">'+w+'週の今　'+pick.h+'</div><div class="nc-s">'+pick.s+
     '</div><div class="nc-links">'+pick.l.map(function(id){
       return '<a href="#'+id+'">'+(SECT_ICON[id]||"")+" "+(SECT_LABEL[id]||id)+'</a>';}).join("")+'</div>';
 
@@ -3491,6 +3664,23 @@ var CITY=[
 
 })();
 
+/* ---- 下タブ ---- */
+(function(){
+  var bar=document.getElementById("tabbar");if(!bar)return;
+  var MAP={food:"food",body:"body",apply:"apply"};
+  function setOn(k){
+    Array.prototype.forEach.call(bar.children,function(b){b.classList.toggle("on",b.dataset.t===k);});
+  }
+  bar.addEventListener("click",function(e){
+    var b=e.target.closest("button");if(!b)return;
+    var t=b.dataset.t;setOn(t);
+    if(t==="top"){window.scrollTo({top:0,behavior:"smooth"});return;}
+    if(t==="menu"){var mb=document.getElementById("menuBtn");if(mb)mb.click();return;}
+    if(MAP[t]&&typeof goSection==="function")goSection(MAP[t]);
+  });
+  window.addEventListener("scroll",function(){if(window.scrollY<160)setOn("top");},{passive:true});
+})();
+
 /* ---- night mode ---- */
 (function(){
   var t=null;try{t=localStorage.getItem("premam-theme");}catch(e){}
@@ -3498,7 +3688,7 @@ var CITY=[
     document.documentElement.setAttribute("data-theme",v);
     $("#themeBtn").innerHTML=(v==="dark")?"&#9728;&#65039; 昼":"&#127769; 夜";
     var mt=document.querySelector('meta[name="theme-color"]');
-    if(mt)mt.setAttribute("content",v==="dark"?"#5A3444":"#FF9EBB");
+    if(mt)mt.setAttribute("content",v==="dark"?"#1E1823":"#FF5FA2");
     if(save){try{localStorage.setItem("premam-theme",v);}catch(e){}}
   }
   set(t||"light",false);
