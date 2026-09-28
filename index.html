@@ -1268,6 +1268,71 @@ body{padding-bottom:116px!important}
 .ppg-dots i{width:14px;height:14px}
 .dial{padding:18px!important}
 .dial-num{font-size:54px!important}
+
+/* ============================================================
+   タブビュー＋なめらかな動き
+   ============================================================ */
+html{scroll-behavior:smooth}
+*{-webkit-tap-highlight-color:transparent}
+
+/* ビュー見出し */
+.vhead{display:flex;align-items:baseline;gap:10px;margin:22px 2px 14px}
+.vhead b{font-family:"Zen Maru Gothic",sans-serif;font-size:24px;color:var(--ink);letter-spacing:.03em}
+.vhead span{font-size:12.5px;color:var(--ink-mid)}
+
+/* ビュー切り替えのフェード */
+#views.vin > section{animation:vfade .34s cubic-bezier(.22,.9,.3,1) both}
+#views.vin > section:nth-child(1){animation-delay:.00s}
+#views.vin > section:nth-child(2){animation-delay:.03s}
+#views.vin > section:nth-child(3){animation-delay:.06s}
+#views.vin > section:nth-child(4){animation-delay:.09s}
+#views.vin > section:nth-child(5){animation-delay:.12s}
+#views.vin > section:nth-child(n+6){animation-delay:.15s}
+@keyframes vfade{from{opacity:0;transform:translateY(14px) scale(.985)}to{opacity:1;transform:none}}
+
+/* 折りたたみの中身もなめらかに */
+.secx[open] > .sx-b,.acc[open] > .acc-b,.ap-x[open] > .ap-d,.item[open] > .i-body{
+  animation:openIn .26s cubic-bezier(.22,.9,.3,1) both}
+@keyframes openIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+
+/* 下タブ：スクロール中は小さく */
+.tabbar{transition:transform .28s cubic-bezier(.22,.9,.3,1), padding .28s, opacity .2s;
+  transform-origin:50% 100%}
+.tabbar.mini{transform:scale(.84) translateY(10px);opacity:.92}
+.tabbar button svg{transition:transform .2s cubic-bezier(.3,1.4,.5,1), background .2s}
+.tabbar button.on svg{transform:translateY(-2px) scale(1.06)}
+.tabbar button span{transition:opacity .2s}
+
+/* 押したときの反応をそろえる */
+.secx > summary,.acc summary,.item summary,.ap-x > summary,.grpx > summary{
+  transition:background .2s ease, transform .1s ease}
+.sx-cv,.ap-cv,.acc .cv{transition:background .2s ease, transform .22s cubic-bezier(.3,1.4,.5,1)}
+.secx[open] .sx-cv,.acc[open] .cv,.ap-x[open] .ap-cv{transform:rotate(135deg)}
+.btnp:active,.bigbtn:active,.btns:active,.chip:active,.mq:active,.mg-l a:active{transform:scale(.96)}
+.cattile{transition:transform .16s ease, background .2s ease}
+.cattile:active{transform:scale(.97)}
+
+/* メニュー・検索パネルの出入り */
+#menu:not([hidden]) .menu-in{animation:sheet .3s cubic-bezier(.22,.9,.3,1) both}
+@keyframes sheet{from{transform:translateY(-14px);opacity:0}to{transform:none;opacity:1}}
+#sPanel:not([hidden]) .sp-in{animation:sheet .26s cubic-bezier(.22,.9,.3,1) both}
+
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  #views.vin > section,.secx[open] > .sx-b,.acc[open] > .acc-b,.ap-x[open] > .ap-d,
+  .item[open] > .i-body,#menu .menu-in,#sPanel .sp-in{animation:none!important}
+  .tabbar{transition:none}
+}
+
+/* ホームのタブ導線 */
+.homenav{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.homenav button{text-align:left;padding:16px 15px;border-radius:var(--r3);cursor:pointer;
+  background:var(--g-bg);-webkit-backdrop-filter:var(--g-blur);backdrop-filter:var(--g-blur);
+  border:1px solid var(--g-line);box-shadow:var(--g-sh),var(--g-in);font-family:inherit;min-height:84px;
+  transition:transform .14s ease}
+.homenav button:active{transform:scale(.97)}
+.homenav b{display:block;font-family:"Zen Maru Gothic",sans-serif;font-size:17px;color:var(--ink);line-height:1.4}
+.homenav span{display:block;font-size:11.5px;color:var(--ink-mid);margin-top:3px;line-height:1.5}
 </style>
 </head>
 <body>
@@ -1286,7 +1351,7 @@ body{padding-bottom:116px!important}
     <button id="tbCancel" aria-label="やめる">&#215;</button>
   </div>
   <button id="searchBtn" class="tb-ic" aria-label="探す">&#128269;</button>
-  <button id="menuBtn" class="tb-ic tb-menu" aria-label="目次" hidden><span></span><span></span><span></span></button>
+  <button id="menuBtn" class="tb-ic tb-menu" aria-label="目次"><span></span><span></span><span></span></button>
 </div>
 
 <div id="sPanel" hidden><div class="sp-in" id="sPanelBody"></div></div>
@@ -1338,6 +1403,7 @@ body{padding-bottom:116px!important}
   <div class="nowcard" id="nowcard"></div>
 
   <div id="cityCard"></div>
+  <div class="homenav" id="homeNav"></div>
 
   <div class="gdiv" data-g="1"><span class="gd-n">01</span><div><b>最初に押さえる</b><span>お金と制度。ここが差になる</span></div></div>
 
@@ -1824,11 +1890,11 @@ body{padding-bottom:116px!important}
 </div>
 
 <nav class="tabbar" id="tabbar">
-  <button data-t="top" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11.5 13 4l9 7.5"/><path d="M6.5 10v10h13V10"/></svg><span>ホーム</span></button>
-  <button data-t="food"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3v8a2.5 2.5 0 0 0 5 0V3"/><path d="M9.5 11v10"/><path d="M18 3c-1.5 2-2 4-2 6.5 0 1.5.7 2.5 2 2.5v9"/></svg><span>食べもの</span></button>
-  <button data-t="body"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.5-7-9.2A4 4 0 0 1 12 8a4 4 0 0 1 7-1.2C19 15.5 12 20 12 20z"/></svg><span>からだ</span></button>
-  <button data-t="apply"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2.5"/><circle cx="12" cy="12" r="2.6"/></svg><span>手続き</span></button>
-  <button data-t="menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h16"/></svg><span>目次</span></button>
+  <button data-v="home" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11.5 13 4l9 7.5"/><path d="M6.5 10v10h13V10"/></svg><span>ホーム</span></button>
+  <button data-v="eat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3v8a2.5 2.5 0 0 0 5 0V3"/><path d="M9.5 11v10"/><path d="M18 3c-1.5 2-2 4-2 6.5 0 1.5.7 2.5 2 2.5v9"/></svg><span>食べる</span></button>
+  <button data-v="body"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.5-7-9.2A4 4 0 0 1 12 8a4 4 0 0 1 7-1.2C19 15.5 12 20 12 20z"/></svg><span>からだ</span></button>
+  <button data-v="money"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2.5"/><circle cx="12" cy="12" r="2.6"/></svg><span>手続き</span></button>
+  <button data-v="more"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="7" r="2.4"/><circle cx="17" cy="7" r="2.4"/><circle cx="7" cy="17" r="2.4"/><circle cx="17" cy="17" r="2.4"/></svg><span>その他</span></button>
 </nav>
 
 <button id="toTop" aria-label="一番上へ">&#8593;</button>
@@ -3911,21 +3977,97 @@ var CITY=[
 
 })();
 
-/* ---- 下タブ ---- */
+/* ---- ホームにタブへの導線 ---- */
+function renderHomeNav(){
+  var el=document.getElementById("homeNav");if(!el)return;
+  el.innerHTML=["eat","body","money","more"].map(function(v){
+    return '<button type="button" data-hv="'+v+'"><b>'+VTITLE[v][0]+"</b><span>"+VTITLE[v][1]+"</span></button>";
+  }).join("");
+  el.addEventListener("click",function(e){
+    var b=e.target.closest("[data-hv]");if(!b)return;
+    if(window.showView)window.showView(b.dataset.hv,true);
+  });
+}
+
+/* ---- タブごとの独立ビュー ---- */
+var VIEWS={
+ home:[],
+ eat:["food","life","recipe","caffeine","nutri","fish","salt","weight"],
+ body:["body","danger","contact","phase","fuan","oops","test","echo","record","kick"],
+ money:["apply","matsudo","tokuten","money","cost","todo","hokatsu","edu"],
+ more:["count","limits","tips","setup","backup","birth","kinkyu","prep","timer","labor","after","baby1m","name","around","papa"]
+};
+var VTITLE={home:["ホーム","今週のこと"],eat:["食べる","判定・栄養・レシピ"],
+ body:["からだ","症状・健診・記録"],money:["手続き","お金と申請"],more:["その他","お産・産後・設定"]};
+var curV="home";
+
 (function(){
-  var bar=document.getElementById("tabbar");if(!bar)return;
-  var MAP={food:"food",body:"body",apply:"apply"};
-  function setOn(k){
-    Array.prototype.forEach.call(bar.children,function(b){b.classList.toggle("on",b.dataset.t===k);});
+  /* グループの入れ物をほどいて、セクションを1か所に集める */
+  var host=document.createElement("div");host.id="views";
+  var first=document.querySelector(".grpx");
+  if(first)first.parentNode.insertBefore(host,first);
+  Array.prototype.forEach.call(document.querySelectorAll(".grpx"),function(g){
+    Array.prototype.forEach.call(g.querySelectorAll("section[data-from]"),function(s){host.appendChild(s);});
+    g.remove();
+  });
+  /* ビューを割り当て */
+  Object.keys(VIEWS).forEach(function(v){
+    VIEWS[v].forEach(function(id){
+      var s=document.getElementById(id);if(s)s.dataset.view=v;
+    });
+  });
+  /* ビュー見出し */
+  var head=document.createElement("div");head.className="vhead";head.id="vhead";
+  host.parentNode.insertBefore(head,host);
+
+  var bar=document.getElementById("tabbar");
+  function show(v,scroll){
+    curV=v;
+    var isHome=(v==="home");
+    [".dial",".nowcard","#cityCard","#homeNav"].forEach(function(sel){
+      var el=document.querySelector(sel);if(el)el.style.display=isHome?"":"none";
+    });
+    head.style.display=isHome?"none":"";
+    head.innerHTML=isHome?"":'<b>'+VTITLE[v][0]+"</b><span>"+VTITLE[v][1]+"・"+VIEWS[v].length+"ページ</span>";
+    Array.prototype.forEach.call(document.querySelectorAll("section[data-from]"),function(s){
+      s.style.display=(s.dataset.view===v)?"":"none";
+    });
+    Array.prototype.forEach.call(bar.children,function(b){b.classList.toggle("on",b.dataset.v===v);});
+    host.classList.remove("vin");void host.offsetWidth;host.classList.add("vin");
+    if(scroll)window.scrollTo({top:0,behavior:"smooth"});
   }
+  window.showView=show;
+  window.viewOf=function(id){
+    for(var v in VIEWS){if(VIEWS[v].indexOf(id)>=0)return v;}
+    return "home";
+  };
   bar.addEventListener("click",function(e){
     var b=e.target.closest("button");if(!b)return;
-    var t=b.dataset.t;setOn(t);
-    if(t==="top"){window.scrollTo({top:0,behavior:"smooth"});return;}
-    if(t==="menu"){var mb=document.getElementById("menuBtn");if(mb)mb.click();return;}
-    if(MAP[t]&&typeof goSection==="function")goSection(MAP[t]);
+    show(b.dataset.v,true);
   });
-  window.addEventListener("scroll",function(){if(window.scrollY<160)setOn("top");},{passive:true});
+  renderHomeNav();
+  show("home",false);
+
+  /* リンクで飛ぶときはビューも切り替える */
+  var _go=window.goSection;
+  window.goSection=function(id){
+    var v=window.viewOf(id);
+    if(v!==curV)show(v,false);
+    var sec=document.getElementById(id);
+    if(sec){sec.style.display="";var d=sec.querySelector(".secx");if(d)d.open=true;}
+    setTimeout(function(){if(sec)sec.scrollIntoView({behavior:"smooth",block:"start"});},60);
+  };
+})();
+
+/* ---- 下タブ：スクロール中は小さく、止まったら戻る ---- */
+(function(){
+  var bar=document.getElementById("tabbar");if(!bar)return;
+  var t=null;
+  window.addEventListener("scroll",function(){
+    bar.classList.add("mini");
+    clearTimeout(t);
+    t=setTimeout(function(){bar.classList.remove("mini");},220);
+  },{passive:true});
 })();
 
 /* ---- night mode ---- */
