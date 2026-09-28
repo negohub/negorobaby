@@ -1333,6 +1333,123 @@ html{scroll-behavior:smooth}
 .homenav button:active{transform:scale(.97)}
 .homenav b{display:block;font-family:"Zen Maru Gothic",sans-serif;font-size:17px;color:var(--ink);line-height:1.4}
 .homenav span{display:block;font-size:11.5px;color:var(--ink-mid);margin-top:3px;line-height:1.5}
+
+/* ============================================================
+   POWERPUFF MAX — ガラスの上に、はっきりした記号を乗せる
+   ============================================================ */
+:root{
+  --ink-edge:#2B2233;
+  --p1:#FF4FA0;  /* ピンク */
+  --p2:#4FC3F7;  /* ブルー */
+  --p3:#7ED957;  /* グリーン */
+  --p4:#FFD84D;  /* イエロー */
+}
+
+/* ---- ヘッダー：放射＋星＋街のシルエット ---- */
+header{
+  background:linear-gradient(160deg,#FF6FB0 0%,#C77BEF 48%,#6FB6FF 100%)!important;
+  padding:30px 0 74px!important;border-radius:0 0 30px 30px!important;
+  border-bottom:4px solid var(--ink-edge)!important;overflow:hidden}
+header::before{
+  background:repeating-conic-gradient(from 0deg at 50% 38%,
+    rgba(255,255,255,.30) 0deg 7deg, rgba(255,255,255,0) 7deg 14deg)!important;
+  inset:-40% -25%!important;opacity:1!important;animation:ppgspin 90s linear infinite!important}
+@keyframes ppgspin{to{transform:rotate(360deg)}}
+header::after{
+  content:"";display:block!important;position:absolute;left:0;right:0;bottom:0;height:64px;z-index:2;
+  background:url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201200%20140%22%20preserveAspectRatio%3D%22none%22%3E%3Cg%20fill%3D%22%232B2233%22%3E%3Crect%20x%3D%220%22%20y%3D%2286%22%20width%3D%221200%22%20height%3D%2254%22%2F%3E%3Crect%20x%3D%2224%22%20y%3D%2252%22%20width%3D%2246%22%20height%3D%2260%22%2F%3E%3Crect%20x%3D%2234%22%20y%3D%2240%22%20width%3D%228%22%20height%3D%2214%22%2F%3E%3Crect%20x%3D%2288%22%20y%3D%2266%22%20width%3D%2262%22%20height%3D%2246%22%2F%3E%3Crect%20x%3D%22168%22%20y%3D%2230%22%20width%3D%2254%22%20height%3D%2282%22%2F%3E%3Crect%20x%3D%22186%22%20y%3D%2214%22%20width%3D%2210%22%20height%3D%2218%22%2F%3E%3Crect%20x%3D%22240%22%20y%3D%2260%22%20width%3D%2240%22%20height%3D%2252%22%2F%3E%3Crect%20x%3D%22298%22%20y%3D%2244%22%20width%3D%2270%22%20height%3D%2268%22%2F%3E%3Crect%20x%3D%22386%22%20y%3D%2270%22%20width%3D%2248%22%20height%3D%2242%22%2F%3E%3Crect%20x%3D%22452%22%20y%3D%2226%22%20width%3D%2258%22%20height%3D%2286%22%2F%3E%3Crect%20x%3D%22474%22%20y%3D%228%22%20width%3D%229%22%20height%3D%2220%22%2F%3E%3Crect%20x%3D%22528%22%20y%3D%2262%22%20width%3D%2244%22%20height%3D%2250%22%2F%3E%3Crect%20x%3D%22590%22%20y%3D%2248%22%20width%3D%2266%22%20height%3D%2264%22%2F%3E%3Crect%20x%3D%22674%22%20y%3D%2272%22%20width%3D%2240%22%20height%3D%2240%22%2F%3E%3Crect%20x%3D%22732%22%20y%3D%2234%22%20width%3D%2256%22%20height%3D%2278%22%2F%3E%3Crect%20x%3D%22752%22%20y%3D%2216%22%20width%3D%229%22%20height%3D%2220%22%2F%3E%3Crect%20x%3D%22806%22%20y%3D%2264%22%20width%3D%2252%22%20height%3D%2248%22%2F%3E%3Crect%20x%3D%22876%22%20y%3D%2246%22%20width%3D%2262%22%20height%3D%2266%22%2F%3E%3Crect%20x%3D%22956%22%20y%3D%2274%22%20width%3D%2244%22%20height%3D%2238%22%2F%3E%3Crect%20x%3D%221018%22%20y%3D%2238%22%20width%3D%2254%22%20height%3D%2274%22%2F%3E%3Crect%20x%3D%221036%22%20y%3D%2220%22%20width%3D%229%22%20height%3D%2220%22%2F%3E%3Crect%20x%3D%221090%22%20y%3D%2266%22%20width%3D%2270%22%20height%3D%2246%22%2F%3E%3C%2Fg%3E%3Cg%20fill%3D%22%23FFE07A%22%3E%3Crect%20x%3D%2234%22%20y%3D%2262%22%20width%3D%227%22%20height%3D%228%22%2F%3E%3Crect%20x%3D%2248%22%20y%3D%2262%22%20width%3D%227%22%20height%3D%228%22%2F%3E%3Crect%20x%3D%2234%22%20y%3D%2278%22%20width%3D%227%22%20height%3D%228%22%2F%3E%3Crect%20x%3D%22180%22%20y%3D%2244%22%20width%3D%227%22%20height%3D%228%22%2F%3E%3Crect%20x%3D%22196%22%20y%3D%2244%22%20width%3D%227%22%20height%3D%228%22%2F%3E%3Crect%20x%3D%22180%22%20y%3D%2262%22%20width%3D%227%22%20height%3D%228%22%2F%3E%3Crect%20x%3D%22196%22%20y%3D%2278%22%20width%3D%227%22%20height%3D%228%22%2F%3E%3Crect%20x%3D%22312%22%20y%3D%2258%22%20width%3D%227%22%20height%3D%228%22%2F%3E%3Crect%20x%3D%22330%22%20y%3D%2258%22%20width%3D%227%22%20height%3D%228%22%2F%3E%3Crect%20x%3D%22348%22%20y%3D%2276%22%20width%3D%227%22%20height%3D%228%22%2F%3E%3Crect%20x%3D%22464%22%20y%3D%2240%22%20width%3D%227%22%20height%3D%228%22%2F%3E%3Crect%20x%3D%22484%22%20y%3D%2240%22%20width%3D%227%22%20height%3D%228%22%2F%3E%3Crect%20x%3D%22464%22%20y%3D%2260%22%20width%3D%227%22%20height%3D%228%22%2F%3E%3Crect%20x%3D%22484%22%20y%3D%2280%22%20width%3D%227%22%20height%3D%228%22%2F%3E%3Crect%20x%3D%22604%22%20y%3D%2262%22%20width%3D%227%22%20height%3D%228%22%2F%3E%3Crect%20x%3D%22624%22%20y%3D%2262%22%20width%3D%227%22%20height%3D%228%22%2F%3E%3Crect%20x%3D%22640%22%20y%3D%2280%22%20width%3D%227%22%20height%3D%228%22%2F%3E%3Crect%20x%3D%22744%22%20y%3D%2248%22%20width%3D%227%22%20height%3D%228%22%2F%3E%3Crect%20x%3D%22764%22%20y%3D%2248%22%20width%3D%227%22%20height%3D%228%22%2F%3E%3Crect%20x%3D%22744%22%20y%3D%2268%22%20width%3D%227%22%20height%3D%228%22%2F%3E%3Crect%20x%3D%22890%22%20y%3D%2260%22%20width%3D%227%22%20height%3D%228%22%2F%3E%3Crect%20x%3D%22910%22%20y%3D%2260%22%20width%3D%227%22%20height%3D%228%22%2F%3E%3Crect%20x%3D%22926%22%20y%3D%2280%22%20width%3D%227%22%20height%3D%228%22%2F%3E%3Crect%20x%3D%221030%22%20y%3D%2252%22%20width%3D%227%22%20height%3D%228%22%2F%3E%3Crect%20x%3D%221050%22%20y%3D%2252%22%20width%3D%227%22%20height%3D%228%22%2F%3E%3Crect%20x%3D%221030%22%20y%3D%2274%22%20width%3D%227%22%20height%3D%228%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E") bottom center / 100% 100% no-repeat}
+.wrap > .ppg-dots{position:relative;z-index:3}
+.brand{
+  position:relative;z-index:3;color:#fff!important;font-size:38px!important;letter-spacing:.05em;
+  text-shadow:
+    3px 3px 0 var(--ink-edge), -2.5px -2.5px 0 var(--ink-edge),
+    2.5px -2.5px 0 var(--ink-edge), -2.5px 2.5px 0 var(--ink-edge),
+    0 6px 0 rgba(43,34,51,.35)!important}
+.lede{position:relative;z-index:3;color:#fff!important;font-weight:700!important;
+  text-shadow:2px 2px 0 var(--ink-edge)!important}
+.ppg-dots i{width:18px!important;height:18px!important;border:2.5px solid var(--ink-edge)!important;
+  box-shadow:2px 2px 0 var(--ink-edge)!important;backdrop-filter:none!important}
+.ppg-dots i:nth-child(1){background:var(--p1)!important}
+.ppg-dots i:nth-child(2){background:var(--p2)!important}
+.ppg-dots i:nth-child(3){background:var(--p3)!important}
+
+/* ---- 面：ガラス＋くっきりした輪郭 ---- */
+.card,.acc,.item,.ap,.secx,.city,.nowcard,.dial,.setup,.ck,.tbl,.cattile,.menu-in,.sp-in,
+.tabbar,.topbar,.homenav button{
+  border:2.5px solid var(--ink-edge)!important;
+  box-shadow:0 14px 34px rgba(90,40,70,.16), 3px 3px 0 var(--ink-edge), var(--g-in)!important}
+.note{border:2.5px solid var(--ink-edge)!important;box-shadow:2px 2px 0 var(--ink-edge)!important}
+.topbar{box-shadow:0 3px 0 var(--ink-edge)!important;border-bottom:3px solid var(--ink-edge)!important}
+.tabbar{box-shadow:0 16px 36px rgba(90,40,70,.26), 4px 4px 0 var(--ink-edge)!important}
+
+/* ---- ボタン：黒フチ＋ずらし影、押すと沈む ---- */
+.btnp,.bigbtn,.btns,.chip,.openall,.ap-all,.ap-filter button,.mq,.mg-l a,.sr,
+.city-f a,.city-f button,.tb-ic,#toTop,.wkstep{
+  border:2.5px solid var(--ink-edge)!important;box-shadow:3px 3px 0 var(--ink-edge)!important}
+.btnp:active,.bigbtn:active,.btns:active,.chip:active,.mq:active,.city-f a:active,
+.city-f button:active,.wkstep:active,.homenav button:active{
+  transform:translate(2px,2px)!important;box-shadow:1px 1px 0 var(--ink-edge)!important}
+.btnp,.bigbtn{background:linear-gradient(180deg,#FF6FB2,#F02E86)!important;color:#fff!important}
+.city-f a{background:linear-gradient(180deg,#FF6B6B,#E02020)!important}
+
+/* ---- アイコン・バッジ：ベタ塗り＋黒リング ---- */
+.sx-ic,.h2-ic,.city-h .ic,.gx-n{border:2.5px solid var(--ink-edge)!important;
+  box-shadow:2px 2px 0 var(--ink-edge)!important}
+.sx-cv,.ap-cv,.acc .cv{border:2.5px solid var(--ink-edge)!important;
+  box-shadow:1.5px 1.5px 0 var(--ink-edge)!important;background:#fff!important;color:var(--ink-edge)!important}
+.secx[open] .sx-cv,.acc[open] .cv,.ap-x[open] .ap-cv{background:var(--p1)!important;color:#fff!important}
+.badge,.tag,.ap-m i,.sx-w,.st,.eyebrow,.lg{border:2px solid var(--ink-edge)!important;
+  box-shadow:1.5px 1.5px 0 var(--ink-edge)!important}
+.eyebrow{background:var(--p4)!important;color:var(--ink-edge)!important;font-weight:700}
+
+/* ---- 3色ローテーションを強く ---- */
+#views > section:nth-child(3n+1) .sx-ic{background:var(--p1)!important}
+#views > section:nth-child(3n+2) .sx-ic{background:var(--p2)!important}
+#views > section:nth-child(3n+3) .sx-ic{background:var(--p3)!important}
+#views > section:nth-child(3n+1) .secx[open] > summary{background:rgba(255,79,160,.22)!important}
+#views > section:nth-child(3n+2) .secx[open] > summary{background:rgba(79,195,247,.22)!important}
+#views > section:nth-child(3n+3) .secx[open] > summary{background:rgba(126,217,87,.22)!important}
+.homenav button:nth-child(1){background:linear-gradient(140deg,rgba(255,79,160,.30),var(--g-bg))!important}
+.homenav button:nth-child(2){background:linear-gradient(140deg,rgba(79,195,247,.30),var(--g-bg))!important}
+.homenav button:nth-child(3){background:linear-gradient(140deg,rgba(126,217,87,.30),var(--g-bg))!important}
+.homenav button:nth-child(4){background:linear-gradient(140deg,rgba(255,216,77,.34),var(--g-bg))!important}
+
+/* ---- 強調カード ---- */
+.nowcard{background:linear-gradient(140deg,var(--p4),#FFF0A8)!important}
+.city{background:linear-gradient(140deg,var(--p3),#D6F7C4)!important}
+.nowcard .nc-h,.nowcard .nc-s,.city-h b,.city-s{color:var(--ink-edge)!important}
+.nowcard .nc-links a{background:#fff!important;color:var(--ink-edge)!important;
+  border:2.5px solid var(--ink-edge)!important;box-shadow:2px 2px 0 var(--ink-edge)!important}
+
+/* ---- 星 ---- */
+.card li::before{content:""!important;width:11px;height:11px;background:url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M12%201.6l2.9%206.3%206.9.8-5.1%204.7%201.4%206.8L12%2016.8%205.9%2020.2l1.4-6.8L2.2%208.7l6.9-.8z%22%20fill%3D%22%23FFFFFF%22%20stroke%3D%22%232B2233%22%20stroke-width%3D%221.6%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E") center/contain no-repeat;
+  position:absolute;left:0;top:.5em}
+.vhead::after{content:"";width:26px;height:26px;background:url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M12%201.6l2.9%206.3%206.9.8-5.1%204.7%201.4%206.8L12%2016.8%205.9%2020.2l1.4-6.8L2.2%208.7l6.9-.8z%22%20fill%3D%22%23FFFFFF%22%20stroke%3D%22%232B2233%22%20stroke-width%3D%221.6%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E") center/contain no-repeat;
+  display:inline-block;margin-left:auto;flex:0 0 auto}
+.vhead{display:flex;align-items:center}
+.vhead b{font-size:26px!important;text-shadow:2px 2px 0 rgba(43,34,51,.18)}
+
+/* ---- 下タブ ---- */
+.tabbar button.on svg{border:2.5px solid var(--ink-edge)!important;box-shadow:2px 2px 0 var(--ink-edge)!important}
+.tabbar button:nth-child(1).on svg{background:var(--p1)!important}
+.tabbar button:nth-child(2).on svg{background:var(--p2)!important}
+.tabbar button:nth-child(3).on svg{background:var(--p3)!important}
+.tabbar button:nth-child(4).on svg{background:var(--p4)!important;color:var(--ink-edge)!important}
+.tabbar button:nth-child(5).on svg{background:#C08BF5!important}
+.tabbar button.on{color:var(--ink-edge)!important;font-weight:700}
+
+/* ---- 見出し ---- */
+h2{text-shadow:2px 2px 0 rgba(43,34,51,.14)!important}
+.sx-t b,.gx-t b{color:var(--ink-edge)}
+html[data-theme="dark"] .sx-t b{color:var(--ink)}
+.dial-num,.cd-big{color:var(--p1)!important;text-shadow:2.5px 2.5px 0 var(--ink-edge)!important}
+
+/* ---- 背景：ハーフトーンのドットを重ねる ---- */
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background-image:radial-gradient(rgba(43,34,51,.09) 1.6px, transparent 1.6px);
+  background-size:16px 16px}
+html[data-theme="dark"] body::before{background-image:radial-gradient(rgba(255,255,255,.06) 1.6px, transparent 1.6px)}
+html[data-theme="dark"]{--ink-edge:#0F0A16}
 </style>
 </head>
 <body>
