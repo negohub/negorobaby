@@ -1487,6 +1487,105 @@ footer{margin-top:34px!important;padding-top:0!important;border-top:none!importa
 .often-l a i{font-style:normal;font-size:16px}
 .often-l a:active{transform:translate(2px,2px);box-shadow:none}
 html[data-theme="dark"] .often-l a{color:var(--ink)}
+
+/* ============================================================
+   なめらかさ（見た目側）
+   ============================================================ */
+@view-transition{navigation:auto}
+::view-transition-old(root){animation:vtOut .22s cubic-bezier(.4,0,1,1) both}
+::view-transition-new(root){animation:vtIn .3s cubic-bezier(.22,.9,.3,1) both}
+@keyframes vtOut{to{opacity:0;transform:translateY(-8px) scale(.995)}}
+@keyframes vtIn{from{opacity:0;transform:translateY(12px) scale(.99)}}
+
+/* 画面に入ったら浮かび上がる */
+#views > section{opacity:0;transform:translateY(18px) scale(.985);
+  transition:opacity .42s cubic-bezier(.22,.9,.3,1), transform .42s cubic-bezier(.22,.9,.3,1)}
+#views > section.seen{opacity:1;transform:none}
+#views.vin > section{animation:none!important}
+@media(prefers-reduced-motion:reduce){#views > section{opacity:1!important;transform:none!important}}
+
+/* 下タブの滑るインジケーター */
+.tabbar{position:fixed}
+.tab-ind{position:absolute;left:8px;top:9px;bottom:9px;border-radius:24px;z-index:0;
+  background:rgba(255,255,255,.55);border:2.5px solid var(--ink-edge);box-shadow:2px 2px 0 var(--ink-edge);
+  transition:transform .34s cubic-bezier(.34,1.3,.4,1), width .34s cubic-bezier(.34,1.3,.4,1);
+  pointer-events:none}
+.tabbar button{position:relative;z-index:1}
+html[data-theme="dark"] .tab-ind{background:rgba(255,255,255,.1)}
+@media(prefers-reduced-motion:reduce){.tab-ind{transition:none}}
+
+/* 開閉のなめらかさ */
+.sx-b,.acc-b,.ap-d,.i-body{will-change:height,opacity}
+.secx[open] > .sx-b,.acc[open] > .acc-b,.ap-x[open] > .ap-d,.item[open] > .i-body{animation:none!important}
+
+/* スクロールの質感 */
+#menu,#sPanel,.menu-body,.sp-in,.chips,.quick,.gtabs{overscroll-behavior:contain}
+.menu-body,.sp-in{-webkit-overflow-scrolling:touch}
+body{overscroll-behavior-y:none}
+
+/* ちらつき防止 */
+.secx,.acc,.item,.ap,.card,.tabbar,.topbar{backface-visibility:hidden}
+
+/* ============================================================
+   PERFORMANCE & MOTION — なめらかさの最適化
+   ============================================================ */
+:root{
+  --ease:cubic-bezier(.22,.9,.28,1);
+  --ease-spring:cubic-bezier(.34,1.3,.5,1);
+}
+
+/* 1) ぼかしは「常に画面にある数枚」だけに絞る（スクロールの重さの主因） */
+.card,.acc,.item,.ap,.secx,.city,.nowcard,.dial,.setup,.ck,.tbl,.cattile,
+.homenav button,.often-l a,.chip,.btns,.mq,.mg-l a,.sr,.ap-filter button,
+.openall,.ap-all,.wkstep,#toTop,.about{
+  -webkit-backdrop-filter:none!important;backdrop-filter:none!important;
+  background:rgba(255,255,255,.86)!important}
+html[data-theme="dark"] .card,html[data-theme="dark"] .acc,html[data-theme="dark"] .item,
+html[data-theme="dark"] .ap,html[data-theme="dark"] .secx,html[data-theme="dark"] .setup,
+html[data-theme="dark"] .ck,html[data-theme="dark"] .tbl,html[data-theme="dark"] .cattile,
+html[data-theme="dark"] .homenav button,html[data-theme="dark"] .often-l a,
+html[data-theme="dark"] .chip,html[data-theme="dark"] .btns,html[data-theme="dark"] .mq,
+html[data-theme="dark"] .mg-l a,html[data-theme="dark"] .sr,html[data-theme="dark"] .dial,
+html[data-theme="dark"] .about{background:rgba(44,36,54,.9)!important}
+/* ぼかしを残すのは固定表示の4つだけ */
+.topbar,.tabbar,.menu-in,.sp-in{
+  -webkit-backdrop-filter:saturate(170%) blur(20px)!important;
+  backdrop-filter:saturate(170%) blur(20px)!important}
+
+/* 2) 画面外のページは描画を省く（41ページぶんの負荷を切る） */
+#views > section{content-visibility:auto;contain-intrinsic-size:auto 120px}
+
+/* 3) アニメーションは transform と opacity だけに寄せる */
+.secx > summary,.acc summary,.item summary,.ap-x > summary{
+  transition:background .18s var(--ease)!important;transform:none!important}
+.btnp,.bigbtn,.btns,.chip,.mq,.mg-l a,.homenav button,.wkstep,.cattile,.often-l a{
+  transition:transform .13s var(--ease), box-shadow .13s var(--ease), background .18s var(--ease)!important;
+  will-change:transform}
+.tabbar{will-change:transform}
+.sx-cv,.ap-cv,.acc .cv{transition:transform .26s var(--ease-spring), background .18s var(--ease)!important}
+
+/* 4) 開閉アニメはJSが担当するので、CSS側の重複を止める */
+.secx[open] > .sx-b,.acc[open] > .acc-b,.ap-x[open] > .ap-d,.item[open] > .i-body{
+  animation:none!important}
+
+/* 5) タブ切り替え（View Transitions 対応ブラウザ） */
+@view-transition{navigation:none}
+::view-transition-old(root){animation:vtOut .22s var(--ease) both}
+::view-transition-new(root){animation:vtIn .3s var(--ease) both}
+@keyframes vtOut{to{opacity:0;transform:translateY(-8px) scale(.995)}}
+@keyframes vtIn{from{opacity:0;transform:translateY(12px) scale(.995)}}
+
+/* 6) 画面に入ってきたページをふわっと出す */
+#views > section{opacity:1}
+#views > section.reveal{animation:revealIn .42s var(--ease) both}
+@keyframes revealIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+
+/* 7) 数字はタブ位置がずれないように */
+.dial-num,.cd-big,.bigread,#cafNum{font-variant-numeric:tabular-nums}
+
+@media(prefers-reduced-motion:reduce){
+  #views > section.reveal,::view-transition-old(root),::view-transition-new(root){animation:none!important}
+}
 </style>
 </head>
 <body>
@@ -2992,7 +3091,7 @@ function babyOf(w){return WEEK[Math.max(0,Math.min(WEEK.length-1,w))];}
 
 function renderDial(){
   const w=+$("#wk").value,p=phaseOf(w),P=PHASES[p],B=babyOf(w);
-  $("#wkNum").textContent=w;
+  if(window.countTo)countTo($("#wkNum"),w,260);else $("#wkNum").textContent=w;
   $("#wkMinus").disabled=(w<=+$("#wk").min);
   $("#wkPlus").disabled=(w>=+$("#wk").max);
   $("#wkPhase").textContent=P.name;
@@ -4182,6 +4281,12 @@ var curV="home";
 
   var bar=document.getElementById("tabbar");
   function show(v,scroll){
+    if(document.startViewTransition&&v!==curV&&(!window.matchMedia||!matchMedia("(prefers-reduced-motion: reduce)").matches)){
+      try{document.startViewTransition(function(){paint(v,scroll);});return;}catch(e){}
+    }
+    paint(v,scroll);
+  }
+  function paint(v,scroll){
     curV=v;
     var isHome=(v==="home");
     [".dial",".nowcard","#cityCard","#homeNav"].forEach(function(sel){
@@ -4193,7 +4298,8 @@ var curV="home";
       s.style.display=(s.dataset.view===v)?"":"none";
     });
     Array.prototype.forEach.call(bar.children,function(b){b.classList.toggle("on",b.dataset.v===v);});
-    host.classList.remove("vin");void host.offsetWidth;host.classList.add("vin");
+    if(window.resetReveal)resetReveal();else{host.classList.remove("vin");void host.offsetWidth;host.classList.add("vin");}
+    if(window.moveTabInd)setTimeout(window.moveTabInd,10);
     if(scroll)window.scrollTo({top:0,behavior:"smooth"});
   }
   window.showView=show;
@@ -4218,6 +4324,163 @@ var curV="home";
     setTimeout(function(){if(sec)sec.scrollIntoView({behavior:"smooth",block:"start"});},60);
   };
 })();
+
+/* ============================================================
+   なめらかさ強化
+   ============================================================ */
+var SMOOTH=!window.matchMedia||!window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* 1) 折りたたみを高さアニメーションで開閉する */
+(function(){
+  if(!SMOOTH||!Element.prototype.animate)return;
+  var EASE="cubic-bezier(.22,.9,.3,1)";
+  function bodyOf(d){
+    return d.querySelector(":scope > .sx-b, :scope > .acc-b, :scope > .ap-d, :scope > .i-body");
+  }
+  document.addEventListener("click",function(e){
+    var sum=e.target.closest("summary");if(!sum)return;
+    var det=sum.parentElement;
+    if(!det||det.tagName!=="DETAILS")return;
+    if(det.dataset.anim==="1")return;
+    var body=bodyOf(det);if(!body)return;
+    e.preventDefault();
+    det.dataset.anim="1";
+    var done=function(closeIt){
+      if(closeIt)det.open=false;
+      body.style.overflow="";body.style.height="";det.dataset.anim="";
+    };
+    try{
+      if(!det.open){
+        det.open=true;
+        var hh=body.scrollHeight;
+        body.style.overflow="hidden";
+        var a1=body.animate([{height:"0px",opacity:0},{height:hh+"px",opacity:1}],
+          {duration:260,easing:EASE});
+        a1.onfinish=function(){done(false);};
+        setTimeout(function(){done(false);},420);
+      }else{
+        var h0=body.scrollHeight;
+        body.style.overflow="hidden";
+        var a2=body.animate([{height:h0+"px",opacity:1},{height:"0px",opacity:0}],
+          {duration:210,easing:EASE});
+        a2.onfinish=function(){done(true);};
+        setTimeout(function(){done(true);},380);
+      }
+    }catch(err){
+      det.open=!det.open;done(false);
+    }
+  },false);
+})();
+
+/* 2) 下タブに滑って動くインジケーター */
+(function(){
+  var bar=document.getElementById("tabbar");if(!bar)return;
+  var ind=document.createElement("span");ind.className="tab-ind";bar.appendChild(ind);
+  function move(){
+    var on=bar.querySelector("button.on");if(!on)return;
+    ind.style.width=on.offsetWidth+"px";
+    ind.style.transform="translateX("+on.offsetLeft+"px)";
+  }
+  window.moveTabInd=move;
+  bar.addEventListener("click",function(){setTimeout(move,10);});
+  window.addEventListener("resize",move);
+  setTimeout(move,60);
+})();
+
+/* 3) 画面に入ったカードを順に浮かび上がらせる */
+(function(){
+  if(!SMOOTH||!("IntersectionObserver" in window))return;
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(en){
+      if(en.isIntersecting){en.target.classList.add("seen");io.unobserve(en.target);}
+    });
+  },{rootMargin:"0px 0px -8% 0px",threshold:.04});
+  window.observeReveal=function(){
+    document.querySelectorAll("#views > section:not(.seen)").forEach(function(s){io.observe(s);});
+  };
+  window.resetReveal=function(){
+    document.querySelectorAll("#views > section").forEach(function(s){s.classList.remove("seen");});
+    window.observeReveal();
+  };
+  observeReveal();
+})();
+
+/* 4) 数字をなめらかに変える */
+function countTo(el,to,ms){
+  if(!el)return;
+  var from=parseFloat((el.textContent||"0").replace(/[^\d.-]/g,""))||0;
+  if(!SMOOTH||from===to){el.textContent=to;return;}
+  var t0=performance.now();
+  (function step(t){
+    var k=Math.min(1,(t-t0)/(ms||420));
+    var e=1-Math.pow(1-k,3);
+    el.textContent=Math.round(from+(to-from)*e);
+    if(k<1)requestAnimationFrame(step);
+  })(t0);
+}
+window.countTo=countTo;
+
+/* ---- 開閉を高さアニメーションでなめらかに ---- */
+(function(){
+  var EASE="cubic-bezier(.22,.9,.28,1)",reduce=false;
+  try{reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;}catch(e){}
+  if(reduce||!Element.prototype.animate)return;
+  document.addEventListener("click",function(e){
+    var sum=e.target.closest("summary");if(!sum)return;
+    var det=sum.parentElement;
+    if(!det||det.tagName!=="DETAILS")return;
+    if(det.classList.contains("duebox")||det.classList.contains("dialx")||det.classList.contains("about"))return;
+    var body=sum.nextElementSibling;if(!body)return;
+    if(body.dataset.anim==="1"){e.preventDefault();return;}
+    e.preventDefault();
+    body.dataset.anim="1";body.style.overflow="hidden";
+    if(det.open){
+      var h0=body.offsetHeight;
+      body.animate([{height:h0+"px",opacity:1},{height:"0px",opacity:0}],{duration:200,easing:EASE})
+        .onfinish=function(){det.open=false;body.style.height="";body.style.overflow="";body.dataset.anim="0";};
+    }else{
+      det.open=true;
+      var h1=body.offsetHeight;
+      body.animate([{height:"0px",opacity:0},{height:h1+"px",opacity:1}],{duration:260,easing:EASE})
+        .onfinish=function(){body.style.height="";body.style.overflow="";body.dataset.anim="0";};
+    }
+  },false);
+})();
+
+/* ---- 画面に入ってきたページをふわっと出す ---- */
+(function(){
+  if(!("IntersectionObserver" in window))return;
+  var reduce=false;try{reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;}catch(e){}
+  if(reduce)return;
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(en){
+      if(en.isIntersecting){en.target.classList.add("reveal");io.unobserve(en.target);}
+    });
+  },{rootMargin:"0px 0px -8% 0px",threshold:.04});
+  window.observeSections=function(){
+    Array.prototype.forEach.call(document.querySelectorAll("#views > section"),function(s){
+      if(s.style.display!=="none"&&!s.classList.contains("reveal"))io.observe(s);
+    });
+  };
+  setTimeout(window.observeSections,60);
+  var _sv=window.showView;
+  if(_sv)window.showView=function(v,sc){_sv(v,sc);setTimeout(window.observeSections,50);};
+})();
+
+/* ---- 数字をカウントアップ ---- */
+window.countTo=function(el,to,ms){
+  if(!el)return;
+  var from=parseInt((el.textContent||"0").replace(/[^\d-]/g,""),10);
+  if(isNaN(from)||from===to||Math.abs(to-from)>400){el.textContent=to;return;}
+  var t0=null,d=ms||420;
+  function step(t){
+    if(!t0)t0=t;
+    var k=Math.min(1,(t-t0)/d);k=1-Math.pow(1-k,3);
+    el.textContent=Math.round(from+(to-from)*k);
+    if(k<1)requestAnimationFrame(step);else el.textContent=to;
+  }
+  requestAnimationFrame(step);
+};
 
 /* ---- 使いやすさの工夫 ---- */
 (function(){
