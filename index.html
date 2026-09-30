@@ -609,7 +609,9 @@ header::after{
   border-top:3px solid var(--edge);
 }
 @keyframes spin{to{transform:rotate(360deg)}}
-@media(prefers-reduced-motion:reduce){header::before{animation:none}}
+
+html.calm header::before{animation:none}
+
 html[data-theme="dark"] header{background:#8A2457}
 .ppg-dots{display:flex;gap:7px;position:relative;z-index:1;margin-bottom:10px}
 .ppg-dots i{width:16px;height:16px;border-radius:50%;border:2.5px solid var(--edge);display:block}
@@ -1006,7 +1008,9 @@ details.grpwrap:not([open]) > summary .gcv::after{content:"ひらく"}
   .legend{grid-template-columns:repeat(4,1fr)}
   .calc-in{grid-template-columns:1fr 1fr 1fr}
 }
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+html.calm *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+
 
 /* ============================================================
    Liquid Glass — 半透明のガラス層に置き換える上書きレイヤー
@@ -1131,14 +1135,12 @@ html[data-theme="dark"] .card p,html[data-theme="dark"] .acc-b p,
 html[data-theme="dark"] .ap-d,html[data-theme="dark"] .card li,
 html[data-theme="dark"] .sub{color:#CFC3D4!important}
 
-@media(prefers-reduced-transparency:reduce){
-  .card,.acc,.item,.ap,.secx,.grpx,.city,.nowcard,.dial,.tabbar,.topbar,.menu-in{
+
+html.calm .card, html.calm .acc, html.calm .item, html.calm .ap, html.calm .secx, html.calm .grpx, html.calm .city, html.calm .nowcard, html.calm .dial, html.calm .tabbar, html.calm .topbar, html.calm .menu-in{
     background:#fff!important;-webkit-backdrop-filter:none;backdrop-filter:none}
-  html[data-theme="dark"] .card,html[data-theme="dark"] .acc,html[data-theme="dark"] .item,
-  html[data-theme="dark"] .ap,html[data-theme="dark"] .secx,html[data-theme="dark"] .grpx,
-  html[data-theme="dark"] .tabbar,html[data-theme="dark"] .topbar,html[data-theme="dark"] .menu-in{
+html.calm[data-theme="dark"] .card, html.calm[data-theme="dark"] .acc, html.calm[data-theme="dark"] .item, html.calm[data-theme="dark"] .ap, html.calm[data-theme="dark"] .secx, html.calm[data-theme="dark"] .grpx, html.calm[data-theme="dark"] .tabbar, html.calm[data-theme="dark"] .topbar, html.calm[data-theme="dark"] .menu-in{
     background:#2B2335!important}
-}
+
 
 /* ============================================================
    Soft & Refined — やわらかさ・操作性・精度のチューニング
@@ -1303,12 +1305,11 @@ html{scroll-behavior:smooth}
 @keyframes sheet{from{transform:translateY(-14px);opacity:0}to{transform:none;opacity:1}}
 #sPanel:not([hidden]) .sp-in{animation:sheet .26s cubic-bezier(.22,.9,.3,1) both}
 
-@media(prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto}
-  #views.vin > section,.secx[open] > .sx-b,.acc[open] > .acc-b,.ap-x[open] > .ap-d,
-  .item[open] > .i-body,#menu .menu-in,#sPanel .sp-in{animation:none!important}
-  .tabbar{transition:none}
-}
+
+html.calm{scroll-behavior:auto}
+html.calm #views.vin > section, html.calm .secx[open] > .sx-b, html.calm .acc[open] > .acc-b, html.calm .ap-x[open] > .ap-d, html.calm .item[open] > .i-body, html.calm #menu .menu-in, html.calm #sPanel .sp-in{animation:none!important}
+html.calm .tabbar{transition:none}
+
 
 /* ホームのタブ導線 */
 .homenav{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
@@ -1490,7 +1491,9 @@ footer{margin-top:34px!important;padding-top:0!important;border-top:none!importa
   transition:opacity .42s cubic-bezier(.22,.9,.3,1), transform .42s cubic-bezier(.22,.9,.3,1)}
 #views > section.seen{opacity:1;transform:none}
 #views.vin > section{animation:none!important}
-@media(prefers-reduced-motion:reduce){#views > section{opacity:1!important;transform:none!important}}
+
+html.calm #views > section{opacity:1!important;transform:none!important}
+
 
 /* 下タブの滑るインジケーター */
 .tabbar{position:fixed}
@@ -1500,7 +1503,9 @@ footer{margin-top:34px!important;padding-top:0!important;border-top:none!importa
   pointer-events:none}
 .tabbar button{position:relative;z-index:1}
 html[data-theme="dark"] .tab-ind{background:rgba(255,255,255,.1)}
-@media(prefers-reduced-motion:reduce){.tab-ind{transition:none}}
+
+html.calm .tab-ind{transition:none}
+
 
 /* 開閉のなめらかさ */
 .sx-b,.acc-b,.ap-d,.i-body{will-change:height,opacity}
@@ -1572,9 +1577,9 @@ html[data-theme="dark"] .about{background:rgba(44,36,54,.9)!important}
 /* 7) 数字はタブ位置がずれないように */
 .dial-num,.cd-big,.bigread,#cafNum{font-variant-numeric:tabular-nums}
 
-@media(prefers-reduced-motion:reduce){
-  #views > section.reveal,::view-transition-old(root),::view-transition-new(root){animation:none!important}
-}
+
+html.calm #views > section.reveal, html.calm ::view-transition-old(root), html.calm ::view-transition-new(root){animation:none!important}
+
 
 /* ============================================================
    GAL ✨ — きらきら・とろける・ぬるぬる
@@ -1647,6 +1652,24 @@ body{background-size:200% 200%!important;animation:galFlow 24s ease-in-out infin
 
 /* 全体の動きをそろえる */
 a,button,summary,label,input,.chip,.cattile{transition-timing-function:var(--spring)!important}
+
+/* 静かモード（サイト内の切り替え） */
+html.calm *{animation-duration:.001s!important;animation-iteration-count:1!important;
+  transition-duration:.001s!important;scroll-behavior:auto!important}
+html.calm body{animation:none!important}
+.menu-set #motionBtn{margin-left:8px}
+
+/* 設定の行 */
+.menu-set{padding:2px 14px 14px}
+.setrow{display:flex;align-items:center;gap:10px;background:var(--card);border:2.5px solid var(--ink-edge);
+  border-radius:18px;padding:11px 13px;margin-bottom:8px;box-shadow:2px 2px 0 var(--ink-edge)}
+.setrow > span{flex:0 0 auto;font-size:12.5px;font-weight:700;color:var(--ink);min-width:6.5em}
+.seg{flex:1;display:flex;gap:5px;justify-content:flex-end;flex-wrap:wrap}
+.seg button{font-family:inherit;font-size:12.5px;font-weight:700;color:var(--ink-mid);
+  background:var(--pink-bg);border:2px solid var(--ink-edge);border-radius:100px;padding:9px 13px;
+  cursor:pointer;min-height:42px}
+.seg button[aria-pressed=true]{background:var(--gal1);color:#fff;box-shadow:1.5px 1.5px 0 var(--ink-edge)}
+.seg button:active{transform:translate(1px,1px)}
 </style>
 </head>
 <body>
@@ -1692,7 +1715,7 @@ a,button,summary,label,input,.chip,.cattile{transition-timing-function:var(--spr
     <div class="dial-scale"><span>0w</span><span>16w</span><span>28w</span><span>42w</span></div>
     <div id="todayBox"></div>
     <details class="dialx">
-      <summary>赤ちゃんの様子・予定日の登録</summary>
+      <summary>赤ちゃんの様子を見る／予定日を登録する</summary>
       <div class="baby"><div class="baby-emoji" id="babyEmoji">&#127827;</div><div class="baby-txt" id="babyTxt"></div></div>
       <div class="dial-out" id="wkOut"></div>
     <div class="dial-focus" id="wkTags"></div>
@@ -1723,7 +1746,7 @@ a,button,summary,label,input,.chip,.cattile{transition-timing-function:var(--spr
 
   <section id="apply" data-from="0" data-to="41">
     <span class="eyebrow">申請の順番</span>
-    <h2>お金のためにやること</h2>
+    <h2>申請の順番</h2>
     <p class="sub">母子手帳をもらってから、産後1年までに申請するものを順番に並べました。<b>タップでチェックできます</b>（この端末に保存されます）。<b>★は絶対にやったほうがいいもの</b>、赤いバッジは期限があるもの、緑は<b>パパが代われるもの</b>です。上の「これだけ表示」で★だけに絞れます。</p>
     <div id="applyBody"></div>
     <div class="note calm" style="margin-top:10px"><b>共働き（お二人とも会社員）を前提</b>にしています。出産手当金は出産する本人だけ、育児休業給付は<b>二人ともそれぞれ受けられます</b>。金額と条件は「もらえるお金」のページに。</div>
@@ -1754,7 +1777,7 @@ a,button,summary,label,input,.chip,.cattile{transition-timing-function:var(--spr
     <div class="card share" style="margin-top:12px">
       <h3 style="margin-bottom:8px">入れ終わったら、もう1台へ</h3>
       <p style="font-size:12.5px;color:var(--ink-mid);line-height:1.8;margin-bottom:12px">予定日も連絡先も、二人の端末で同じにしておくと安心です。押すと共有メニューが開くので、LINEで送ってください。<b>相手はリンクをタップするだけ</b>です。</p>
-      <button class="bigbtn" id="bkLink2">&#128279; リンクにして送る</button>
+      <button class="bigbtn" id="bkLink2">&#128279; リンクを作って相手に送る</button>
       <div id="bkLinkOut2" style="margin-top:10px"></div>
     </div>
 
@@ -1765,7 +1788,7 @@ a,button,summary,label,input,.chip,.cattile{transition-timing-function:var(--spr
 
   <section id="food" data-from="0" data-to="41">
     <span class="eyebrow">食べもの</span>
-    <h2>これ、食べてええ？</h2>
+    <h2>食べもの判定</h2>
     <p class="sub">200品目。カテゴリを選ぶか、検索窓に食材名を入れてください。答えは1行で出ます。ひらがな・カタカナ・漢字どれでもOK。</p>
     <div class="legend legend-mini">
       <div class="lg best"><b>◎ 積極的に</b><span>今の体が欲しい栄養</span></div>
@@ -1787,7 +1810,7 @@ a,button,summary,label,input,.chip,.cattile{transition-timing-function:var(--spr
 
   <section id="life" data-from="0" data-to="41">
     <span class="eyebrow">暮らし</span>
-    <h2>これ、してええ？</h2>
+    <h2>暮らしの判定</h2>
     <p class="sub">お薬、レントゲン、温泉、旅行、運動、ヘアカラー、猫。カテゴリを選ぶか、検索窓に入れてください。</p>
     <div class="finder">
       <div class="search">
@@ -1803,14 +1826,14 @@ a,button,summary,label,input,.chip,.cattile{transition-timing-function:var(--spr
 
   <section id="recipe" data-from="0" data-to="41">
     <span class="eyebrow">レシピ</span>
-    <h2>じゃあ、何作る</h2>
+    <h2>レシピ</h2>
     <p class="sub">「食べていいもの」がわかっても、作るのは別問題。つわり期に通るものと、鉄・カルシウムが自然に入るものを集めました。全部10分前後でできます。</p>
     <div id="recipeBody"></div>
   </section>
 
   <section id="caffeine" data-from="0" data-to="41">
     <span class="eyebrow">カフェイン</span>
-    <h2>今日、どれくらい？</h2>
+    <h2>カフェインの合計</h2>
     <p class="sub">飲んだものをタップすると合計が出ます。目安は1日200mgまで。日付が変わると自動でリセットされます。</p>
     <div class="card">
       <div class="bigread" id="cafNum">0</div>
@@ -1823,18 +1846,18 @@ a,button,summary,label,input,.chip,.cattile{transition-timing-function:var(--spr
     <div class="note calm">数値は食品成分表をもとにした1杯あたりの目安です。同じコーヒーでも淹れ方で倍近く変わるので、きっちり計算するというより「だいたいこのへん」を掴むために使ってください。カフェインレスなら何杯でも大丈夫です。</div>
   </section>
 
-  <div class="gdiv" data-g="3"><span class="gd-n">03</span><div><b>体と心</b><span>しんどい時・不安な時</span></div></div>
+  <div class="gdiv" data-g="3"><span class="gd-n">03</span><div><b>体と心</b><span>つらい時・不安な時</span></div></div>
 
   <section id="body" data-from="0" data-to="41">
     <span class="eyebrow">体のこと</span>
-    <h2>しんどい時の手当て</h2>
+    <h2>症状と手当て</h2>
     <p class="sub">妊娠中に出やすい症状と、家でできる対処。がまんが美徳ではないので、つらければ産院に言ってください。薬をもらえるものも多いです。</p>
     <div id="symBody"></div>
   </section>
 
   <section id="danger" data-from="0" data-to="41">
     <span class="eyebrow">危険サイン</span>
-    <h2>これが出たら、すぐ電話</h2>
+    <h2>危険サイン</h2>
     <p class="sub">迷ったら電話していい。夜中でも休日でも。「大したことなかった」で終わるのが一番いい結果です。</p>
     <div id="dangerBody"></div>
   </section>
@@ -1866,7 +1889,7 @@ a,button,summary,label,input,.chip,.cattile{transition-timing-function:var(--spr
 
   <section id="phase" data-from="0" data-to="41">
     <span class="eyebrow">時期別ガイド</span>
-    <h2>今は、こういう時期</h2>
+    <h2>時期別ガイド</h2>
     <p class="sub">上のダイヤルと連動しています。時期で優先順位が変わります。</p>
     <div class="tabs" id="tabs" role="tablist"></div>
     <div id="phaseBody"></div>
@@ -1874,14 +1897,14 @@ a,button,summary,label,input,.chip,.cattile{transition-timing-function:var(--spr
 
   <section id="fuan" data-from="0" data-to="41">
     <span class="eyebrow">不安のこと</span>
-    <h2>あなたのせいじゃない</h2>
+    <h2>不安との向き合い方</h2>
     <div id="fuanBody"></div>
     <div class="note love" style="margin-top:10px">相談先：かかりつけの産院／自治体のこども家庭センター（旧・子育て世代包括支援センター）／産後ケア事業／救急相談 #7119。どこも「こんなことで」と思われる場所ではありません。</div>
   </section>
 
   <section id="oops" data-from="0" data-to="41">
     <span class="eyebrow">やってしまった時</span>
-    <h2>だいたい、大丈夫</h2>
+    <h2>やってしまった時</h2>
     <div class="note love" style="margin-bottom:10px">生ハムを1切れ。コーヒーを3杯。気づく前にお酒を飲んだ。——後から来る不安のほうが体にこたえます。1回の出来事でリスクが跳ね上がることは、ほとんどありません。</div>
     <div id="oopsBody"></div>
   </section>
@@ -1890,14 +1913,14 @@ a,button,summary,label,input,.chip,.cattile{transition-timing-function:var(--spr
 
   <section id="count" data-from="0" data-to="41">
     <span class="eyebrow">数え方</span>
-    <h2>「5週」ってどこから？</h2>
+    <h2>週数の数え方</h2>
     <p class="sub">最初にみんなが混乱するところです。1回読めば、後はずっとすっきりします。</p>
     <div id="countBody"></div>
   </section>
 
   <section id="limits" data-from="0" data-to="41">
     <span class="eyebrow">この手帳の使い方</span>
-    <h2>ここに書いていないこと</h2>
+    <h2>当てはまらない場合</h2>
     <p class="sub">この手帳は「よくある妊娠」を前提にまとめています。当てはまらない事情があるときは、ここの記述より主治医が優先です。</p>
     <div id="limitBody"></div>
     <div class="note calm" style="margin-top:10px">情報は<b>2026年8月時点</b>のものです。制度と金額はよく変わるので、申請の前に勤務先か自治体の窓口で必ず確認してください。</div>
@@ -1905,17 +1928,17 @@ a,button,summary,label,input,.chip,.cattile{transition-timing-function:var(--spr
 
   <section id="tips" data-from="10" data-to="41">
     <span class="eyebrow">細かいこと</span>
-    <h2>服と、細かいこと</h2>
+    <h2>服と細かいこと</h2>
     <p class="sub">誰も教えてくれないけど、知っておくと地味に助かること。</p>
     <div id="tipsBody"></div>
   </section>
 
   <section id="backup" data-from="0" data-to="41">
     <span class="eyebrow">データの引き継ぎ</span>
-    <h2>もう1台に移す</h2>
+    <h2>データの引き継ぎ</h2>
     <p class="sub">記録はこの端末の中だけに保存されています。二人の端末で同じ内容を見たいとき、機種変するとき、ブラウザのデータを消す前に。サーバーには何も保存されません。</p>
     <div class="card share">
-      <button class="bigbtn" id="bkLink">&#128279; リンクにして送る</button>
+      <button class="bigbtn" id="bkLink">&#128279; リンクを作って相手に送る</button>
       <p style="font-size:12.5px;color:var(--ink-mid);margin-top:10px;line-height:1.8">押すと共有メニューが開きます。LINEで相手に送ってください。<b>受け取った人がリンクをタップするだけ</b>で、この端末の記録がそのまま入ります。</p>
       <div id="bkLinkOut" style="margin-top:10px"></div>
     </div>
@@ -1923,22 +1946,22 @@ a,button,summary,label,input,.chip,.cattile{transition-timing-function:var(--spr
     <div class="card share" style="margin-top:12px">
       <h3 style="margin-bottom:8px">受け取る（ホーム画面のアプリはこちら）</h3>
       <p style="font-size:13.5px;color:var(--ink-mid);line-height:1.9;margin-bottom:12px">iPhoneは<b>Safariとホーム画面のアプリで保存場所が別</b>です。ホーム画面のアイコンから開いている場合、リンクをタップしても記録は入りません。<b>送られてきた文字列かURLをここから読み込んでください。</b></p>
-      <button class="bigbtn" id="bkPaste">&#128203; コピーした内容を読み込む</button>
+      <button class="bigbtn" id="bkPaste">&#128203; コピーした内容をここに取り込む</button>
       <textarea id="bkText" placeholder="うまく読み取れないときは、ここに貼り付けてから下のボタンを押してください。文字列でもURLでもかまいません。" spellcheck="false" style="margin-top:10px"></textarea>
-      <button class="btnp" id="bkIn" style="width:100%;margin-top:8px">貼り付けた内容を読み込む</button>
+      <button class="btnp" id="bkIn" style="width:100%;margin-top:8px">貼り付けた内容を取り込む</button>
     </div>
 
     <details class="acc" style="margin-top:12px">
-      <summary><span class="ttl">送る側：文字列で渡す</span><span class="cv">+</span></summary>
+      <summary><span class="ttl">送る人はこちら（文字で渡す）</span><span class="cv">+</span></summary>
       <div class="acc-b share">
-        <button class="btns" id="bkOut" style="width:100%">この端末のデータを書き出す</button>
+        <button class="btns" id="bkOut" style="width:100%">この端末のデータを文字にする</button>
         <textarea id="bkTextOut" placeholder="ここに出てくる文字列を、LINEなどで送ってください。" spellcheck="false" style="margin-top:8px"></textarea>
         <button class="btns" id="bkCopy" style="width:100%;margin-top:8px">コピー</button>
       </div>
     </details>
 
     <div class="note warn" style="margin-top:10px"><b>ホーム画面のアプリに入れる手順。</b><br>
-    ①送る人は「送る側：文字列で渡す」を開いて<b>書き出す→コピー</b>し、LINEで送る<br>
+    ①送る人は「送る人はこちら（文字で渡す）」を開いて<b>書き出す→コピー</b>し、LINEで送る<br>
     ②受け取る人はその文字列を<b>長押しでコピー</b><br>
     ③ホーム画面のアイコンからアプリを開き、<b>「コピーした内容を読み込む」</b>を押す<br><br>
     リンクをタップする方法だとSafariが開いてしまい、ホーム画面のアプリには入りません（iPhoneでは保存場所が別々のため）。上の「リンクにして送る」は、相手がSafariで使っている場合や、パソコンに渡すときに便利です。</div>
@@ -1950,14 +1973,14 @@ a,button,summary,label,input,.chip,.cattile{transition-timing-function:var(--spr
 
   <section id="nutri" data-from="0" data-to="41">
     <span class="eyebrow">栄養</span>
-    <h2>足りなくなるのは、この6つ</h2>
+    <h2>不足しやすい栄養</h2>
     <p class="sub">やみくもに「バランスよく」より、不足しやすいものを狙い撃ちするほうが現実的。数字は食事摂取基準（2025年版）の目安です。</p>
     <div id="nutBody"></div>
   </section>
 
   <section id="fish" data-from="0" data-to="41">
     <span class="eyebrow">お魚</span>
-    <h2>種類と量だけ見ればOK</h2>
+    <h2>魚の選び方</h2>
     <p class="sub">魚は妊娠中一番食べてほしい食材のひとつ。制限があるのは一部の大型魚だけです。切り身1切れ＝刺身1人前＝約80g。</p>
     <table class="tbl">
       <thead><tr><th>目安</th><th>魚の種類</th></tr></thead>
@@ -1973,14 +1996,14 @@ a,button,summary,label,input,.chip,.cattile{transition-timing-function:var(--spr
 
   <section id="salt" data-from="12" data-to="41">
     <span class="eyebrow">塩分</span>
-    <h2>6.5gって、どれくらい？</h2>
+    <h2>塩分の早見表</h2>
     <p class="sub">「1日6.5g未満」と言われてもピンときません。実際の数字で見ると、どこを削ればいいかが一目でわかります。</p>
     <div id="saltBody"></div>
   </section>
 
   <section id="weight" data-from="8" data-to="41">
     <span class="eyebrow">体重</span>
-    <h2>増えていいんです</h2>
+    <h2>体重の目安</h2>
     <p class="sub">2021年に日本産科婦人科学会が目安を改定し、以前より2〜3kg引き上げられました。「増やさないで」と厳しく言われる時代は終わっています。</p>
     <div class="card">
       <div class="calc-in">
@@ -2005,14 +2028,14 @@ a,button,summary,label,input,.chip,.cattile{transition-timing-function:var(--spr
 
   <section id="test" data-from="0" data-to="41">
     <span class="eyebrow">健診と検査</span>
-    <h2>いつ、何を調べるの</h2>
+    <h2>健診と検査</h2>
     <p class="sub">妊婦健診は14回前後が公費補助の対象。母子健康手帳と一緒に受診票（補助券）がもらえます。</p>
     <div class="tl" id="testBody"></div>
   </section>
 
   <section id="echo" data-from="6" data-to="41">
     <span class="eyebrow">エコーの見方</span>
-    <h2>あの英語、何？</h2>
+    <h2>エコー用語</h2>
     <p class="sub">健診でもらう紙にずらっと並ぶアルファベット。意味がわかると、健診が「見る時間」から「わかる時間」になります。</p>
     <div id="echoBody"></div>
     <div class="note calm" style="margin-top:10px"><b>EFW（推定体重）に一喜一憂しないで。</b>計算式で出しているので誤差は±10〜15%あります。大事なのは1点の数字ではなく、前回からの伸び方。医師が何も言わないなら順調です。</div>
@@ -2037,7 +2060,7 @@ a,button,summary,label,input,.chip,.cattile{transition-timing-function:var(--spr
 
   <section id="kick" data-from="27" data-to="41">
     <span class="eyebrow">胎動カウント</span>
-    <h2>10回動くまで、何分？</h2>
+    <h2>胎動カウント</h2>
     <p class="sub">28週ごろから、毎日だいたい同じ時間に測ります。横向きに寝て、赤ちゃんが10回動くまでの時間を計るだけ。多くは10〜30分です。</p>
     <div class="card" id="kickCard">
       <div style="text-align:center">
@@ -2055,7 +2078,7 @@ a,button,summary,label,input,.chip,.cattile{transition-timing-function:var(--spr
 
   <section id="money" data-from="0" data-to="41">
     <span class="eyebrow">お金</span>
-    <h2>もらえるもの、全部</h2>
+    <h2>もらえるお金</h2>
     <p class="sub">申請しないともらえないものばかりです。<b>共働き（お二人とも会社員）前提</b>の一覧。育児休業給付は二人ともそれぞれ対象になります。</p>
     <div id="moneyBody"></div>
     <div class="note calm" style="margin-top:10px">2026年5月に改正健康保険法が成立し、正常分娩を公的保険でまかなう新制度（自己負担ゼロ）が決まりました。ただし施行は公布から2年以内で、実際の開始は2027〜2028年度の見込み。<b>今は従来どおり出産育児一時金50万円が使えます。</b></div>
@@ -2063,7 +2086,7 @@ a,button,summary,label,input,.chip,.cattile{transition-timing-function:var(--spr
 
   <section id="cost" data-from="12" data-to="41">
     <span class="eyebrow">実際の金額</span>
-    <h2>結局いくら要るのか</h2>
+    <h2>実際にかかる金額</h2>
     <p class="sub">制度の話とは別に、財布から出ていく実額の目安です。金額は全国平均で、地域と施設で大きく変わります。</p>
     <div id="costBody"></div>
     <div class="note calm" style="margin-top:10px"><b>出ていく額より、タイミングがつらい。</b>もらえるお金は合計するとかなりの額になりますが、振り込まれるのは数か月後です。<b>現金で50〜80万円を先に用意できる状態</b>にしておくと、精神的にまったく違います。</div>
@@ -2071,14 +2094,14 @@ a,button,summary,label,input,.chip,.cattile{transition-timing-function:var(--spr
 
   <section id="todo" data-from="0" data-to="41">
     <span class="eyebrow">手続き</span>
-    <h2>いつ、何をする</h2>
+    <h2>手続きの順番</h2>
     <p class="sub">妊娠中の手続きです。やることが多く見えますが、ほとんどは「その時期になったら案内が来る」もの。忘れると損するものだけ太字にしています。<b>生まれた後の手続きは「産後にやること」</b>にまとめています。</p>
     <div class="tl" id="todoBody"></div>
   </section>
 
   <section id="hokatsu" data-from="14" data-to="41">
     <span class="eyebrow">保活</span>
-    <h2>保育園は、妊娠中から</h2>
+    <h2>保活</h2>
     <p class="sub">産まれてから考えると間に合わないことがあります。4月入園から逆算するのが基本です。</p>
     <div class="tl" id="hokatsuBody"></div>
     <div id="hokatsuNote"></div>
@@ -2086,7 +2109,7 @@ a,button,summary,label,input,.chip,.cattile{transition-timing-function:var(--spr
 
   <section id="edu" data-from="18" data-to="41">
     <span class="eyebrow">これからのお金</span>
-    <h2>18年分の設計</h2>
+    <h2>教育費</h2>
     <p class="sub">不安を煽る情報が多い分野ですが、順番どおりにやれば怖くありません。慌てて保険や商品を契約しないのが一番大事です。</p>
     <div id="eduBody"></div>
     <div class="note calm" style="margin-top:10px">金額は全ておおよその目安です。実際の教育費は進路で大きく変わるので、今決め打ちする必要はありません。<b>今確実に効くのは「児童手当を使わずに別口座に貯める」だけ。</b>これで18年後に200万円台が残ります。</div>
@@ -2096,7 +2119,7 @@ a,button,summary,label,input,.chip,.cattile{transition-timing-function:var(--spr
 
   <section id="birth" data-from="20" data-to="41">
     <span class="eyebrow">お産の選択</span>
-    <h2>どう産むか、を決める</h2>
+    <h2>産み方の選択</h2>
     <p class="sub">産み方に優劣はありません。どれを選んでも、選ばされても、それは「ちゃんと産んだ」ことです。決める材料だけ置いておきます。</p>
     <div id="birthBody"></div>
   </section>
@@ -2117,7 +2140,7 @@ a,button,summary,label,input,.chip,.cattile{transition-timing-function:var(--spr
 
   <section id="timer" data-from="32" data-to="41">
     <span class="eyebrow">陣痛タイマー</span>
-    <h2>間隔を測る</h2>
+    <h2>陣痛タイマー</h2>
     <p class="sub">痛みが来たらボタン、収まったらもう一度。間隔と長さが自動で計算されます。実際に始まったら、これを見ながら電話してください。</p>
     <div class="card">
       <div class="bigread" id="tmDisp">--</div>
@@ -2136,7 +2159,7 @@ a,button,summary,label,input,.chip,.cattile{transition-timing-function:var(--spr
 
   <section id="labor" data-from="33" data-to="41">
     <span class="eyebrow">お産</span>
-    <h2>そろそろ、のサイン</h2>
+    <h2>お産のサイン</h2>
     <div id="laborBody"></div>
   </section>
 
@@ -2155,7 +2178,7 @@ a,button,summary,label,input,.chip,.cattile{transition-timing-function:var(--spr
 
   <section id="baby1m" data-from="30" data-to="41">
     <span class="eyebrow">最初の1か月</span>
-    <h2>生まれてからのこと</h2>
+    <h2>最初の1か月</h2>
     <p class="sub">産まれた瞬間から始まるのに、妊娠中は誰も教えてくれない部分です。読んでおくだけで、最初の1週間がだいぶ違います。</p>
     <div id="babyBody"></div>
     <div class="note warn" style="margin-top:10px"><b>迷ったら #8000。</b>子ども医療電話相談。夜間・休日に小児科医や看護師へつながります。<b>生後3か月未満で38℃以上の熱が出たら、時間帯にかかわらず受診</b>してください。この月齢だけは特別です。</div>
@@ -2170,21 +2193,21 @@ a,button,summary,label,input,.chip,.cattile{transition-timing-function:var(--spr
 
   <section id="around" data-from="12" data-to="41">
     <span class="eyebrow">周りのこと</span>
-    <h2>人付き合いの段取り</h2>
+    <h2>周りとの付き合い</h2>
     <p class="sub">妊娠で一番消耗するのは、実は体ではなく人間関係だったりします。先に決めておけば揉めません。</p>
     <div id="aroundBody"></div>
   </section>
 
   <section id="papa" data-from="0" data-to="41">
     <span class="eyebrow">パパへ</span>
-    <h2>一番効くこと</h2>
+    <h2>パパの役割</h2>
     <p class="sub">「何か手伝おうか？」より「これやっとくね」。判断のコストを渡さないのが、一番の支えになります。</p>
     <div id="papaBody"></div>
   </section>
 
   <footer>
     <details class="about">
-      <summary>このサイトについて（注意・出典）</summary>
+      <summary>このサイトの注意書きと出典</summary>
       <div class="about-b">
     <p>このサイトは家庭用のまとめです。医師・助産師・管理栄養士の指示があるときは、そちらが優先です。持病がある場合、妊娠糖尿病・妊娠高血圧症候群と診断された場合、貧血の治療中の場合は、必ず主治医の指導に従ってください。制度・金額は変わることがあるので、申請前に勤務先の担当部署や自治体の窓口でご確認を。</p>
     <p style="margin-top:10px;font-weight:700;color:var(--pink-d)">おもな出典</p>
@@ -2201,7 +2224,7 @@ a,button,summary,label,input,.chip,.cattile{transition-timing-function:var(--spr
       <li>各社の妊婦向け特典は2026年8〜9月時点の各公式情報</li>
     </ul>
     <p style="margin-top:12px">松戸市・特典情報の確認日：2026年9月10日<span id="verLine"><br>表示中のファイル：<b id="verTag">確認中…</b></span></p>
-    <button class="btns" id="reloadBtn" style="margin-top:8px">&#8635; 最新版にする</button>
+    <button class="btns" id="reloadBtn" style="margin-top:8px">&#8635; 最新の内容に更新する</button>
     <p style="margin-top:8px;font-size:11px">更新は自動で反映されます。うまくいかないときだけ、これを押してください。記録は消えません。</p>
         </div>
     </details>
@@ -2225,12 +2248,24 @@ a,button,summary,label,input,.chip,.cattile{transition-timing-function:var(--spr
       <button id="menuClose" aria-label="閉じる">&#215;</button>
     </div>
     <div class="menu-set">
-      <div class="tools" role="group" aria-label="表示設定">
-        <span>文字の大きさ</span>
-        <button class="s1" data-size="m" aria-pressed="true">普通</button>
-        <button class="s2" data-size="l" aria-pressed="false">大きめ</button>
-        <button class="s3" data-size="xl" aria-pressed="false">特大</button>
-        <button id="themeBtn" style="margin-left:auto" aria-label="表示の切り替え">&#127769; 夜</button>
+      <div class="setrow"><span>文字の大きさ</span>
+        <div class="seg" id="segSize">
+          <button data-size="m" aria-pressed="true">ふつう</button>
+          <button data-size="l" aria-pressed="false">大きい</button>
+          <button data-size="xl" aria-pressed="false">特大</button>
+        </div>
+      </div>
+      <div class="setrow"><span>画面の色</span>
+        <div class="seg" id="segTheme">
+          <button data-theme="light" aria-pressed="true">あかるい</button>
+          <button data-theme="dark" aria-pressed="false">くらい</button>
+        </div>
+      </div>
+      <div class="setrow"><span>画面の動き</span>
+        <div class="seg" id="segMotion">
+          <button data-motion="1" aria-pressed="true">動かす</button>
+          <button data-motion="0" aria-pressed="false">止める</button>
+        </div>
       </div>
     </div>
 
@@ -3191,8 +3226,8 @@ function checklist(boxId,data,key){
   var i=0,musts=0;
   data.forEach(function(g){g.l.forEach(function(x){if(x.m)musts++;});});
   var html='<div class="ap-filter"><span>&#9733; まずこれ <b>'+musts+'</b>件</span>'+
-    '<button type="button" data-f="must">これだけ表示</button>'+
-    '<button type="button" data-f="all" aria-pressed="true">全部</button></div>';
+    '<button type="button" data-f="must">★だけ見る</button>'+
+    '<button type="button" data-f="all" aria-pressed="true">すべて見る</button></div>';
   html+=data.map(function(g){
     var rows=g.l.map(function(x){
       var id="k"+(i++);
@@ -3204,7 +3239,7 @@ function checklist(boxId,data,key){
         '</span></span><span class="ap-cv">+</span></summary><div class="ap-d">'+x.d+"</div></details></div>";
     }).join("");
     return '<div class="ap"><div class="ap-h"><b>'+g.g+"</b><span>"+g.n+
-      '</span><button class="ap-all" type="button">全部開く</button></div>'+rows+"</div>";
+      '</span><button class="ap-all" type="button">中身をぜんぶ開く</button></div>'+rows+"</div>";
   }).join("");
   box.innerHTML=html;
   box.addEventListener("change",function(e){
@@ -3219,7 +3254,7 @@ function checklist(boxId,data,key){
       var anyClosed=false;
       Array.prototype.forEach.call(ds,function(d){if(!d.open)anyClosed=true;});
       Array.prototype.forEach.call(ds,function(d){d.open=anyClosed;});
-      b.textContent=anyClosed?"全部閉じる":"全部開く";
+      b.textContent=anyClosed?"ぜんぶ閉じる":"中身をぜんぶ開く";
       return;
     }
     var f=e.target.closest("[data-f]");
@@ -3239,7 +3274,7 @@ function checklist(boxId,data,key){
   });
 }
 function openAll(target){
-  return '<button class="openall" data-target="'+target+'">全部開く</button>';
+  return '<button class="openall" data-target="'+target+'">中身をぜんぶ開く</button>';
 }
 document.addEventListener("click",function(e){
   if(!e.target.closest("details.acc > summary"))return;
@@ -3256,7 +3291,7 @@ document.addEventListener("click",function(e){
   var anyClosed=false;
   Array.prototype.forEach.call(ds,function(d){if(!d.open)anyClosed=true;});
   Array.prototype.forEach.call(ds,function(d){d.open=anyClosed;});
-  b.textContent=anyClosed?"全部閉じる":"全部開く";
+  b.textContent=anyClosed?"ぜんぶ閉じる":"中身をぜんぶ開く";
 });
 
 function renderStatic(){
@@ -3378,7 +3413,7 @@ makeFinder(LIFE,CL,{chips:"#chipsL",items:"#itemsL",count:"#countL",q:"#qL",quic
 renderDial();
 
 /* ---- week-aware UI ---- */
-var SECT_LABEL={"setup":"入力するところ","food": "これ食べてええ？", "life": "これしてええ？", "recipe": "レシピ", "caffeine": "カフェイン計算", "body": "しんどい時の手当て", "danger": "危険サイン", "contact": "電話するところ", "phase": "時期別ガイド", "fuan": "不安のこと", "oops": "やっちゃったとき", "count": "週数の数え方", "limits": "書いていないこと", "tips": "服と細かいこと", "backup": "データの引き継ぎ", "nutri": "栄養", "fish": "お魚", "salt": "塩分の早見表", "weight": "体重の目安", "test": "健診と検査", "echo": "エコー用語", "record": "体重と血圧の記録", "kick": "胎動カウント", "apply": "申請の順番", "matsudo": "松戸市の制度", "tokuten": "母子手帳の特典", "money": "もらえるお金", "cost": "実際にいくら要る", "todo": "手続きの順番", "hokatsu": "保活", "edu": "教育費", "birth": "産み方の選択", "kinkyu": "入院になったら", "prep": "用意するもの", "timer": "陣痛タイマー", "labor": "お産のサイン", "after": "産後にやること", "baby1m": "最初の1か月", "name": "名づけと出生届", "around": "周りのこと", "papa": "パパへ"};
+var SECT_LABEL={"setup":"入力するところ","food": "食べもの判定", "life": "暮らしの判定", "recipe": "レシピ", "caffeine": "カフェイン計算", "body": "症状と手当て", "danger": "危険サイン", "contact": "電話するところ", "phase": "時期別ガイド", "fuan": "不安との向き合い方", "oops": "やってしまった時", "count": "週数の数え方", "limits": "当てはまらない場合", "tips": "服と細かいこと", "backup": "データの引き継ぎ", "nutri": "栄養", "fish": "お魚", "salt": "塩分の早見表", "weight": "体重の目安", "test": "健診と検査", "echo": "エコー用語", "record": "体重と血圧", "kick": "胎動カウント", "apply": "申請の順番", "matsudo": "松戸市の制度", "tokuten": "母子手帳の特典", "money": "もらえるお金", "cost": "実際にかかる金額", "todo": "手続きの順番", "hokatsu": "保活", "edu": "教育費", "birth": "産み方の選択", "kinkyu": "入院になったら", "prep": "用意するものリスト", "timer": "陣痛タイマー", "labor": "お産のサイン", "after": "産後にやること", "baby1m": "最初の1か月", "name": "名づけと出生届", "around": "周りとの付き合い", "papa": "パパの役割"};
 
 var TOPPICKS=[
  {to:3,h:"まだ、数えはじめの時期",s:"0〜3週は最終月経から数えた期間で、この時点ではまだ妊娠が成立していないか、着床したばかりです。検査薬が反応するのは4週から。今知っておくといいのは、数え方と葉酸のことだけ。",l:["apply","count","matsudo","food"]},
@@ -3859,7 +3894,7 @@ function buildSetup(){
       "</b><span>"+x.s+'</span></span><span class="st '+st[0]+'" data-st="'+i+'">'+st[1]+"</span></summary>";
     if(x.f){
       return "<details>"+head+'<div class="form">'+SFORM[x.f]+
-        '<a class="go" href="#'+x.id+'">ページを開く &#8250;</a></div></details>';
+        '<a class="go" href="#'+x.id+'">このページを開く &#8250;</a></div></details>';
     }
     return '<a href="#'+x.id+'"><span class="n">'+(i+1)+'</span><span class="tx"><b>'+x.t+
       "</b><span>"+x.s+'</span></span><span class="st '+st[0]+'" data-st="'+i+'">'+st[1]+"</span></a>";
@@ -3940,7 +3975,7 @@ function refreshSetup(){
 
 /* ---- menu ---- */
 var MENU_GROUPS=[["最初に押さえる", ["apply", "matsudo", "tokuten", "setup"]], ["毎日使う", ["food", "life", "recipe", "caffeine"]], ["体と心", ["body", "danger", "contact", "phase", "fuan", "oops"]], ["知っておくこと", ["count", "limits", "tips", "backup"]], ["食べ方と体重", ["nutri", "fish", "salt", "weight"]], ["健診と記録", ["test", "echo", "record", "kick"]], ["お金と手続き", ["money", "cost", "todo", "hokatsu", "edu"]], ["お産に向けて", ["birth", "kinkyu", "prep", "timer", "labor"]], ["生まれた後", ["after", "baby1m", "name", "around", "papa"]]];
-var MENU_LAB={"setup":"入力するところ","food": "これ食べてええ？", "life": "これしてええ？", "recipe": "レシピ", "caffeine": "カフェイン計算", "body": "しんどい時の手当て", "danger": "危険サイン", "contact": "電話するところ", "phase": "時期別ガイド", "fuan": "不安のこと", "oops": "やっちゃったとき", "count": "週数の数え方", "limits": "書いていないこと", "tips": "服と細かいこと", "backup": "データの引き継ぎ", "nutri": "栄養", "fish": "お魚", "salt": "塩分の早見表", "weight": "体重の目安", "test": "健診と検査", "echo": "エコー用語", "record": "体重と血圧の記録", "kick": "胎動カウント", "apply": "申請の順番", "matsudo": "松戸市の制度", "tokuten": "母子手帳の特典", "money": "もらえるお金", "cost": "実際にいくら要る", "todo": "手続きの順番", "hokatsu": "保活", "edu": "教育費", "birth": "産み方の選択", "kinkyu": "入院になったら", "prep": "用意するもの", "timer": "陣痛タイマー", "labor": "お産のサイン", "after": "産後にやること", "baby1m": "最初の1か月", "name": "名づけと出生届", "around": "周りのこと", "papa": "パパへ"};
+var MENU_LAB={"setup":"入力するところ","food": "食べもの判定", "life": "暮らしの判定", "recipe": "レシピ", "caffeine": "カフェイン計算", "body": "症状と手当て", "danger": "危険サイン", "contact": "電話するところ", "phase": "時期別ガイド", "fuan": "不安との向き合い方", "oops": "やってしまった時", "count": "週数の数え方", "limits": "当てはまらない場合", "tips": "服と細かいこと", "backup": "データの引き継ぎ", "nutri": "栄養", "fish": "お魚", "salt": "塩分の早見表", "weight": "体重の目安", "test": "健診と検査", "echo": "エコー用語", "record": "体重と血圧", "kick": "胎動カウント", "apply": "申請の順番", "matsudo": "松戸市の制度", "tokuten": "母子手帳の特典", "money": "もらえるお金", "cost": "実際にかかる金額", "todo": "手続きの順番", "hokatsu": "保活", "edu": "教育費", "birth": "産み方の選択", "kinkyu": "入院になったら", "prep": "用意するものリスト", "timer": "陣痛タイマー", "labor": "お産のサイン", "after": "産後にやること", "baby1m": "最初の1か月", "name": "名づけと出生届", "around": "周りとの付き合い", "papa": "パパの役割"};
 (function(){
   var m=$("#menu"),hits=[];
 
@@ -4006,7 +4041,7 @@ var MENU_LAB={"setup":"入力するところ","food": "これ食べてええ？"
         html+='<button class="sr" data-h="'+i+'"><span class="sr-w">'+x.f.c+'</span><span class="sr-t">'+x.f.n+
           '<span class="sr-v '+x.f.v+'">'+VLAB[x.f.v]+'</span></span><span class="sr-b">'+(x.f.s||x.f.w)+"</span></button>";
       });
-      if(fl.length>12)html+='<div style="font-size:11.5px;color:var(--ink-soft);margin:-2px 2px 10px">ほか'+(fl.length-12)+'件。「これ食べてええ？」の検索窓で見られます。</div>';
+      if(fl.length>12)html+='<div style="font-size:11.5px;color:var(--ink-soft);margin:-2px 2px 10px">ほか'+(fl.length-12)+'件。「食べもの判定」の検索窓で見られます。</div>';
     }
 
     var dm=domIndex().filter(function(x){return norm(x.t+" "+x.b).indexOf(nq)>=0;});
@@ -4204,7 +4239,7 @@ var CITY=[
   var st={};try{st=JSON.parse(localStorage.getItem("premam-next")||"{}");}catch(e){}
   function render(){
     if(st.done){
-      box.innerHTML='<button class="city-back" id="cityBack">&#128203; つぎにやることリストを見る</button>';
+      box.innerHTML='<button class="city-back" id="cityBack">&#128203; 「つぎにやること」をもう一度見る</button>';
       document.getElementById("cityBack").addEventListener("click",function(){st.done=false;save();render();});
       return;
     }
@@ -4219,7 +4254,7 @@ var CITY=[
         }).join("")+"</div>";
       }).join("")+
       '<div class="city-f"><a href="tel:0473665180">&#128222; 047-366-5180</a>'+
-      '<button type="button" id="cityDone">閉じる</button></div></div>';
+      '<button type="button" id="cityDone">このリストを閉じる</button></div></div>';
     box.querySelectorAll("[data-c]").forEach(function(el){
       el.addEventListener("change",function(){st[el.dataset.c]=el.checked;save();});
     });
@@ -4347,7 +4382,7 @@ var curV="home";
 
   var bar=document.getElementById("tabbar");
   function show(v,scroll){
-    if(document.startViewTransition&&v!==curV&&(!window.matchMedia||!matchMedia("(prefers-reduced-motion: reduce)").matches)){
+    if(document.startViewTransition&&v!==curV&&!document.documentElement.classList.contains("calm")){
       try{document.startViewTransition(function(){paint(v,scroll);});return;}catch(e){}
     }
     paint(v,scroll);
@@ -4394,7 +4429,7 @@ var curV="home";
 /* ============================================================
    なめらかさ強化
    ============================================================ */
-var SMOOTH=!window.matchMedia||!window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+var SMOOTH=!window.matchMedia||!document.documentElement.classList.contains("calm");
 
 /* 1) 折りたたみを高さアニメーションで開閉する */
 (function(){
@@ -4489,7 +4524,7 @@ window.countTo=countTo;
 /* ---- 開閉を高さアニメーションでなめらかに ---- */
 (function(){
   var EASE="cubic-bezier(.22,.9,.28,1)",reduce=false;
-  try{reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;}catch(e){}
+  try{reduce=document.documentElement.classList.contains("calm");}catch(e){}
   if(reduce||!Element.prototype.animate)return;
   document.addEventListener("click",function(e){
     var sum=e.target.closest("summary");if(!sum)return;
@@ -4516,7 +4551,7 @@ window.countTo=countTo;
 /* ---- 画面に入ってきたページをふわっと出す ---- */
 (function(){
   if(!("IntersectionObserver" in window))return;
-  var reduce=false;try{reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;}catch(e){}
+  var reduce=false;try{reduce=document.documentElement.classList.contains("calm");}catch(e){}
   if(reduce)return;
   var io=new IntersectionObserver(function(es){
     es.forEach(function(en){
@@ -4680,22 +4715,6 @@ window.countTo=function(el,to,ms){
   },{passive:true});
 })();
 
-/* ---- night mode ---- */
-(function(){
-  var t=null;try{t=localStorage.getItem("premam-theme");}catch(e){}
-  function set(v,save){
-    document.documentElement.setAttribute("data-theme",v);
-    $("#themeBtn").innerHTML=(v==="dark")?"&#9728;&#65039; 昼":"&#127769; 夜";
-    var mt=document.querySelector('meta[name="theme-color"]');
-    if(mt)mt.setAttribute("content",v==="dark"?"#1E1823":"#FF5FA2");
-    if(save){try{localStorage.setItem("premam-theme",v);}catch(e){}}
-  }
-  set(t||"light",false);
-  $("#themeBtn").addEventListener("click",function(){
-    set(document.documentElement.getAttribute("data-theme")==="dark"?"light":"dark",true);
-  });
-})();
-
 /* ---- backup / handoff ---- */
 (function(){
   var KEYS=["premam-due","premam-contact","premam-q","premam-rec","premam-kick","premam-check","premam-size","premam-theme","premam-caf","premam-ctx","premam-apply","premam-tokuten","premam-matsudo","premam-next"];
@@ -4818,28 +4837,66 @@ window.countTo=function(el,to,ms){
           alert(t?"コピーされていた内容からは読み込めませんでした。下の枠を確認してください。":"クリップボードが空でした。LINEで受け取った文字列をコピーしてから、もう一度押してください。");
         }
       }).catch(function(){
-        alert("クリップボードを読み取れませんでした。下の枠に貼り付けてから「貼り付けた内容を読み込む」を押してください。");
+        alert("クリップボードを読み取れませんでした。下の枠に貼り付けてから「貼り付けた内容を取り込む」を押してください。");
         $("#bkText").focus();
       });
     }else{
-      alert("この端末では自動で読み取れません。下の枠に貼り付けてから「貼り付けた内容を読み込む」を押してください。");
+      alert("この端末では自動で読み取れません。下の枠に貼り付けてから「貼り付けた内容を取り込む」を押してください。");
       $("#bkText").focus();
     }
   });
 })();
 
-/* ---- text size ---- */
+/* ---- 設定（文字の大きさ・画面の色・画面の動き） ---- */
 (function(){
-  var s=null;try{s=localStorage.getItem("premam-size");}catch(e){}
-  function set(v,save){
-    document.documentElement.setAttribute("data-size",v);
-    Array.prototype.forEach.call(document.querySelectorAll(".tools button"),function(b){
-      b.setAttribute("aria-pressed",b.dataset.size===v);});
-    if(save){try{localStorage.setItem("premam-size",v);}catch(e){}}
+  function LSget(k){try{return localStorage.getItem(k);}catch(e){return null;}}
+  function LSset(k,v){try{localStorage.setItem(k,v);}catch(e){}}
+  function mark(box,attr,val){
+    if(!box)return;
+    Array.prototype.forEach.call(box.querySelectorAll("button"),function(b){
+      b.setAttribute("aria-pressed",b.dataset[attr]===val);
+    });
   }
-  set(s||"m",false);
-  document.querySelector(".tools").addEventListener("click",function(e){
-    var b=e.target.closest("button[data-size]");if(!b)return;set(b.dataset.size,true);
+  /* 文字の大きさ */
+  var size=LSget("premam-size")||"m";
+  function setSize(v,save){
+    document.documentElement.setAttribute("data-size",v);
+    mark(document.getElementById("segSize"),"size",v);
+    if(save)LSset("premam-size",v);
+  }
+  setSize(size,false);
+  var sg=document.getElementById("segSize");
+  if(sg)sg.addEventListener("click",function(e){
+    var b=e.target.closest("button[data-size]");if(!b)return;setSize(b.dataset.size,true);
+  });
+
+  /* 画面の色 */
+  var theme=LSget("premam-theme")||"light";
+  function setTheme(v,save){
+    document.documentElement.setAttribute("data-theme",v);
+    mark(document.getElementById("segTheme"),"theme",v);
+    var mt=document.querySelector('meta[name="theme-color"]');
+    if(mt)mt.setAttribute("content",v==="dark"?"#1E1823":"#FF5FA2");
+    if(save)LSset("premam-theme",v);
+  }
+  setTheme(theme,false);
+  var tg=document.getElementById("segTheme");
+  if(tg)tg.addEventListener("click",function(e){
+    var b=e.target.closest("button[data-theme]");if(!b)return;setTheme(b.dataset.theme,true);
+  });
+
+  /* 画面の動き */
+  var motion=LSget("premam-motion");
+  motion=(motion==="0")?"0":"1";
+  function setMotion(v,save){
+    document.documentElement.classList.toggle("calm",v==="0");
+    mark(document.getElementById("segMotion"),"motion",v);
+    if(save)LSset("premam-motion",v);
+  }
+  setMotion(motion,false);
+  var mg=document.getElementById("segMotion");
+  if(mg)mg.addEventListener("click",function(e){
+    var b=e.target.closest("button[data-motion]");if(!b)return;setMotion(b.dataset.motion,true);
   });
 })();
 
