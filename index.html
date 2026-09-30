@@ -664,6 +664,13 @@ html.calm *{transition-duration:.001s!important;animation-duration:.001s!importa
   .sx-b{display:block!important;padding:0}
   .card,.note,.ap,.acc{box-shadow:none;border:1px solid #ccc}
 }
+
+/* 折りたたみ：開いた中身をふわっと出す（開閉自体はブラウザ標準） */
+.secx[open] > .sx-b,.acc[open] > .acc-b,.ap-x[open] > .ap-d,.item[open] > .i-body{
+  animation:openFade .2s ease both}
+@keyframes openFade{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+html.calm .secx[open] > .sx-b,html.calm .acc[open] > .acc-b,
+html.calm .ap-x[open] > .ap-d,html.calm .item[open] > .i-body{animation:none}
 </style>
 </head>
 <body>
@@ -3405,7 +3412,6 @@ var curV="home";
     },60);
     Array.prototype.forEach.call(bar.children,function(b){b.classList.toggle("on",b.dataset.v===v);});
     if(window.resetReveal)resetReveal();else{host.classList.remove("vin");void host.offsetWidth;host.classList.add("vin");}
-    if(window.moveTabInd)setTimeout(window.moveTabInd,10);
     if(scroll)window.scrollTo({top:0,behavior:"smooth"});
   }
   window.showView=show;
@@ -3487,21 +3493,6 @@ var SMOOTH=!window.matchMedia||!document.documentElement.classList.contains("cal
   },false);
 })();
 
-/* 2) 下タブに滑って動くインジケーター */
-(function(){
-  var bar=document.getElementById("tabbar");if(!bar)return;
-  var ind=document.createElement("span");ind.className="tab-ind";bar.appendChild(ind);
-  function move(){
-    var on=bar.querySelector("button.on");if(!on)return;
-    ind.style.width=on.offsetWidth+"px";
-    ind.style.transform="translateX("+on.offsetLeft+"px)";
-  }
-  window.moveTabInd=move;
-  bar.addEventListener("click",function(){setTimeout(move,10);});
-  window.addEventListener("resize",move);
-  setTimeout(move,60);
-})();
-
 /* 3) 画面に入ったカードを順に浮かび上がらせる */
 (function(){
   if(!SMOOTH||!("IntersectionObserver" in window))return;
@@ -3522,32 +3513,6 @@ var SMOOTH=!window.matchMedia||!document.documentElement.classList.contains("cal
 
 /* 4) 数字をなめらかに変える */
 
-/* ---- 開閉を高さアニメーションでなめらかに ---- */
-(function(){
-  var EASE="cubic-bezier(.22,.9,.28,1)",reduce=false;
-  try{reduce=document.documentElement.classList.contains("calm");}catch(e){}
-  if(reduce||!Element.prototype.animate)return;
-  document.addEventListener("click",function(e){
-    var sum=e.target.closest("summary");if(!sum)return;
-    var det=sum.parentElement;
-    if(!det||det.tagName!=="DETAILS")return;
-    if(det.classList.contains("duebox")||det.classList.contains("dialx")||det.classList.contains("about"))return;
-    var body=sum.nextElementSibling;if(!body)return;
-    if(body.dataset.anim==="1"){e.preventDefault();return;}
-    e.preventDefault();
-    body.dataset.anim="1";body.style.overflow="hidden";
-    if(det.open){
-      var h0=body.offsetHeight;
-      body.animate([{height:h0+"px",opacity:1},{height:"0px",opacity:0}],{duration:200,easing:EASE})
-        .onfinish=function(){det.open=false;body.style.height="";body.style.overflow="";body.dataset.anim="0";};
-    }else{
-      det.open=true;
-      var h1=body.offsetHeight;
-      body.animate([{height:"0px",opacity:0},{height:h1+"px",opacity:1}],{duration:260,easing:EASE})
-        .onfinish=function(){body.style.height="";body.style.overflow="";body.dataset.anim="0";};
-    }
-  },false);
-})();
 
 /* ---- 上部バーのタイトルを、今いるタブに合わせる ---- */
 (function(){
