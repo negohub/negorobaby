@@ -65,7 +65,7 @@ body{
   background:var(--bg);color:var(--ink);
   font-family:"Zen Kaku Gothic New",-apple-system,BlinkMacSystemFont,"Hiragino Sans",sans-serif;
   font-size:16px;line-height:1.9;letter-spacing:.01em;
-  padding:54px 0 96px;overflow-x:hidden;
+  padding:54px 0 112px;overflow-x:hidden;
 }
 h1,h2,h3{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;line-height:1.5}
 .wrap{max-width:680px;margin:0 auto;padding:0 16px}
@@ -591,9 +591,11 @@ body.has-up #sPanel{top:100px}
 .hit{box-shadow:0 0 0 3px var(--pink)}
 
 /* ---------- 下タブ ---------- */
-.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:55;display:flex;
-  background:var(--card);border-top:3px solid var(--edge);
-  padding:7px 4px calc(7px + env(safe-area-inset-bottom))}
+.tabbar{position:fixed;left:50%;transform:translateX(-50%);
+  bottom:calc(12px + env(safe-area-inset-bottom));z-index:55;display:flex;
+  width:calc(100% - 24px);max-width:660px;
+  background:var(--card);border:3px solid var(--edge);border-radius:28px;
+  box-shadow:4px 4px 0 var(--edge);padding:7px 6px}
 .tabbar button{flex:1 1 0;min-width:0;border:none;background:transparent;cursor:pointer;
   padding:4px 2px;display:flex;flex-direction:column;align-items:center;gap:4px;
   font-family:"Titan One","Dela Gothic One","Zen Maru Gothic",sans-serif;font-weight:400;
@@ -608,7 +610,7 @@ body.has-up #sPanel{top:100px}
 .tabbar button:nth-child(3).on .ti{background:var(--p3)}
 .tabbar button:nth-child(4).on .ti{background:var(--p4);color:var(--edge)}
 .tabbar button:nth-child(5).on .ti{background:#C08BF5}
-#toTop{position:fixed;right:14px;bottom:calc(84px + env(safe-area-inset-bottom));z-index:45;
+#toTop{position:fixed;right:14px;bottom:calc(104px + env(safe-area-inset-bottom));z-index:45;
   width:48px;height:48px;border-radius:50%;background:var(--card);border:1px solid var(--line);
   color:var(--pink);font-size:19px;cursor:pointer;display:none;align-items:center;justify-content:center;
   box-shadow:var(--sh)}
@@ -3327,7 +3329,7 @@ var CITY=[
 function renderHomeNav(){
   var el=document.getElementById("homeNav");if(!el)return;
   el.innerHTML=["eat","body","money","more"].map(function(v){
-    return '<button type="button" data-hv="'+v+'"><b>'+VTITLE[v][0]+"</b><span>"+VTITLE[v][1]+"</span></button>";
+    return '<button type="button" data-hv="'+v+'"><b>'+window.VTITLE[v][0]+"</b><span>"+window.VTITLE[v][1]+"</span></button>";
   }).join("");
   el.addEventListener("click",function(e){
     var b=e.target.closest("[data-hv]");if(!b)return;
@@ -3343,7 +3345,7 @@ var VIEWS={
  money:["apply","matsudo","tokuten","money","cost","todo","hokatsu","edu"],
  more:["count","limits","tips","setup","backup","birth","kinkyu","prep","timer","labor","after","baby1m","name","around","papa"]
 };
-var VTITLE={home:["ホーム","今週のこと"],eat:["食べる","判定・栄養・レシピ"],
+window.VTITLE={home:["ホーム","今週のこと"],eat:["食べる","判定・栄養・レシピ"],
  body:["からだ","症状・健診・記録"],money:["手続き","お金と申請"],more:["その他","お産・産後・設定"]};
 var curV="home";
 
@@ -3377,13 +3379,13 @@ var curV="home";
       var el=document.querySelector(sel);if(el)el.style.display=isHome?"":"none";
     });
     head.style.display=isHome?"none":"";
-    head.innerHTML=isHome?"":'<b>'+VTITLE[v][0]+"</b><span>"+VTITLE[v][1]+"・"+VIEWS[v].length+"ページ</span>";
+    head.innerHTML=isHome?"":'<b>'+window.VTITLE[v][0]+"</b><span>"+window.VTITLE[v][1]+"・"+VIEWS[v].length+"ページ</span>";
     Array.prototype.forEach.call(document.querySelectorAll("section[data-from]"),function(s){
       s.style.display=(s.dataset.view===v)?"":"none";
     });
     Array.prototype.forEach.call(bar.children,function(b){b.classList.toggle("on",b.dataset.v===v);});
     var tb=document.querySelector(".tb-brand");
-    if(tb)tb.textContent=isHome?"ぷれまむ手帳":VTITLE[v][0];
+    if(tb)tb.textContent=isHome?"ぷれまむ手帳":window.VTITLE[v][0];
     if(window.resetReveal)resetReveal();else{host.classList.remove("vin");void host.offsetWidth;host.classList.add("vin");}
     if(window.moveTabInd)setTimeout(window.moveTabInd,10);
     if(scroll)window.scrollTo({top:0,behavior:"smooth"});
@@ -3518,6 +3520,24 @@ var SMOOTH=!window.matchMedia||!document.documentElement.classList.contains("cal
         .onfinish=function(){body.style.height="";body.style.overflow="";body.dataset.anim="0";};
     }
   },false);
+})();
+
+/* ---- 上部バーのタイトルを、今いるタブに合わせる ---- */
+(function(){
+  var bar=document.getElementById("tabbar"),tb=document.querySelector(".tb-brand");
+  if(!bar||!tb)return;
+  function sync(){
+    var on=bar.querySelector("button.on");
+    var v=on?on.dataset.v:"home";
+    var t=(v==="home"||!window.VTITLE||!window.VTITLE[v])?"ぷれまむ手帳":window.VTITLE[v][0];
+    if(tb.textContent!==t)tb.textContent=t;
+  }
+  window.syncTitle=sync;
+  sync();
+  bar.addEventListener("click",function(){setTimeout(sync,0);});
+  try{
+    new MutationObserver(sync).observe(bar,{attributes:true,subtree:true,attributeFilter:["class"]});
+  }catch(e){}
 })();
 
 /* ---- 使いやすさの工夫 ---- */
